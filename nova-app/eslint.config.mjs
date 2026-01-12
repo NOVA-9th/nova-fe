@@ -11,7 +11,15 @@ const eslintConfig = defineConfig([
 
   // Prettier를 ESLint 규칙으로 실행
   {
-    plugins: prettier,
+    plugins: { prettier },
+    rules: {
+      'prettier/prettier': ['warn', { endOfLine: 'auto' }],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+      ],
+      '@typescript-eslint/no-explicit-any': 'warn',
+    },
   },
 
   // Override default ignores of eslint-config-next.

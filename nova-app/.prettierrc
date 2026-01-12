@@ -7,7 +7,6 @@
   "trailingComma": "all",
   "bracketSameLine": false,
   "bracketSpacing": true,
-  "endOfLine": "lf",
   "arrowParens": "always",
   "plugins": ["prettier-plugin-tailwindcss"]
 }
