@@ -1,0 +1,14 @@
+/* Global-Platform */
+@theme {
+  /* Desktop */
+  --frame-width: 1440px;
+  --frame-height: 1024px;
+}
+
+.mobile {
+  @theme {
+    /* Mobile */
+    --frame-width: 402px;
+    --frame-height: 874px;
+  }
+}

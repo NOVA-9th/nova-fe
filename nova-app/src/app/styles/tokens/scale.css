@@ -1,0 +1,50 @@
+/* Global-Readability */
+@theme {
+  --text-display: 40px;
+  --text-title: 24px;
+  --text-heading: 20px;
+  --text-subhead: 18px;
+  --text-body: 16px;
+  --text-callout: 14px;
+  --text-footnote: 12px;
+  --text-caption: 11px;
+}
+
+.type-110 {
+  @theme {
+    --text-display: 42px;
+    --text-title: 26px;
+    --text-heading: 22px;
+    --text-subhead: 20px;
+    --text-body: 18px;
+    --text-callout: 16px;
+    --text-footnote: 14px;
+    --text-caption: 13px;
+  }
+}
+
+.type-120 {
+  @theme {
+    --text-display: 44px;
+    --text-title: 28px;
+    --text-heading: 24px;
+    --text-subhead: 22px;
+    --text-body: 20px;
+    --text-callout: 18px;
+    --text-footnote: 16px;
+    --text-caption: 15px;
+  }
+}
+
+.type-130 {
+  @theme {
+    --text-display: 46px;
+    --text-title: 30px;
+    --text-heading: 26px;
+    --text-subhead: 24px;
+    --text-body: 22px;
+    --text-callout: 20px;
+    --text-footnote: 18px;
+    --text-caption: 17px;
+  }
+}

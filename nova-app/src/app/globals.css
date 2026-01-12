@@ -1,8 +1,30 @@
 @import 'tailwindcss';
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* tokens */
+@import './styles/tokens/color.css';
+@import './styles/tokens/fonts.css';
+@import './styles/tokens/radius.css';
+@import './styles/tokens/spacing.css';
+@import './styles/tokens/scale.css';
+@import './styles/tokens/frame.css';
+
+/* component-level tokens */
+@import './styles/components/variants.css';
+@import './styles/components/interaction.css';
+@import './styles/components/layout.css';
+@import './styles/components/state.css';
+
+/* composed theme */
+@import './styles/theme/light.css';
+@import './styles/theme/dark.css';
+
+@layer utilities {
+  .font-hero {
+    font-family: var(--font-hero);
+  }
+  .font-interface {
+    font-family: var(--font-interface);
+  }
 }
 
 html,
@@ -12,9 +34,7 @@ body {
   padding: 0;
   overflow-x: hidden; /* 가로 스크롤 방지 */
   overflow-y: auto; /* 세로 스크롤 허용 */
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-pretendard-jp);
+  font-family: var(--font-interface);
 }
 
 body {

@@ -14,7 +14,14 @@ const pretendardJP = localFont({
   src: './fonts/PretendardJPVariable.woff2',
   display: 'swap',
   weight: '45 920',
-  variable: '--font-pretendard-jp',
+  variable: '--font-interface',
+});
+
+const wantedSans = localFont({
+  src: './fonts/WantedSansVariable.woff2',
+  weight: '100 900',
+  display: 'swap',
+  variable: '--font-hero',
 });
 
 export default function RootLayout({
@@ -24,7 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko'>
-      <body className={`${pretendardJP.variable} font-sans antialiased`}>{children}</body>
+      <body className={`${pretendardJP.variable} ${wantedSans.variable} font-sans antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }

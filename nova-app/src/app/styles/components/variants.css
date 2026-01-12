@@ -1,0 +1,58 @@
+/* Component-Data */
+@theme {
+  /* Light (#00BD75) */
+  --color-light-hover: rgba(0 189 117 / 0.04);
+  --color-light-press: rgba(0 189 117 / 0.08);
+  --color-light-surface: rgba(0 189 117 / 0.1);
+  --color-light-outline: rgba(0 189 117 / 0.2);
+  --color-light-full: rgba(0 189 117 / 1);
+  --color-light-peak: rgba(238 243 240 / 1); /* #EEF3F0 */
+
+  /* Dark */
+  --color-dark-hover: rgba(0 173 101 / 0.04);
+  --color-dark-press: rgba(0 173 101 / 0.08);
+  --color-dark-surface: rgba(0 173 101 / 0.1);
+  --color-dark-outline: rgba(0 173 101 / 0.2);
+  --color-dark-full: rgba(0 173 101 / 1);
+  --color-dark-peak: rgba(238 243 239 / 1); /* #EEF3EF */
+}
+
+.warning {
+  @theme {
+    /* Light (#C18700) */
+    --color-light-hover: rgba(193 135 0 / 0.04);
+    --color-light-press: rgba(193 135 0 / 0.08);
+    --color-light-surface: rgba(193 135 0 / 0.1);
+    --color-light-outline: rgba(193 135 0 / 0.2);
+    --color-light-full: rgba(193 135 0 / 1);
+    --color-light-peak: rgba(245 241 236 / 1); /* #F5F1EC */
+
+    /* Dark (#D29100) */
+    --color-dark-hover: rgba(210 145 0 / 0.04);
+    --color-dark-press: rgba(210 145 0 / 0.08);
+    --color-dark-surface: rgba(210 145 0 / 0.1);
+    --color-dark-outline: rgba(210 145 0 / 0.2);
+    --color-dark-full: rgba(210 145 0 / 1);
+    --color-dark-peak: rgba(245 241 236 / 1); /* #F5F1EC */
+  }
+}
+
+.danger {
+  @theme {
+    /* Light (#F04C5A) */
+    --color-light-hover: rgba(240 76 90 / 0.04);
+    --color-light-press: rgba(240 76 90 / 0.08);
+    --color-light-surface: rgba(240 76 90 / 0.1);
+    --color-light-outline: rgba(240 76 90 / 0.2);
+    --color-light-full: rgba(240 76 90 / 1);
+    --color-light-peak: rgba(247 240 239 / 1); /* #F7F0EF */
+
+    /* Dark (#FF435C) */
+    --color-dark-hover: rgba(255 67 92 / 0.04);
+    --color-dark-press: rgba(255 67 92 / 0.08);
+    --color-dark-surface: rgba(255 67 92 / 0.1);
+    --color-dark-outline: rgba(255 67 92 / 0.2);
+    --color-dark-full: rgba(255 67 92 / 1);
+    --color-dark-peak: rgba(247 240 240 / 1); /* #F7F0F0 */
+  }
+}
