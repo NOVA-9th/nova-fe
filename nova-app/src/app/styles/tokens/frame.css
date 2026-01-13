@@ -5,8 +5,8 @@
   --frame-height: 1024px;
 }
 
-.mobile {
-  @theme {
+@layer utilities {
+  .mobile {
     /* Mobile */
     --frame-width: 402px;
     --frame-height: 874px;

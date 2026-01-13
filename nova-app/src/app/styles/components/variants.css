@@ -17,8 +17,8 @@
   --color-dark-peak: rgba(238 243 239 / 1); /* #EEF3EF */
 }
 
-.warning {
-  @theme {
+@layer utilities {
+  .warning {
     /* Light (#C18700) */
     --color-light-hover: rgba(193 135 0 / 0.04);
     --color-light-press: rgba(193 135 0 / 0.08);
@@ -35,10 +35,8 @@
     --color-dark-full: rgba(210 145 0 / 1);
     --color-dark-peak: rgba(245 241 236 / 1); /* #F5F1EC */
   }
-}
 
-.danger {
-  @theme {
+  .danger {
     /* Light (#F04C5A) */
     --color-light-hover: rgba(240 76 90 / 0.04);
     --color-light-press: rgba(240 76 90 / 0.08);

@@ -1,9 +1,9 @@
-.dark {
-  @theme {
+@layer utilities {
+  .dark {
     /* ---------- Background ---------- */
     --bg-base: var(--color-charcoal-full);
     --bg-alternative: var(--color-black-full);
-    --bg-surface: var(--color-slate-surface); /* #FFFFFF @ 4% */
+    --bg-surface: var(--color-slate-surface);
     --bg-peak: var(--color-white-full);
     --bg-static: rgb(255 255 255 / 0.04); /* #FFFFFF @ 4% */
 

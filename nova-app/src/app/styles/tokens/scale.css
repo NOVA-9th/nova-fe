@@ -10,8 +10,8 @@
   --text-caption: 11px;
 }
 
-.type-110 {
-  @theme {
+@layer utilities {
+  .type-110 {
     --text-display: 42px;
     --text-title: 26px;
     --text-heading: 22px;
@@ -21,10 +21,8 @@
     --text-footnote: 14px;
     --text-caption: 13px;
   }
-}
 
-.type-120 {
-  @theme {
+  .type-120 {
     --text-display: 44px;
     --text-title: 28px;
     --text-heading: 24px;
@@ -34,10 +32,8 @@
     --text-footnote: 16px;
     --text-caption: 15px;
   }
-}
 
-.type-130 {
-  @theme {
+  .type-130 {
     --text-display: 46px;
     --text-title: 30px;
     --text-heading: 26px;

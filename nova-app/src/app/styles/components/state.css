@@ -14,8 +14,8 @@
   --color-interaction-data: var(--color-overlay-data);
 }
 
-.disabled {
-  @theme {
+@layer utilities {
+  .disabled {
     --layer-spinner: 0;
     --layer-content: 1;
     --layer-opacity: 0.36; /* 36% */
@@ -28,10 +28,8 @@
     --color-interaction-peak: rgba(128 128 128 / 0);
     --color-interaction-data: rgba(128 128 128 / 0);
   }
-}
 
-.is-readonly {
-  @theme {
+  .is-readonly {
     --layer-spinner: 0;
     --layer-content: 1;
     --layer-opacity: 0.48; /* 48% */
@@ -44,10 +42,8 @@
     --color-interaction-peak: rgba(128 128 128 / 0);
     --color-interaction-data: rgba(128 128 128 / 0);
   }
-}
 
-.loading {
-  @theme {
+  .loading {
     --layer-spinner: 1;
     --layer-content: 0;
     --layer-opacity: 0.48; /* 48% */
