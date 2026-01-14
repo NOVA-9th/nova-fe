@@ -1,0 +1,45 @@
+@layer utilities {
+  .dark {
+    /* ---------- Background ---------- */
+    --bg-base: var(--color-charcoal-full);
+    --bg-alternative: var(--color-black-full);
+    --bg-surface: var(--color-slate-surface);
+    --bg-peak: var(--color-white-full);
+    --bg-static: rgb(255 255 255 / 0.04); /* #FFFFFF @ 4% */
+
+    --bg-data-surface: var(--color-dark-surface); /* #00AD65 @ 10% */
+    --bg-data-peak: var(--color-dark-full);
+
+    --bg-accent-surface: var(--color-primary-surface); /* #287AF5 @ 10% */
+    --bg-accent-peak: var(--color-primary-full);
+
+    /* ---------- Background / Interaction ---------- */
+    --bg-interaction-surface: var(--color-interaction-surface);
+    --bg-interaction-peak: var(--color-interaction-peak);
+    --bg-interaction-data: var(--color-interaction-data);
+    --bg-interaction-accent: var(--color-interaction-accent);
+
+    /* ---------- Foreground ---------- */
+    --fg-base: var(--color-white-full);
+    --fg-additive: var(--color-white-additive); /* #F0F2F4 @ 72% */
+    --fg-optional: var(--color-white-optional); /* #F0F2F4 @ 48% */
+    --fg-inactive: var(--color-white-inactive); /* #F0F2F4 @ 36% */
+    --fg-peak: var(--color-charcoal-full);
+    --fg-static: var(--color-black-full);
+
+    --fg-data-base: var(--color-dark-full);
+    --fg-data-peak: var(--color-dark-peak);
+
+    --fg-accent-base: var(--color-primary-full);
+    --fg-accent-peak: var(--color-primary-peak);
+
+    /* ---------- Stroke ---------- */
+    --stroke-outline: var(--color-slate-outline);
+    --stroke-peak: var(--color-white-full);
+    --stroke-selected: var(--color-white-selected); /* #F0F2F4 @ 56% */
+    --stroke-ring: var(--color-slate-ring); /* #969FAE @ 28% */
+
+    --stroke-data-outline: var(--color-dark-outline); /* #00BD75 @ 20% */
+    --stroke-data-selected: var(--color-dark-full);
+  }
+}

@@ -1,0 +1,59 @@
+/* ---- Component-State ---- */
+@theme {
+  --layer-spinner: 0;
+  --layer-content: 1;
+  --layer-opacity: 1; /* 100% */
+
+  /* Ring width */
+  --stroke-ring-width: 3px;
+
+  /* Interaction overlays */
+  --color-interaction-accent: var(--color-overlay-accent);
+  --color-interaction-surface: var(--color-overlay-surface);
+  --color-interaction-peak: var(--color-overlay-peak);
+  --color-interaction-data: var(--color-overlay-data);
+}
+
+@layer utilities {
+  .disabled {
+    --layer-spinner: 0;
+    --layer-content: 1;
+    --layer-opacity: 0.36; /* 36% */
+
+    /* Ring width */
+    --stroke-ring-width: 0px;
+
+    --color-interaction-accent: rgba(128 128 128 / 0);
+    --color-interaction-surface: rgba(128 128 128 / 0);
+    --color-interaction-peak: rgba(128 128 128 / 0);
+    --color-interaction-data: rgba(128 128 128 / 0);
+  }
+
+  .is-readonly {
+    --layer-spinner: 0;
+    --layer-content: 1;
+    --layer-opacity: 0.48; /* 48% */
+
+    /* Ring width */
+    --stroke-ring-width: 3px;
+
+    --color-interaction-accent: rgba(128 128 128 / 0);
+    --color-interaction-surface: rgba(128 128 128 / 0);
+    --color-interaction-peak: rgba(128 128 128 / 0);
+    --color-interaction-data: rgba(128 128 128 / 0);
+  }
+
+  .loading {
+    --layer-spinner: 1;
+    --layer-content: 0;
+    --layer-opacity: 0.48; /* 48% */
+
+    /* Ring width */
+    --stroke-ring-width: 0px;
+
+    --color-interaction-accent: rgba(128 128 128 / 0);
+    --color-interaction-surface: rgba(128 128 128 / 0);
+    --color-interaction-peak: rgba(128 128 128 / 0);
+    --color-interaction-data: rgba(128 128 128 / 0);
+  }
+}

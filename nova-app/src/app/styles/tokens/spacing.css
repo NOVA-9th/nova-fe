@@ -1,0 +1,10 @@
+@theme {
+  /* ---------- Spacing ---------- */
+  --spacing-step1: 2px;
+  --spacing-step2: 4px;
+  --spacing-step3: 6px;
+  --spacing-step4: 8px;
+  --spacing-step5: 10px;
+  --spacing-step6: 12px;
+  --spacing-step7: 14px;
+}

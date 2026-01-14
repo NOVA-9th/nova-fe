@@ -1,0 +1,44 @@
+/* Global-Theme */
+@theme {
+  /* ---------- Background ---------- */
+  --bg-base: #ffffff;
+  --bg-alternative: var(--color-white-full);
+  --bg-surface: var(--color-slate-surface);
+  --bg-peak: var(--color-charcoal-full);
+  --bg-static: rgb(255 255 255 / 0.72);
+
+  --bg-data-surface: var(--color-light-surface); /* #00BD75 @ 10% */
+  --bg-data-peak: var(--color-light-full);
+
+  --bg-accent-surface: var(--color-primary-surface); /* #287AF5 @ 10% */
+  --bg-accent-peak: var(--color-primary-full);
+
+  /* ---------- Background / Interaction ---------- */
+  --bg-interaction-surface: var(--color-interaction-surface);
+  --bg-interaction-peak: var(--color-interaction-peak);
+  --bg-interaction-data: var(--color-interaction-data);
+  --bg-interaction-accent: var(--color-interaction-accent);
+
+  /* ---------- Foreground ---------- */
+  --fg-base: var(--color-charcoal-full);
+  --fg-additive: var(--color-charcoal-additive); /* #151618 @ 72% */
+  --fg-optional: var(--color-charcoal-optional); /* #151618 @ 48% */
+  --fg-inactive: var(--color-charcoal-inactive); /* #151618 @ 36% */
+  --fg-peak: var(--color-white-full);
+  --fg-static: #ffffff;
+
+  --fg-data-base: var(--color-light-full);
+  --fg-data-peak: var(--color-light-peak);
+
+  --fg-accent-base: var(--color-primary-full);
+  --fg-accent-peak: var(--color-primary-peak);
+
+  /* ---------- Stroke ---------- */
+  --stroke-outline: var(--color-slate-outline); /* #969FAE @ 20% */
+  --stroke-peak: var(--color-charcoal-full);
+  --stroke-selected: var(--color-charcoal-selected); /* #151618 @ 56% */
+  --stroke-ring: var(--color-slate-ring); /* #969FAE @ 28% */
+
+  --stroke-data-outline: var(--color-light-outline); /* #00BD75 @ 20% */
+  --stroke-data-selected: var(--color-light-full);
+}

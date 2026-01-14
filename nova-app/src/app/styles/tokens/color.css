@@ -1,0 +1,35 @@
+@theme {
+  /* Primary (#287AF5) */
+  --color-primary-surface: rgba(40 122 245 / 0.1);
+  --color-primary-hover: rgba(40 122 245 / 0.12);
+  --color-primary-press: rgba(40 122 245 / 0.2);
+  --color-primary-full: rgba(40 122 245 / 1);
+  --color-primary-peak: rgba(245 249 254 / 1); /* #F5F9FE */
+
+  /* White (#F0F2F4) */
+  --color-white-hover: rgba(240 242 244 / 0.06);
+  --color-white-outline: rgba(240 242 244 / 0.08);
+  --color-white-press: rgba(240 242 244 / 0.1);
+  --color-white-inactive: rgba(240 242 244 / 0.36);
+  --color-white-optional: rgba(240 242 244 / 0.48);
+  --color-white-selected: rgba(240 242 244 / 0.56);
+  --color-white-additive: rgba(240 242 244 / 0.72);
+  --color-white-full: rgba(240 242 244 / 1);
+
+  /* Slate (#969FAE) */
+  --color-slate-surface: rgba(150 159 174 / 0.1);
+  --color-slate-outline: rgba(150 159 174 / 0.2);
+  --color-slate-ring: rgba(150 159 174 / 0.28);
+
+  /* Charcoal (#151618) */
+  --color-charcoal-hover: rgba(21 22 24 / 0.02);
+  --color-charcoal-press: rgba(21 22 24 / 0.06);
+  --color-charcoal-inactive: rgba(21 22 24 / 0.36);
+  --color-charcoal-optional: rgba(21 22 24 / 0.48);
+  --color-charcoal-selected: rgba(21 22 24 / 0.56);
+  --color-charcoal-additive: rgba(21 22 24 / 0.72);
+  --color-charcoal-full: rgba(21 22 24 / 1);
+
+  /* Black (#0C0D0F) */
+  --color-black-full: rgba(12 13 15 / 1);
+}

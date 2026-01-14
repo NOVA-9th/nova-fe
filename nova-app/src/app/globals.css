@@ -1,0 +1,67 @@
+@import 'tailwindcss';
+
+/* tokens */
+@import './styles/tokens/color.css';
+@import './styles/tokens/fonts.css';
+@import './styles/tokens/radius.css';
+@import './styles/tokens/spacing.css';
+@import './styles/tokens/scale.css';
+@import './styles/tokens/frame.css';
+
+/* component-level tokens */
+@import './styles/components/variants.css';
+@import './styles/components/interaction.css';
+@import './styles/components/layout.css';
+@import './styles/components/state.css';
+
+/* composed theme */
+@import './styles/theme/light.css';
+@import './styles/theme/dark.css';
+
+@layer utilities {
+  .font-hero {
+    font-family: var(--font-hero);
+  }
+  .font-interface {
+    font-family: var(--font-interface);
+  }
+}
+
+html,
+body {
+  height: 100dvh; /* 뷰포트 단위 높이 확보 */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* 가로 스크롤 방지 */
+  overflow-y: auto; /* 세로 스크롤 허용 */
+  font-family: var(--font-interface);
+}
+
+body {
+  min-height: 100dvh;
+  height: 100%;
+  overflow-x: hidden;
+  line-height: 1;
+}
+
+menu,
+ol,
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed; /* 비활성화 상태에서는 막힌 커서 */
+}

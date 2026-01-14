@@ -1,0 +1,53 @@
+/* Component-Layout */
+@theme {
+  /* ---- Padding ---- (Medium) */
+  --spacing-padding-thin: var(--spacing-step2);
+  --spacing-padding-light: var(--spacing-step3);
+  --spacing-padding-regular: var(--spacing-step4);
+  --spacing-padding-medium: var(--spacing-step5);
+  --spacing-padding-bold: var(--spacing-step6);
+
+  /* ---- Radius ---- (Medium) */
+  --radius-interactive-subtle: var(--radius-step2);
+  --radius-interactive-default: var(--radius-step3);
+  --radius-interactive-parent: var(--radius-step5);
+
+  --radius-static-frame: var(--radius-step7);
+  --radius-static-pill: 1000px;
+}
+
+@layer utilities {
+  .size-sm {
+    /* ---- Padding ---- (Small) */
+    --spacing-padding-thin: var(--spacing-step1);
+    --spacing-padding-light: var(--spacing-step2);
+    --spacing-padding-regular: var(--spacing-step3);
+    --spacing-padding-medium: var(--spacing-step4);
+    --spacing-padding-bold: var(--spacing-step5);
+
+    /* ---- Radius ---- (Small) */
+    --radius-interactive-subtle: var(--radius-step1);
+    --radius-interactive-default: var(--radius-step2);
+    --radius-interactive-parent: var(--radius-step3);
+
+    --radius-static-frame: var(--radius-step7);
+    --radius-static-pill: 1000px;
+  }
+
+  .size-lg {
+    /* ---- Padding ---- (Large) */
+    --spacing-padding-thin: var(--spacing-step3);
+    --spacing-padding-light: var(--spacing-step4);
+    --spacing-padding-regular: var(--spacing-step5);
+    --spacing-padding-medium: var(--spacing-step6);
+    --spacing-padding-bold: var(--spacing-step7);
+
+    /* ---- Radius ---- (Large) */
+    --radius-interactive-subtle: var(--radius-step3);
+    --radius-interactive-default: var(--radius-step4);
+    --radius-interactive-parent: var(--radius-step6);
+
+    --radius-static-frame: var(--radius-step7);
+    --radius-static-pill: 1000px;
+  }
+}

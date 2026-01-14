@@ -1,0 +1,10 @@
+@theme {
+  /* ---------- Radius ---------- */
+  --radius-step1: 4px;
+  --radius-step2: 6px;
+  --radius-step3: 8px;
+  --radius-step4: 10px;
+  --radius-step5: 12px;
+  --radius-step6: 14px;
+  --radius-step7: 16px;
+}
