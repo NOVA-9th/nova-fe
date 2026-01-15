@@ -18,7 +18,7 @@ const DotBadgeVariants = cva(
       },
 
       compoundVariants: [
-        // surface + peak 조합
+        // surface
         {
           variant: "surface",
           class: "bg-peak",
@@ -27,7 +27,7 @@ const DotBadgeVariants = cva(
           variant: "surface",
           class: "bg-surface",
         },
-        // accent + peak 조합
+        // accent
         {
           variant: "accent",
           class: "bg-accent-peak",
@@ -36,7 +36,7 @@ const DotBadgeVariants = cva(
           variant: "accent",
           class: "bg-accent-surface",
         },
-        // data + peak 조합
+        // data
         {
           variant: "data",
           class: "bg-data-peak",
