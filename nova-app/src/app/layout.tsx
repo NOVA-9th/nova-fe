@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import { ThemeProvider } from './_providers';
 
 export const metadata: Metadata = {
   title: 'Nova',
@@ -30,9 +31,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ko'>
+    <html lang='ko' suppressHydrationWarning>
       <body className={`${pretendardJP.variable} ${wantedSans.variable} font-sans antialiased`}>
-        {children}
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='light'
+          enableSystem={false}
+          disableTransitionOnChange={true}
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
