@@ -1,1 +1,1 @@
-// init
+export { ThemeProvider } from './ThemeProvider';

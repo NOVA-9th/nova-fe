@@ -42,3 +42,261 @@
   --stroke-data-outline: var(--color-light-outline); /* #00BD75 @ 20% */
   --stroke-data-selected: var(--color-light-full);
 }
+
+@layer utilities {
+  /* ---------- Background ---------- */
+  .bg-base {
+    background-color: var(--bg-base);
+  }
+  
+  .bg-alternative {
+    background-color: var(--bg-alternative);
+  }
+  
+  .bg-surface {
+    background-color: var(--bg-surface);
+  }
+  
+  .bg-peak {
+    background-color: var(--bg-peak);
+  }
+  
+  .bg-static {
+    background-color: var(--bg-static);
+  }
+  
+  .bg-data-surface {
+    background-color: var(--bg-data-surface);
+  }
+  
+  .bg-data-peak {
+    background-color: var(--bg-data-peak);
+  }
+  
+  .bg-accent-surface {
+    background-color: var(--bg-accent-surface);
+  }
+  
+  .bg-accent-peak {
+    background-color: var(--bg-accent-peak);
+  }
+
+  /* ---------- Background / Interaction ---------- */
+  .hover\:bg-base:hover {
+    background-color: var(--bg-interaction-surface);
+  }
+  
+  .hover\:bg-surface:hover {
+    background-color: var(--bg-interaction-surface);
+  }
+  
+  .hover\:bg-peak:hover {
+    background-color: var(--bg-interaction-peak);
+  }
+  
+  .hover\:bg-data-surface:hover {
+    background-color: var(--bg-interaction-data);
+  }
+  
+  .hover\:bg-data-peak:hover {
+    background-color: var(--bg-interaction-data);
+  }
+  
+  .hover\:bg-accent-surface:hover {
+    background-color: var(--bg-interaction-accent);
+  }
+  
+  .hover\:bg-accent-peak:hover {
+    background-color: var(--bg-interaction-accent);
+  }
+
+  .disabled\:bg-base:disabled,
+  .disabled\:bg-base[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+  
+  .disabled\:bg-surface:disabled,
+  .disabled\:bg-surface[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+  
+  .disabled\:bg-peak:disabled,
+  .disabled\:bg-peak[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+  
+  .disabled\:bg-data-surface:disabled,
+  .disabled\:bg-data-surface[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+  
+  .disabled\:bg-accent-surface:disabled,
+  .disabled\:bg-accent-surface[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+
+  /* ---------- Foreground ---------- */
+  .text-base {
+    color: var(--fg-base);
+  }
+  
+  .text-additive {
+    color: var(--fg-additive);
+  }
+  
+  .text-optional {
+    color: var(--fg-optional);
+  }
+  
+  .text-inactive {
+    color: var(--fg-inactive);
+  }
+  
+  .text-peak {
+    color: var(--fg-peak);
+  }
+  
+  .text-static {
+    color: var(--fg-static);
+  }
+  
+  .text-data-base {
+    color: var(--fg-data-base);
+  }
+  
+  .text-data-peak {
+    color: var(--fg-data-peak);
+  }
+  
+  .text-accent-base {
+    color: var(--fg-accent-base);
+  }
+  
+  .text-accent-peak {
+    color: var(--fg-accent-peak);
+  }
+
+  .hover\:text-base:hover {
+    color: var(--fg-base);
+  }
+  
+  .hover\:text-additive:hover {
+    color: var(--fg-additive);
+  }
+  
+  .hover\:text-optional:hover {
+    color: var(--fg-optional);
+  }
+  
+  .hover\:text-peak:hover {
+    color: var(--fg-peak);
+  }
+  
+  .hover\:text-data-base:hover {
+    color: var(--fg-data-base);
+  }
+  
+  .hover\:text-accent-base:hover {
+    color: var(--fg-accent-base);
+  }
+
+  .disabled\:text-base:disabled,
+  .disabled\:text-base[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .disabled\:text-additive:disabled,
+  .disabled\:text-additive[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .disabled\:text-optional:disabled,
+  .disabled\:text-optional[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .disabled\:text-peak:disabled,
+  .disabled\:text-peak[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .disabled\:text-data-base:disabled,
+  .disabled\:text-data-base[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .disabled\:text-accent-base:disabled,
+  .disabled\:text-accent-base[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+
+  /* ---------- Stroke ---------- */
+  .border-outline {
+    border-color: var(--stroke-outline);
+  }
+  
+  .border-peak {
+    border-color: var(--stroke-peak);
+  }
+  
+  .border-selected {
+    border-color: var(--stroke-selected);
+  }
+  
+  .border-ring {
+    border-color: var(--stroke-ring);
+  }
+  
+  .border-data-outline {
+    border-color: var(--stroke-data-outline);
+  }
+  
+  .border-data-selected {
+    border-color: var(--stroke-data-selected);
+  }
+
+  .hover\:border-outline:hover {
+    border-color: var(--stroke-selected);
+  }
+  
+  .hover\:border-peak:hover {
+    border-color: var(--stroke-peak);
+  }
+  
+  .hover\:border-selected:hover {
+    border-color: var(--stroke-selected);
+  }
+  
+  .hover\:border-ring:hover {
+    border-color: var(--stroke-ring);
+  }
+  
+  .hover\:border-data-outline:hover {
+    border-color: var(--stroke-data-selected);
+  }
+
+  .disabled\:border-outline:disabled,
+  .disabled\:border-outline[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+  
+  .disabled\:border-peak:disabled,
+  .disabled\:border-peak[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+  
+  .disabled\:border-selected:disabled,
+  .disabled\:border-selected[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+  
+  .disabled\:border-ring:disabled,
+  .disabled\:border-ring[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+  
+  .disabled\:border-data-outline:disabled,
+  .disabled\:border-data-outline[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+}
