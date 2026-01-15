@@ -40,7 +40,7 @@ const NumberBadgeVariants = cva(
         {
           variant: "outline",
           peak: true,
-          class: "bg-surface text-base border border-outline ",
+          class: "bg-surface text-base border border-outline",
         },
         {
           variant: "outline",
