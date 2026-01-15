@@ -42,4 +42,260 @@
     --stroke-data-outline: var(--color-dark-outline); /* #00BD75 @ 20% */
     --stroke-data-selected: var(--color-dark-full);
   }
+
+  /* ---------- Background ---------- */
+  .dark .bg-base {
+    background-color: var(--bg-base);
+  }
+  
+  .dark .bg-alternative {
+    background-color: var(--bg-alternative);
+  }
+  
+  .dark .bg-surface {
+    background-color: var(--bg-surface);
+  }
+  
+  .dark .bg-peak {
+    background-color: var(--bg-peak);
+  }
+  
+  .dark .bg-static {
+    background-color: var(--bg-static);
+  }
+  
+  .dark .bg-data-surface {
+    background-color: var(--bg-data-surface);
+  }
+  
+  .dark .bg-data-peak {
+    background-color: var(--bg-data-peak);
+  }
+  
+  .dark .bg-accent-surface {
+    background-color: var(--bg-accent-surface);
+  }
+  
+  .dark .bg-accent-peak {
+    background-color: var(--bg-accent-peak);
+  }
+
+  /* ---------- Background / Interaction ---------- */
+  .dark .hover\:bg-base:hover {
+    background-color: var(--bg-interaction-surface);
+  }
+  
+  .dark .hover\:bg-surface:hover {
+    background-color: var(--bg-interaction-surface);
+  }
+  
+  .dark .hover\:bg-peak:hover {
+    background-color: var(--bg-interaction-peak);
+  }
+  
+  .dark .hover\:bg-data-surface:hover {
+    background-color: var(--bg-interaction-data);
+  }
+  
+  .dark .hover\:bg-data-peak:hover {
+    background-color: var(--bg-interaction-data);
+  }
+  
+  .dark .hover\:bg-accent-surface:hover {
+    background-color: var(--bg-interaction-accent);
+  }
+  
+  .dark .hover\:bg-accent-peak:hover {
+    background-color: var(--bg-interaction-accent);
+  }
+
+  .dark .disabled\:bg-base:disabled,
+  .dark .disabled\:bg-base[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+  
+  .dark .disabled\:bg-surface:disabled,
+  .dark .disabled\:bg-surface[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+  
+  .dark .disabled\:bg-peak:disabled,
+  .dark .disabled\:bg-peak[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+  
+  .dark .disabled\:bg-data-surface:disabled,
+  .dark .disabled\:bg-data-surface[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+  
+  .dark .disabled\:bg-accent-surface:disabled,
+  .dark .disabled\:bg-accent-surface[aria-disabled='true'] {
+    background-color: var(--bg-surface);
+  }
+
+  /* ---------- Foreground ---------- */
+  .dark .text-base {
+    color: var(--fg-base);
+  }
+  
+  .dark .text-additive {
+    color: var(--fg-additive);
+  }
+  
+  .dark .text-optional {
+    color: var(--fg-optional);
+  }
+  
+  .dark .text-inactive {
+    color: var(--fg-inactive);
+  }
+  
+  .dark .text-peak {
+    color: var(--fg-peak);
+  }
+  
+  .dark .text-static {
+    color: var(--fg-static);
+  }
+  
+  .dark .text-data-base {
+    color: var(--fg-data-base);
+  }
+  
+  .dark .text-data-peak {
+    color: var(--fg-data-peak);
+  }
+  
+  .dark .text-accent-base {
+    color: var(--fg-accent-base);
+  }
+  
+  .dark .text-accent-peak {
+    color: var(--fg-accent-peak);
+  }
+
+  .dark .hover\:text-base:hover {
+    color: var(--fg-base);
+  }
+  
+  .dark .hover\:text-additive:hover {
+    color: var(--fg-additive);
+  }
+  
+  .dark .hover\:text-optional:hover {
+    color: var(--fg-optional);
+  }
+  
+  .dark .hover\:text-peak:hover {
+    color: var(--fg-peak);
+  }
+  
+  .dark .hover\:text-data-base:hover {
+    color: var(--fg-data-base);
+  }
+  
+  .dark .hover\:text-accent-base:hover {
+    color: var(--fg-accent-base);
+  }
+
+  .dark .disabled\:text-base:disabled,
+  .dark .disabled\:text-base[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .dark .disabled\:text-additive:disabled,
+  .dark .disabled\:text-additive[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .dark .disabled\:text-optional:disabled,
+  .dark .disabled\:text-optional[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .dark .disabled\:text-peak:disabled,
+  .dark .disabled\:text-peak[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .dark .disabled\:text-data-base:disabled,
+  .dark .disabled\:text-data-base[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+  
+  .dark .disabled\:text-accent-base:disabled,
+  .dark .disabled\:text-accent-base[aria-disabled='true'] {
+    color: var(--fg-inactive);
+  }
+
+  /* ---------- Stroke ---------- */
+  .dark .border-outline {
+    border-color: var(--stroke-outline);
+  }
+  
+  .dark .border-peak {
+    border-color: var(--stroke-peak);
+  }
+  
+  .dark .border-selected {
+    border-color: var(--stroke-selected);
+  }
+  
+  .dark .border-ring {
+    border-color: var(--stroke-ring);
+  }
+  
+  .dark .border-data-outline {
+    border-color: var(--stroke-data-outline);
+  }
+  
+  .dark .border-data-selected {
+    border-color: var(--stroke-data-selected);
+  }
+
+  .dark .hover\:border-outline:hover {
+    border-color: var(--stroke-selected);
+  }
+  
+  .dark .hover\:border-peak:hover {
+    border-color: var(--stroke-peak);
+  }
+  
+  .dark .hover\:border-selected:hover {
+    border-color: var(--stroke-selected);
+  }
+  
+  .dark .hover\:border-ring:hover {
+    border-color: var(--stroke-ring);
+  }
+  
+  .dark .hover\:border-data-outline:hover {
+    border-color: var(--stroke-data-selected);
+  }
+
+  .dark .disabled\:border-outline:disabled,
+  .dark .disabled\:border-outline[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+  
+  .dark .disabled\:border-peak:disabled,
+  .dark .disabled\:border-peak[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+  
+  .dark .disabled\:border-selected:disabled,
+  .dark .disabled\:border-selected[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+  
+  .dark .disabled\:border-ring:disabled,
+  .dark .disabled\:border-ring[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
+  
+  .dark .disabled\:border-data-outline:disabled,
+  .dark .disabled\:border-data-outline[aria-disabled='true'] {
+    border-color: var(--stroke-outline);
+  }
 }
