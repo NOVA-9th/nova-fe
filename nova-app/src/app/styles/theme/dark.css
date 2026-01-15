@@ -81,39 +81,54 @@
   }
 
   /* ---------- Background / Interaction ---------- */
-  .dark .hover\:bg-base:hover {
-    background-color: var(--bg-interaction-surface);
-  }
-  
   .dark .hover\:bg-surface:hover {
-    background-color: var(--bg-interaction-surface);
+    background-color: color-mix(in srgb, var(--bg-surface), var(--color-white-full) 6%);
   }
   
   .dark .hover\:bg-peak:hover {
-    background-color: var(--bg-interaction-peak);
+    background-color: color-mix(in srgb, var(--bg-peak), var(--color-charcoal-full) 2%);
   }
   
   .dark .hover\:bg-data-surface:hover {
-    background-color: var(--bg-interaction-data);
+    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-dark-full) 4%);
   }
   
   .dark .hover\:bg-data-peak:hover {
-    background-color: var(--bg-interaction-data);
+    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-charcoal-full) 2%);
   }
   
   .dark .hover\:bg-accent-surface:hover {
-    background-color: var(--bg-interaction-accent);
+    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 12%);
   }
   
   .dark .hover\:bg-accent-peak:hover {
-    background-color: var(--bg-interaction-accent);
+    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-charcoal-full) 2%);
   }
 
-  .dark .disabled\:bg-base:disabled,
-  .dark .disabled\:bg-base[aria-disabled='true'] {
-    background-color: var(--bg-surface);
+  .dark .active\:bg-surface:active {
+    background-color: color-mix(in srgb, var(--bg-surface), var(--color-white-full) 10%);
   }
   
+  .dark .active\:bg-peak:active {
+    background-color: color-mix(in srgb, var(--bg-peak), var(--color-charcoal-full) 6%);
+  }
+  
+  .dark .active\:bg-data-surface:active {
+    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-dark-full) 8%);
+  }
+  
+  .dark .active\:bg-data-peak:active {
+    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-charcoal-full) 6%);
+  }
+  
+  .dark .active\:bg-accent-surface:active {
+    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 20%);
+  }
+  
+  .dark .active\:bg-accent-peak:active {
+    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-charcoal-full) 6%);
+  }
+
   .dark .disabled\:bg-surface:disabled,
   .dark .disabled\:bg-surface[aria-disabled='true'] {
     background-color: var(--bg-surface);
