@@ -1,5 +1,6 @@
-import { TextBtnIconVariants } from '@/shared/ui/action/text_button/TextBtn.icon.styles';
-import { TextBtnVariants } from './textButton.styles';
+import { TextBtnIconVariants } from '@/shared/ui/action/text_button/textBtn.icon.styles';
+import {} from '@/shared/ui/action/text_button/textButton.styles';
+import { TextBtnVariants } from '@/shared/ui/action/text_button/textButton.styles';
 import { ResourceIcon } from '@/shared/ui/icon/Resource';
 import { cn } from '@/shared/utils/cn';
 import { VariantProps } from 'class-variance-authority';
