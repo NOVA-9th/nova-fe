@@ -1,4 +1,5 @@
 import { cva } from "class-variance-authority";
+import { cn } from "@/shared/utils/cn";
 
 const DotBadgeVariants = cva(
     "flex items-center justify-center rounded-[1000px]",
@@ -52,10 +53,11 @@ const DotBadgeVariants = cva(
 interface DotBadgeProps {
   size: "sm" | "md" | "lg",
   variant: "surface" | "accent" | "data" ,
+  className?: string
 }
 
-export default function DotBadge({ size, variant } : DotBadgeProps) {
+export default function DotBadge({ size, variant, className } : DotBadgeProps) {
     return (
-      <div className={DotBadgeVariants({ size: size, variant: variant })}/>
+      <div className={cn(DotBadgeVariants({ size: size, variant: variant }), className)}/>
     )
 }

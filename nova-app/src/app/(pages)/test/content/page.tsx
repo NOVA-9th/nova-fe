@@ -1,7 +1,8 @@
-import DotBadge from "@/shared/ui/Content/DotBadge";
-import IconBadge from "@/shared/ui/Content/IconBadge";
-import NumberBadge from "@/shared/ui/Content/NumberBadge";
-import TextBadge from "@/shared/ui/Content/TextBadge";
+import DotBadge from "@/shared/ui/content/DotBadge/DotBadge";
+import IconBadge from "@/shared/ui/content/IconBadge/IconBadge";
+import NumberBadge from "@/shared/ui/content/NumberBadge/NumberBadge";
+import SectionHeader from "@/shared/ui/content/SectionHeader/SectionHeader";
+import TextBadge from "@/shared/ui/content/TextBadge/TextBadge";
 import { Icon, SquareDashed } from "lucide-react";
 
 const testPage = () => {
@@ -44,6 +45,13 @@ const testPage = () => {
             <DotBadge size="lg" variant="surface"/>
             <DotBadge size="lg" variant="accent"/>
             <DotBadge size="lg" variant="data"/>
+
+            <SectionHeader size="sm" peak={true} leftIcon={<SquareDashed className="w-4 h-4" />} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
+            <SectionHeader size="sm" peak={false} leftIcon={<SquareDashed className="w-4 h-4" />} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
+            <SectionHeader size="md" peak={true} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
+            <SectionHeader size="md" peak={false} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
+            <SectionHeader size="lg" peak={true} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
+            <SectionHeader size="lg" peak={false} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
         
         </div>
       );

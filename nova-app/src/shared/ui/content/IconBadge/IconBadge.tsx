@@ -1,13 +1,14 @@
 import { cva } from "class-variance-authority";
+import { cn } from "@/shared/utils/cn";
 
-const TextBadgeVariants = cva(
+const IconBadgeVariants = cva(
     "flex items-center justify-center rounded-[1000px]",
     {
       variants: {
         size: {
-          sm: "py-0.5 px-1.5 gap-0.5 typo-caption-base",
-          md: "py-0.5 px-1.5 gap-0.5 typo-footnote-base",
-          lg: "py-0.5 px-2 gap-1 typo-callout-base",
+          sm: "w-4 h-4 typo-caption-base",
+          md: "w-4.5 h-4.5 typo-footnote-base",
+          lg: "w-5 h-5 typo-callout-base",
         },
         
         variant: {
@@ -73,19 +74,22 @@ const TextBadgeVariants = cva(
     }
 );
 
-interface TextBadgeProps {
-    size: "sm" | "md" | "lg",
-    variant: "surface" | "outline" | "accent" | "data" ,
-    peak: true | false
-    text?: string
-    icon?: React.ReactNode
+interface IconBadgeProps {
+  size: "sm" | "md" | "lg",
+  variant: "surface" | "outline" | "accent" | "data" ,
+  peak: true | false
+  icon?: React.ReactNode
+  className?: string
 }
 
-export default function TextBadge({ size, variant, peak, text, children } : TextBadgeProps & React.PropsWithChildren) {
+/*
+* 아이콘은 sm 사이즈에서 11px, md 사이즈에서 12px, lg 사이즈에서 13px 크기로 적용할 것.
+*/
+
+export default function IconBadgeBadge({ size, variant, peak, icon, className } : IconBadgeProps) {
     return (
-      <div className={TextBadgeVariants({ size: size, variant: variant, peak: peak })}>
-        <div className="flex items-center justify-center py-[1.5px]">{children}</div>
-        <p className="px-0.5">{text}</p>
+      <div className={cn(IconBadgeVariants({ size: size, variant: variant, peak: peak }), className)}>
+        {icon}
       </div>
-    );
+    )
 }

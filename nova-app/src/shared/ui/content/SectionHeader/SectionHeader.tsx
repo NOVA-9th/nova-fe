@@ -1,0 +1,51 @@
+import { cva } from "class-variance-authority";
+import { cn } from "@/shared/utils/cn";
+
+const SectionHeaderVariants = cva(
+    "flex items-center justify-center",
+    {
+      variants: {
+        size: {
+          sm: "gap-1.5 typo-subhead-key",
+          md: "gap-1.5 typo-body-key",
+          lg: "gap-2 typo-headline-key",
+        },
+        
+        peak: {
+          true: "",
+          false: "",
+        },
+      },
+
+      compoundVariants: [
+        // peak
+        {
+          peak: true,
+          class: "text-base",
+        },
+        {
+          peak: false,
+          class: "text-additive",
+        },
+      ],
+    }
+);
+
+interface SectionHeaderProps {
+  size: "sm" | "md" | "lg",
+  peak: true | false,
+  text: string,
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
+  className?: string
+}
+
+export default function SectionHeader({ size, peak, text = "Label", leftIcon, rightIcon, className } : SectionHeaderProps) {
+    return (
+      <div className={cn(SectionHeaderVariants({ size: size, peak: peak }), className)}>
+        {leftIcon && leftIcon}
+        {text}
+        {rightIcon && rightIcon}
+      </div>
+    )
+}
