@@ -49,7 +49,6 @@ export default function InputChipBtn({
   variant,
   text,
   icon,
-  children,
   onClick,
   className,
 }: InputChipBtnProps & React.PropsWithChildren) {
@@ -59,7 +58,6 @@ export default function InputChipBtn({
       className={cn(InputChipBtnVariants({ size, variant }), className)}
       onClick={onClick}
     >
-      <div>{children}</div>
       <span className='text-additive'>{icon}</span>
       <p className='text-base-color'>{text}</p>
       <X className='text-additive' size={size === 'sm' ? 12 : 14} />

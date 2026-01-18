@@ -21,7 +21,6 @@ const ToggleBtnVariants = cva(
     },
 
     compoundVariants: [
-      // surface + selected 조합
       {
         variant: 'surface',
         selected: true,
@@ -32,7 +31,6 @@ const ToggleBtnVariants = cva(
         selected: false,
         class: 'text-optional ',
       },
-      // outline + selected 조합
       {
         variant: 'outline',
         selected: true,
@@ -63,7 +61,6 @@ export default function ToggleBtn({
   selected,
   text,
   icon,
-  children,
   onClick,
   className,
 }: ToggleBtnProps & React.PropsWithChildren) {
@@ -73,7 +70,6 @@ export default function ToggleBtn({
       className={cn(ToggleBtnVariants({ size, variant, selected }), className)}
       onClick={onClick}
     >
-      <div>{children}</div>
       <span>{icon}</span>
       <p>{text}</p>
     </button>
