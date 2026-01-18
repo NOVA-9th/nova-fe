@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const NumberBadgeVariants = cva(
-    "flex items-center justify-center px-1 py-0.5 rounded-[1000px]",
+    "flex items-center justify-center px-1 py-0.5 rounded-static-pill",
     {
       variants: {
         size: {
