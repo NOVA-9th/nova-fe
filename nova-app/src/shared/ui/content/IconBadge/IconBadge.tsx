@@ -14,7 +14,7 @@ const IconBadgeVariants = cva(
         variant: {
           surface: "",
           data: "",
-          outline: "",
+          outline: "border border-outline",
           accent: "",
         },
         
@@ -41,12 +41,12 @@ const IconBadgeVariants = cva(
         {
           variant: "outline",
           peak: true,
-          class: "bg-surface text-base border border-outline ",
+          class: "bg-surface text-base",
         },
         {
           variant: "outline",
           peak: false,
-          class: "bg-white text-additive border border-outline ",
+          class: "bg-white text-additive",
         },
         // accent + peak 조합
         {
