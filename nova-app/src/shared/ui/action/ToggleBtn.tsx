@@ -1,3 +1,4 @@
+import { cn } from '@/shared/utils/cn';
 import { cva } from 'class-variance-authority';
 const ToggleBtnVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5',
@@ -53,6 +54,7 @@ interface ToggleBtnProps {
   text?: string;
   icon?: React.ReactNode;
   onClick?: () => void;
+  className?: string;
 }
 
 export default function ToggleBtn({
@@ -63,11 +65,12 @@ export default function ToggleBtn({
   icon,
   children,
   onClick,
+  className,
 }: ToggleBtnProps & React.PropsWithChildren) {
   return (
     <button
       type='button'
-      className={ToggleBtnVariants({ size: size, variant: variant, selected: selected })}
+      className={cn(ToggleBtnVariants({ size, variant, selected }), className)}
       onClick={onClick}
     >
       <div className='flex items-center justify-center'>{children}</div>
