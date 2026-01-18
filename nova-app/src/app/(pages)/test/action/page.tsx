@@ -1,3 +1,4 @@
+import InputChipBtn from '@/shared/ui/action/InputBtn';
 import ToggleBtn from '@/shared/ui/action/ToggleBtn';
 import { SquareDashed } from 'lucide-react';
 
@@ -9,28 +10,28 @@ const testPage = () => {
           size='md'
           variant='surface'
           selected={true}
-          icon={<SquareDashed size={11.375} />}
+          icon={<SquareDashed size={14} />}
           text='Label'
         />
         <ToggleBtn
           size='md'
           variant='surface'
           selected={false}
-          icon={<SquareDashed size={11.375} />}
+          icon={<SquareDashed size={14} />}
           text='Label'
         />
         <ToggleBtn
           size='md'
           variant='outline'
           selected={true}
-          icon={<SquareDashed size={11.375} />}
+          icon={<SquareDashed size={14} />}
           text='Label'
         />
         <ToggleBtn
           size='md'
           variant='outline'
           selected={false}
-          icon={<SquareDashed size={11.375} />}
+          icon={<SquareDashed size={14} />}
           text='Label'
         />
 
@@ -38,28 +39,28 @@ const testPage = () => {
           size='lg'
           variant='surface'
           selected={true}
-          icon={<SquareDashed size={13} />}
+          icon={<SquareDashed size={16} />}
           text='Label'
         />
         <ToggleBtn
           size='lg'
           variant='surface'
           selected={false}
-          icon={<SquareDashed size={13} />}
+          icon={<SquareDashed size={16} />}
           text='Label'
         />
         <ToggleBtn
           size='lg'
           variant='outline'
           selected={true}
-          icon={<SquareDashed size={13} />}
+          icon={<SquareDashed size={16} />}
           text='Label'
         />
         <ToggleBtn
           size='lg'
           variant='outline'
           selected={false}
-          icon={<SquareDashed size={13} />}
+          icon={<SquareDashed size={16} />}
           text='Label'
         />
       </div>
