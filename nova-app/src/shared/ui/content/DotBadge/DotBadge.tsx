@@ -12,41 +12,11 @@ const DotBadgeVariants = cva(
         },
         
         variant: {
-          surface: "",
-          data: "",
-          accent: "",
+          surface: "bg-peak",
+          data: "bg-accent-peak",
+          accent: "bg-data-peak",
         },
       },
-
-      compoundVariants: [
-        // surface
-        {
-          variant: "surface",
-          class: "bg-peak",
-        },
-        {
-          variant: "surface",
-          class: "bg-surface",
-        },
-        // accent
-        {
-          variant: "accent",
-          class: "bg-accent-peak",
-        },
-        {
-          variant: "accent",
-          class: "bg-accent-surface",
-        },
-        // data
-        {
-          variant: "data",
-          class: "bg-data-peak",
-        },
-        {
-          variant: "data",
-          class: "bg-data-surface",
-        },
-      ],
     }
 );
 
