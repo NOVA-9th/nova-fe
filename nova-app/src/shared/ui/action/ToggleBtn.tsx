@@ -25,7 +25,7 @@ const ToggleBtnVariants = cva(
       {
         variant: 'surface',
         selected: true,
-        class: 'bg-surface text-base',
+        class: 'hover:bg-surface bg-surface text-base',
       },
       {
         variant: 'surface',
@@ -36,12 +36,12 @@ const ToggleBtnVariants = cva(
       {
         variant: 'outline',
         selected: true,
-        class: 'bg-surface text-base border border-selected',
+        class: 'hover:bg-surface bg-surface text-base border border-selected',
       },
       {
         variant: 'outline',
         selected: false,
-        class: 'text-optional border border-outline ',
+        class: 'hover:bg-interaction-surface text-optional border border-outline ',
       },
     ],
   },
@@ -73,9 +73,9 @@ export default function ToggleBtn({
       className={cn(ToggleBtnVariants({ size, variant, selected }), className)}
       onClick={onClick}
     >
-      <div className='flex items-center justify-center'>{children}</div>
-      {icon}
-      <p className='px-0.5'>{text}</p>
+      <div>{children}</div>
+      <span>{icon}</span>
+      <p>{text}</p>
     </button>
   );
 }
