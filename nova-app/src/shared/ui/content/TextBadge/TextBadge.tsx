@@ -2,7 +2,7 @@ import { cn } from "@/shared/utils/cn";
 import { cva } from "class-variance-authority";
 
 const TextBadgeVariants = cva(
-    "flex items-center justify-center rounded-[1000px]",
+    "flex items-center justify-center rounded-static-pill",
     {
       variants: {
         size: {
