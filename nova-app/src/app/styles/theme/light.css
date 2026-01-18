@@ -82,6 +82,10 @@
   }
 
   /* ---------- Background / Interaction ---------- */
+  .hover\:bg-base:hover {
+    background-color: color-mix(in srgb, var(--bg-base), var(--color-charcoal-full) 2%);
+  }
+
   .hover\:bg-surface:hover {
     background-color: color-mix(in srgb, var(--bg-surface), var(--color-charcoal-full) 2%);
   }
@@ -104,6 +108,14 @@
 
   .hover\:bg-accent-peak:hover {
     background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-white-full) 6%);
+  }
+
+  .hover\:bg-interaction-surface:hover {
+    background-color: color-mix(
+      in srgb,
+      var(--bg-interaction-surface),
+      var(--color-charcoal-full) 2%
+    );
   }
 
   .active\:bg-surface:active {

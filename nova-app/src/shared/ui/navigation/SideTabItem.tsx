@@ -46,11 +46,11 @@ const sideItemVariants = cva(
   },
 );
 
-type SideTabItemProps = VariantProps<typeof sideItemVariants> & {
+interface SideTabItemProps extends VariantProps<typeof sideItemVariants> {
   icon?: React.ReactNode;
   label?: string;
   className?: string;
-};
+}
 
 const SideTabItem = ({ peak, minimized, className, icon, label }: SideTabItemProps) => {
   return (
