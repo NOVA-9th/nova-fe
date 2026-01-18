@@ -83,10 +83,10 @@ interface TextBadgeProps {
     className?: string
 }
 
-export default function TextBadge({ size, variant, peak, text = "Label", children, className } : TextBadgeProps & React.PropsWithChildren) {
+export default function TextBadge({ size, variant, peak, text = "Label", icon, className } : TextBadgeProps & React.PropsWithChildren) {
     return (
       <div className={cn(TextBadgeVariants({ size: size, variant: variant, peak: peak }), className)}>
-        <div className="flex items-center justify-center py-[1.5px]">{children}</div>
+        <div className="flex items-center justify-center py-[1.5px]">{icon}</div>
         <p className="px-0.5">{text}</p>
       </div>
     );
