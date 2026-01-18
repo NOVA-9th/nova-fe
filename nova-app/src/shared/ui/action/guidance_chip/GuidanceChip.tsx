@@ -1,7 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva } from 'class-variance-authority';
 
-const GuidanceChipBtnVariants = cva(
+const GuidanceChipVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light',
   {
     variants: {
@@ -34,7 +34,7 @@ const GuidanceChipBtnVariants = cva(
   },
 );
 
-interface InputChipBtnProps {
+interface GuidanceChipProps {
   size: 'sm' | 'md';
   variant: 'surface' | 'outline' | 'accent';
   text?: string;
@@ -43,18 +43,18 @@ interface InputChipBtnProps {
   className?: string;
 }
 
-export default function GuidanceChipBtn({
+export default function GuidanceChip({
   size,
   variant,
   text,
   icon,
   onClick,
   className,
-}: InputChipBtnProps & React.PropsWithChildren) {
+}: GuidanceChipProps & React.PropsWithChildren) {
   return (
     <button
       type='button'
-      className={cn(GuidanceChipBtnVariants({ size, variant }), className)}
+      className={cn(GuidanceChipVariants({ size, variant }), className)}
       onClick={onClick}
     >
       {icon}

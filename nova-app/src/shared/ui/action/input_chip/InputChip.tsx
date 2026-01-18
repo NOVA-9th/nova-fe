@@ -2,7 +2,7 @@ import { cn } from '@/shared/utils/cn';
 import { cva } from 'class-variance-authority';
 import { X } from 'lucide-react';
 
-const InputChipBtnVariants = cva(
+const InputChipVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light gap-1',
   {
     variants: {
@@ -35,7 +35,7 @@ const InputChipBtnVariants = cva(
   },
 );
 
-interface InputChipBtnProps {
+interface InputChipProps {
   size: 'sm' | 'md';
   variant: 'surface' | 'outline';
   text?: string;
@@ -44,18 +44,18 @@ interface InputChipBtnProps {
   className?: string;
 }
 
-export default function InputChipBtn({
+export default function InputChip({
   size,
   variant,
   text,
   icon,
   onClick,
   className,
-}: InputChipBtnProps & React.PropsWithChildren) {
+}: InputChipProps & React.PropsWithChildren) {
   return (
     <button
       type='button'
-      className={cn(InputChipBtnVariants({ size, variant }), className)}
+      className={cn(InputChipVariants({ size, variant }), className)}
       onClick={onClick}
     >
       <span className='text-additive'>{icon}</span>
