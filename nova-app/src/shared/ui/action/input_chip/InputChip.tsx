@@ -12,26 +12,10 @@ const InputChipVariants = cva(
       },
 
       variant: {
-        surface: '',
-        outline: '',
-      },
-
-      selected: {
-        true: '',
-        false: '',
+        surface: 'hover:bg-surface bg-surface text-base border-ring-width border-ring',
+        outline: 'text-optional border-ring border',
       },
     },
-
-    compoundVariants: [
-      {
-        variant: 'surface',
-        class: 'hover:bg-surface bg-surface text-base border-ring-width border-ring',
-      },
-      {
-        variant: 'outline',
-        class: 'text-optional border-ring border',
-      },
-    ],
   },
 );
 

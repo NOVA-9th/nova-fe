@@ -11,35 +11,25 @@ const ToggleBtnVariants = cva(
 
       variant: {
         surface: '',
-        outline: '',
+        outline: 'border',
       },
 
       selected: {
-        true: '',
-        false: '',
+        true: 'hover:bg-surface bg-surface text-base',
+        false: 'text-optional',
       },
     },
 
     compoundVariants: [
       {
-        variant: 'surface',
-        selected: true,
-        class: 'hover:bg-surface bg-surface text-base',
-      },
-      {
-        variant: 'surface',
-        selected: false,
-        class: 'text-optional ',
-      },
-      {
         variant: 'outline',
         selected: true,
-        class: 'hover:bg-surface bg-surface text-base border border-selected',
+        class: ' border-selected',
       },
       {
         variant: 'outline',
         selected: false,
-        class: 'hover:bg-interaction-surface text-optional border border-outline ',
+        class: 'hover:bg- border-outline ',
       },
     ],
   },

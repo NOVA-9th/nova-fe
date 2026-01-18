@@ -11,26 +11,11 @@ const GuidanceChipVariants = cva(
       },
 
       variant: {
-        surface: '',
-        outline: '',
-        accent: '',
+        surface: 'text-additive bg-surface hover:bg-surface',
+        outline: 'text-additive border-ring border',
+        accent: 'text-accent-base bg-accent-surface hover:bg-accent-surface',
       },
     },
-
-    compoundVariants: [
-      {
-        variant: 'surface',
-        class: 'text-additive bg-surface hover:bg-surface',
-      },
-      {
-        variant: 'outline',
-        class: 'text-additive border-ring border',
-      },
-      {
-        variant: 'accent',
-        class: 'text-accent-base bg-accent-surface hover:bg-accent-surface ',
-      },
-    ],
   },
 );
 
