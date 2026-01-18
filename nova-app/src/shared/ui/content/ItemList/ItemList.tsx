@@ -2,7 +2,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const ItemListVariants = cva(
-    "flex justify-center p-2 gap-2",
+    "flex justify-center p-2",
     {
       variants: {
         size: {
