@@ -11,8 +11,8 @@ const testPage = () => {
     return (
         <div className='flex min-h-dvh flex-col items-center justify-center gap-5 rounded-md px-4 text-xl bg-base'>
             
-            <TextBadge size="sm" variant="surface" peak={true} text="Label"><SquareDashed className="w-4 h-4" /></TextBadge>
-            <TextBadge size="sm" variant="surface" peak={false} text="TextBadge"/>
+            <TextBadge size="sm" variant="surface" peak={true} icon={<SquareDashed className="w-4 h-4" />} text="Label"></TextBadge>
+            <TextBadge size="sm" variant="surface" peak={false} icon={<SquareDashed className="w-4 h-4" />} text="TextBadge"/>
             <TextBadge size="sm" variant="outline" peak={true} text="TextBadge"/>
             <TextBadge size="sm" variant="outline" peak={false} text="TextBadge"/>
             <TextBadge size="sm" variant="accent" peak={true} text="TextBadge"/>
