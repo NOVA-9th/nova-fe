@@ -1,6 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ChevronRight } from 'lucide-react';
+import { TextBtn } from '../../action/text_button/TextBtn';
 
 const breadcrumbVariants = cva('typo-body-key', {
   variants: {
@@ -32,10 +33,9 @@ const Breadcrumb = ({ items, depth, className }: BreadcrumbProps) => {
 
         return (
           <span key={`${label}-${idx}`} className='flex items-center'>
-            <span className={breadcrumbVariants({ textColor })}>{label}</span>
-            {idx !== lastIndex && (
-              <ChevronRight size={16} className='font-100 text-inactive mx-2.5' />
-            )}
+            <TextBtn label={label} className={breadcrumbVariants({ textColor })} />
+
+            {idx !== lastIndex && <ChevronRight size={16} className='font-100 text-inactive' />}
           </span>
         );
       })}

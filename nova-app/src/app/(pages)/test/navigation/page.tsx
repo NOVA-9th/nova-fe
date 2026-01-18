@@ -1,5 +1,5 @@
-import Breadcrumb from '@/shared/ui/navigation/Breadcrumb';
-import SideTabItem from '@/shared/ui/navigation/SideTabItem';
+import Breadcrumb from '@/shared/ui/navigation/Breadcrumb/Breadcrumb';
+import SideTabItem from '@/shared/ui/navigation/SideTabItem/SideTabItem';
 import { SquareDashed } from 'lucide-react';
 
 const page = () => {
@@ -12,8 +12,8 @@ const page = () => {
         <SideTabItem label='Label' icon={<SquareDashed size={16} />} peak={true} minimized={true} />
       </div>
       <div className='flex flex-col gap-4'>
-        <Breadcrumb items={['Depth 1']} />
-        <Breadcrumb items={['Depth 1', 'Depth 2']} />
+        <Breadcrumb items={['Depth 1']} depth={1} />
+        <Breadcrumb items={['Depth 1', 'Depth 2']} depth={2} />
         <Breadcrumb items={['Depth 1', 'Depth 2', 'Depth 3']} depth={3} />
         <Breadcrumb items={['Depth 1', 'Depth 2', 'Depth 3', 'Depth 4']} depth={4} />
       </div>
