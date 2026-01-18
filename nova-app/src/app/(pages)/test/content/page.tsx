@@ -1,5 +1,7 @@
 import DotBadge from "@/shared/ui/content/DotBadge/DotBadge";
+import Header from "@/shared/ui/content/Header/Header";
 import IconBadge from "@/shared/ui/content/IconBadge/IconBadge";
+import ItemList from "@/shared/ui/content/ItemList/ItemList";
 import NumberBadge from "@/shared/ui/content/NumberBadge/NumberBadge";
 import SectionHeader from "@/shared/ui/content/SectionHeader/SectionHeader";
 import TextBadge from "@/shared/ui/content/TextBadge/TextBadge";
@@ -52,7 +54,14 @@ const testPage = () => {
             <SectionHeader size="md" peak={false} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
             <SectionHeader size="lg" peak={true} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
             <SectionHeader size="lg" peak={false} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
+             
+            <ItemList size="md" align="Center" Label="ItemList" SubLabel="SubLabel" Description="Description" LeftIcon={<SquareDashed className="w-4 h-4" />} RightIcon={<SquareDashed className="w-4 h-4" />}/>
+            <ItemList size="md" align="Top" Label="ItemList" SubLabel="SubLabel" Description="Description" LeftIcon={<SquareDashed className="w-4 h-4" />} RightIcon={<SquareDashed className="w-4 h-4" />}/>
+            <ItemList size="lg" align="Center" Label="ItemList" SubLabel="SubLabel" Description="Description" LeftIcon={<SquareDashed className="w-4 h-4" />} RightIcon={<SquareDashed className="w-4 h-4" />}/>
+            <ItemList size="lg" align="Center" Label="ItemList" SubLabel="SubLabel" Description="Description" LeftIcon={<SquareDashed className="w-4 h-4" />} RightIcon={<SquareDashed className="w-4 h-4" />}/>
         
+            <Header size="md" SubLabel="SubLabel" Label="Header" Description="Description"/>
+            <Header size="lg" SubLabel="SubLabel" Label="Header" Description="Description"/>
         </div>
       );
   };

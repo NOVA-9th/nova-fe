@@ -1,4 +1,5 @@
 import { cva } from "class-variance-authority";
+import { cn } from "@/shared/utils/cn";
 
 const NumberBadgeVariants = cva(
     "flex items-center justify-center px-1 py-0.5 rounded-[1000px]",
@@ -78,11 +79,12 @@ interface NumberBadgeProps {
   variant: "surface" | "outline" | "accent" | "data" ,
   peak: true | false
   number?: number
+  className?: string
 }
 
-export default function NumberBadge({ size, variant, peak, number } : NumberBadgeProps) {
+export default function NumberBadge({ size, variant, peak, number, className } : NumberBadgeProps) {
     return (
-      <div className={NumberBadgeVariants({ size: size, variant: variant, peak: peak })}>
+      <div className={cn(NumberBadgeVariants({ size: size, variant: variant, peak: peak }), className)}>
         {number}
       </div>
     )

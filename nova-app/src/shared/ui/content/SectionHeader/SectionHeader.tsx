@@ -2,32 +2,20 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const SectionHeaderVariants = cva(
-    "flex items-center justify-center",
+    "flex items-center justify-center py-0.5",
     {
       variants: {
         size: {
-          sm: "gap-1.5 typo-subhead-key",
-          md: "gap-1.5 typo-body-key",
+          sm: "gap-1.5 typo-body-key",
+          md: "gap-1.5 typo-subhead-key",
           lg: "gap-2 typo-headline-key",
         },
         
         peak: {
-          true: "",
-          false: "",
+          true: "text-base",
+          false: "text-additive",
         },
       },
-
-      compoundVariants: [
-        // peak
-        {
-          peak: true,
-          class: "text-base",
-        },
-        {
-          peak: false,
-          class: "text-additive",
-        },
-      ],
     }
 );
 
