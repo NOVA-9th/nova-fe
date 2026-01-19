@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const IconBadgeVariants = cva(
@@ -74,10 +74,7 @@ const IconBadgeVariants = cva(
     }
 );
 
-interface IconBadgeProps {
-  size: "sm" | "md" | "lg",
-  variant: "surface" | "outline" | "accent" | "data" ,
-  peak: true | false
+interface IconBadgeProps extends VariantProps<typeof IconBadgeVariants> {
   icon?: React.ReactNode
   className?: string
 }
@@ -86,9 +83,9 @@ interface IconBadgeProps {
 * 아이콘은 sm 사이즈에서 11px, md 사이즈에서 12px, lg 사이즈에서 13px 크기로 적용할 것.
 */
 
-export default function IconBadgeBadge({ size, variant, peak, icon, className } : IconBadgeProps) {
+export default function IconBadgeBadge({ size, variant, peak, icon, className }: IconBadgeProps) {
     return (
-      <div className={cn(IconBadgeVariants({ size: size, variant: variant, peak: peak }), className)}>
+      <div className={cn(IconBadgeVariants({ size, variant, peak }), className)}>
         {icon}
       </div>
     )
