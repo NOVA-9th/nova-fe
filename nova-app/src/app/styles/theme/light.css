@@ -82,10 +82,6 @@
   }
 
   /* ---------- Background / Interaction ---------- */
-  .hover\:bg-base:hover {
-    background-color: color-mix(in srgb, var(--bg-base), var(--color-charcoal-full) 2%);
-  }
-
   .hover\:bg-surface:hover {
     background-color: color-mix(in srgb, var(--bg-surface), var(--color-charcoal-full) 2%);
   }
@@ -95,11 +91,11 @@
   }
 
   .hover\:bg-data-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-light-full) 4%);
+    background-color: color-mix(in srgb, var(--color-light-surface), var(--color-light-full) 4%);
   }
 
   .hover\:bg-data-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-white-full) 6%);
+    background-color: color-mix(in srgb, var(--color-light-full), var(--color-white-full) 6%);
   }
 
   .hover\:bg-accent-surface:hover {
@@ -108,14 +104,6 @@
 
   .hover\:bg-accent-peak:hover {
     background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-white-full) 6%);
-  }
-
-  .hover\:bg-interaction-surface:hover {
-    background-color: color-mix(
-      in srgb,
-      var(--bg-interaction-surface),
-      var(--color-charcoal-full) 2%
-    );
   }
 
   .active\:bg-surface:active {
@@ -127,11 +115,11 @@
   }
 
   .active\:bg-data-surface:active {
-    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-light-full) 8%);
+    background-color: color-mix(in srgb, var(--color-light-surface), var(--color-light-full) 8%);
   }
 
   .active\:bg-data-peak:active {
-    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-white-full) 10%);
+    background-color: color-mix(in srgb, var(--color-light-full), var(--color-white-full) 10%);
   }
 
   .active\:bg-accent-surface:active {
