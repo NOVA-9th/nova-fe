@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Global-Theme */
 @theme {
   /* ---------- Background ---------- */
@@ -304,3 +305,326 @@
     border-color: var(--stroke-selected);
   }
 }
+=======
+/* Global-Theme */
+@theme {
+  /* ---------- Background ---------- */
+  --bg-base: #ffffff;
+  --bg-alternative: var(--color-white-full);
+  --bg-surface: var(--color-slate-surface);
+  --bg-peak: var(--color-charcoal-full);
+  --bg-static: rgb(255 255 255 / 0.72);
+
+  --bg-data-surface: var(--color-light-surface); /* #00BD75 @ 10% */
+  --bg-data-peak: var(--color-light-full);
+
+  --bg-accent-surface: var(--color-primary-surface); /* #287AF5 @ 10% */
+  --bg-accent-peak: var(--color-primary-full);
+
+  /* ---------- Background / Interaction ---------- */
+  --bg-interaction-surface: var(--color-interaction-surface);
+  --bg-interaction-peak: var(--color-interaction-peak);
+  --bg-interaction-data: var(--color-interaction-data);
+  --bg-interaction-accent: var(--color-interaction-accent);
+
+  /* ---------- Foreground ---------- */
+  --fg-base: var(--color-charcoal-full);
+  --fg-additive: var(--color-charcoal-additive); /* #151618 @ 72% */
+  --fg-optional: var(--color-charcoal-optional); /* #151618 @ 48% */
+  --fg-inactive: var(--color-charcoal-inactive); /* #151618 @ 36% */
+  --fg-peak: var(--color-white-full);
+  --fg-static: #ffffff;
+
+  --fg-data-base: var(--color-light-full);
+  --fg-data-peak: var(--color-light-peak);
+
+  --fg-accent-base: var(--color-primary-full);
+  --fg-accent-peak: var(--color-primary-peak);
+
+  /* ---------- Stroke ---------- */
+  --stroke-outline: var(--color-slate-outline); /* #969FAE @ 20% */
+  --stroke-peak: var(--color-charcoal-full);
+  --stroke-selected: var(--color-charcoal-selected); /* #151618 @ 56% */
+  --stroke-ring: var(--color-slate-ring); /* #969FAE @ 28% */
+
+  --stroke-data-outline: var(--color-light-outline); /* #00BD75 @ 20% */
+  --stroke-data-selected: var(--color-light-full);
+}
+
+@layer utilities {
+  /* ---------- Background ---------- */
+  .bg-base {
+    background-color: #ffffff;
+  }
+
+  .bg-alternative {
+    background-color: var(--color-white-full);
+  }
+
+  .bg-surface {
+    background-color: var(--color-slate-surface);
+  }
+
+  .bg-peak {
+    background-color: var(--color-charcoal-full);
+  }
+
+  .bg-static {
+    background-color: rgb(255 255 255 / 0.72);
+  }
+
+  .bg-data-surface {
+    background-color: var(--color-light-surface);
+  }
+
+  .bg-data-peak {
+    background-color: var(--color-light-full);
+  }
+
+  .bg-accent-surface {
+    background-color: var(--color-primary-surface);
+  }
+
+  .bg-accent-peak {
+    background-color: var(--color-primary-full);
+  }
+
+  /* ---------- Background / Interaction ---------- */
+  .hover\:bg-surface:hover {
+    background-color: color-mix(in srgb, var(--bg-surface), var(--color-charcoal-full) 2%);
+  }
+
+  .hover\:bg-peak:hover {
+    background-color: color-mix(in srgb, var(--bg-peak), var(--color-white-full) 6%);
+  }
+
+  .hover\:bg-data-surface:hover {
+    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-light-full) 4%);
+  }
+
+  .hover\:bg-data-peak:hover {
+    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-white-full) 6%);
+  }
+
+  .hover\:bg-accent-surface:hover {
+    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 12%);
+  }
+
+  .hover\:bg-accent-peak:hover {
+    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-white-full) 6%);
+  }
+
+  .active\:bg-surface:active {
+    background-color: color-mix(in srgb, var(--bg-surface), var(--color-charcoal-full) 6%);
+  }
+
+  .active\:bg-peak:active {
+    background-color: color-mix(in srgb, var(--bg-peak), var(--color-white-full) 10%);
+  }
+
+  .active\:bg-data-surface:active {
+    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-light-full) 8%);
+  }
+
+  .active\:bg-data-peak:active {
+    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-white-full) 10%);
+  }
+
+  .active\:bg-accent-surface:active {
+    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 20%);
+  }
+
+  .active\:bg-accent-peak:active {
+    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-white-full) 10%);
+  }
+
+  .disabled\:bg-surface:disabled,
+  .disabled\:bg-surface[aria-disabled='true'] {
+    opacity: 0.36;
+  }
+
+  .disabled\:bg-peak:disabled,
+  .disabled\:bg-peak[aria-disabled='true'] {
+    opacity: 0.36;
+  }
+
+  .disabled\:bg-data-surface:disabled,
+  .disabled\:bg-data-surface[aria-disabled='true'] {
+    opacity: 0.36;
+  }
+
+  .disabled\:bg-accent-surface:disabled,
+  .disabled\:bg-accent-surface[aria-disabled='true'] {
+    opacity: 0.36;
+  }
+
+  /* ---------- Foreground ---------- */
+  .text-base-color {
+    color: var(--color-charcoal-full);
+  }
+
+  .text-additive {
+    color: var(--color-charcoal-additive);
+  }
+
+  .text-optional {
+    color: var(--color-charcoal-optional);
+  }
+
+  .text-inactive {
+    color: var(--color-charcoal-inactive);
+  }
+
+  .text-peak {
+    color: var(--color-white-full);
+  }
+
+  .text-static {
+    color: #ffffff;
+  }
+
+  .text-data-base {
+    color: var(--color-light-full);
+  }
+
+  .text-data-peak {
+    color: var(--color-light-peak);
+  }
+
+  .text-accent-base {
+    color: var(--color-primary-full);
+  }
+
+  .text-accent-peak {
+    color: var(--color-primary-peak);
+  }
+
+  .hover\:text-base-color:hover {
+    color: var(--color-charcoal-full);
+  }
+
+  .hover\:text-additive:hover {
+    color: var(--color-charcoal-additive);
+  }
+
+  .hover\:text-optional:hover {
+    color: var(--color-charcoal-optional);
+  }
+
+  .hover\:text-peak:hover {
+    color: var(--color-white-full);
+  }
+
+  .hover\:text-data-base:hover {
+    color: var(--color-light-full);
+  }
+
+  .hover\:text-accent-base:hover {
+    color: var(--color-primary-full);
+  }
+
+  .disabled\:text-base-color:disabled,
+  .disabled\:text-base-color[aria-disabled='true'] {
+    color: var(--color-charcoal-inactive);
+  }
+
+  .disabled\:text-additive:disabled,
+  .disabled\:text-additive[aria-disabled='true'] {
+    color: var(--color-charcoal-inactive);
+  }
+
+  .disabled\:text-optional:disabled,
+  .disabled\:text-optional[aria-disabled='true'] {
+    color: var(--color-charcoal-inactive);
+  }
+
+  .disabled\:text-peak:disabled,
+  .disabled\:text-peak[aria-disabled='true'] {
+    color: var(--color-charcoal-inactive);
+  }
+
+  .disabled\:text-data-base:disabled,
+  .disabled\:text-data-base[aria-disabled='true'] {
+    color: var(--color-charcoal-inactive);
+  }
+
+  .disabled\:text-accent-base:disabled,
+  .disabled\:text-accent-base[aria-disabled='true'] {
+    color: var(--color-charcoal-inactive);
+  }
+
+  /* ---------- Stroke ---------- */
+  .border-outline {
+    border-color: var(--color-slate-outline);
+  }
+
+  .border-peak {
+    border-color: var(--color-charcoal-full);
+  }
+
+  .border-selected {
+    border-color: var(--color-charcoal-selected);
+  }
+
+  .border-ring {
+    border-color: var(--color-slate-ring);
+  }
+
+  .border-data-outline {
+    border-color: var(--color-light-outline);
+  }
+
+  .border-data-selected {
+    border-color: var(--color-light-full);
+  }
+
+  .hover\:border-outline:hover {
+    border-color: var(--color-charcoal-selected);
+  }
+
+  .hover\:border-peak:hover {
+    border-color: var(--color-charcoal-full);
+  }
+
+  .hover\:border-selected:hover {
+    border-color: var(--color-charcoal-selected);
+  }
+
+  .hover\:border-ring:hover {
+    border-color: var(--color-slate-ring);
+  }
+
+  .hover\:border-data-outline:hover {
+    border-color: var(--color-light-full);
+  }
+
+  .disabled\:border-outline:disabled,
+  .disabled\:border-outline[aria-disabled='true'] {
+    border-color: var(--color-slate-outline);
+  }
+
+  .disabled\:border-peak:disabled,
+  .disabled\:border-peak[aria-disabled='true'] {
+    border-color: var(--color-slate-outline);
+  }
+
+  .disabled\:border-selected:disabled,
+  .disabled\:border-selected[aria-disabled='true'] {
+    border-color: var(--color-slate-outline);
+  }
+
+  .disabled\:border-ring:disabled,
+  .disabled\:border-ring[aria-disabled='true'] {
+    border-color: var(--color-slate-outline);
+  }
+
+  .disabled\:border-data-outline:disabled,
+  .disabled\:border-data-outline[aria-disabled='true'] {
+    border-color: var(--color-slate-outline);
+  }
+
+  .focus-within\:border-selected:focus-within {
+    border-color: var(--stroke-selected);
+  }
+}
+>>>>>>> b547843 (💄 style: light 및 dark 디자인 시스템 최신화)
