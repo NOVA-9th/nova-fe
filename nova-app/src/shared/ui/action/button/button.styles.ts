@@ -43,6 +43,11 @@ export const ButtonVariants = cva(
         class: 'bg-surface ',
       },
       {
+        style: 'outline',
+        peak: false,
+        class: 'bg-surface hover:hovered hover:bg-surface  active:active active:bg-surface',
+      },
+      {
         style: 'accent',
         peak: true,
         class:

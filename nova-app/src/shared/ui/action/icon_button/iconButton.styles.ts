@@ -42,6 +42,16 @@ export const IconButtonVariants = cva(
         class: 'bg-surface ',
       },
       {
+        style: 'outline',
+        peak: false,
+        class: 'bg-surface hover:hovered hover:bg-surface active:active active:bg-surface',
+      },
+      {
+        style: 'outline',
+        peak: true,
+        class: 'bg-surface ',
+      },
+      {
         style: 'accent',
         peak: true,
         class:
