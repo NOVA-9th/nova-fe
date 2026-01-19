@@ -55,13 +55,13 @@ const testPage = () => {
             <SectionHeader size="lg" peak={true} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
             <SectionHeader size="lg" peak={false} rightIcon={<SquareDashed className="w-4 h-4" />} text="SectionHeader"/>
              
-            <ItemList size="md" align="Center" Label="ItemList" SubLabel="SubLabel" Description="Description" LeftIcon={<SquareDashed className="w-4 h-4" />} RightIcon={<SquareDashed className="w-4 h-4" />}/>
-            <ItemList size="md" align="Top" Label="ItemList" SubLabel="SubLabel" Description="Description" LeftIcon={<SquareDashed className="w-4 h-4" />} RightIcon={<SquareDashed className="w-4 h-4" />}/>
-            <ItemList size="lg" align="Center" Label="ItemList" SubLabel="SubLabel" Description="Description" LeftIcon={<SquareDashed className="w-4 h-4" />} RightIcon={<SquareDashed className="w-4 h-4" />}/>
-            <ItemList size="lg" align="Center" Label="ItemList" SubLabel="SubLabel" Description="Description" LeftIcon={<SquareDashed className="w-4 h-4" />} RightIcon={<SquareDashed className="w-4 h-4" />}/>
+            <ItemList size="md" align="Center" label="ItemList" subLabel="SubLabel" description="Description" leftIcon={<SquareDashed className="w-4 h-4" />} rightIcon={<SquareDashed className="w-4 h-4" />}/>
+            <ItemList size="md" align="Top" label="ItemList" subLabel="SubLabel" description="Description" leftIcon={<SquareDashed className="w-4 h-4" />} rightIcon={<SquareDashed className="w-4 h-4" />}/>
+            <ItemList size="lg" align="Center" label="ItemList" subLabel="SubLabel" description="Description" leftIcon={<SquareDashed className="w-4 h-4" />} rightIcon={<SquareDashed className="w-4 h-4" />}/>
+            <ItemList size="lg" align="Center" label="ItemList" subLabel="SubLabel" description="Description" leftIcon={<SquareDashed className="w-4 h-4" />} rightIcon={<SquareDashed className="w-4 h-4" />}/>
         
-            <Header size="md" SubLabel="SubLabel" Label="Header" Description="Description"/>
-            <Header size="lg" SubLabel="SubLabel" Label="Header" Description="Description"/>
+            <Header size="md" subLabel="SubLabel" label="Header" description="Description"/>
+            <Header size="lg" subLabel="SubLabel" label="Header" description="Description"/>
         </div>
       );
   };
