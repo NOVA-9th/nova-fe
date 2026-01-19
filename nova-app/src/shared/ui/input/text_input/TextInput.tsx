@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 
 const TextInputVariants = cva(
-  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
+  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular danger',
   {
     variants: {
       size: {
@@ -17,20 +17,20 @@ const TextInputVariants = cva(
       },
 
       data: {
-        true: '',
-        false: 'border-outline focus-within:border-selected hover:border-ring',
+        true: 'danger',
+        false: 'border-outline focus-within:border-selected',
       },
     },
     compoundVariants: [
       {
         variant: 'outline',
         data: true,
-        class: 'border border-data-outline focus-within:border-data-selected danger',
+        class: 'border border-data-outline focus-within:border-data-selected',
       },
       {
         variant: 'surface',
         data: true,
-        class: 'bg-data-surface danger',
+        class: 'bg-data-surface',
       },
       {
         variant: 'surface',

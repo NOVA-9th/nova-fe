@@ -399,11 +399,11 @@
   }
 
   .hover\:bg-data-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-light-full) 4%);
+    background-color: color-mix(in srgb, var(--color-light-surface), var(--color-light-full) 4%);
   }
 
   .hover\:bg-data-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-white-full) 6%);
+    background-color: color-mix(in srgb, var(--color-light-full), var(--color-white-full) 6%);
   }
 
   .hover\:bg-accent-surface:hover {
@@ -423,11 +423,11 @@
   }
 
   .active\:bg-data-surface:active {
-    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-light-full) 8%);
+    background-color: color-mix(in srgb, var(--color-light-surface), var(--color-light-full) 8%);
   }
 
   .active\:bg-data-peak:active {
-    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-white-full) 10%);
+    background-color: color-mix(in srgb, var(--color-light-full), var(--color-white-full) 10%);
   }
 
   .active\:bg-accent-surface:active {
@@ -624,7 +624,15 @@
   }
 
   .focus-within\:border-selected:focus-within {
-    border-color: var(--stroke-selected);
+    border-color: var(--color-charcoal-selected);
+  }
+
+  .focus-within\:border-data-selected:focus-within {
+    border-color: var(--color-light-full);
+  }
+
+  .caret-theme {
+    caret-color: var(--color-light-full);
   }
 }
 >>>>>>> b547843 (💄 style: light 및 dark 디자인 시스템 최신화)
