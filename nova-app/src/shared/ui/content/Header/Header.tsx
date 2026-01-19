@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const HeaderVariants = cva(
@@ -13,20 +13,19 @@ const HeaderVariants = cva(
     }
 );
 
-interface HeaderProps {
-  size: "md" | "lg",
-  SubLabel?: string,
-  Label: string,
-  Description?: string,
-  className?: string
+interface HeaderProps extends VariantProps<typeof HeaderVariants> {
+  label: string;
+  subLabel?: string;
+  description?: string;
+  className?: string;
 }
 
-export default function Header({ size, SubLabel, Label, Description, className } : HeaderProps) {
+export default function Header({ size, subLabel, label, description, className }: HeaderProps) {
     return (
       <div className={cn(HeaderVariants({ size: size }), className)}>
-        {SubLabel && <span className="typo-callout-base text-optional">{SubLabel}</span>}
-        <span className={`${size === "md" ? "typo-headline-strong" : "typo-title-strong"} text-base `}>{Label}</span>
-        {Description && <span className="typo-body-base text-additive">{Description}</span>}
+        {subLabel && <span className="typo-callout-base text-optional">{subLabel}</span>}
+        <span className={`${size === "md" ? "typo-headline-strong" : "typo-title-strong"} text-base `}>{label}</span>
+        {description && <span className="typo-body-base text-additive">{description}</span>}
       </div>
     )
 }
