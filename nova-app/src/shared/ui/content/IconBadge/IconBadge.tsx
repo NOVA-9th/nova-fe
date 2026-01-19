@@ -41,7 +41,7 @@ const IconBadgeVariants = cva(
         {
           variant: "outline",
           peak: true,
-          class: "bg-surface text-base",
+          class: "bg-surface text-base-color",
         },
         {
           variant: "outline",
