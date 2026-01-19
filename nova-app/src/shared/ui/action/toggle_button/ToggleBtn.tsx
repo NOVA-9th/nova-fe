@@ -1,5 +1,5 @@
 import { cn } from '@/shared/utils/cn';
-import { cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 const ToggleBtnVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5',
   {
@@ -15,7 +15,7 @@ const ToggleBtnVariants = cva(
       },
 
       selected: {
-        true: 'hover:bg-surface bg-surface text-base',
+        true: 'hover:bg-surface bg-surface text-base-color',
         false: 'text-optional',
       },
     },
@@ -29,16 +29,13 @@ const ToggleBtnVariants = cva(
       {
         variant: 'outline',
         selected: false,
-        class: 'hover:bg- border-outline ',
+        class: '',
       },
     ],
   },
 );
 
-interface ToggleBtnProps {
-  size: 'md' | 'lg';
-  variant: 'surface' | 'outline';
-  selected: true | false;
+interface ToggleBtnProps extends VariantProps<typeof ToggleBtnVariants> {
   text?: string;
   icon?: React.ReactNode;
   onClick?: () => void;
@@ -53,7 +50,7 @@ export default function ToggleBtn({
   icon,
   onClick,
   className,
-}: ToggleBtnProps & React.PropsWithChildren) {
+}: ToggleBtnProps) {
   return (
     <button
       type='button'

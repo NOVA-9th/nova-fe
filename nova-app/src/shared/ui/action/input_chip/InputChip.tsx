@@ -1,27 +1,30 @@
 import { cn } from '@/shared/utils/cn';
-import { cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 
+const ICON_SIZE_BY_CHIP_SIZE = {
+  sm: 12,
+  md: 14,
+} as const;
+
 const InputChipVariants = cva(
-  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light gap-1',
+  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light',
   {
     variants: {
       size: {
-        md: 'size-md typo-callout-base',
-        sm: 'size-sm typo-footnote-base',
+        md: 'gap-1.5 size-md typo-callout-base',
+        sm: 'gap-1 size-sm typo-footnote-base',
       },
 
       variant: {
         surface: 'hover:bg-surface bg-surface text-base border-ring-width border-ring',
-        outline: 'text-optional border-ring border',
+        outline: 'text-optional border-outline border hover:border-ring',
       },
     },
   },
 );
 
-interface InputChipProps {
-  size: 'sm' | 'md';
-  variant: 'surface' | 'outline';
+interface InputChipProps extends VariantProps<typeof InputChipVariants> {
   text?: string;
   icon?: React.ReactNode;
   onClick?: () => void;
@@ -35,7 +38,7 @@ export default function InputChip({
   icon,
   onClick,
   className,
-}: InputChipProps & React.PropsWithChildren) {
+}: InputChipProps) {
   return (
     <button
       type='button'
@@ -44,7 +47,7 @@ export default function InputChip({
     >
       <span className='text-additive'>{icon}</span>
       <p className='text-base-color'>{text}</p>
-      <X className='text-additive' size={size === 'sm' ? 12 : 14} />
+      <X className='text-additive' size={ICON_SIZE_BY_CHIP_SIZE[size ?? 'md']} />
     </button>
   );
 }
