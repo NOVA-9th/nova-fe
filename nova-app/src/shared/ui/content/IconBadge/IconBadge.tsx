@@ -75,7 +75,7 @@ const IconBadgeVariants = cva(
 );
 
 interface IconBadgeProps extends VariantProps<typeof IconBadgeVariants> {
-  icon?: React.ReactNode
+  icon: React.ReactNode
   className?: string
 }
 
