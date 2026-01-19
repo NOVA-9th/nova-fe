@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const ItemListVariants = cva(
@@ -18,30 +18,28 @@ const ItemListVariants = cva(
     }
 );
 
-interface ItemListProps {
-  size: "md" | "lg",
-  align: "Center" | "Top",
-  Label: string,
-  SubLabel?: string,
-  Description?: string,
-  LeftIcon?: React.ReactNode
-  RightIcon?: React.ReactNode
+interface ItemListProps extends VariantProps<typeof ItemListVariants> {
+  label: string,
+  subLabel?: string,
+  description?: string,
+  leftIcon?: React.ReactNode
+  rightIcon?: React.ReactNode
   className?: string
 }
 
-export default function ItemList({ size, align, Label, SubLabel, Description, LeftIcon, RightIcon, className } : ItemListProps) {
+export default function ItemList({ size, align, label, subLabel, description, leftIcon, rightIcon, className } : ItemListProps) {
     return (
-      <div className={cn(ItemListVariants({ size: size, align: align }), className)}>
+      <div className={cn(ItemListVariants({ size, align }), className)}>
         <div className={`flex flex-col ${align === "Center" ? "justify-center" : "justify-start"} items-center`}>
-            { LeftIcon && LeftIcon }
+            { leftIcon && leftIcon }
         </div>
         <div className="flex flex-col items-start justify-center">
-            { SubLabel && <span className="typo-footnote-base text-optional">{SubLabel}</span>}
-            <span className="typo-callout-base text-base">{Label}</span>
-            { Description && <span className="typo-footnote-base text-additive">{Description}</span>}
+            { subLabel && <span className="typo-footnote-base text-optional">{subLabel}</span>}
+            <span className="typo-callout-base text-base-color">{label}</span>
+            { description && <span className="typo-footnote-base text-additive">{description}</span>}
         </div>
         <div className={`flex flex-col ${align === "Center" ? "justify-center" : "justify-start"} items-center`}>
-            { RightIcon && RightIcon }
+            { rightIcon && rightIcon }
         </div>
       </div>
     )
