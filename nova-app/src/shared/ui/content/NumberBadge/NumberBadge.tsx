@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const NumberBadgeVariants = cva(
@@ -74,17 +74,14 @@ const NumberBadgeVariants = cva(
     }
 );
 
-interface NumberBadgeProps {
-  size: "sm" | "md" | "lg",
-  variant: "surface" | "outline" | "accent" | "data" ,
-  peak: true | false
+interface NumberBadgeProps extends VariantProps<typeof NumberBadgeVariants> {
   number?: number
   className?: string
 }
 
 export default function NumberBadge({ size, variant, peak, number, className } : NumberBadgeProps) {
     return (
-      <div className={cn(NumberBadgeVariants({ size: size, variant: variant, peak: peak }), className)}>
+      <div className={cn(NumberBadgeVariants({ size, variant, peak }), className)}>
         {number}
       </div>
     )
