@@ -26,7 +26,7 @@ interface SectionHeaderProps extends VariantProps<typeof SectionHeaderVariants> 
   className?: string
 }
 
-export default function SectionHeader({ size, peak, text = "Label", leftIcon, rightIcon, className } : SectionHeaderProps) {
+const SectionHeader = ({ size, peak, text = "Label", leftIcon, rightIcon, className } : SectionHeaderProps) => {
     return (
       <div className={cn(SectionHeaderVariants({ size, peak }), className)}>
         {leftIcon}
@@ -35,3 +35,5 @@ export default function SectionHeader({ size, peak, text = "Label", leftIcon, ri
       </div>
     )
 }
+
+export default SectionHeader;

@@ -24,8 +24,10 @@ interface DotBadgeProps extends VariantProps<typeof DotBadgeVariants> {
   className?: string;
 }
 
-export default function DotBadge({ size, variant, className }: DotBadgeProps) {
+const DotBadge = ({ size, variant, className }: DotBadgeProps) => {
     return (
       <div className={cn(DotBadgeVariants({ size, variant }), className)}/>
     )
 }
+
+export default DotBadge;
