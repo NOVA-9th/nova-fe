@@ -24,7 +24,7 @@ export default function Header({ size, subLabel, label, description, className }
     return (
       <div className={cn(HeaderVariants({ size: size }), className)}>
         {subLabel && <span className="typo-callout-base text-optional">{subLabel}</span>}
-        <span className={`${size === "md" ? "typo-headline-strong" : "typo-title-strong"} text-base `}>{label}</span>
+        <span className={`${size === "md" ? "typo-headline-strong" : "typo-title-strong"} text-base-color`}>{label}</span>
         {description && <span className="typo-body-base text-additive">{description}</span>}
       </div>
     )
