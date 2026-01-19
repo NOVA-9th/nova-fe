@@ -1,4 +1,4 @@
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/shared/utils/cn";
 
 const SectionHeaderVariants = cva(
@@ -19,9 +19,7 @@ const SectionHeaderVariants = cva(
     }
 );
 
-interface SectionHeaderProps {
-  size: "sm" | "md" | "lg",
-  peak: true | false,
+interface SectionHeaderProps extends VariantProps<typeof SectionHeaderVariants> {
   text: string,
   leftIcon?: React.ReactNode
   rightIcon?: React.ReactNode
@@ -30,7 +28,7 @@ interface SectionHeaderProps {
 
 export default function SectionHeader({ size, peak, text = "Label", leftIcon, rightIcon, className } : SectionHeaderProps) {
     return (
-      <div className={cn(SectionHeaderVariants({ size: size, peak: peak }), className)}>
+      <div className={cn(SectionHeaderVariants({ size, peak }), className)}>
         {leftIcon && leftIcon}
         {text}
         {rightIcon && rightIcon}
