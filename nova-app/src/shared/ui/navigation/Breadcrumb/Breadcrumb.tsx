@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { ChevronRight } from 'lucide-react';
 import { TextBtn } from '../../action/text_button/TextBtn';
 
-const breadcrumbVariants = cva('typo-body-key', {
+const BreadcrumbVariants = cva('typo-body-key', {
   variants: {
     textColor: {
       prev: 'text-additive',
@@ -15,7 +15,7 @@ const breadcrumbVariants = cva('typo-body-key', {
   },
 });
 
-interface BreadcrumbProps extends VariantProps<typeof breadcrumbVariants> {
+interface BreadcrumbProps extends VariantProps<typeof BreadcrumbVariants> {
   items: string[]; // ['Depth 1', 'Depth 2', ...]
   depth?: 1 | 2 | 3 | 4; // 보여줄 개수(옵션)
   className?: string;
@@ -32,7 +32,7 @@ const Breadcrumb = ({ items, depth, className }: BreadcrumbProps) => {
 
         return (
           <span key={`${label}-${idx}`} className='flex items-center'>
-            <TextBtn label={label} className={breadcrumbVariants({ textColor })} />
+            <TextBtn label={label} className={BreadcrumbVariants({ textColor })} />
 
             {idx !== lastIndex && (
               <ChevronRight size={16} className='font-100 text-inactive mx-2' />
