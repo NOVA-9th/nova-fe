@@ -5,7 +5,7 @@ import ItemList from "@/shared/ui/content/ItemList/ItemList";
 import NumberBadge from "@/shared/ui/content/NumberBadge/NumberBadge";
 import SectionHeader from "@/shared/ui/content/SectionHeader/SectionHeader";
 import TextBadge from "@/shared/ui/content/TextBadge/TextBadge";
-import { Icon, SquareDashed } from "lucide-react";
+import { SquareDashed } from "lucide-react";
 
 const testPage = () => {
     return (
