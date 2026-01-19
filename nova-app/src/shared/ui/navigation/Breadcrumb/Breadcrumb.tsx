@@ -21,7 +21,6 @@ interface BreadcrumbProps extends VariantProps<typeof breadcrumbVariants> {
   className?: string;
 }
 
-// 추후 TextButton 적용
 const Breadcrumb = ({ items, depth, className }: BreadcrumbProps) => {
   const visible = depth ? items.slice(0, depth) : items;
   const lastIndex = visible.length - 1;
@@ -35,7 +34,9 @@ const Breadcrumb = ({ items, depth, className }: BreadcrumbProps) => {
           <span key={`${label}-${idx}`} className='flex items-center'>
             <TextBtn label={label} className={breadcrumbVariants({ textColor })} />
 
-            {idx !== lastIndex && <ChevronRight size={16} className='font-100 text-inactive' />}
+            {idx !== lastIndex && (
+              <ChevronRight size={16} className='font-100 text-inactive mx-2' />
+            )}
           </span>
         );
       })}

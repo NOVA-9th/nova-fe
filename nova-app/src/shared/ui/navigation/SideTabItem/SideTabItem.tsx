@@ -19,23 +19,22 @@ const sideItemVariants = cva(
       {
         peak: false,
         minimized: false,
-        class: 'w-60 h-11 typo-body-key text-optional gap-2.5',
+        class: 'typo-body-key text-optional gap-3', // gap 2.5 + label 패팅 px 0.5
       },
       {
         peak: true,
         minimized: false,
-        class: 'w-60 h-11 bg-surface typo-body-key text-base-color gap-2.5',
+        class: 'bg-surface typo-body-key text-base-color gap-3',
       },
       {
         peak: false,
         minimized: true,
-        class: 'w-17 h-17.5 typo-callout-key text-optional flex-col justify-center gap-1.5',
+        class: 'typo-callout-key text-optional flex-col justify-center gap-2',
       },
       {
         peak: true,
         minimized: true,
-        class:
-          'w-17 h-17.5 bg-surface typo-callout-key text-base-color flex-col justify-center gap-1.5',
+        class: 'bg-surface typo-callout-key text-base-color flex-col justify-center gap-2',
       },
     ],
 
@@ -48,7 +47,7 @@ const sideItemVariants = cva(
 
 interface SideTabItemProps extends VariantProps<typeof sideItemVariants> {
   icon?: React.ReactNode;
-  label?: string;
+  label: string;
   className?: string;
 }
 

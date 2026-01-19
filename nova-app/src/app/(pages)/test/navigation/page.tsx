@@ -6,10 +6,26 @@ const page = () => {
   return (
     <div className='flex flex-col items-center justify-center gap-10 min-h-dvh'>
       <div className='flex gap-6'>
-        <SideTabItem label='Label' icon={<SquareDashed size={16} />} />
-        <SideTabItem label='Label' icon={<SquareDashed size={16} />} peak={true} />
-        <SideTabItem label='Label' icon={<SquareDashed size={16} />} minimized={true} />
-        <SideTabItem label='Label' icon={<SquareDashed size={16} />} peak={true} minimized={true} />
+        <SideTabItem label='Label' icon={<SquareDashed size={16} />} className='w-60 h-11' />
+        <SideTabItem
+          label='Label'
+          icon={<SquareDashed size={16} />}
+          peak={true}
+          className='w-60 h-11'
+        />
+        <SideTabItem
+          label='Label'
+          icon={<SquareDashed size={16} />}
+          minimized={true}
+          className='w-17 h-17.5'
+        />
+        <SideTabItem
+          label='Label'
+          icon={<SquareDashed size={16} />}
+          peak={true}
+          minimized={true}
+          className='w-17 h-17.5'
+        />
       </div>
       <div className='flex flex-col gap-4'>
         <Breadcrumb items={['Depth 1']} depth={1} />
