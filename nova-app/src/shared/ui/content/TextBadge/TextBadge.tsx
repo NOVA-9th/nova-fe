@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils/cn";
-import { cva } from "class-variance-authority";
+import { cva, VariantProps } from "class-variance-authority";
 
 const TextBadgeVariants = cva(
     "flex items-center justify-center rounded-static-pill",
@@ -74,20 +74,17 @@ const TextBadgeVariants = cva(
     }
 );
 
-interface TextBadgeProps {
-    size: "sm" | "md" | "lg",
-    variant: "surface" | "outline" | "accent" | "data" ,
-    peak: true | false
+interface TextBadgeProps extends VariantProps<typeof TextBadgeVariants> {
     text: string
     icon?: React.ReactNode
     className?: string
 }
 
-export default function TextBadge({ size, variant, peak, text = "Label", icon, className } : TextBadgeProps & React.PropsWithChildren) {
-    return (
-      <div className={cn(TextBadgeVariants({ size: size, variant: variant, peak: peak }), className)}>
-        <div className="flex items-center justify-center py-[1.5px]">{icon}</div>
-        <p className="px-0.5">{text}</p>
-      </div>
-    );
+export default function TextBadge({ size, variant, peak, text = "Label", icon, className } : TextBadgeProps) {
+  return (
+    <div className={cn(TextBadgeVariants({ size, variant, peak }), className)}>
+      <div className="flex items-center justify-center py-[1.5px]">{icon}</div>
+      <p className="px-0.5">{text}</p>
+    </div>
+  );
 }
