@@ -151,7 +151,7 @@
   }
 
   /* ---------- Foreground ---------- */
-  .text-base {
+  .text-base-color {
     color: var(--color-charcoal-full);
   }
 
@@ -191,7 +191,7 @@
     color: var(--color-primary-peak);
   }
 
-  .hover\:text-base:hover {
+  .hover\:text-base-color:hover {
     color: var(--color-charcoal-full);
   }
 
@@ -215,8 +215,8 @@
     color: var(--color-primary-full);
   }
 
-  .disabled\:text-base:disabled,
-  .disabled\:text-base[aria-disabled='true'] {
+  .disabled\:text-base-color:disabled,
+  .disabled\:text-base-color[aria-disabled='true'] {
     color: var(--color-charcoal-inactive);
   }
 
@@ -271,7 +271,7 @@
   }
 
   .hover\:border-outline:hover {
-    border-color: var(--color-slate-outline);
+    border-color: var(--color-charcoal-selected);
   }
 
   .hover\:border-peak:hover {
