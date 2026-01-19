@@ -80,7 +80,7 @@ interface TextBadgeProps extends VariantProps<typeof TextBadgeVariants> {
     className?: string
 }
 
-export default function TextBadge({ size, variant, peak, text = "Label", icon, className } : TextBadgeProps) {
+const TextBadge = ({ size, variant, peak, text = "Label", icon, className } : TextBadgeProps) => {
   return (
     <div className={cn(TextBadgeVariants({ size, variant, peak }), className)}>
       <div className="flex items-center justify-center py-[1.5px]">{icon}</div>
@@ -88,3 +88,5 @@ export default function TextBadge({ size, variant, peak, text = "Label", icon, c
     </div>
   );
 }
+
+export default TextBadge;

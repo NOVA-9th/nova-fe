@@ -20,7 +20,7 @@ interface HeaderProps extends VariantProps<typeof HeaderVariants> {
   className?: string;
 }
 
-export default function Header({ size, subLabel, label, description, className }: HeaderProps) {
+const Header = ({ size, subLabel, label, description, className }: HeaderProps) => {
     return (
       <div className={cn(HeaderVariants({ size: size }), className)}>
         {subLabel && <span className="typo-callout-base text-optional">{subLabel}</span>}
@@ -29,3 +29,5 @@ export default function Header({ size, subLabel, label, description, className }
       </div>
     )
 }
+
+export default Header;

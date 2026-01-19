@@ -83,10 +83,12 @@ interface IconBadgeProps extends VariantProps<typeof IconBadgeVariants> {
 * 아이콘은 sm 사이즈에서 11px, md 사이즈에서 12px, lg 사이즈에서 13px 크기로 적용할 것.
 */
 
-export default function IconBadgeBadge({ size, variant, peak, icon, className }: IconBadgeProps) {
+const IconBadge = ({ size, variant, peak, icon, className }: IconBadgeProps) => {
     return (
       <div className={cn(IconBadgeVariants({ size, variant, peak }), className)}>
         {icon}
       </div>
     )
 }
+
+export default IconBadge;

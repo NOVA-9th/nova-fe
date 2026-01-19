@@ -27,7 +27,7 @@ interface ItemListProps extends VariantProps<typeof ItemListVariants> {
   className?: string
 }
 
-export default function ItemList({ size, align, label, subLabel, description, leftIcon, rightIcon, className } : ItemListProps) {
+const ItemList = ({ size, align, label, subLabel, description, leftIcon, rightIcon, className } : ItemListProps) => {
     return (
       <div className={cn(ItemListVariants({ size, align }), className)}>
         <div className={`flex flex-col ${align === "Center" ? "justify-center" : "justify-start"} items-center`}>
@@ -44,3 +44,5 @@ export default function ItemList({ size, align, label, subLabel, description, le
       </div>
     )
 }
+
+export default ItemList;
