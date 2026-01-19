@@ -46,272 +46,261 @@
 @layer utilities {
   /* ---------- Background ---------- */
   .bg-base {
-    background-color: #ffffff;
+    background-color: var(--bg-base);
   }
 
   .bg-alternative {
-    background-color: var(--color-white-full);
+    background-color: var(--bg-alternative);
   }
 
   .bg-surface {
-    background-color: var(--color-slate-surface);
+    background-color: var(--bg-surface);
   }
 
   .bg-peak {
-    background-color: var(--color-charcoal-full);
+    background-color: var(--bg-peak);
   }
 
   .bg-static {
-    background-color: rgb(255 255 255 / 0.72);
+    background-color: var(--bg-static);
   }
 
   .bg-data-surface {
-    background-color: var(--color-light-surface);
+    background-color: var(--bg-data-surface);
   }
 
   .bg-data-peak {
-    background-color: var(--color-light-full);
+    background-color: var(--bg-data-peak);
   }
 
   .bg-accent-surface {
-    background-color: var(--color-primary-surface);
+    background-color: var(--bg-accent-surface);
   }
 
   .bg-accent-peak {
-    background-color: var(--color-primary-full);
+    background-color: var(--bg-accent-peak);
   }
 
   /* ---------- Background / Interaction ---------- */
+  .hover\:bg-base:hover {
+    background-color: var(--bg-interaction-surface);
+  }
+
   .hover\:bg-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-surface), var(--color-charcoal-full) 2%);
+    background-color: var(--bg-interaction-surface);
   }
 
   .hover\:bg-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-peak), var(--color-white-full) 6%);
+    background-color: var(--bg-interaction-peak);
   }
 
   .hover\:bg-data-surface:hover {
-    background-color: color-mix(in srgb, var(--color-light-surface), var(--color-light-full) 4%);
+    background-color: var(--bg-interaction-data);
   }
 
   .hover\:bg-data-peak:hover {
-    background-color: color-mix(in srgb, var(--color-light-full), var(--color-white-full) 6%);
+    background-color: var(--bg-interaction-data);
   }
 
   .hover\:bg-accent-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 12%);
+    background-color: var(--bg-interaction-accent);
   }
 
   .hover\:bg-accent-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-white-full) 6%);
+    background-color: var(--bg-interaction-accent);
   }
 
-  .active\:bg-surface:active {
-    background-color: color-mix(in srgb, var(--bg-surface), var(--color-charcoal-full) 6%);
-  }
-
-  .active\:bg-peak:active {
-    background-color: color-mix(in srgb, var(--bg-peak), var(--color-white-full) 10%);
-  }
-
-  .active\:bg-data-surface:active {
-    background-color: color-mix(in srgb, var(--color-light-surface), var(--color-light-full) 8%);
-  }
-
-  .active\:bg-data-peak:active {
-    background-color: color-mix(in srgb, var(--color-light-full), var(--color-white-full) 10%);
-  }
-
-  .active\:bg-accent-surface:active {
-    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 20%);
-  }
-
-  .active\:bg-accent-peak:active {
-    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-white-full) 10%);
+  .disabled\:bg-base:disabled,
+  .disabled\:bg-base[aria-disabled='true'] {
+    background-color: var(--bg-surface);
   }
 
   .disabled\:bg-surface:disabled,
   .disabled\:bg-surface[aria-disabled='true'] {
-    opacity: 0.36;
+    background-color: var(--bg-surface);
   }
 
   .disabled\:bg-peak:disabled,
   .disabled\:bg-peak[aria-disabled='true'] {
-    opacity: 0.36;
+    background-color: var(--bg-surface);
   }
 
   .disabled\:bg-data-surface:disabled,
   .disabled\:bg-data-surface[aria-disabled='true'] {
-    opacity: 0.36;
+    background-color: var(--bg-surface);
   }
 
   .disabled\:bg-accent-surface:disabled,
   .disabled\:bg-accent-surface[aria-disabled='true'] {
-    opacity: 0.36;
+    background-color: var(--bg-surface);
   }
 
   /* ---------- Foreground ---------- */
-  .text-base-color {
-    color: var(--color-charcoal-full);
+  .text-base {
+    color: var(--fg-base);
   }
 
   .text-additive {
-    color: var(--color-charcoal-additive);
+    color: var(--fg-additive);
   }
 
   .text-optional {
-    color: var(--color-charcoal-optional);
+    color: var(--fg-optional);
   }
 
   .text-inactive {
-    color: var(--color-charcoal-inactive);
+    color: var(--fg-inactive);
   }
 
   .text-peak {
-    color: var(--color-white-full);
+    color: var(--fg-peak);
   }
 
   .text-static {
-    color: #ffffff;
+    color: var(--fg-static);
   }
 
   .text-data-base {
-    color: var(--color-light-full);
+    color: var(--fg-data-base);
   }
 
   .text-data-peak {
-    color: var(--color-light-peak);
+    color: var(--fg-data-peak);
   }
 
   .text-accent-base {
-    color: var(--color-primary-full);
+    color: var(--fg-accent-base);
   }
 
   .text-accent-peak {
-    color: var(--color-primary-peak);
+    color: var(--fg-accent-peak);
   }
 
-  .hover\:text-base-color:hover {
-    color: var(--color-charcoal-full);
+  .hover\:text-base:hover {
+    color: var(--fg-base);
   }
 
   .hover\:text-additive:hover {
-    color: var(--color-charcoal-additive);
+    color: var(--fg-additive);
   }
 
   .hover\:text-optional:hover {
-    color: var(--color-charcoal-optional);
+    color: var(--fg-optional);
   }
 
   .hover\:text-peak:hover {
-    color: var(--color-white-full);
+    color: var(--fg-peak);
   }
 
   .hover\:text-data-base:hover {
-    color: var(--color-light-full);
+    color: var(--fg-data-base);
   }
 
   .hover\:text-accent-base:hover {
-    color: var(--color-primary-full);
+    color: var(--fg-accent-base);
   }
 
-  .disabled\:text-base-color:disabled,
-  .disabled\:text-base-color[aria-disabled='true'] {
-    color: var(--color-charcoal-inactive);
+  .disabled\:text-base:disabled,
+  .disabled\:text-base[aria-disabled='true'] {
+    color: var(--fg-inactive);
   }
 
   .disabled\:text-additive:disabled,
   .disabled\:text-additive[aria-disabled='true'] {
-    color: var(--color-charcoal-inactive);
+    color: var(--fg-inactive);
   }
 
   .disabled\:text-optional:disabled,
   .disabled\:text-optional[aria-disabled='true'] {
-    color: var(--color-charcoal-inactive);
+    color: var(--fg-inactive);
   }
 
   .disabled\:text-peak:disabled,
   .disabled\:text-peak[aria-disabled='true'] {
-    color: var(--color-charcoal-inactive);
+    color: var(--fg-inactive);
   }
 
   .disabled\:text-data-base:disabled,
   .disabled\:text-data-base[aria-disabled='true'] {
-    color: var(--color-charcoal-inactive);
+    color: var(--fg-inactive);
   }
 
   .disabled\:text-accent-base:disabled,
   .disabled\:text-accent-base[aria-disabled='true'] {
-    color: var(--color-charcoal-inactive);
+    color: var(--fg-inactive);
   }
 
   /* ---------- Stroke ---------- */
   .border-outline {
-    border-color: var(--color-slate-outline);
+    border-color: var(--stroke-outline);
   }
 
   .border-peak {
-    border-color: var(--color-charcoal-full);
+    border-color: var(--stroke-peak);
   }
 
   .border-selected {
-    border-color: var(--color-charcoal-selected);
+    border-color: var(--stroke-selected);
   }
 
   .border-ring {
-    border-color: var(--color-slate-ring);
+    border-color: var(--stroke-ring);
   }
 
   .border-data-outline {
-    border-color: var(--color-light-outline);
+    border-color: var(--stroke-data-outline);
   }
 
   .border-data-selected {
-    border-color: var(--color-light-full);
+    border-color: var(--stroke-data-selected);
   }
 
   .hover\:border-outline:hover {
-    border-color: var(--color-charcoal-selected);
+    border-color: var(--stroke-selected);
   }
 
   .hover\:border-peak:hover {
-    border-color: var(--color-charcoal-full);
+    border-color: var(--stroke-peak);
   }
 
   .hover\:border-selected:hover {
-    border-color: var(--color-charcoal-selected);
+    border-color: var(--stroke-selected);
   }
 
   .hover\:border-ring:hover {
-    border-color: var(--color-slate-ring);
+    border-color: var(--stroke-ring);
   }
 
   .hover\:border-data-outline:hover {
-    border-color: var(--color-light-full);
+    border-color: var(--stroke-data-selected);
   }
 
   .disabled\:border-outline:disabled,
   .disabled\:border-outline[aria-disabled='true'] {
-    border-color: var(--color-slate-outline);
+    border-color: var(--stroke-outline);
   }
 
   .disabled\:border-peak:disabled,
   .disabled\:border-peak[aria-disabled='true'] {
-    border-color: var(--color-slate-outline);
+    border-color: var(--stroke-outline);
   }
 
   .disabled\:border-selected:disabled,
   .disabled\:border-selected[aria-disabled='true'] {
-    border-color: var(--color-slate-outline);
+    border-color: var(--stroke-outline);
   }
 
   .disabled\:border-ring:disabled,
   .disabled\:border-ring[aria-disabled='true'] {
-    border-color: var(--color-slate-outline);
+    border-color: var(--stroke-outline);
   }
 
   .disabled\:border-data-outline:disabled,
   .disabled\:border-data-outline[aria-disabled='true'] {
-    border-color: var(--color-slate-outline);
+    border-color: var(--stroke-outline);
+  }
+
+  .focus-within\:border-selected:focus-within {
+    border-color: var(--stroke-selected);
   }
 }

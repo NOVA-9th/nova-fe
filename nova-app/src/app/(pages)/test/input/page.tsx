@@ -1,0 +1,79 @@
+import TextInput from '@/shared/ui/input/text_input/TextInput';
+import { SquareDashed } from 'lucide-react';
+
+const page = () => {
+  return (
+    <div className='bg-base flex min-h-dvh items-center justify-center'>
+      <div className='flex flex-col gap-10'>
+        <div className='grid grid-cols-4 place-items-center gap-5'>
+          <TextInput
+            variant='outline'
+            size='md'
+            data={false}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={14} />}
+            className='h-9 w-90'
+          />
+          <TextInput
+            variant='surface'
+            size='md'
+            data={false}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={14} />}
+            className='h-9 w-90'
+          />
+          <TextInput
+            variant='outline'
+            size='md'
+            data={true}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={14} />}
+            className='h-9 w-90'
+          />
+          <TextInput
+            variant='surface'
+            size='md'
+            data={true}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={14} />}
+            className='h-9 w-90'
+          />
+          <TextInput
+            variant='outline'
+            size='lg'
+            data={false}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={16} />}
+            className='h-11 w-90'
+          />
+          <TextInput
+            variant='surface'
+            size='lg'
+            data={false}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={16} />}
+            className='h-11 w-90'
+          />
+          <TextInput
+            variant='outline'
+            size='lg'
+            data={true}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={16} />}
+            className='h-11 w-90'
+          />
+          <TextInput
+            variant='surface'
+            size='lg'
+            data={true}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={16} />}
+            className='h-11 w-90'
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default page;
