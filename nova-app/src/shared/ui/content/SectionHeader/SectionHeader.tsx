@@ -29,9 +29,9 @@ interface SectionHeaderProps extends VariantProps<typeof SectionHeaderVariants> 
 export default function SectionHeader({ size, peak, text = "Label", leftIcon, rightIcon, className } : SectionHeaderProps) {
     return (
       <div className={cn(SectionHeaderVariants({ size, peak }), className)}>
-        {leftIcon && leftIcon}
+        {leftIcon}
         {text}
-        {rightIcon && rightIcon}
+        {rightIcon}
       </div>
     )
 }
