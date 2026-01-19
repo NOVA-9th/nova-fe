@@ -3,34 +3,32 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 
 const TextInputVariants = cva(
-  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular danger',
+  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
   {
     variants: {
       size: {
         md: 'gap-2.5 size-md typo-callout-base',
         lg: 'gap-3 size-lg typo-body-base',
       },
-
       variant: {
         surface: '',
         outline: '',
       },
-
       data: {
-        true: 'danger',
-        false: 'border-outline focus-within:border-selected',
+        true: '',
+        false: 'border-outline hover:border-ring',
       },
     },
     compoundVariants: [
       {
         variant: 'outline',
         data: true,
-        class: 'border border-data-outline focus-within:border-data-selected',
+        class: 'border border-data-outline danger focus-within:border-data-selected',
       },
       {
         variant: 'surface',
         data: true,
-        class: 'bg-data-surface',
+        class: 'bg-data-surface danger',
       },
       {
         variant: 'surface',
@@ -40,13 +38,15 @@ const TextInputVariants = cva(
       {
         variant: 'outline',
         data: false,
-        class: 'border hover:bg-surface',
+        class: 'border focus-within:border-selected',
       },
     ],
   },
 );
 
 interface TextInputProps extends VariantProps<typeof TextInputVariants> {
+  value: string;
+  onChange: (value: string) => void;
   placeholder?: string;
   icon?: React.ReactNode;
   className?: string;
@@ -56,19 +56,29 @@ export default function TextInput({
   size,
   variant,
   data,
+  value,
+  onChange,
   placeholder,
   icon,
   className,
 }: TextInputProps) {
   return (
     <div className={cn(TextInputVariants({ size, variant, data }), className)}>
-      <span className='text-charcoal-additive'>{icon}</span>
+      {icon && <span className='text-charcoal-additive'>{icon}</span>}
+
       <input
         type='text'
-        className='placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
+        className='caret-theme placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
       />
-      <X size={size === 'md' ? 14 : 16} className='text-charcoal-optional' />
+
+      {value && (
+        <button type='button' onClick={() => onChange('')} className='text-charcoal-optional'>
+          <X size={size === 'md' ? 14 : 16} />
+        </button>
+      )}
     </div>
   );
 }
