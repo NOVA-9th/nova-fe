@@ -1,5 +1,6 @@
 'use client';
 
+import ChipInput from '@/shared/ui/input/chip_input/ChipInput';
 import TextInput from '@/shared/ui/input/text_input/TextInput';
 import { SquareDashed } from 'lucide-react';
 import { useState } from 'react';
@@ -87,6 +88,70 @@ const page = () => {
             data={true}
             value={value}
             onChange={setValue}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={16} />}
+            className='h-11 w-90'
+          />
+          <ChipInput
+            variant='outline'
+            size='md'
+            data={false}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={14} />}
+            className='h-9 w-90'
+          />
+          <ChipInput
+            variant='surface'
+            size='md'
+            data={false}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={14} />}
+            className='h-9 w-90'
+          />
+          <ChipInput
+            variant='outline'
+            size='md'
+            data={true}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={14} />}
+            className='h-9 w-90'
+          />
+          <ChipInput
+            variant='surface'
+            size='md'
+            data={true}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={14} />}
+            className='h-9 w-90'
+          />
+          <ChipInput
+            variant='outline'
+            size='lg'
+            data={false}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={16} />}
+            className='h-11 w-90'
+          />
+          <ChipInput
+            variant='surface'
+            size='lg'
+            data={false}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={16} />}
+            className='h-11 w-90'
+          />
+          <ChipInput
+            variant='outline'
+            size='lg'
+            data={true}
+            placeholder='Placeholder'
+            icon={<SquareDashed size={16} />}
+            className='h-11 w-90'
+          />
+          <ChipInput
+            variant='surface'
+            size='lg'
+            data={true}
             placeholder='Placeholder'
             icon={<SquareDashed size={16} />}
             className='h-11 w-90'
