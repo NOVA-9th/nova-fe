@@ -64,6 +64,7 @@ export default function ChipInput({
 }: ChipInputProps) {
   const [value, setValue] = useState('');
   const [chips, setChips] = useState<string[]>([]);
+  const [isComposing, setIsComposing] = useState(false);
 
   const addChip = () => {
     const trimmed = value.trim();
@@ -99,10 +100,13 @@ export default function ChipInput({
         ))}
 
         <input
+          onCompositionStart={() => setIsComposing(true)}
+          onCompositionEnd={() => setIsComposing(false)}
           type='text'
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={(e) => {
+            if (isComposing) return;
             if (e.key === 'Enter') {
               e.preventDefault();
               addChip();
