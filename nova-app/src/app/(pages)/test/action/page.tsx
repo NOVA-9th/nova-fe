@@ -1,5 +1,9 @@
+import { Button } from '@/shared/ui/action/button/Button';
 import GuidanceChip from '@/shared/ui/action/guidance_chip/GuidanceChip';
+import { IconBtn } from '@/shared/ui/action/icon_button/IconBtn';
 import InputChip from '@/shared/ui/action/input_chip/InputChip';
+import { SelectionChipBtn } from '@/shared/ui/action/selection_chip/SelectionChipBtn';
+import { TextBtn } from '@/shared/ui/action/text_button/TextBtn';
 import ToggleBtn from '@/shared/ui/action/toggle_button/ToggleBtn';
 import { SquareDashed } from 'lucide-react';
 
@@ -146,6 +150,86 @@ const page = () => {
             icon={<SquareDashed size={16} />}
             text='Label'
             className='h-11 w-22'
+          />
+          <Button label='label' size={'sm'} peak={true} style={'surface'} />
+          <Button label='label' size={'sm'} peak={false} style={'surface'} />
+          <Button label='label' size={'md'} peak={false} style={'data'} />
+          <Button label='label' size={'lg'} peak={true} style={'accent'} />
+          <Button label='label' size={'lg'} peak={true} style={'outline'} />
+          <Button label='label' size={'lg'} peak={false} style={'outline'} />
+          <TextBtn
+            label='label'
+            style={'data'}
+            size={'lg'}
+            leftIcon={<SquareDashed size={12} />}
+            rightIcon={<SquareDashed size={12} />}
+          />
+          <TextBtn
+            label='label'
+            style={'accent'}
+            size={'sm'}
+            leftIcon={<SquareDashed size={12} />}
+            rightIcon={<SquareDashed size={12} />}
+          />
+          <TextBtn
+            label='label'
+            style={'surface'}
+            size={'md'}
+            leftIcon={<SquareDashed size={12} />}
+            rightIcon={<SquareDashed size={12} />}
+          />
+          <TextBtn label='label' style={'data'} />
+          <IconBtn size={'sm'} style={'surface'} peak={true} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'surface'} peak={false} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'outline'} peak={true} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'outline'} peak={false} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'surface'} peak={false} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'accent'} peak={false} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'accent'} peak={true} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'accent'} peak={false} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'data'} peak={true} icon={<SquareDashed size={12} />} />
+          <IconBtn size={'sm'} style={'data'} peak={false} icon={<SquareDashed size={12} />} />
+          <SelectionChipBtn
+            size={'sm'}
+            style={'surface'}
+            selected={false}
+            icon={<SquareDashed size={12} />}
+            label={'label'}
+          />
+          <SelectionChipBtn
+            size={'sm'}
+            style={'surface'}
+            selected={true}
+            icon={<SquareDashed size={12} />}
+            label={'label'}
+          />
+          <SelectionChipBtn
+            size={'sm'}
+            style={'accent'}
+            selected={true}
+            icon={<SquareDashed size={12} />}
+            label={'label'}
+          />
+          <SelectionChipBtn
+            size={'sm'}
+            style={'accent'}
+            selected={false}
+            icon={<SquareDashed size={12} />}
+            label={'label'}
+          />
+          <SelectionChipBtn
+            size={'sm'}
+            style={'outline'}
+            selected={true}
+            icon={<SquareDashed size={12} />}
+            label={'label'}
+          />
+          <SelectionChipBtn
+            size={'sm'}
+            style={'outline'}
+            selected={false}
+            icon={<SquareDashed size={12} />}
+            label={'label'}
           />
         </div>
       </div>

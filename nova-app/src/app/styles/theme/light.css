@@ -83,11 +83,11 @@
 
   /* ---------- Background / Interaction ---------- */
   .hover\:bg-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-surface), var(--color-charcoal-full) 2%);
+    background-color: color-mix(in srgb, var(--color-slate-surface), var(--color-charcoal-full) 2%);
   }
 
   .hover\:bg-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-peak), var(--color-white-full) 6%);
+    background-color: color-mix(in srgb, var(--color-charcoal-full), var(--color-white-full) 6%);
   }
 
   .hover\:bg-data-surface:hover {
@@ -99,19 +99,23 @@
   }
 
   .hover\:bg-accent-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 12%);
+    background-color: color-mix(
+      in srgb,
+      var(--color-primary-surface),
+      var(--color-primary-full) 12%
+    );
   }
 
   .hover\:bg-accent-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-white-full) 6%);
+    background-color: color-mix(in srgb, var(--color-primary-full), var(--color-white-full) 6%);
   }
 
   .active\:bg-surface:active {
-    background-color: color-mix(in srgb, var(--bg-surface), var(--color-charcoal-full) 6%);
+    background-color: color-mix(in srgb, var(--color-slate-surface), var(--color-charcoal-full) 6%);
   }
 
   .active\:bg-peak:active {
-    background-color: color-mix(in srgb, var(--bg-peak), var(--color-white-full) 10%);
+    background-color: color-mix(in srgb, var(--color-charcoal-full), var(--color-white-full) 10%);
   }
 
   .active\:bg-data-surface:active {
@@ -123,11 +127,15 @@
   }
 
   .active\:bg-accent-surface:active {
-    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 20%);
+    background-color: color-mix(
+      in srgb,
+      var(--color-primary-surface),
+      var(--color-primary-full) 20%
+    );
   }
 
   .active\:bg-accent-peak:active {
-    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-white-full) 10%);
+    background-color: color-mix(in srgb, var(--color-primary-full), var(--color-white-full) 10%);
   }
 
   .disabled\:bg-surface:disabled,
