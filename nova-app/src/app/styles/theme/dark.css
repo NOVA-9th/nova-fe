@@ -45,203 +45,211 @@
 
   /* ---------- Background ---------- */
   .dark .bg-base {
-    background-color: var(--bg-base);
+    background-color: var(--color-charcoal-full);
   }
 
   .dark .bg-alternative {
-    background-color: var(--bg-alternative);
+    background-color: var(--color-black-full);
   }
 
   .dark .bg-surface {
-    background-color: var(--bg-surface);
+    background-color: var(--color-slate-surface);
   }
 
   .dark .bg-peak {
-    background-color: var(--bg-peak);
+    background-color: var(--color-white-full);
   }
 
   .dark .bg-static {
-    background-color: var(--bg-static);
+    background-color: rgb(255 255 255 / 0.04);
   }
 
   .dark .bg-data-surface {
-    background-color: var(--bg-data-surface);
+    background-color: var(--color-dark-surface);
   }
 
   .dark .bg-data-peak {
-    background-color: var(--bg-data-peak);
+    background-color: var(--color-dark-full);
   }
 
   .dark .bg-accent-surface {
-    background-color: var(--bg-accent-surface);
+    background-color: var(--color-primary-surface);
   }
 
   .dark .bg-accent-peak {
-    background-color: var(--bg-accent-peak);
+    background-color: var(--color-primary-full);
   }
 
   /* ---------- Background / Interaction ---------- */
   .dark .hover\:bg-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-surface), var(--color-white-full) 6%);
+    background-color: color-mix(in srgb, var(--color-slate-surface), var(--color-white-full) 6%);
   }
 
   .dark .hover\:bg-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-peak), var(--color-charcoal-full) 2%);
+    background-color: color-mix(in srgb, var(--color-white-full), var(--color-charcoal-full) 2%);
   }
 
   .dark .hover\:bg-data-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-dark-full) 4%);
+    background-color: color-mix(in srgb, var(--color-dark-surface), var(--color-dark-full) 4%);
   }
 
   .dark .hover\:bg-data-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-charcoal-full) 2%);
+    background-color: color-mix(in srgb, var(--color-dark-full), var(--color-charcoal-full) 2%);
   }
 
   .dark .hover\:bg-accent-surface:hover {
-    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 12%);
+    background-color: color-mix(
+      in srgb,
+      var(--color-primary-surface),
+      var(--color-primary-full) 12%
+    );
   }
 
   .dark .hover\:bg-accent-peak:hover {
-    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-charcoal-full) 2%);
+    background-color: color-mix(in srgb, var(--color-primary-full), var(--color-charcoal-full) 2%);
   }
 
   .dark .active\:bg-surface:active {
-    background-color: color-mix(in srgb, var(--bg-surface), var(--color-white-full) 10%);
+    background-color: color-mix(in srgb, var(--color-slate-surface), var(--color-white-full) 10%);
   }
 
   .dark .active\:bg-peak:active {
-    background-color: color-mix(in srgb, var(--bg-peak), var(--color-charcoal-full) 6%);
+    background-color: color-mix(in srgb, var(--color-white-full), var(--color-charcoal-full) 6%);
   }
 
   .dark .active\:bg-data-surface:active {
-    background-color: color-mix(in srgb, var(--bg-data-surface), var(--color-dark-full) 8%);
+    background-color: color-mix(in srgb, var(--color-dark-surface), var(--color-dark-full) 8%);
   }
 
   .dark .active\:bg-data-peak:active {
-    background-color: color-mix(in srgb, var(--bg-data-peak), var(--color-charcoal-full) 6%);
+    background-color: color-mix(in srgb, var(--color-dark-full), var(--color-charcoal-full) 6%);
   }
 
   .dark .active\:bg-accent-surface:active {
-    background-color: color-mix(in srgb, var(--bg-accent-surface), var(--color-primary-full) 20%);
+    background-color: color-mix(
+      in srgb,
+      var(--color-primary-surface),
+      var(--color-primary-full) 20%
+    );
   }
 
   .dark .active\:bg-accent-peak:active {
-    background-color: color-mix(in srgb, var(--bg-accent-peak), var(--color-charcoal-full) 6%);
+    background-color: color-mix(in srgb, var(--color-primary-full), var(--color-charcoal-full) 6%);
   }
 
   .dark .disabled\:bg-surface:disabled,
   .dark .disabled\:bg-surface[aria-disabled='true'] {
-    background-color: var(--bg-surface);
+    background-color: var(--color-slate-surface);
   }
 
   .dark .disabled\:bg-peak:disabled,
   .dark .disabled\:bg-peak[aria-disabled='true'] {
-    background-color: var(--bg-surface);
+    background-color: var(--color-slate-surface);
   }
 
   .dark .disabled\:bg-data-surface:disabled,
   .dark .disabled\:bg-data-surface[aria-disabled='true'] {
-    background-color: var(--bg-surface);
+    background-color: var(--color-slate-surface);
   }
 
   .dark .disabled\:bg-accent-surface:disabled,
   .dark .disabled\:bg-accent-surface[aria-disabled='true'] {
-    background-color: var(--bg-surface);
+    background-color: var(--color-slate-surface);
   }
 
   /* ---------- Foreground ---------- */
   .dark .text-base {
-    color: var(--fg-base);
+    color: var(--color-white-full);
   }
 
   .dark .text-additive {
-    color: var(--fg-additive);
+    color: var(--color-white-additive);
   }
 
   .dark .text-optional {
-    color: var(--fg-optional);
+    color: var(--color-white-optional);
   }
 
   .dark .text-inactive {
-    color: var(--fg-inactive);
+    color: var(--color-white-inactive);
   }
 
   .dark .text-peak {
-    color: var(--fg-peak);
+    color: var(--color-white-full);
   }
 
   .dark .text-static {
-    color: var(--fg-static);
+    color: var(--color-white-static);
   }
 
   .dark .text-data-base {
-    color: var(--fg-data-base);
+    color: var(--color-white-data-base);
   }
 
   .dark .text-data-peak {
-    color: var(--fg-data-peak);
+    color: var(--color-white-data-peak);
   }
 
   .dark .text-accent-base {
-    color: var(--fg-accent-base);
+    color: var(--color-white-accent-base);
   }
 
   .dark .text-accent-peak {
-    color: var(--fg-accent-peak);
+    color: var(--color-white-accent-peak);
   }
 
   .dark .hover\:text-base:hover {
-    color: var(--fg-base);
+    color: var(--color-white-full);
   }
 
   .dark .hover\:text-additive:hover {
-    color: var(--fg-additive);
+    color: var(--color-white-additive);
   }
 
   .dark .hover\:text-optional:hover {
-    color: var(--fg-optional);
+    color: var(--color-white-optional);
   }
 
   .dark .hover\:text-peak:hover {
-    color: var(--fg-peak);
+    color: var(--color-white-full);
   }
 
   .dark .hover\:text-data-base:hover {
-    color: var(--fg-data-base);
+    color: var(--color-white-data-base);
   }
 
   .dark .hover\:text-accent-base:hover {
-    color: var(--fg-accent-base);
+    color: var(--color-white-accent-base);
   }
 
   .dark .disabled\:text-base:disabled,
   .dark .disabled\:text-base[aria-disabled='true'] {
-    color: var(--fg-inactive);
+    color: var(--color-white-inactive);
   }
 
   .dark .disabled\:text-additive:disabled,
   .dark .disabled\:text-additive[aria-disabled='true'] {
-    color: var(--fg-inactive);
+    color: var(--color-white-inactive);
   }
 
   .dark .disabled\:text-optional:disabled,
   .dark .disabled\:text-optional[aria-disabled='true'] {
-    color: var(--fg-inactive);
+    color: var(--color-white-inactive);
   }
 
   .dark .disabled\:text-peak:disabled,
   .dark .disabled\:text-peak[aria-disabled='true'] {
-    color: var(--fg-inactive);
+    color: var(--color-white-inactive);
   }
 
   .dark .disabled\:text-data-base:disabled,
   .dark .disabled\:text-data-base[aria-disabled='true'] {
-    color: var(--fg-inactive);
+    color: var(--color-white-inactive);
   }
 
   .dark .disabled\:text-accent-base:disabled,
   .dark .disabled\:text-accent-base[aria-disabled='true'] {
-    color: var(--fg-inactive);
+    color: var(--color-white-inactive);
   }
 
   /* ---------- Stroke ---------- */
@@ -312,5 +320,14 @@
   .dark .disabled\:border-data-outline:disabled,
   .dark .disabled\:border-data-outline[aria-disabled='true'] {
     border-color: var(--stroke-outline);
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE, Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
   }
 }
