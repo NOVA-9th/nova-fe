@@ -7,7 +7,7 @@ import { useState } from 'react';
 import InputChip from '../../action/input_chip/InputChip';
 
 const ChipInputVariants = cva(
-  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
+  'flex rounded-interactive-default px-padding-medium py-padding-regular',
   {
     variants: {
       size: {
@@ -27,7 +27,7 @@ const ChipInputVariants = cva(
       {
         variant: 'outline',
         data: true,
-        class: 'border box-border border-data-outline danger focus-within:border-data-selected',
+        class: 'border -boxborder border-data-outline danger focus-within:border-data-selected',
       },
       {
         variant: 'surface',
@@ -86,13 +86,18 @@ export default function ChipInput({
 
   return (
     <div className={cn(ChipInputVariants({ size, variant, data }), className)}>
-      {icon && <span className='text-charcoal-additive'>{icon}</span>}
+      {icon && <span className='text-charcoal-additive self-center'>{icon}</span>}
 
-      <div className='no-scrollbar flex flex-1 items-center gap-1 overflow-x-auto whitespace-nowrap'>
+      <div
+        className={cn(
+          'flex min-w-0 flex-1 flex-wrap items-start',
+          size === 'md' ? 'gap-1' : 'gap-1.5',
+        )}
+      >
         {chips.map((chip) => (
           <InputChip
             key={chip}
-            size='sm'
+            size={size === 'md' ? 'sm' : 'md'}
             variant='surface'
             text={chip}
             onRemove={() => removeChip(chip)}
@@ -122,7 +127,7 @@ export default function ChipInput({
       </div>
 
       {(value || chips.length > 0) && (
-        <button type='button' onClick={clearAll} className='text-charcoal-optional'>
+        <button type='button' onClick={clearAll} className='text-charcoal-optional self-center'>
           <X size={size === 'md' ? 14 : 16} />
         </button>
       )}
