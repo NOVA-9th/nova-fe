@@ -8,7 +8,7 @@ interface ButtonProps extends VariantProps<typeof ButtonVariants> {
   className?: string;
 }
 
-export const Button = ({ onClick, className, label = '버튼', peak, style, size }: ButtonProps) => {
+export const Button = ({ onClick, className, label, peak, style, size }: ButtonProps) => {
   return (
     <button onClick={onClick} className={cn(ButtonVariants({ size, peak, style }), className)}>
       {label}
