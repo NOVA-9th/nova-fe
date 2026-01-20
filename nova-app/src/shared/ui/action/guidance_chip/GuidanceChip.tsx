@@ -12,7 +12,7 @@ const GuidanceChipVariants = cva(
 
       variant: {
         surface: 'text-additive bg-surface hover:bg-surface',
-        outline: 'text-additive border-ring border',
+        outline: 'text-additive border-ring border hover:bg-surface',
         accent: 'text-accent-base bg-accent-surface hover:bg-accent-surface',
       },
     },
