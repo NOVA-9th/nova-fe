@@ -8,7 +8,7 @@ const ICON_SIZE_BY_CHIP_SIZE = {
 } as const;
 
 const InputChipVariants = cva(
-  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light hover:bg-surface',
+  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light hover:bg-surface active:bg-surface',
   {
     variants: {
       size: {
