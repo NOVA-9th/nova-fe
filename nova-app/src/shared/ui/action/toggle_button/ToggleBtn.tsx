@@ -42,15 +42,7 @@ interface ToggleBtnProps extends VariantProps<typeof ToggleBtnVariants> {
   className?: string;
 }
 
-export default function ToggleBtn({
-  size,
-  variant,
-  selected,
-  text,
-  icon,
-  onClick,
-  className,
-}: ToggleBtnProps) {
+const ToggleBtn = ({ size, variant, selected, text, icon, onClick, className }: ToggleBtnProps) => {
   return (
     <button
       type='button'
@@ -61,4 +53,6 @@ export default function ToggleBtn({
       <p>{text}</p>
     </button>
   );
-}
+};
+
+export default ToggleBtn;

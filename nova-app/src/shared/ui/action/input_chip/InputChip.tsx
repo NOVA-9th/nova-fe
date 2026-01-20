@@ -31,14 +31,7 @@ interface InputChipProps extends VariantProps<typeof InputChipVariants> {
   className?: string;
 }
 
-export default function InputChip({
-  size,
-  variant,
-  text,
-  icon,
-  onClick,
-  className,
-}: InputChipProps) {
+const InputChip = ({ size, variant, text, icon, onClick, className }: InputChipProps) => {
   return (
     <button
       type='button'
@@ -50,4 +43,6 @@ export default function InputChip({
       <X className='text-additive' size={ICON_SIZE_BY_CHIP_SIZE[size ?? 'md']} />
     </button>
   );
-}
+};
+
+export default InputChip;
