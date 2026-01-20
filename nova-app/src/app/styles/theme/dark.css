@@ -321,13 +321,4 @@
   .dark .disabled\:border-data-outline[aria-disabled='true'] {
     border-color: var(--stroke-outline);
   }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE, Edge */
-    scrollbar-width: none; /* Firefox */
-  }
-
-  .no-scrollbar::-webkit-scrollbar {
-    display: none; /* Chrome, Safari */
-  }
 }
