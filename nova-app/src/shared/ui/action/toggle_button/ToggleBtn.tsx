@@ -1,7 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 const ToggleBtnVariants = cva(
-  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5',
+  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5 hover:bg-surface ',
   {
     variants: {
       size: {
@@ -15,7 +15,7 @@ const ToggleBtnVariants = cva(
       },
 
       selected: {
-        true: 'hover:bg-surface bg-surface text-base-color',
+        true: 'bg-surface text-base-color',
         false: 'text-optional',
       },
     },
