@@ -1,6 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
-import { X } from 'lucide-react';
+import { LucideIcon, X } from 'lucide-react';
+import React from 'react';
 
 const TextInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
@@ -48,7 +49,7 @@ interface TextInputProps extends VariantProps<typeof TextInputVariants> {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
   className?: string;
 }
 
@@ -64,7 +65,10 @@ export default function TextInput({
 }: TextInputProps) {
   return (
     <div className={cn(TextInputVariants({ size, variant, data }), className)}>
-      {icon && <span className='text-charcoal-additive'>{icon}</span>}
+      {icon &&
+        React.createElement(icon, {
+          size: size === 'md' ? 14 : 16,
+        })}
 
       <input
         type='text'

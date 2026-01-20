@@ -19,7 +19,7 @@ const page = () => {
             value={value}
             onChange={setValue}
             placeholder='Placeholder'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             className='h-9 w-90'
           />
           <TextInput
@@ -29,7 +29,7 @@ const page = () => {
             value={value}
             onChange={setValue}
             placeholder='Placeholder'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             className='h-9 w-90'
           />
           <TextInput
@@ -39,7 +39,7 @@ const page = () => {
             value={value}
             onChange={setValue}
             placeholder='Placeholder'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             className='h-9 w-90'
           />
           <TextInput
@@ -49,7 +49,7 @@ const page = () => {
             value={value}
             onChange={setValue}
             placeholder='Placeholder'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             className='h-9 w-90'
           />
           <TextInput
@@ -59,7 +59,7 @@ const page = () => {
             value={value}
             onChange={setValue}
             placeholder='Placeholder'
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             className='h-11 w-90'
           />
           <TextInput
@@ -69,7 +69,7 @@ const page = () => {
             value={value}
             onChange={setValue}
             placeholder='Placeholder'
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             className='h-11 w-90'
           />
           <TextInput
@@ -79,7 +79,7 @@ const page = () => {
             value={value}
             onChange={setValue}
             placeholder='Placeholder'
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             className='h-11 w-90'
           />
           <TextInput
@@ -89,7 +89,7 @@ const page = () => {
             value={value}
             onChange={setValue}
             placeholder='Placeholder'
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             className='h-11 w-90'
           />
           <ChipInput
@@ -97,7 +97,7 @@ const page = () => {
             size='md'
             data={false}
             placeholder='Placeholder'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             className='h-9 w-90'
           />
           <ChipInput
@@ -105,7 +105,7 @@ const page = () => {
             size='md'
             data={false}
             placeholder='Placeholder'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             className='h-9 w-90'
           />
           <ChipInput
@@ -113,7 +113,7 @@ const page = () => {
             size='md'
             data={true}
             placeholder='Placeholder'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             className='h-9 w-90'
           />
           <ChipInput
@@ -121,7 +121,7 @@ const page = () => {
             size='md'
             data={true}
             placeholder='Placeholder'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             className='h-9 w-90'
           />
           <ChipInput
@@ -129,7 +129,7 @@ const page = () => {
             size='lg'
             data={false}
             placeholder='Placeholder'
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             className='h-11 w-90'
           />
           <ChipInput
@@ -137,7 +137,7 @@ const page = () => {
             size='lg'
             data={false}
             placeholder='Placeholder'
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             className='h-11 w-90'
           />
           <ChipInput
@@ -145,7 +145,7 @@ const page = () => {
             size='lg'
             data={true}
             placeholder='Placeholder'
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             className='h-11 w-90'
           />
           <ChipInput
@@ -153,7 +153,7 @@ const page = () => {
             size='lg'
             data={true}
             placeholder='Placeholder'
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             className='h-11 w-90'
           />
         </div>

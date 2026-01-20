@@ -5,6 +5,8 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import InputChip from '../../action/input_chip/InputChip';
+import React from 'react';
+import { LucideIcon } from 'lucide-react';
 
 const ChipInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
@@ -16,10 +18,10 @@ const ChipInputVariants = cva(
       },
       variant: {
         surface: '',
-        outline: '',
+        outline: 'border box-border',
       },
       data: {
-        true: '',
+        true: 'border-data-outline danger',
         false: 'border-outline hover:border-ring',
       },
     },
@@ -27,7 +29,7 @@ const ChipInputVariants = cva(
       {
         variant: 'outline',
         data: true,
-        class: 'border -boxborder border-data-outline danger focus-within:border-data-selected',
+        class: 'focus-within:border-data-selected',
       },
       {
         variant: 'surface',
@@ -42,7 +44,7 @@ const ChipInputVariants = cva(
       {
         variant: 'outline',
         data: false,
-        class: 'border box-border focus-within:border-selected',
+        class: 'focus-within:border-selected',
       },
     ],
   },
@@ -50,7 +52,7 @@ const ChipInputVariants = cva(
 
 interface ChipInputProps extends VariantProps<typeof ChipInputVariants> {
   placeholder?: string;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
   className?: string;
 }
 
@@ -86,7 +88,10 @@ export default function ChipInput({
 
   return (
     <div className={cn(ChipInputVariants({ size, variant, data }), className)}>
-      {icon && <span className='text-charcoal-additive'>{icon}</span>}
+      {icon &&
+        React.createElement(icon, {
+          size: size === 'md' ? 14 : 16,
+        })}
 
       <div
         className={cn(
