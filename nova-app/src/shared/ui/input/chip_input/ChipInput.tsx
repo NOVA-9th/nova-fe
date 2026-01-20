@@ -56,14 +56,7 @@ interface ChipInputProps extends VariantProps<typeof ChipInputVariants> {
   className?: string;
 }
 
-export default function ChipInput({
-  size,
-  variant,
-  data,
-  placeholder,
-  icon,
-  className,
-}: ChipInputProps) {
+const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipInputProps) => {
   const [value, setValue] = useState('');
   const [chips, setChips] = useState<string[]>([]);
   const [isComposing, setIsComposing] = useState(false);
@@ -84,6 +77,20 @@ export default function ChipInput({
   const clearAll = () => {
     setValue('');
     setChips([]);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isComposing) return;
+
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      addChip();
+      return;
+    }
+
+    if (e.key === 'Backspace' && !value && chips.length) {
+      removeChip(chips[chips.length - 1]);
+    }
   };
 
   return (
@@ -116,19 +123,9 @@ export default function ChipInput({
           type='text'
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          onKeyDown={(e) => {
-            if (isComposing) return;
-            if (e.key === 'Enter') {
-              e.preventDefault();
-              addChip();
-            }
-
-            if (e.key === 'Backspace' && !value && chips.length) {
-              removeChip(chips[chips.length - 1]);
-            }
-          }}
+          onKeyDown={handleKeyDown}
           placeholder={chips.length === 0 ? placeholder : undefined}
-          className='caret-theme placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
+          className='caret-color placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
         />
       </div>
 
@@ -139,4 +136,6 @@ export default function ChipInput({
       )}
     </div>
   );
-}
+};
+
+export default ChipInput;

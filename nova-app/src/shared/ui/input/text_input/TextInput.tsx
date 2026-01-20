@@ -53,7 +53,7 @@ interface TextInputProps extends VariantProps<typeof TextInputVariants> {
   className?: string;
 }
 
-export default function TextInput({
+const TextInput = ({
   size,
   variant,
   data,
@@ -62,7 +62,7 @@ export default function TextInput({
   placeholder,
   icon,
   className,
-}: TextInputProps) {
+}: TextInputProps) => {
   return (
     <div className={cn(TextInputVariants({ size, variant, data }), className)}>
       {icon &&
@@ -75,7 +75,7 @@ export default function TextInput({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className='caret-theme placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
+        className='caret-color placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
       />
 
       {value && (
@@ -85,4 +85,6 @@ export default function TextInput({
       )}
     </div>
   );
-}
+};
+
+export default TextInput;

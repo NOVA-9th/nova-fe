@@ -7,7 +7,7 @@ import { TextBtn } from '@/shared/ui/action/text_button/TextBtn';
 import ToggleBtn from '@/shared/ui/action/toggle_button/ToggleBtn';
 import { SquareDashed } from 'lucide-react';
 
-const page = () => {
+const InputTestPage = () => {
   return (
     <div className='bg-base flex min-h-dvh items-center justify-center'>
       <div className='flex flex-col gap-10'>
@@ -237,4 +237,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default InputTestPage;
