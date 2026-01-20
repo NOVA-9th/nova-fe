@@ -7,7 +7,7 @@ import { useState } from 'react';
 import InputChip from '../../action/input_chip/InputChip';
 
 const ChipInputVariants = cva(
-  'flex rounded-interactive-default px-padding-medium py-padding-regular',
+  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
   {
     variants: {
       size: {
@@ -86,11 +86,11 @@ export default function ChipInput({
 
   return (
     <div className={cn(ChipInputVariants({ size, variant, data }), className)}>
-      {icon && <span className='text-charcoal-additive self-center'>{icon}</span>}
+      {icon && <span className='text-charcoal-additive'>{icon}</span>}
 
       <div
         className={cn(
-          'flex min-w-0 flex-1 flex-wrap items-start',
+          'no-scrollbar flex flex-1 items-center overflow-x-auto whitespace-nowrap',
           size === 'md' ? 'gap-1' : 'gap-1.5',
         )}
       >
@@ -127,7 +127,7 @@ export default function ChipInput({
       </div>
 
       {(value || chips.length > 0) && (
-        <button type='button' onClick={clearAll} className='text-charcoal-optional self-center'>
+        <button type='button' onClick={clearAll} className='text-charcoal-optional'>
           <X size={size === 'md' ? 14 : 16} />
         </button>
       )}
