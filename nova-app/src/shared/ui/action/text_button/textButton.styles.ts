@@ -7,9 +7,9 @@ export const TextBtnVariants = cva(
   {
     variants: {
       size: {
-        lg: 'typo-body-key gap-[6px]',
-        md: 'typo-callout-key gap-1',
-        sm: 'typo-footnote-key gap-0.5',
+        lg: 'typo-body-key gap-2',
+        md: 'typo-callout-key gap-1.5',
+        sm: 'typo-footnote-key gap-1.5',
       },
       style: {
         surface: 'text-additive',

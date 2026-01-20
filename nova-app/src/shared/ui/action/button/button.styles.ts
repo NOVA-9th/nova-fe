@@ -29,46 +29,43 @@ export const ButtonVariants = cva(
       {
         style: 'surface',
         peak: true,
-        class: 'bg-peak text-peak hover:hovered hover:bg-peak active:active active:bg-peak',
+        class: 'bg-peak text-peak hover:bg-peak active:bg-peak',
       },
       {
         style: 'surface',
         peak: false,
-        class:
-          'bg-surface text-additive hover:hovered hover:bg-surface active:active active:bg-surface',
+        class: 'bg-surface text-additive hover:bg-surface active:bg-surface',
       },
       {
         style: 'outline',
         peak: true,
-        class: 'bg-surface ',
+        class: 'bg-surface hover:bg-surface active:bg-surface text-base-color',
       },
       {
         style: 'outline',
         peak: false,
-        class: 'bg-surface hover:hovered hover:bg-surface  active:active active:bg-surface',
+        class: 'hover:bg-surface active:bg-surface text-additive',
       },
       {
         style: 'accent',
         peak: true,
-        class:
-          'bg-accent-peak text-accent-peak hover:hovered hover:bg-accent-peak active:active active:bg-accent-peak',
+        class: 'bg-accent-peak text-accent-peak hover:bg-accent-peak active:bg-accent-peak',
       },
       {
         style: 'accent',
         peak: false,
         class:
-          'bg-accent-surface text-accent-base hover:hovered hover:bg-accent-surface active:active active:bg-accent-surface',
+          'bg-accent-surface text-accent-base hover:bg-accent-surface active:bg-accent-surface',
       },
       {
         style: 'data',
         peak: true,
-        class:
-          'bg-data-peak text-data-peak danger hover:hovered hover:bg-data-peak active:active active:bg-data-peak',
+        class: 'bg-data-peak text-data-peak danger hover:bg-data-peak active:bg-data-peak',
       },
       {
         style: 'data',
         peak: false,
-        class: 'bg-data-surface text-data-base danger hover:hovered hover:bg-data-surface',
+        class: 'bg-data-surface text-data-base danger hover:bg-data-surface active:bg-data-surface',
       },
     ],
     defaultVariants: {

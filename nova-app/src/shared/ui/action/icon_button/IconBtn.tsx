@@ -4,7 +4,7 @@ import { VariantProps } from 'class-variance-authority';
 interface IconButtonProps extends VariantProps<typeof IconButtonVariants> {
   onClick?: () => void;
   className?: string;
-  icon?: React.ReactNode;
+  icon: React.ReactNode;
 }
 
 export const IconBtn = ({ onClick, size, style, className, peak, icon }: IconButtonProps) => {
