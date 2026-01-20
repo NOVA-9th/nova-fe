@@ -1,5 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
+import { LucideIcon } from 'lucide-react';
+import React from 'react';
 const ToggleBtnVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5',
   {
@@ -37,7 +39,7 @@ const ToggleBtnVariants = cva(
 
 interface ToggleBtnProps extends VariantProps<typeof ToggleBtnVariants> {
   text?: string;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
   onClick?: () => void;
   className?: string;
 }
@@ -57,7 +59,13 @@ export default function ToggleBtn({
       className={cn(ToggleBtnVariants({ size, variant, selected }), className)}
       onClick={onClick}
     >
-      <span>{icon}</span>
+      <span>
+        {' '}
+        {icon &&
+          React.createElement(icon, {
+            size: size === 'md' ? 14 : 16,
+          })}
+      </span>
       <p>{text}</p>
     </button>
   );

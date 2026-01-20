@@ -15,28 +15,28 @@ const page = () => {
           <InputChip
             size='sm'
             variant='surface'
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             text='Label'
             className='h-6 w-19.25'
           />
           <InputChip
             size='sm'
             variant='outline'
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             text='Label'
             className='h-6 w-19.25'
           />
           <InputChip
             size='md'
             variant='surface'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-8 w-23.25'
           />
           <InputChip
             size='md'
             variant='outline'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-8 w-23.25'
           />
@@ -45,42 +45,42 @@ const page = () => {
           <GuidanceChip
             size='sm'
             variant='surface'
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             text='Label'
             className='h-6 w-15.25'
           />
           <GuidanceChip
             size='sm'
             variant='outline'
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             text='Label'
             className='h-6 w-15.25'
           />
           <GuidanceChip
             size='sm'
             variant='accent'
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             text='Label'
             className='h-6 w-15.25'
           />
           <GuidanceChip
             size='md'
             variant='surface'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-8 w-18.25'
           />
           <GuidanceChip
             size='md'
             variant='outline'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-8 w-18.25'
           />
           <GuidanceChip
             size='md'
             variant='accent'
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-8 w-18.25'
           />
@@ -90,7 +90,7 @@ const page = () => {
             size='md'
             variant='surface'
             selected={true}
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-9 w-19.25'
           />
@@ -98,7 +98,7 @@ const page = () => {
             size='md'
             variant='surface'
             selected={false}
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-9 w-19.25'
           />
@@ -106,7 +106,7 @@ const page = () => {
             size='md'
             variant='outline'
             selected={true}
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-9 w-19.25'
           />
@@ -114,7 +114,7 @@ const page = () => {
             size='md'
             variant='outline'
             selected={false}
-            icon={<SquareDashed size={14} />}
+            icon={SquareDashed}
             text='Label'
             className='h-9 w-19.25'
           />
@@ -123,7 +123,7 @@ const page = () => {
             size='lg'
             variant='surface'
             selected={true}
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             text='Label'
             className='h-11 w-22'
           />
@@ -131,7 +131,7 @@ const page = () => {
             size='lg'
             variant='surface'
             selected={false}
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             text='Label'
             className='h-11 w-22'
           />
@@ -139,7 +139,7 @@ const page = () => {
             size='lg'
             variant='outline'
             selected={true}
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             text='Label'
             className='h-11 w-22'
           />
@@ -147,7 +147,7 @@ const page = () => {
             size='lg'
             variant='outline'
             selected={false}
-            icon={<SquareDashed size={16} />}
+            icon={SquareDashed}
             text='Label'
             className='h-11 w-22'
           />

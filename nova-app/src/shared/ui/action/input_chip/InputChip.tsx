@@ -1,6 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
-import { X } from 'lucide-react';
+import { LucideIcon, X } from 'lucide-react';
+import React from 'react';
 
 const InputChipVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light',
@@ -21,7 +22,7 @@ const InputChipVariants = cva(
 
 interface InputChipProps extends VariantProps<typeof InputChipVariants> {
   text?: string;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
   onRemove?: () => void;
   className?: string;
 }
@@ -36,7 +37,13 @@ export default function InputChip({
 }: InputChipProps) {
   return (
     <div className={cn(InputChipVariants({ size, variant }), className)}>
-      {icon && <span className='text-additive'>{icon}</span>}
+      {icon && (
+        <span className='chip-icon shrink-0'>
+          {React.createElement(icon, {
+            size: size === 'sm' ? 12 : 14,
+          })}
+        </span>
+      )}
       <p className='text-base-color'>{text}</p>
 
       <button type='button' onClick={onRemove} className='text-additive'>
