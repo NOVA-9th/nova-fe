@@ -2,11 +2,6 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 
-const ICON_SIZE_BY_CHIP_SIZE = {
-  sm: 12,
-  md: 14,
-} as const;
-
 const InputChipVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light',
   {
@@ -27,7 +22,7 @@ const InputChipVariants = cva(
 interface InputChipProps extends VariantProps<typeof InputChipVariants> {
   text?: string;
   icon?: React.ReactNode;
-  onClick?: () => void;
+  onRemove?: () => void;
   className?: string;
 }
 
@@ -36,18 +31,17 @@ export default function InputChip({
   variant,
   text,
   icon,
-  onClick,
+  onRemove,
   className,
 }: InputChipProps) {
   return (
-    <button
-      type='button'
-      className={cn(InputChipVariants({ size, variant }), className)}
-      onClick={onClick}
-    >
-      <span className='text-additive'>{icon}</span>
+    <div className={cn(InputChipVariants({ size, variant }), className)}>
+      {icon && <span className='text-additive'>{icon}</span>}
       <p className='text-base-color'>{text}</p>
-      <X className='text-additive' size={ICON_SIZE_BY_CHIP_SIZE[size ?? 'md']} />
-    </button>
+
+      <button type='button' onClick={onRemove} className='text-additive'>
+        <X size={size === 'sm' ? 12 : 14} />
+      </button>
+    </div>
   );
 }
