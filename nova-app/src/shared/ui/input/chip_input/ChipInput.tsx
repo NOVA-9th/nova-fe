@@ -101,6 +101,7 @@ export default function ChipInput({
             variant='surface'
             text={chip}
             onRemove={() => removeChip(chip)}
+            className={size === 'md' ? 'h-6' : 'h-8'}
           />
         ))}
 
