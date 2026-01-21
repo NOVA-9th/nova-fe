@@ -1,12 +1,9 @@
 'use client';
 
-import TextInput from '@/shared/ui/input/text_input/TextInput';
 import { useState } from 'react';
-import { ListFilter, Search } from 'lucide-react';
-import { TextBtn } from '@/shared/ui/action/text_button/TextBtn';
-import SectionHeader from '@/shared/ui/content/SectionHeader/SectionHeader';
-import { SelectionChipBtn } from '@/shared/ui/action/selection_chip/SelectionChipBtn';
+import { EarthIcon, FileUser, ListFilter, Newspaper, Search } from 'lucide-react';
 import { keywordFilter } from '../constants/keywordFilter';
+import { SectionHeader, SelectionChip, TextButton, TextInput } from '@/shared/ui';
 
 export const KeywordCard = () => {
   const [value, setValue] = useState('');
@@ -28,11 +25,11 @@ export const KeywordCard = () => {
           icon={Search}
           className='flex-1'
         />
-        <TextBtn
+        <TextButton
           onClick={() => {}}
           size='lg'
           label='필터 초기화'
-          leftIcon={<ListFilter />}
+          leftIcon={ListFilter}
           style='surface'
           className='flex justify-center items-center px-padding-bold py-padding-regular rounded-md bg-surface'
         />
@@ -41,14 +38,16 @@ export const KeywordCard = () => {
         <div className='flex flex-col w-full h-full justify-start items-start gap-4'>
           <SectionHeader text='정렬' />
           <div className='flex gap-2'>
-            <SelectionChipBtn
+            <SelectionChip
+              isShowChevron={false}
               size='md'
               style='surface'
               selected={true}
               label='최신순'
               onClick={() => {}}
             />
-            <SelectionChipBtn
+            <SelectionChip
+              isShowChevron={false}
               size='md'
               style='surface'
               selected={false}
@@ -60,21 +59,27 @@ export const KeywordCard = () => {
         <div className='flex flex-col w-full h-full justify-start items-start gap-4'>
           <SectionHeader text='유형' />
           <div className='flex gap-2'>
-            <SelectionChipBtn
+            <SelectionChip
+              isShowChevron={false}
+              icon={Newspaper}
               size='md'
               style='surface'
               selected={true}
               label='뉴스'
               onClick={() => {}}
             />
-            <SelectionChipBtn
+            <SelectionChip
+              isShowChevron={false}
+              icon={FileUser}
               size='md'
               style='surface'
               selected={false}
               label='채용'
               onClick={() => {}}
             />
-            <SelectionChipBtn
+            <SelectionChip
+              isShowChevron={false}
+              icon={EarthIcon}
               size='md'
               style='surface'
               selected={true}
@@ -88,7 +93,8 @@ export const KeywordCard = () => {
         <SectionHeader text='정렬' />
         <div className='flex flex-wrap gap-2'>
           {keywordFilter.map((keyword, index) => (
-            <SelectionChipBtn
+            <SelectionChip
+              isShowChevron={false}
               key={index}
               size='sm'
               style='surface'
