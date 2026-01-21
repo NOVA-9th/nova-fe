@@ -1,8 +1,6 @@
 'use client';
 
-import ChipInput from '@/shared/ui/input/chip_input/ChipInput';
-import SwitchInput from '@/shared/ui/input/switch_input/SwitchInput';
-import TextInput from '@/shared/ui/input/text_input/TextInput';
+import { ChipInput, SwitchInput, TextInput } from '@/shared/ui';
 import { SquareDashed } from 'lucide-react';
 import { useState } from 'react';
 
