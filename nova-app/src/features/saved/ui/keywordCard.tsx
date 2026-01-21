@@ -8,7 +8,7 @@ import SectionHeader from '@/shared/ui/content/SectionHeader/SectionHeader';
 import { SelectionChipBtn } from '@/shared/ui/action/selection_chip/SelectionChipBtn';
 import { keywordFilter } from '../constants/keywordFilter';
 
-export const KeywordSection = () => {
+export const KeywordCard = () => {
   const [value, setValue] = useState('');
 
   const onChange = (value: string) => {
@@ -16,7 +16,7 @@ export const KeywordSection = () => {
   };
 
   return (
-    <div className='flex flex-col w-full h-full justify-start items-center p-5 gap-5 bg-white'>
+    <div className='flex flex-col w-full h-fit justify-start items-center rounded-lg p-5 gap-5 bg-white'>
       <div className='flex w-full justify-center items-center gap-3'>
         <TextInput
           size='lg'
