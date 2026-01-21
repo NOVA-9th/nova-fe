@@ -1,5 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
+import { LucideIcon } from 'lucide-react';
+import React from 'react';
 
 const GuidanceChipVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light',
@@ -22,7 +24,7 @@ const GuidanceChipVariants = cva(
 
 interface GuidanceChipProps extends VariantProps<typeof GuidanceChipVariants> {
   text?: string;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
   onClick?: () => void;
   className?: string;
 }
@@ -34,7 +36,10 @@ const GuidanceChip = ({ size, variant, text, icon, onClick, className }: Guidanc
       className={cn(GuidanceChipVariants({ size, variant }), className)}
       onClick={onClick}
     >
-      {icon}
+      {icon &&
+        React.createElement(icon, {
+          size: size === 'sm' ? 12 : 14,
+        })}
       <p>{text}</p>
     </button>
   );
