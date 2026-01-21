@@ -1,7 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ChevronRight } from 'lucide-react';
-import TextButton from '../action/TextButton';
+import TextButton from '@/shared/ui/action/TextButton';
 
 const BreadcrumbVariants = cva('typo-body-key', {
   variants: {

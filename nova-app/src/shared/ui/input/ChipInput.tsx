@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
-import InputChip from '../action/InputChip';
+import InputChip from '@/shared/ui/action/InputChip';
 
 const ChipInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
