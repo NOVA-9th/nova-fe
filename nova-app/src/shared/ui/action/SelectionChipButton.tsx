@@ -1,4 +1,4 @@
-import { SelectionChipVariants } from '@/shared/ui/action/selection_chip/selection.styles';
+import { SelectionChipVariants } from '@/shared/ui/styles/selection.styles';
 import { cn } from '@/shared/utils/cn';
 import { VariantProps } from 'class-variance-authority';
 import { ChevronDown } from 'lucide-react';
@@ -9,11 +9,13 @@ interface SelectionChipBtnProps extends VariantProps<typeof SelectionChipVariant
   className?: string;
   icon?: React.ReactNode;
 }
+
 const ICON_SIZE_BY_CHIP_SIZE = {
   sm: 12,
   md: 14,
 } as const;
-export const SelectionChipBtn = ({
+
+const SelectionChipButton = ({
   size,
   style,
   selected,
@@ -34,3 +36,5 @@ export const SelectionChipBtn = ({
     </button>
   );
 };
+
+export default SelectionChipButton;

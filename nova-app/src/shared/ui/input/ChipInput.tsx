@@ -4,9 +4,10 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 import { useState } from 'react';
-import InputChip from '../../action/input_chip/InputChip';
+
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
+import InputChip from '../action/InputChip';
 
 const ChipInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',

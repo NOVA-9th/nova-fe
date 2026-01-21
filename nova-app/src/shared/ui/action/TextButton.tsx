@@ -1,4 +1,4 @@
-import { TextBtnVariants } from '@/shared/ui/action/text_button/textButton.styles';
+import { TextBtnVariants } from '@/shared/ui/styles/textButton.styles';
 import { cn } from '@/shared/utils/cn';
 import { VariantProps } from 'class-variance-authority';
 
@@ -10,7 +10,7 @@ interface ButtonProps extends VariantProps<typeof TextBtnVariants> {
   rightIcon?: React.ReactNode;
 }
 
-export const TextBtn = ({
+const TextButton = ({
   label,
   onClick,
   className,
@@ -27,3 +27,5 @@ export const TextBtn = ({
     </button>
   );
 };
+
+export default TextButton;

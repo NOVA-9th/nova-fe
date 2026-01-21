@@ -1,5 +1,4 @@
-import Breadcrumb from '@/shared/ui/navigation/Breadcrumb/Breadcrumb';
-import SideTabItem from '@/shared/ui/navigation/SideTabItem/SideTabItem';
+import { Breadcrumb, SideTabItem } from '@/shared/ui';
 import { SquareDashed } from 'lucide-react';
 
 const page = () => {

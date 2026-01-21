@@ -27,14 +27,7 @@ interface InputChipProps extends VariantProps<typeof InputChipVariants> {
   className?: string;
 }
 
-export default function InputChip({
-  size,
-  variant,
-  text,
-  icon,
-  onRemove,
-  className,
-}: InputChipProps) {
+const InputChip = ({ size, variant, text, icon, onRemove, className }: InputChipProps) => {
   return (
     <div className={cn(InputChipVariants({ size, variant }), className)}>
       {icon && (
@@ -51,4 +44,6 @@ export default function InputChip({
       </button>
     </div>
   );
-}
+};
+
+export default InputChip;
