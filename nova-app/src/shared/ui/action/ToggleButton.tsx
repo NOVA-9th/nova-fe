@@ -2,7 +2,7 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
-const ToggleBtnVariants = cva(
+const ToggleButtonVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5 hover:bg-surface active:bg-surface ',
   {
     variants: {
@@ -37,7 +37,7 @@ const ToggleBtnVariants = cva(
   },
 );
 
-interface ToggleBtnProps extends VariantProps<typeof ToggleBtnVariants> {
+interface ToggleButtonProps extends VariantProps<typeof ToggleButtonVariants> {
   text?: string;
   icon?: LucideIcon;
   onClick?: () => void;
@@ -52,15 +52,14 @@ const ToggleButton = ({
   icon,
   onClick,
   className,
-}: ToggleBtnProps) => {
+}: ToggleButtonProps) => {
   return (
     <button
       type='button'
-      className={cn(ToggleBtnVariants({ size, variant, selected }), className)}
+      className={cn(ToggleButtonVariants({ size, variant, selected }), className)}
       onClick={onClick}
     >
       <span>
-        {' '}
         {icon &&
           React.createElement(icon, {
             size: size === 'md' ? 14 : 16,
