@@ -1,11 +1,12 @@
 'use client';
 
 import ChipInput from '@/shared/ui/input/chip_input/ChipInput';
+import SwitchInput from '@/shared/ui/input/switch_input/SwitchInput';
 import TextInput from '@/shared/ui/input/text_input/TextInput';
 import { SquareDashed } from 'lucide-react';
 import { useState } from 'react';
 
-const page = () => {
+const InputTestPage = () => {
   const [value, setValue] = useState('');
 
   return (
@@ -157,9 +158,14 @@ const page = () => {
             className='h-11 w-90'
           />
         </div>
+        <div className='flex items-center justify-center gap-10'>
+          <SwitchInput size='lg' label='Label' />
+          <SwitchInput size='md' label='Label' />
+          <SwitchInput size='sm' label='Label' />
+        </div>
       </div>
     </div>
   );
 };
 
-export default page;
+export default InputTestPage;

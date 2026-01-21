@@ -2,7 +2,7 @@ import { cn } from '@/shared/utils/cn';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const SideTabItemVariants = cva(
-  'flex items-center rounded-interactive-default size-lg px-padding-bold py-padding-regular',
+  'flex items-center rounded-interactive-default size-lg px-padding-medium py-padding-regular',
   {
     variants: {
       peak: {
