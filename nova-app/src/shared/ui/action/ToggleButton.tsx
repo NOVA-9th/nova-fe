@@ -2,8 +2,8 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
-const ToggleBtnVariants = cva(
-  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5 hover:bg-surface active:bg-surface',
+const ToggleButtonVariants = cva(
+  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5 hover:bg-surface active:bg-surface ',
   {
     variants: {
       size: {
@@ -26,7 +26,7 @@ const ToggleBtnVariants = cva(
       {
         variant: 'outline',
         selected: true,
-        class: ' border-selected',
+        class: 'border-selected',
       },
       {
         variant: 'outline',
@@ -37,22 +37,29 @@ const ToggleBtnVariants = cva(
   },
 );
 
-interface ToggleBtnProps extends VariantProps<typeof ToggleBtnVariants> {
+interface ToggleButtonProps extends VariantProps<typeof ToggleButtonVariants> {
   text?: string;
   icon?: LucideIcon;
   onClick?: () => void;
   className?: string;
 }
 
-const ToggleBtn = ({ size, variant, selected, text, icon, onClick, className }: ToggleBtnProps) => {
+const ToggleButton = ({
+  size,
+  variant,
+  selected,
+  text,
+  icon,
+  onClick,
+  className,
+}: ToggleButtonProps) => {
   return (
     <button
       type='button'
-      className={cn(ToggleBtnVariants({ size, variant, selected }), className)}
+      className={cn(ToggleButtonVariants({ size, variant, selected }), className)}
       onClick={onClick}
     >
       <span>
-        {' '}
         {icon &&
           React.createElement(icon, {
             size: size === 'md' ? 14 : 16,
@@ -63,4 +70,4 @@ const ToggleBtn = ({ size, variant, selected, text, icon, onClick, className }: 
   );
 };
 
-export default ToggleBtn;
+export default ToggleButton;
