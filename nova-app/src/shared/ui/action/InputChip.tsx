@@ -4,7 +4,7 @@ import { LucideIcon, X } from 'lucide-react';
 import React from 'react';
 
 const InputChipVariants = cva(
-  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light',
+  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light hover:bg-surface active:bg-surface',
   {
     variants: {
       size: {
@@ -13,7 +13,7 @@ const InputChipVariants = cva(
       },
 
       variant: {
-        surface: 'hover:bg-surface bg-surface text-base border-ring-width border-ring',
+        surface: 'bg-surface text-base border-ring-width border-ring',
         outline: 'text-optional border-outline border hover:border-ring',
       },
     },

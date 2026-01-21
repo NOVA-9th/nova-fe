@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
 const ToggleBtnVariants = cva(
-  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5',
+  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5 hover:bg-surface active:bg-surface ',
   {
     variants: {
       size: {
@@ -17,7 +17,7 @@ const ToggleBtnVariants = cva(
       },
 
       selected: {
-        true: 'hover:bg-surface bg-surface text-base-color',
+        true: 'bg-surface text-base-color',
         false: 'text-optional',
       },
     },
@@ -26,7 +26,7 @@ const ToggleBtnVariants = cva(
       {
         variant: 'outline',
         selected: true,
-        class: ' border-selected',
+        class: 'border-selected',
       },
       {
         variant: 'outline',
