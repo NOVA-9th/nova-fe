@@ -12,26 +12,14 @@ import { SquareDashed } from 'lucide-react';
 const testPage = () => {
   return (
     <div className='flex min-h-dvh flex-col items-center justify-center gap-5 rounded-md px-4 text-xl bg-base'>
-      <TextBadge
-        size='sm'
-        variant='surface'
-        peak={true}
-        icon={<SquareDashed className='w-4 h-4' />}
-        text='Label'
-      ></TextBadge>
-      <TextBadge
-        size='sm'
-        variant='surface'
-        peak={false}
-        icon={<SquareDashed className='w-4 h-4' />}
-        text='TextBadge'
-      />
-      <TextBadge size='sm' variant='outline' peak={true} text='TextBadge' />
-      <TextBadge size='sm' variant='outline' peak={false} text='TextBadge' />
-      <TextBadge size='sm' variant='accent' peak={true} text='TextBadge' />
-      <TextBadge size='sm' variant='accent' peak={false} text='TextBadge' />
-      <TextBadge size='sm' variant='data' peak={true} text='TextBadge' />
-      <TextBadge size='sm' variant='data' peak={false} text='TextBadge' />
+      <TextBadge size='sm' variant='surface' peak={true} icon={SquareDashed} text='Label' />
+      <TextBadge size='sm' variant='surface' peak={false} icon={SquareDashed} text='TextBadge' />
+      <TextBadge size='sm' variant='outline' peak={true} icon={SquareDashed} text='TextBadge' />
+      <TextBadge size='sm' variant='outline' peak={false} icon={SquareDashed} text='TextBadge' />
+      <TextBadge size='sm' variant='accent' peak={true} icon={SquareDashed} text='TextBadge' />
+      <TextBadge size='sm' variant='accent' peak={false} icon={SquareDashed} text='TextBadge' />
+      <TextBadge size='sm' variant='data' peak={true} icon={SquareDashed} text='TextBadge' />
+      <TextBadge size='sm' variant='data' peak={false} icon={SquareDashed} text='TextBadge' />
 
       <NumberBadge size='sm' variant='surface' peak={true} number={10} />
       <NumberBadge size='sm' variant='surface' peak={false} number={1} />
@@ -42,54 +30,14 @@ const testPage = () => {
       <NumberBadge size='sm' variant='data' peak={true} number={1} />
       <NumberBadge size='sm' variant='data' peak={false} number={1} />
 
-      <IconBadge
-        size='sm'
-        variant='surface'
-        peak={true}
-        icon={<SquareDashed className='w-[11px] h-[11px]' />}
-      />
-      <IconBadge
-        size='md'
-        variant='surface'
-        peak={false}
-        icon={<SquareDashed className='w-[12px] h-[12px]' />}
-      />
-      <IconBadge
-        size='md'
-        variant='outline'
-        peak={true}
-        icon={<SquareDashed className='w-[12px] h-[12px]' />}
-      />
-      <IconBadge
-        size='md'
-        variant='outline'
-        peak={false}
-        icon={<SquareDashed className='w-[12px] h-[12px]' />}
-      />
-      <IconBadge
-        size='md'
-        variant='accent'
-        peak={true}
-        icon={<SquareDashed className='w-[12px] h-[12px]' />}
-      />
-      <IconBadge
-        size='lg'
-        variant='accent'
-        peak={false}
-        icon={<SquareDashed className='w-[13px] h-[13px]' />}
-      />
-      <IconBadge
-        size='lg'
-        variant='data'
-        peak={true}
-        icon={<SquareDashed className='w-[13px] h-[13px]' />}
-      />
-      <IconBadge
-        size='lg'
-        variant='data'
-        peak={false}
-        icon={<SquareDashed className='w-[13px] h-[13px]' />}
-      />
+      <IconBadge size='sm' variant='surface' peak={true} icon={SquareDashed} />
+      <IconBadge size='md' variant='surface' peak={false} icon={SquareDashed} />
+      <IconBadge size='md' variant='outline' peak={true} icon={SquareDashed} />
+      <IconBadge size='md' variant='outline' peak={false} icon={SquareDashed} />
+      <IconBadge size='md' variant='accent' peak={true} icon={SquareDashed} />
+      <IconBadge size='lg' variant='accent' peak={false} icon={SquareDashed} />
+      <IconBadge size='lg' variant='data' peak={true} icon={SquareDashed} />
+      <IconBadge size='lg' variant='data' peak={false} icon={SquareDashed} />
 
       <DotBadge size='sm' variant='surface' />
       <DotBadge size='sm' variant='accent' />
@@ -104,41 +52,21 @@ const testPage = () => {
       <SectionHeader
         size='sm'
         peak={true}
-        leftIcon={<SquareDashed className='w-4 h-4' />}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
+        leftIcon={SquareDashed}
+        rightIcon={SquareDashed}
         text='SectionHeader'
       />
       <SectionHeader
         size='sm'
         peak={false}
-        leftIcon={<SquareDashed className='w-4 h-4' />}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
+        leftIcon={SquareDashed}
+        rightIcon={SquareDashed}
         text='SectionHeader'
       />
-      <SectionHeader
-        size='md'
-        peak={true}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
-        text='SectionHeader'
-      />
-      <SectionHeader
-        size='md'
-        peak={false}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
-        text='SectionHeader'
-      />
-      <SectionHeader
-        size='lg'
-        peak={true}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
-        text='SectionHeader'
-      />
-      <SectionHeader
-        size='lg'
-        peak={false}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
-        text='SectionHeader'
-      />
+      <SectionHeader size='md' peak={true} rightIcon={SquareDashed} text='SectionHeader' />
+      <SectionHeader size='md' peak={false} rightIcon={SquareDashed} text='SectionHeader' />
+      <SectionHeader size='lg' peak={true} rightIcon={SquareDashed} text='SectionHeader' />
+      <SectionHeader size='lg' peak={false} rightIcon={SquareDashed} text='SectionHeader' />
 
       <ItemList
         size='md'
@@ -146,8 +74,8 @@ const testPage = () => {
         label='ItemList'
         subLabel='SubLabel'
         description='Description'
-        leftIcon={<SquareDashed className='w-4 h-4' />}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
+        leftIcon={SquareDashed}
+        rightIcon={SquareDashed}
       />
       <ItemList
         size='md'
@@ -155,8 +83,8 @@ const testPage = () => {
         label='ItemList'
         subLabel='SubLabel'
         description='Description'
-        leftIcon={<SquareDashed className='w-4 h-4' />}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
+        leftIcon={SquareDashed}
+        rightIcon={SquareDashed}
       />
       <ItemList
         size='lg'
@@ -164,8 +92,8 @@ const testPage = () => {
         label='ItemList'
         subLabel='SubLabel'
         description='Description'
-        leftIcon={<SquareDashed className='w-4 h-4' />}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
+        leftIcon={SquareDashed}
+        rightIcon={SquareDashed}
       />
       <ItemList
         size='lg'
@@ -173,8 +101,8 @@ const testPage = () => {
         label='ItemList'
         subLabel='SubLabel'
         description='Description'
-        leftIcon={<SquareDashed className='w-4 h-4' />}
-        rightIcon={<SquareDashed className='w-4 h-4' />}
+        leftIcon={SquareDashed}
+        rightIcon={SquareDashed}
       />
 
       <Header size='md' subLabel='SubLabel' label='Header' description='Description' />
