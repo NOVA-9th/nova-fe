@@ -4,7 +4,7 @@ import { LucideIcon, X } from 'lucide-react';
 import React from 'react';
 
 const InputChipVariants = cva(
-  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light',
+  'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-light hover:bg-surface active:bg-surface',
   {
     variants: {
       size: {
@@ -13,7 +13,7 @@ const InputChipVariants = cva(
       },
 
       variant: {
-        surface: 'hover:bg-surface bg-surface text-base border-ring-width border-ring',
+        surface: 'bg-surface text-base border-ring-width border-ring',
         outline: 'text-optional border-outline border hover:border-ring',
       },
     },
@@ -27,14 +27,7 @@ interface InputChipProps extends VariantProps<typeof InputChipVariants> {
   className?: string;
 }
 
-export default function InputChip({
-  size,
-  variant,
-  text,
-  icon,
-  onRemove,
-  className,
-}: InputChipProps) {
+const InputChip = ({ size, variant, text, icon, onClick, className }: InputChipProps) => {
   return (
     <div className={cn(InputChipVariants({ size, variant }), className)}>
       {icon && (
@@ -51,4 +44,6 @@ export default function InputChip({
       </button>
     </div>
   );
-}
+};
+
+export default InputChip;

@@ -13,9 +13,10 @@ const GuidanceChipVariants = cva(
       },
 
       variant: {
-        surface: 'text-additive bg-surface hover:bg-surface',
-        outline: 'text-additive border-ring border',
-        accent: 'text-accent-base bg-accent-surface hover:bg-accent-surface',
+        surface: 'text-additive bg-surface hover:bg-surface active:bg-surface',
+        outline: 'text-additive border-ring border hover:bg-surface active:bg-surface',
+        accent:
+          'text-accent-base bg-accent-surface hover:bg-accent-surface active:bg-accent-surface',
       },
     },
   },
@@ -28,14 +29,7 @@ interface GuidanceChipProps extends VariantProps<typeof GuidanceChipVariants> {
   className?: string;
 }
 
-export default function GuidanceChip({
-  size,
-  variant,
-  text,
-  icon,
-  onClick,
-  className,
-}: GuidanceChipProps) {
+const GuidanceChip = ({ size, variant, text, icon, onClick, className }: GuidanceChipProps) => {
   return (
     <button
       type='button'
@@ -49,4 +43,6 @@ export default function GuidanceChip({
       <p>{text}</p>
     </button>
   );
-}
+};
+
+export default GuidanceChip;
