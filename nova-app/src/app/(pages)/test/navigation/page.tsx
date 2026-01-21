@@ -5,22 +5,12 @@ const page = () => {
   return (
     <div className='flex flex-col items-center justify-center gap-10 min-h-dvh'>
       <div className='flex gap-6'>
-        <SideTabItem label='Label' icon={<SquareDashed size={16} />} className='w-60 h-11' />
+        <SideTabItem label='Label' icon={SquareDashed} className='w-60 h-11' />
+        <SideTabItem label='Label' icon={SquareDashed} peak={true} className='w-60 h-11' />
+        <SideTabItem label='Label' icon={SquareDashed} minimized={true} className='w-17 h-17.5' />
         <SideTabItem
           label='Label'
-          icon={<SquareDashed size={16} />}
-          peak={true}
-          className='w-60 h-11'
-        />
-        <SideTabItem
-          label='Label'
-          icon={<SquareDashed size={16} />}
-          minimized={true}
-          className='w-17 h-17.5'
-        />
-        <SideTabItem
-          label='Label'
-          icon={<SquareDashed size={16} />}
+          icon={SquareDashed}
           peak={true}
           minimized={true}
           className='w-17 h-17.5'
