@@ -3,7 +3,7 @@ import {
   GuidanceChip,
   IconButton,
   InputChip,
-  SelectionChipButton,
+  SelectionChip,
   TextButton,
   ToggleButton,
 } from '@/shared/ui';
@@ -163,90 +163,81 @@ const InputTestPage = () => {
             label='label'
             style={'data'}
             size={'lg'}
-            leftIcon={<SquareDashed size={12} />}
-            rightIcon={<SquareDashed size={12} />}
+            leftIcon={SquareDashed}
+            rightIcon={SquareDashed}
           />
           <TextButton
             label='label'
             style={'accent'}
             size={'sm'}
-            leftIcon={<SquareDashed size={12} />}
-            rightIcon={<SquareDashed size={12} />}
+            leftIcon={SquareDashed}
+            rightIcon={SquareDashed}
           />
           <TextButton
             label='label'
             style={'surface'}
             size={'md'}
-            leftIcon={<SquareDashed size={12} />}
-            rightIcon={<SquareDashed size={12} />}
+            leftIcon={SquareDashed}
+            rightIcon={SquareDashed}
           />
           <TextButton label='label' style={'data'} />
-          <IconButton size={'sm'} style={'surface'} peak={true} icon={<SquareDashed size={12} />} />
-          <IconButton
-            size={'sm'}
-            style={'surface'}
-            peak={false}
-            icon={<SquareDashed size={12} />}
-          />
-          <IconButton size={'sm'} style={'outline'} peak={true} icon={<SquareDashed size={12} />} />
-          <IconButton
-            size={'sm'}
-            style={'outline'}
-            peak={false}
-            icon={<SquareDashed size={12} />}
-          />
-          <IconButton
-            size={'sm'}
-            style={'surface'}
-            peak={false}
-            icon={<SquareDashed size={12} />}
-          />
-          <IconButton size={'sm'} style={'accent'} peak={false} icon={<SquareDashed size={12} />} />
-          <IconButton size={'sm'} style={'accent'} peak={true} icon={<SquareDashed size={12} />} />
-          <IconButton size={'sm'} style={'accent'} peak={false} icon={<SquareDashed size={12} />} />
-          <IconButton size={'sm'} style={'data'} peak={true} icon={<SquareDashed size={12} />} />
-          <IconButton size={'sm'} style={'data'} peak={false} icon={<SquareDashed size={12} />} />
-          <SelectionChipButton
+          <IconButton size={'sm'} style={'surface'} peak={true} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'surface'} peak={false} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'outline'} peak={true} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'outline'} peak={false} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'surface'} peak={false} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'accent'} peak={false} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'accent'} peak={true} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'accent'} peak={false} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'data'} peak={true} icon={SquareDashed} />
+          <IconButton size={'sm'} style={'data'} peak={false} icon={SquareDashed} />
+          <SelectionChip
             size={'sm'}
             style={'surface'}
             selected={false}
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             label={'label'}
+            isShowChevron={true}
           />
-          <SelectionChipButton
+          <SelectionChip
             size={'sm'}
             style={'surface'}
             selected={true}
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             label={'label'}
+            isShowChevron={true}
           />
-          <SelectionChipButton
+          <SelectionChip
             size={'sm'}
             style={'accent'}
             selected={true}
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             label={'label'}
+            isShowChevron={true}
           />
-          <SelectionChipButton
+          <SelectionChip
             size={'sm'}
             style={'accent'}
             selected={false}
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             label={'label'}
+            isShowChevron={true}
           />
-          <SelectionChipButton
+          <SelectionChip
             size={'sm'}
             style={'outline'}
             selected={true}
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             label={'label'}
+            isShowChevron={true}
           />
-          <SelectionChipButton
+          <SelectionChip
             size={'sm'}
             style={'outline'}
             selected={false}
-            icon={<SquareDashed size={12} />}
+            icon={SquareDashed}
             label={'label'}
+            isShowChevron={true}
           />
         </div>
       </div>

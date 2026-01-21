@@ -1,13 +1,15 @@
 import { SelectionChipVariants } from '@/shared/ui/styles/selection.styles';
 import { cn } from '@/shared/utils/cn';
 import { VariantProps } from 'class-variance-authority';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, LucideIcon } from 'lucide-react';
+import React from 'react';
 
-interface SelectionChipBtnProps extends VariantProps<typeof SelectionChipVariants> {
+interface SelectionChipProps extends VariantProps<typeof SelectionChipVariants> {
   onClick?: () => void;
   label: string;
   className?: string;
-  icon?: React.ReactNode;
+  icon?: LucideIcon;
+  isShowChevron: boolean;
 }
 
 const ICON_SIZE_BY_CHIP_SIZE = {
@@ -15,7 +17,7 @@ const ICON_SIZE_BY_CHIP_SIZE = {
   md: 14,
 } as const;
 
-const SelectionChipButton = ({
+const SelectionChip = ({
   size,
   style,
   selected,
@@ -23,18 +25,25 @@ const SelectionChipButton = ({
   label,
   onClick,
   icon,
-}: SelectionChipBtnProps) => {
+  isShowChevron,
+}: SelectionChipProps) => {
   return (
     <button
       type='button'
       className={cn(SelectionChipVariants({ size, style, selected }), className)}
       onClick={onClick}
     >
-      {icon}
+      {icon && (
+        <span>
+          {React.createElement(icon, {
+            size: size === 'sm' ? 12 : 14,
+          })}
+        </span>
+      )}
       {label}
-      <ChevronDown size={ICON_SIZE_BY_CHIP_SIZE[size ?? 'md']} />
+      {isShowChevron && <ChevronDown size={ICON_SIZE_BY_CHIP_SIZE[size ?? 'md']} />}
     </button>
   );
 };
 
-export default SelectionChipButton;
+export default SelectionChip;

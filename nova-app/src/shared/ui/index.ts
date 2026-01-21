@@ -3,7 +3,7 @@ import Button from '@/shared/ui/action/Button';
 import GuidanceChip from '@/shared/ui/action/GuidanceChip';
 import IconButton from '@/shared/ui/action/IconButton';
 import InputChip from '@/shared/ui/action/InputChip';
-import SelectionChipButton from '@/shared/ui/action/SelectionChipButton';
+import SelectionChip from '@/shared/ui/action/SelectionChip';
 import TextButton from '@/shared/ui/action/TextButton';
 import ToggleButton from '@/shared/ui/action/ToggleButton';
 
@@ -30,7 +30,7 @@ export {
   GuidanceChip,
   IconButton,
   InputChip,
-  SelectionChipButton,
+  SelectionChip,
   TextButton,
   ToggleButton,
   DotBadge,

@@ -1,13 +1,15 @@
 import { TextBtnVariants } from '@/shared/ui/styles/textButton.styles';
 import { cn } from '@/shared/utils/cn';
 import { VariantProps } from 'class-variance-authority';
+import { LucideIcon } from 'lucide-react';
+import React from 'react';
 
-interface ButtonProps extends VariantProps<typeof TextBtnVariants> {
+interface TextButtonProps extends VariantProps<typeof TextBtnVariants> {
   onClick?: () => void;
   label: string;
   className?: string;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+  leftIcon?: LucideIcon;
+  rightIcon?: LucideIcon;
 }
 
 const TextButton = ({
@@ -18,12 +20,24 @@ const TextButton = ({
   style,
   leftIcon,
   rightIcon,
-}: ButtonProps) => {
+}: TextButtonProps) => {
   return (
     <button onClick={onClick} className={cn(TextBtnVariants({ size, style }), className)}>
-      {leftIcon}
+      {leftIcon && (
+        <span>
+          {React.createElement(leftIcon, {
+            size: size === 'sm' ? 12 : 14,
+          })}
+        </span>
+      )}
       {label}
-      {rightIcon}
+      {rightIcon && (
+        <span>
+          {React.createElement(rightIcon, {
+            size: size === 'sm' ? 12 : 14,
+          })}
+        </span>
+      )}
     </button>
   );
 };
