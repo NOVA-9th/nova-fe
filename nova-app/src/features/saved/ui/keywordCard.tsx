@@ -13,7 +13,7 @@ export const KeywordCard = () => {
   };
 
   return (
-    <div className='flex flex-col w-full h-fit justify-start items-center rounded-lg p-5 gap-5 bg-static'>
+    <div className='flex flex-col w-full h-fit justify-start items-center rounded-static-frame p-5 gap-5 bg-static'>
       <div className='flex w-full justify-center items-center gap-3'>
         <TextInput
           size='lg'
@@ -31,7 +31,7 @@ export const KeywordCard = () => {
           label='필터 초기화'
           leftIcon={ListFilter}
           style='surface'
-          className='flex justify-center items-center px-padding-bold py-padding-regular rounded-md bg-surface'
+          className='flex justify-center items-center px-padding-bold py-padding-regular rounded-interactive-default bg-surface'
         />
       </div>
       <div className='flex w-full h-fit items-center gap-8'>
@@ -96,7 +96,7 @@ export const KeywordCard = () => {
             <SelectionChip
               isShowChevron={false}
               key={index}
-              size='sm'
+              size='md'
               style='surface'
               selected={false}
               label={`#${keyword.filter}`}
