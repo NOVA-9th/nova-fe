@@ -14,13 +14,13 @@ import {
   Bookmark,
 } from 'lucide-react';
 import React, { useState } from 'react';
-import { Button, Header, IconButton, SectionHeader, TextBadge, TextButton } from '..';
+import { Button, Header, IconButton, SectionHeader, TextBadge } from '..';
 import { articleData } from '@/features/saved/types/ArticleType';
 import EvidenceCard from '../../../features/saved/ui/EvidenceCard';
 import TextIconButton from '../action/TextIconButton';
 
 const ArticleCardVariants = cva(
-  'flex flex-col w-full h-fit justify-start items-start rounded-lg p-5 gap-5 bg-white',
+  'flex flex-col w-full h-fit justify-start items-start rounded-lg p-5 gap-5 bg-static',
   {
     variants: {
       type: {

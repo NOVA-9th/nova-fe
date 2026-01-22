@@ -13,7 +13,7 @@ export const KeywordCard = () => {
   };
 
   return (
-    <div className='flex flex-col w-full h-fit justify-start items-center rounded-lg p-5 gap-5 bg-white'>
+    <div className='flex flex-col w-full h-fit justify-start items-center rounded-lg p-5 gap-5 bg-static'>
       <div className='flex w-full justify-center items-center gap-3'>
         <TextInput
           size='lg'

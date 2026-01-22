@@ -45,7 +45,7 @@ const IconBadgeVariants = cva('flex items-center justify-center rounded-static-p
     {
       variant: 'outline',
       peak: false,
-      class: 'bg-white text-additive',
+      class: 'bg-static text-additive',
     },
     // accent + peak 조합
     {
