@@ -16,7 +16,7 @@ import {
 import React, { useState } from 'react';
 import { Button, Header, IconButton, SectionHeader, TextBadge, TextButton } from '..';
 import { articleData } from '@/features/saved/types/ArticleType';
-import EvidenceCard from './EvidenceCard';
+import EvidenceCard from '../../../features/saved/ui/EvidenceCard';
 import TextIconButton from '../action/TextIconButton';
 
 const ArticleCardVariants = cva(
