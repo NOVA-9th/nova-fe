@@ -101,6 +101,7 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
             variant='surface'
             peak={false}
             text={`${articleData.evidences.length}개`}
+            className='gap-0'
           />
         </div>
         <button

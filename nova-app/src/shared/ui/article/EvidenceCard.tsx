@@ -1,6 +1,5 @@
 import { CircleQuestionMark } from 'lucide-react';
-import { TextBadge } from '..'
-
+import { TextBadge } from '..';
 
 interface EvidenceCardProps {
   evidenceSource: string;
@@ -19,7 +18,7 @@ const EvidenceCard = ({ evidenceSource, content }: EvidenceCardProps) => {
       />
       <span className='typo-body-base text-base line-clamp-2'>{content}</span>
     </div>
-  )
-}
+  );
+};
 
 export default EvidenceCard;
