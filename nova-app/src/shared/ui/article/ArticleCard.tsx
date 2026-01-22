@@ -19,19 +19,6 @@ import { articleData } from '@/features/saved/types/ArticleType';
 import EvidenceCard from '../../../features/saved/ui/EvidenceCard';
 import TextIconButton from '../action/TextIconButton';
 
-const ArticleCardVariants = cva(
-  'flex flex-col w-full h-fit justify-start items-start rounded-static-frame p-5 gap-5 bg-static',
-  {
-    variants: {
-      type: {
-        news: '',
-        recruitment: '',
-        community: '',
-      },
-    },
-  },
-);
-
 const ARTICLE_TYPE_CONFIG: Record<
   'news' | 'recruitment' | 'community',
   { icon: LucideIcon; title: string }
@@ -64,7 +51,12 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
     : ARTICLE_TYPE_CONFIG['news'];
 
   return (
-    <article className={cn(ArticleCardVariants({ type: articleData.type }), className)}>
+    <article
+      className={cn(
+        'flex flex-col w-full h-fit items-start rounded-static-frame bg-white p-5 gap-5',
+        className,
+      )}
+    >
       <div className='flex w-full h-fit justify-start items-center gap-2.5'>
         {typeConfig && (
           <TextBadge
