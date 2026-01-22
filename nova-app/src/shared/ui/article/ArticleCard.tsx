@@ -1,7 +1,6 @@
 'use client';
 
 import { cn } from '@/shared/utils/cn';
-import { cva, VariantProps } from 'class-variance-authority';
 import {
   SquareArrowOutUpRight,
   BookOpenText,
@@ -37,7 +36,7 @@ const ARTICLE_TYPE_CONFIG: Record<
   },
 };
 
-interface ArticleCardProps extends VariantProps<typeof ArticleCardVariants> {
+interface ArticleCardProps {
   className?: string;
   children?: React.ReactNode;
   articleData: articleData;
