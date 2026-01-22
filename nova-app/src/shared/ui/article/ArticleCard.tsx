@@ -3,6 +3,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import {
+  SquareArrowOutUpRight,
   BookOpenText,
   Brain,
   ChevronDownIcon,
@@ -10,11 +11,13 @@ import {
   FileUser,
   LucideIcon,
   Newspaper,
+  Bookmark,
 } from 'lucide-react';
 import React, { useState } from 'react';
-import { Header, SectionHeader, TextBadge } from '..';
+import { Button, Header, IconButton, SectionHeader, TextBadge, TextButton } from '..';
 import { articleData } from '@/features/saved/types/ArticleType';
 import EvidenceCard from './EvidenceCard';
+import TextIconButton from '../action/TextIconButton';
 
 const ArticleCardVariants = cva(
   'flex flex-col w-full h-fit justify-start items-start rounded-lg p-5 gap-5 bg-white',
@@ -78,6 +81,7 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
             variant='data'
             peak={false}
             text={`관련도 ${articleData.relevance}%`}
+            className='gap-0'
           />
         )}
       </div>
@@ -125,6 +129,23 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
           ))}
         </div>
       )}
+      <div className='flex w-full h-fit justify-between items-start gap-2.5'>
+        <TextIconButton
+          style='surface'
+          peak={true}
+          size='lg'
+          label='원문 보기'
+          leftIcon={SquareArrowOutUpRight}
+          onClick={() => {
+            window.open(articleData.originalUrl, '_blank');
+          }}
+          className='gap-1'
+        />
+        <div className='flex justify-center items-center gap-2.5'>
+          <Button label='숨김' style='surface' peak={false} size='lg' onClick={() => {}} />
+          <IconButton size='lg' style='surface' peak={false} icon={Bookmark} />
+        </div>
+      </div>
     </article>
   );
 };
