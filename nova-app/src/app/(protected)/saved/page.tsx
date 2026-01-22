@@ -10,8 +10,8 @@ import TextIconButton from '@/shared/ui/action/TextIconButton';
 
 const SavedPage = () => {
   return (
-    <div className='flex flex-col w-full h-full justify-start items-center overflow-hidden rounded-lg bg-alternative'>
-      <div className='flex h-19 p-4 w-full rounded-lg bg-alternative'>
+    <div className='flex flex-col w-full h-full justify-start items-center overflow-hidden rounded-static-frame bg-alternative'>
+      <div className='flex h-19 p-4 w-full rounded-static-frame bg-alternative'>
         <SectionHeader text='저장함' leftIcon={Bookmark} className='px-2 py-0.5 gap-1.5' />
       </div>
       <div className='flex flex-col w-full h-full justify-start items-center bg-alternative'>
