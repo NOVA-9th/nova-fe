@@ -20,7 +20,7 @@ import EvidenceCard from '../../../features/saved/ui/EvidenceCard';
 import TextIconButton from '../action/TextIconButton';
 
 const ArticleCardVariants = cva(
-  'flex flex-col w-full h-fit justify-start items-start rounded-lg p-5 gap-5 bg-static',
+  'flex flex-col w-full h-fit justify-start items-start rounded-static-frame p-5 gap-5 bg-static',
   {
     variants: {
       type: {
@@ -81,18 +81,15 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
             variant='data'
             peak={false}
             text={`관련도 ${articleData.relevance}%`}
-            className='gap-0'
           />
         )}
       </div>
-      <div className='flex flex-col w-full h-fit justify-start items-start'>
-        <Header
-          size='md'
-          subLabel={`${articleData.source} | ${articleData.author} | ${articleData.date}`}
-          className='p-0'
-        />
-        <Header size='md' label={articleData.title} className='p-0'></Header>
-      </div>
+      <Header
+        size='md'
+        label={articleData.title}
+        subLabel={`${articleData.source} | ${articleData.author} | ${articleData.date}`}
+        className='py-0'
+      />
       <div className='flex flex-col w-full h-fit justify-start items-start rounded-interactive-default bg-surface p-4 gap-4'>
         <TextBadge size='lg' variant='surface' peak={false} icon={Brain} text='AI 요약' />
         <span className='typo-body-base text-base'>{articleData.aiSummary}</span>
@@ -105,7 +102,6 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
             variant='surface'
             peak={false}
             text={`${articleData.evidences.length}개`}
-            className='gap-0'
           />
         </div>
         <button
@@ -119,7 +115,7 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
         </button>
       </div>
       {isOpen && articleData.evidences.length > 0 && (
-        <div className='flex flex-col w-full h-fit justify-start items-start border border-outline rounded-lg p-4 gap-4'>
+        <div className='flex flex-col w-full h-fit justify-start items-start border border-outline rounded-static-frame p-4 gap-4'>
           {articleData.evidences.map((evidence) => (
             <EvidenceCard
               key={evidence.id}
