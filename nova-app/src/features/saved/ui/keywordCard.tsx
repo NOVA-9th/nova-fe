@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { EarthIcon, FileUser, ListFilter, Newspaper, Search } from 'lucide-react';
-import { keywordFilter } from '../constants/keywordFilter';
+import { KeywordFilter } from '../mocks/keywordFilter';
 import { SectionHeader, SelectionChip, TextButton, TextInput } from '@/shared/ui';
 
 export const KeywordCard = () => {
@@ -92,7 +92,7 @@ export const KeywordCard = () => {
       <div className='flex flex-col w-full h-full justify-start items-start gap-4'>
         <SectionHeader text='정렬' />
         <div className='flex flex-wrap gap-2'>
-          {keywordFilter.map((keyword, index) => (
+          {KeywordFilter.map((keyword, index) => (
             <SelectionChip
               isShowChevron={false}
               key={index}

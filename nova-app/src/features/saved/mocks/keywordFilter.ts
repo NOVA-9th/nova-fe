@@ -1,4 +1,4 @@
-export const keywordFilter = [
+export const KeywordFilter = [
   {
     id: 1,
     filter: 'React',
