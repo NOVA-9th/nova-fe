@@ -13,10 +13,9 @@ import {
   Bookmark,
 } from 'lucide-react';
 import React, { useState } from 'react';
-import { Button, Header, IconButton, SectionHeader, TextBadge } from '..';
+import { Button, Header, IconButton, SectionHeader, TextBadge, TextIconButton } from '@/shared/ui';
 import { articleData } from '@/features/saved/types/ArticleType';
-import EvidenceCard from '../../../features/saved/ui/EvidenceCard';
-import TextIconButton from '../action/TextIconButton';
+import { EvidenceCard } from '@/features/saved/ui';
 
 const ARTICLE_TYPE_CONFIG: Record<
   'news' | 'recruitment' | 'community',
