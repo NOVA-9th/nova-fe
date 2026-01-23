@@ -10,22 +10,22 @@ import TextIconButton from '@/shared/ui/action/TextIconButton';
 
 const SavedPage = () => {
   return (
-    <div className='flex flex-col w-full h-full justify-start items-center overflow-hidden rounded-static-frame border border-outline bg-alternative'>
-      <div className='flex h-19 p-4 w-full rounded-static-frame bg-alternative'>
+    <main className='flex flex-col w-full h-full justify-start items-center overflow-hidden rounded-static-frame border border-outline bg-alternative'>
+      <header className='flex h-15 p-4 w-full rounded-static-frame bg-alternative'>
         <SectionHeader text='저장함' size='sm' leftIcon={Bookmark} className='px-2' />
-      </div>
+      </header>
       <div className='flex flex-col w-full h-full justify-start items-center bg-alternative'>
-        <div className='flex w-full h-full justify-center items-center px-5 pb-5 gap-4'>
-          <div className='flex-1 flex flex-col h-full overflow-y-auto gap-4'>
+        <section className='flex w-full h-full justify-center items-center px-5 pb-5 gap-4'>
+          <section className='flex-1 flex flex-col h-full overflow-y-auto gap-4'>
             <KeywordCard />
             {mockArticleData.map((article) => (
               <ArticleCard key={article.id} articleData={article} />
             ))}
-          </div>
-          <div className='flex flex-col w-80 h-full bg-alternative gap-4'>
-            <div className='flex flex-col w-full h-fit justify-start items-start p-5 rounded-static-frame bg-static gap-5'>
+          </section>
+          <aside  className='flex flex-col w-80 h-full bg-alternative gap-4'>
+            <section className='flex flex-col w-full h-fit justify-start items-start p-5 rounded-static-frame bg-static gap-5'>
               <SectionHeader size='lg' text='컬렉션' />
-              <div className='flex flex-col w-full h-fit justify-center items-start gap-1'>
+              <section className='flex flex-col w-full h-fit justify-center items-start gap-1'>
                 {SideTabCollectionMockData.map((sideTabCollection) => (
                   <SideTabItemCustom
                     key={sideTabCollection.id}
@@ -39,11 +39,11 @@ const SavedPage = () => {
                     </div>
                   </SideTabItemCustom>
                 ))}
-              </div>
-            </div>
-            <div className='flex flex-col w-full h-fit justify-start items-start p-5 rounded-static-frame bg-static gap-5'>
+              </section>
+            </section>
+            <section className='flex flex-col w-full h-fit justify-start items-start p-5 rounded-static-frame bg-static gap-5'>
               <SectionHeader size='lg' text='저장함 통계' />
-              <div className='flex flex-col w-full h-fit justify-center items-start gap-1'>
+              <section className='flex flex-col w-full h-fit justify-center items-start gap-1'>
                 {SavedStaticsMockData.map((savedStatics) => (
                   <SavedStatics
                     key={savedStatics.id}
@@ -52,7 +52,7 @@ const SavedPage = () => {
                     value={savedStatics.value}
                   />
                 ))}
-              </div>
+              </section>
               <TextIconButton
                 size='lg'
                 style='surface'
@@ -61,11 +61,11 @@ const SavedPage = () => {
                 label='저장함 내보내기'
                 className='w-full gap-1.5'
               />
-            </div>
-          </div>
-        </div>
+            </section>
+          </aside>
+        </section>
       </div>
-    </div>
+    </main>
   );
 };
 
