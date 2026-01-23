@@ -1,6 +1,6 @@
 import { mockArticleData } from '@/features/saved/mocks/articleMockData';
 import { KeywordCard } from '@/features/saved/ui/KeywordCard';
-import { Bookmark, Brain, Chrome, Download, Grid2X2, Grid2X2Icon, Settings } from 'lucide-react';
+import { Bookmark, Download } from 'lucide-react';
 import ArticleCard from '@/shared/ui/article/ArticleCard';
 import { SectionHeader, SideTabItem } from '@/shared/ui';
 import SideTabItemCustom from '@/shared/ui/navigation/SideTabItemCustom';
@@ -10,9 +10,9 @@ import TextIconButton from '@/shared/ui/action/TextIconButton';
 
 const SavedPage = () => {
   return (
-    <div className='flex flex-col w-full h-full justify-start items-center overflow-hidden rounded-static-frame bg-alternative'>
+    <div className='flex flex-col w-full h-full justify-start items-center overflow-hidden rounded-static-frame border border-outline bg-alternative'>
       <div className='flex h-19 p-4 w-full rounded-static-frame bg-alternative'>
-        <SectionHeader text='저장함' leftIcon={Bookmark} className='px-2 py-0.5 gap-1.5' />
+        <SectionHeader text='저장함' size='sm' leftIcon={Bookmark} className='px-2' />
       </div>
       <div className='flex flex-col w-full h-full justify-start items-center bg-alternative'>
         <div className='flex w-full h-full justify-center items-center px-5 pb-5 gap-4'>
