@@ -31,7 +31,7 @@ export const KeywordCard = () => {
           label='필터 초기화'
           leftIcon={ListFilter}
           style='surface'
-          className='flex justify-center items-center px-padding-bold py-padding-regular rounded-interactive-default bg-surface'
+          className='flex h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-surface'
         />
       </div>
       <div className='flex w-full h-fit items-center gap-8'>
