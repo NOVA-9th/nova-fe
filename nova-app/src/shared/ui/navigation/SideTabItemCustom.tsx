@@ -1,7 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
-import React, { Children } from 'react';
+import React from 'react';
 
 const SideTabItemCustomVariants = cva(
   'flex items-center rounded-interactive-default size-lg px-padding-medium py-padding-regular',
