@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { EarthIcon, FileUser, ListFilter, Newspaper, Search } from 'lucide-react';
-import { KeywordFilter } from '../mocks/KeywordFilter';
+import { KeywordFilter } from '../mocks/keywordFilter';
 import { SectionHeader, SelectionChip, TextButton, TextInput } from '@/shared/ui';
 
 export const KeywordCard = () => {
