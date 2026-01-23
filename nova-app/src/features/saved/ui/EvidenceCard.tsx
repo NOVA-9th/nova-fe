@@ -1,5 +1,5 @@
 import { CircleQuestionMark } from 'lucide-react';
-import { TextBadge } from '../../../shared/ui';
+import { TextBadge } from '@/shared/ui';
 
 interface EvidenceCardProps {
   evidenceSource: string;
