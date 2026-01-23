@@ -26,7 +26,6 @@ const SideTabItemCustomVariants = cva(
 
 interface SideTabItemCustomProps extends VariantProps<typeof SideTabItemCustomVariants> {
   icon?: LucideIcon;
-  label?: string;
   className?: string;
   children?: React.ReactNode;
 }
@@ -36,7 +35,6 @@ const SideTabItemCustom = ({
   minimized,
   className,
   icon,
-  label,
   children
 }: SideTabItemCustomProps) => {
   return (
@@ -48,7 +46,6 @@ const SideTabItemCustom = ({
           })}
         </span>
       )}
-      {label}
       {children}
     </div>
   );
