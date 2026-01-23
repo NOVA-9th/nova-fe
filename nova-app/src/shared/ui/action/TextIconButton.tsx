@@ -2,7 +2,7 @@ import { cn } from '@/shared/utils/cn';
 import { VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
-import { ButtonVariants } from '../styles/button.styles';
+import { ButtonVariants } from '@/shared/ui/styles/button.styles';
 
 interface TextIconButtonProps extends VariantProps<typeof ButtonVariants> {
   onClick?: () => void;

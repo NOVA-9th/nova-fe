@@ -25,7 +25,7 @@ import TextInput from '@/shared/ui/input/TextInput';
 // navigation
 import Breadcrumb from '@/shared/ui/navigation/Breadcrumb';
 import SideTabItem from '@/shared/ui/navigation/SideTabItem';
-import SideTabItemCustom from './navigation/SideTabItemCustom';
+import SideTabItemCustom from '@/shared/ui/navigation/SideTabItemCustom';
 
 export {
   Button,
