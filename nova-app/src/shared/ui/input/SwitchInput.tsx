@@ -74,7 +74,7 @@ const SwitchInput = ({ label, className, size }: SwitchInputProps) => {
                 : size === 'md'
                   ? 'translate-x-4 bg-alternative'
                   : 'translate-x-3 bg-alternative'
-              : 'translate-x-0 bg-white',
+              : 'translate-x-0 bg-static',
           )}
         />
       </button>

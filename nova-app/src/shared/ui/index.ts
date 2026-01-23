@@ -5,6 +5,7 @@ import IconButton from '@/shared/ui/action/IconButton';
 import InputChip from '@/shared/ui/action/InputChip';
 import SelectionChip from '@/shared/ui/action/SelectionChip';
 import TextButton from '@/shared/ui/action/TextButton';
+import TextIconButton from '@/shared/ui/action/TextIconButton';
 import ToggleButton from '@/shared/ui/action/ToggleButton';
 
 // content
@@ -24,6 +25,7 @@ import TextInput from '@/shared/ui/input/TextInput';
 // navigation
 import Breadcrumb from '@/shared/ui/navigation/Breadcrumb';
 import SideTabItem from '@/shared/ui/navigation/SideTabItem';
+import SideTabItemCustom from '@/shared/ui/navigation/SideTabItemCustom';
 
 export {
   Button,
@@ -32,6 +34,7 @@ export {
   InputChip,
   SelectionChip,
   TextButton,
+  TextIconButton,
   ToggleButton,
   DotBadge,
   Header,
@@ -45,4 +48,5 @@ export {
   TextInput,
   Breadcrumb,
   SideTabItem,
+  SideTabItemCustom,
 };

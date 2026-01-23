@@ -11,7 +11,8 @@ const HeaderVariants = cva('flex flex-col items-start justify-center', {
 });
 
 interface HeaderProps extends VariantProps<typeof HeaderVariants> {
-  label: string;
+  size: 'md' | 'lg';
+  label?: string;
   subLabel?: string;
   description?: string;
   className?: string;
@@ -19,7 +20,7 @@ interface HeaderProps extends VariantProps<typeof HeaderVariants> {
 
 const Header = ({ size, subLabel, label, description, className }: HeaderProps) => {
   return (
-    <div className={cn(HeaderVariants({ size: size }), className)}>
+    <div className={cn(HeaderVariants({ size }), className)}>
       {subLabel && <span className='typo-callout-base text-optional'>{subLabel}</span>}
       <span
         className={`${size === 'md' ? 'typo-headline-strong' : 'typo-title-strong'} text-base-color`}

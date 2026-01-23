@@ -45,7 +45,7 @@ const TextBadgeVariants = cva('flex items-center justify-center rounded-static-p
     {
       variant: 'outline',
       peak: false,
-      class: 'bg-white text-additive',
+      class: 'bg-static text-additive',
     },
     // accent + peak 조합
     {
@@ -78,19 +78,16 @@ interface TextBadgeProps extends VariantProps<typeof TextBadgeVariants> {
   className?: string;
 }
 
-const TextBadge = ({ size, variant, peak, text = 'Label', icon, className }: TextBadgeProps) => {
+const TextBadge = ({ size, variant, peak, text, icon, className }: TextBadgeProps) => {
   return (
     <div className={cn(TextBadgeVariants({ size, variant, peak }), className)}>
-      <div className='flex items-center justify-center py-[1.5px]'>
-        {' '}
-        {icon && (
-          <span>
-            {React.createElement(icon, {
-              size: size === 'sm' ? 11 : size === 'md' ? 12 : 14,
-            })}
-          </span>
-        )}
-      </div>
+      {icon && (
+        <span>
+          {React.createElement(icon, {
+            size: size === 'sm' ? 11 : size === 'md' ? 12 : 14,
+          })}
+        </span>
+      )}
       <p className='px-0.5'>{text}</p>
     </div>
   );

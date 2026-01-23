@@ -11,7 +11,7 @@ import { SquareDashed } from 'lucide-react';
 
 const testPage = () => {
   return (
-    <div className='flex min-h-dvh flex-col items-center justify-center gap-5 rounded-md px-4 text-xl bg-base'>
+    <div className='flex min-h-dvh flex-col items-center justify-center gap-5 rounded-interactive-default px-4 text-xl bg-base'>
       <TextBadge size='sm' variant='surface' peak={true} icon={SquareDashed} text='Label' />
       <TextBadge size='sm' variant='surface' peak={false} icon={SquareDashed} text='TextBadge' />
       <TextBadge size='sm' variant='outline' peak={true} icon={SquareDashed} text='TextBadge' />
