@@ -1,8 +1,13 @@
+import { HeaderBar, SideBar } from '@/widgets/layouts';
+
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className='flex flex-col w-screen h-screen justify-start items-center bg-alternative'>
-      <div className='h-19 w-full bg-white'></div>
-      <div className='flex flex-1 justify-center items-center w-full'>{children}</div>
+    <div className='h-dvh grid grid-rows-[auto_1fr]'>
+      <HeaderBar />
+      <div className='grid grid-cols-[320px_1fr]'>
+        <SideBar />
+        <main className='overflow-auto p-4 bg-alternative'>{children}</main>
+      </div>
     </div>
   );
 };
