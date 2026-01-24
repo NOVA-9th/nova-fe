@@ -1,0 +1,19 @@
+import { cn } from '@/shared/utils/cn';
+import { ButtonVariants } from '@/shared/ui/styles/button.styles';
+import { VariantProps } from 'class-variance-authority';
+
+interface ButtonProps extends VariantProps<typeof ButtonVariants> {
+  onClick?: () => void;
+  label: string;
+  className?: string;
+}
+
+const Button = ({ onClick, className, label, peak, style, size }: ButtonProps) => {
+  return (
+    <button onClick={onClick} className={cn(ButtonVariants({ size, peak, style }), className)}>
+      {label}
+    </button>
+  );
+};
+
+export default Button;

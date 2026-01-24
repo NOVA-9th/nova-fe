@@ -3,3 +3,101 @@
   --font-weight-200: 500;
   --font-weight-300: 600;
 }
+
+@layer utilities {
+  .typo-display-base {
+    @apply text-display font-100 leading-tight tracking-tight;
+  }
+
+  .typo-display-key {
+    @apply text-display font-200 leading-tight tracking-tight;
+  }
+
+  .typo-display-strong {
+    @apply text-display font-300 leading-tight tracking-tight;
+  }
+
+  .typo-title-base {
+    @apply text-title font-100 leading-8 tracking-tight;
+  }
+
+  .typo-title-key {
+    @apply text-title font-200 leading-8 tracking-tight;
+  }
+
+  .typo-title-strong {
+    @apply text-title font-300 leading-8 tracking-tight;
+  }
+
+  .typo-headline-base {
+    @apply text-heading font-100 leading-7 tracking-tight;
+  }
+
+  .typo-headline-key {
+    @apply text-heading font-200 leading-7 tracking-tight;
+  }
+
+  .typo-headline-strong {
+    @apply text-heading font-300 leading-7 tracking-tight;
+  }
+
+  .typo-subhead-base {
+    @apply text-subhead font-100 leading-7 tracking-tight;
+  }
+
+  .typo-subhead-key {
+    @apply text-subhead font-200 leading-7 tracking-tight;
+  }
+
+  .typo-subhead-strong {
+    @apply text-subhead font-300 leading-7 tracking-tight;
+  }
+
+  .typo-body-base {
+    @apply text-body font-100 leading-6 tracking-tight;
+  }
+
+  .typo-body-key {
+    @apply text-body font-200 leading-6 tracking-tight;
+  }
+
+  .typo-body-strong {
+    @apply text-body font-300 leading-6 tracking-tight;
+  }
+
+  .typo-callout-base {
+    @apply text-callout font-100 leading-5 tracking-tight;
+  }
+
+  .typo-callout-key {
+    @apply text-callout font-200 leading-5 tracking-tight;
+  }
+
+  .typo-callout-strong {
+    @apply text-callout font-300 leading-5 tracking-tight;
+  }
+
+  .typo-footnote-base {
+    @apply text-footnote font-100 leading-4 tracking-tight;
+  }
+
+  .typo-footnote-key {
+    @apply text-footnote font-200 leading-4 tracking-tight;
+  }
+
+  .typo-footnote-strong {
+    @apply text-footnote font-300 leading-4 tracking-tight;
+  }
+
+  .typo-caption-base {
+    @apply text-caption font-100 leading-4 tracking-tight;
+  }
+
+  .typo-caption-key {
+    @apply text-caption font-200 leading-4 tracking-tight;
+  }
+
+  .typo-caption-strong {
+    @apply text-caption font-300 leading-4 tracking-tight;
+  }
+}
