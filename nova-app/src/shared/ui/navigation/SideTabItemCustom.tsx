@@ -35,7 +35,7 @@ const SideTabItemCustom = ({
   minimized,
   className,
   icon,
-  children
+  children,
 }: SideTabItemCustomProps) => {
   return (
     <div className={cn(SideTabItemCustomVariants({ peak, minimized }), className)}>

@@ -106,7 +106,7 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
         </button>
       </div>
       {isOpen && articleData.evidences.length > 0 && (
-        <div className='flex flex-col w-full h-fit justify-start items-start border border-outline rounded-static-frame p-4 gap-4'>
+        <div className='flex flex-col w-full justify-start items-start border border-outline rounded-static-frame p-4 gap-4'>
           {articleData.evidences.map((evidence) => (
             <EvidenceCard
               key={evidence.id}

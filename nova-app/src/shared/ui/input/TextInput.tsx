@@ -2,6 +2,7 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon, X } from 'lucide-react';
 import React from 'react';
+import { TextBadge } from '@/shared/ui';
 
 const TextInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
@@ -42,6 +43,12 @@ const TextInputVariants = cva(
         class: 'border focus-within:border-selected',
       },
     ],
+
+    defaultVariants: {
+      size: 'md',
+      variant: 'surface',
+      data: false,
+    },
   },
 );
 
@@ -65,10 +72,12 @@ const TextInput = ({
 }: TextInputProps) => {
   return (
     <div className={cn(TextInputVariants({ size, variant, data }), className)}>
-      {icon &&
-        React.createElement(icon, {
-          size: size === 'md' ? 14 : 16,
-        })}
+      <div className='text-additive'>
+        {icon &&
+          React.createElement(icon, {
+            size: size === 'md' ? 14 : 16,
+          })}
+      </div>
 
       <input
         type='text'
@@ -78,11 +87,11 @@ const TextInput = ({
         className='caret-color placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
       />
 
-      {value && (
-        <button type='button' onClick={() => onChange('')} className='text-charcoal-optional'>
-          <X size={size === 'md' ? 14 : 16} />
-        </button>
-      )}
+      {!value && <TextBadge size='md' variant='surface' peak={false} text='Cmd + K' />}
+
+      <button type='button' onClick={() => onChange('')} className='text-charcoal-optional'>
+        <X size={size === 'md' ? 14 : 16} />
+      </button>
     </div>
   );
 };

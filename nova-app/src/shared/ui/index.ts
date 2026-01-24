@@ -27,6 +27,9 @@ import Breadcrumb from '@/shared/ui/navigation/Breadcrumb';
 import SideTabItem from '@/shared/ui/navigation/SideTabItem';
 import SideTabItemCustom from '@/shared/ui/navigation/SideTabItemCustom';
 
+// article
+import ArticleCard from '@/shared/ui/article/ArticleCard';
+
 export {
   Button,
   GuidanceChip,
@@ -49,4 +52,5 @@ export {
   Breadcrumb,
   SideTabItem,
   SideTabItemCustom,
+  ArticleCard,
 };
