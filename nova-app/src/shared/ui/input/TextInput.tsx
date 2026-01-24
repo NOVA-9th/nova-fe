@@ -2,7 +2,7 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon, X } from 'lucide-react';
 import React from 'react';
-import TextBadge from '../content/TextBadge';
+import { TextBadge } from '@/shared/ui';
 
 const TextInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
