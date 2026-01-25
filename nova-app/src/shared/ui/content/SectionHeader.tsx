@@ -3,7 +3,7 @@ import { cn } from '@/shared/utils/cn';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
-const SectionHeaderVariants = cva('flex items-center justify-center py-0.5', {
+const SectionHeaderVariants = cva('flex items-center py-0.5', {
   variants: {
     size: {
       sm: 'gap-1.5 typo-body-key',
