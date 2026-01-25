@@ -28,7 +28,7 @@ interface SectionHeaderProps extends VariantProps<typeof SectionHeaderVariants> 
 const SectionHeader = ({
   size,
   peak,
-  text = 'Label',
+  text,
   leftIcon,
   rightIcon,
   className,

@@ -26,7 +26,7 @@ const TextButton = ({
       {leftIcon && (
         <span>
           {React.createElement(leftIcon, {
-            size: size === 'sm' ? 12 : 14,
+            size: size === 'sm' ? 12 : size === 'lg' ? 16 : 14,
           })}
         </span>
       )}
@@ -34,7 +34,7 @@ const TextButton = ({
       {rightIcon && (
         <span>
           {React.createElement(rightIcon, {
-            size: size === 'sm' ? 12 : 14,
+            size: size === 'sm' ? 12 : size === 'lg' ? 16 : 14,
           })}
         </span>
       )}
