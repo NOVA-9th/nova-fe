@@ -33,7 +33,7 @@ export default function Stepper({ totalSteps, currentStep, labels }: StepperProp
               </div>
               <div
                 className={cn(`ml-2 h-0.75 w-13.75 rounded-l-static-pill
-                  ${step === totalSteps ? 'bg-transparent' : step <= currentStep ? 'bg-charcoal-full' : ' bg-slate-outline'}`)}
+                  ${step === totalSteps ? 'bg-transparent' : step < currentStep ? 'bg-charcoal-full' : ' bg-slate-outline'}`)}
               />
             </div>
             <span
