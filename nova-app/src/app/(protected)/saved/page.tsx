@@ -2,7 +2,7 @@ import { mockArticleData } from '@/features/saved/mocks/articleMockData';
 import { Bookmark, Download } from 'lucide-react';
 import {
   ArticleCard,
-  Breadcrumb,
+  PageHeader,
   SectionHeader,
   SideTabItemCustom,
   TextIconButton,
@@ -16,7 +16,7 @@ import { KeywordCard, SavedStatics } from '@/features/saved/ui';
 const SavedPage = () => {
   return (
     <>
-      <Breadcrumb items={['저장함']} depth={1} icon={Bookmark} />
+      <PageHeader text='저장함' icon={Bookmark} />
       <div className='flex flex-col w-full h-full justify-start items-center bg-alternative'>
         <section className='flex w-full h-full justify-center items-center px-5 pb-5 gap-4'>
           <section className='flex-1 flex flex-col h-full overflow-y-auto gap-4'>
