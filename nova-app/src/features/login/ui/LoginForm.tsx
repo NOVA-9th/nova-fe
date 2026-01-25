@@ -1,12 +1,12 @@
 import { Header } from '@/shared/ui';
 import { Lightbulb } from 'lucide-react';
-import NovaLabel from '@/shared/assets/NovaLabel.svg';
+import { NovaLabel } from '@/shared/assets';
 import LoginButton from './LoginButton';
 
 const LoginForm = () => {
   return (
     <main className='w-160 h-107.5 rounded-static-frame p-5 gap-5 flex flex-col items-center justify-center bg-base'>
-      <div className='flex flex-row gap-2.25 items-center justify-center py-5 px-1 w-150 h-22'>
+      <div className='flex gap-2.25 items-center justify-center py-5 px-1 w-150 h-22'>
         <Lightbulb size={36} className='text-base' />
         <NovaLabel className='w-[68.5px] h-[17.5px]' />
       </div>
