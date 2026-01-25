@@ -1,7 +1,4 @@
-import InterestCard from '../ui/InterestCard';
-import InterestKeywordCard from '../ui/InterestKeywordCard';
-import MajorCard from '../ui/MajorCard';
-import SkillCard from '../ui/SkillCard';
+import { MajorCard, InterestCard, SkillCard, InterestKeywordCard } from '@/features/onboarding/ui';
 
 export const STEP_ITEMS = {
   1: {

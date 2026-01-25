@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import Stepper from '@/features/onboarding/ui/Stepper';
+import { Stepper } from '@/features/onboarding/ui';
 import { Header } from '@/shared/ui';
 import { STEP_ITEMS } from '@/features/onboarding/data/StepItems';
 import StepCard from '@/features/onboarding/ui/StepCard';
