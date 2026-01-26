@@ -23,7 +23,10 @@ export const useOnboarding = () => {
   const onPrev = () => setCurrentStep((prev) => STEPS[Math.max(STEPS.indexOf(prev) - 1, 0)]);
 
   const onValidChange = (isValid: boolean) => {
-    setStepValidMap((prev) => ({ ...prev, [currentStep]: isValid }));
+    setStepValidMap((prev) => {
+      if (prev[currentStep] === isValid) return prev;
+      return { ...prev, [currentStep]: isValid };
+    });
   };
 
   return {
