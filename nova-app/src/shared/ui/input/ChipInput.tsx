@@ -35,10 +35,12 @@ const ChipInputVariants = cva(
 );
 
 interface ChipInputProps extends VariantProps<typeof ChipInputVariants> {
+  value: string[];
+  onChange: (chips: string[]) => void;
   placeholder?: string;
   icon?: LucideIcon;
   className?: string;
-  suggestions?: string[]; // 외부에서 받는 추천 목록
+  suggestions?: string[];
 }
 
 const ChipInput = ({
@@ -49,33 +51,34 @@ const ChipInput = ({
   icon,
   className,
   suggestions = [],
+  value,
+  onChange,
 }: ChipInputProps) => {
-  const [value, setValue] = useState('');
-  const [chips, setChips] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState('');
   const [isComposing, setIsComposing] = useState(false);
 
   const addChipsFromValue = (input: string) => {
-    input
+    const newChips = input
       .split(',')
       .map((v) => v.trim())
-      .filter((v) => v && !chips.includes(v))
-      .forEach((v) => setChips((prev) => [...prev, v]));
+      .filter((v) => v && !value.includes(v));
+    if (newChips.length) onChange([...value, ...newChips]);
+    setInputValue('');
   };
 
   const addChip = (chipValue?: string) => {
-    const finalValue = chipValue ?? value;
+    const finalValue = chipValue ?? inputValue;
     if (!finalValue) return;
     addChipsFromValue(finalValue);
-    setValue('');
   };
 
   const removeChip = (chip: string) => {
-    setChips((prev) => prev.filter((c) => c !== chip));
+    onChange(value.filter((c) => c !== chip));
   };
 
   const clearAll = () => {
-    setValue('');
-    setChips([]);
+    setInputValue('');
+    onChange([]);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -86,36 +89,26 @@ const ChipInput = ({
       addChip();
     }
 
-    if (e.key === 'Backspace' && !value && chips.length) {
-      removeChip(chips[chips.length - 1]);
+    if (e.key === 'Backspace' && !inputValue && value.length) {
+      removeChip(value[value.length - 1]);
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = e.target.value;
-
-    if (inputValue.includes(',')) {
-      addChipsFromValue(inputValue);
-      setValue('');
-    } else {
-      setValue(inputValue);
-    }
+    setInputValue(e.target.value);
   };
 
   const filteredSuggestions = useMemo(
     () =>
       suggestions.filter(
-        (item) => item.toLowerCase().includes(value.toLowerCase()) && !chips.includes(item),
+        (item) => item.toLowerCase().includes(inputValue.toLowerCase()) && !value.includes(item),
       ),
-    [value, suggestions, chips],
+    [inputValue, suggestions, value],
   );
 
   return (
     <div className={cn(ChipInputVariants({ size, variant, data }), className)}>
-      {icon &&
-        React.createElement(icon, {
-          size: size === 'md' ? 14 : 16,
-        })}
+      {icon && React.createElement(icon, { size: size === 'md' ? 14 : 16 })}
 
       <div
         className={cn(
@@ -123,7 +116,7 @@ const ChipInput = ({
           size === 'md' ? 'gap-1' : 'gap-1.5',
         )}
       >
-        {chips.map((chip) => (
+        {value.map((chip) => (
           <InputChip
             key={chip}
             size={size === 'md' ? 'sm' : 'md'}
@@ -138,23 +131,20 @@ const ChipInput = ({
           onCompositionStart={() => setIsComposing(true)}
           onCompositionEnd={() => setIsComposing(false)}
           type='text'
-          value={value}
+          value={inputValue}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          placeholder={chips.length === 0 ? placeholder : undefined}
+          placeholder={value.length === 0 ? placeholder : undefined}
           className='caret-color placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
         />
       </div>
 
-      {value && filteredSuggestions.length > 0 && (
-        <ul
-          className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base 
-               border-x border-b border-slate-ring rounded-b-static-frame'
-        >
+      {inputValue && filteredSuggestions.length > 0 && (
+        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base border-x border-b border-slate-ring rounded-b-static-frame'>
           {filteredSuggestions.map((item) => (
             <li
               key={item}
-              className='px-4 py-2.5 typo-body-base h-12 text-charcoal-optional'
+              className='px-4 py-2.5 typo-body-base h-12 text-charcoal-optional hover:bg-surface active:bg-surface '
               onClick={() => addChip(item)}
             >
               {item}
@@ -163,7 +153,7 @@ const ChipInput = ({
         </ul>
       )}
 
-      {(value || chips.length > 0) && (
+      {(inputValue || value.length > 0) && (
         <button type='button' onClick={clearAll} className='text-charcoal-optional'>
           <X size={size === 'md' ? 14 : 16} />
         </button>
