@@ -1,12 +1,13 @@
-import { KEYWORD_TITLE } from '@/features/trend/constants/trendTop';
 import { keyword_data } from '@/features/trend/mock/keyword';
 import { KEYWORDS } from '@/features/trend/mock/topKeyword';
 import { BarChart } from '@/features/trend/ui/BarChart';
 import { TitleText } from '@/features/trend/ui/TitleText';
 import { TrendChart } from '@/features/trend/ui/TrendChart';
 import { Button, SectionHeader, SelectionChip, TextBadge } from '@/shared/ui';
-import clsx from 'clsx';
+import { cn } from '@/shared/utils/cn';
 import { ChartBar } from 'lucide-react';
+
+const gridCols = 'grid grid-cols-[0.95fr_2.86fr_2.86fr_1.43fr_1.35fr_0.55fr] gap-x-[20px]';
 
 const TrendPage = () => {
   return (
@@ -16,87 +17,67 @@ const TrendPage = () => {
       </header>
       {/* 트렌드차트 */}
       <section className='rounded-2xl bg-static p-5 mb-4'>
-        <div className='gap-2 flex mb-4'>
-          <SelectionChip
-            isShowChevron={false}
-            label='최근 7일'
-            size={'md'}
-            style={'surface'}
-            selected={true}
-          />
-          <SelectionChip
-            isShowChevron={false}
-            label='최근 1개월'
-            size={'md'}
-            style={'surface'}
-            selected={false}
-          />
-          <SelectionChip
-            isShowChevron={false}
-            label='최근 3개월'
-            size={'md'}
-            style={'surface'}
-            selected={false}
-          />
-        </div>
+        <SelectionChip
+          isShowChevron={false}
+          label='최근 7일'
+          size={'md'}
+          style={'surface'}
+          selected={true}
+          className='mb-4'
+        />
 
         <TitleText title='키워드 트렌드 차트' subTitle='선택한 키워드의 시간별 언급 빈도' />
         <TrendChart />
       </section>
+
       {/* 인기키워드 */}
       <section className='rounded-2xl bg-static p-5 mb-4'>
         <TitleText
           title='인기 키워드 TOP 10'
           subTitle='아래의 표를 클릭하여 비교할 키워드를 추가하세요'
         />
-        <div className='  border-outline rounded-interactive-default border'>
-          <table className='w-full table-fixed'>
-            <thead className='text-optional bg-surface rounded-interactive-default '>
-              <tr>
-                {KEYWORD_TITLE.map(({ label, align }) => (
-                  <th
-                    key={label}
-                    className={clsx(
-                      'px-4 py-3 typo-footnote-base',
-                      align === 'right' && 'text-right',
-                      align === 'center' && 'text-center',
-                      align === 'left' && 'text-left',
-                    )}
-                  >
-                    {label}
-                  </th>
-                ))}
-              </tr>
-            </thead>
 
-            <tbody>
-              {KEYWORDS.map((item) => (
-                <tr key={item.rank} className='border-t border-slate-100 typo-callout-base '>
-                  <td className='px-4 py-3 text-base-color '>{item.rank}</td>
-                  <td className='px-4 py-3 '>{item.keyword}</td>
-                  <td className='px-4 py-3 text-base-color'>{item.category}</td>
-                  <td className='px-4 py-3 text-right'>{item.count.toLocaleString()}</td>
-
-                  <td className='px-4 py-3 '>
-                    <TextBadge
-                      text={`+${item.changeRate}%`}
-                      size={'md'}
-                      variant={'surface'}
-                      peak={false}
-                      className='w-fit'
-                    />
-                  </td>
-                  <td className='px-4 py-3 text-center'>
-                    <Button label='선택' style={'surface'} peak={true} size={'sm'} />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className='border-outline rounded-interactive-default border '>
+          <div
+            className={`${gridCols} px-8 py-3 bg-peak text-white  typo-body-strong  rounded-t-interactive-default items-center `}
+          >
+            <div className='text-center'>순위</div>
+            <div className='text-left'>키워드</div>
+            <div className='text-center'>카테고리</div>
+            <div className='text-center'>언급수</div>
+            <div className='text-left'>변화율</div>
+            <div className='text-center'>선택</div>
+          </div>
+          <div className='divide-y divide-outline'>
+            {KEYWORDS.map((item) => (
+              <div
+                key={item.rank}
+                className={cn(
+                  `${gridCols} px-8 py-3 typo-callout-base  text-optional border-b border-outline items-center`,
+                  item.rank === 1 && 'bg-surface  text-base-color border-black',
+                  item.rank === 2 && 'bg-alternative  text-base-color border-black',
+                  item.rank === 3 && 'bg-surface  text-base-color ',
+                )}
+              >
+                <p className=' text-center'>{item.rank}</p>
+                <p className='text-left'>{item.keyword}</p>
+                <p className=' text-center'>{item.category}</p>
+                <p className='text-center'>{item.count.toLocaleString()}</p>
+                <TextBadge
+                  text={`${item.changeRate}%`}
+                  size='md'
+                  variant={item.changeRate.slice(0, 1) === '+' ? 'data' : 'accent'}
+                  peak={false}
+                  className='w-fit items-left'
+                />
+                <Button label='취소' style='surface' peak={true} size='sm' />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <section className='rounded-2xl bg-static p-5 mb-4'>
-        <TitleText title='기술 스택 카테고리별 순위' subTitle='전체 언급 수 기준' />
+        <TitleText title='카테고리 내 키워드 언급량' subTitle='전체 언급 수 기준' />
         <BarChart />
       </section>
       {/* 키워드 */}
