@@ -59,7 +59,7 @@ export const SelectionChipVariants = cva(
     defaultVariants: {
       size: 'md',
       style: 'surface',
-      selected: true,
+      selected: false,
     },
   },
 );
