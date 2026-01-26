@@ -3,13 +3,13 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import InputChip from '@/shared/ui/action/InputChip';
 
 const ChipInputVariants = cva(
-  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
+  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular relative',
   {
     variants: {
       size: {
@@ -38,14 +38,22 @@ interface ChipInputProps extends VariantProps<typeof ChipInputVariants> {
   placeholder?: string;
   icon?: LucideIcon;
   className?: string;
+  suggestions?: string[]; // 외부에서 받는 추천 목록
 }
 
-const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipInputProps) => {
+const ChipInput = ({
+  size,
+  variant,
+  data,
+  placeholder,
+  icon,
+  className,
+  suggestions = [],
+}: ChipInputProps) => {
   const [value, setValue] = useState('');
   const [chips, setChips] = useState<string[]>([]);
   const [isComposing, setIsComposing] = useState(false);
 
-  // 입력값으로부터 Chip 추가
   const addChipsFromValue = (input: string) => {
     input
       .split(',')
@@ -54,9 +62,10 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
       .forEach((v) => setChips((prev) => [...prev, v]));
   };
 
-  const addChip = () => {
-    if (!value) return;
-    addChipsFromValue(value);
+  const addChip = (chipValue?: string) => {
+    const finalValue = chipValue ?? value;
+    if (!finalValue) return;
+    addChipsFromValue(finalValue);
     setValue('');
   };
 
@@ -72,7 +81,7 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isComposing) return;
 
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
       addChip();
     }
@@ -92,6 +101,14 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
       setValue(inputValue);
     }
   };
+
+  const filteredSuggestions = useMemo(
+    () =>
+      suggestions.filter(
+        (item) => item.toLowerCase().includes(value.toLowerCase()) && !chips.includes(item),
+      ),
+    [value, suggestions, chips],
+  );
 
   return (
     <div className={cn(ChipInputVariants({ size, variant, data }), className)}>
@@ -128,6 +145,23 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
           className='caret-color placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
         />
       </div>
+
+      {value && filteredSuggestions.length > 0 && (
+        <ul
+          className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base 
+               border-x border-b border-slate-ring rounded-b-static-frame'
+        >
+          {filteredSuggestions.map((item) => (
+            <li
+              key={item}
+              className='px-4 py-2.5 typo-body-base h-12 text-charcoal-optional'
+              onClick={() => addChip(item)}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
 
       {(value || chips.length > 0) && (
         <button type='button' onClick={clearAll} className='text-charcoal-optional'>
