@@ -4,7 +4,6 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
 import { useState } from 'react';
-
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import InputChip from '@/shared/ui/action/InputChip';
@@ -27,26 +26,10 @@ const ChipInputVariants = cva(
       },
     },
     compoundVariants: [
-      {
-        variant: 'outline',
-        data: true,
-        class: 'focus-within:border-data-selected',
-      },
-      {
-        variant: 'surface',
-        data: true,
-        class: 'bg-data-surface danger',
-      },
-      {
-        variant: 'surface',
-        data: false,
-        class: 'bg-slate-surface',
-      },
-      {
-        variant: 'outline',
-        data: false,
-        class: 'focus-within:border-selected',
-      },
+      { variant: 'outline', data: true, class: 'focus-within:border-data-selected' },
+      { variant: 'surface', data: true, class: 'bg-data-surface danger' },
+      { variant: 'surface', data: false, class: 'bg-slate-surface' },
+      { variant: 'outline', data: false, class: 'focus-within:border-selected' },
     ],
   },
 );
@@ -62,12 +45,18 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
   const [chips, setChips] = useState<string[]>([]);
   const [isComposing, setIsComposing] = useState(false);
 
-  const addChip = () => {
-    const trimmed = value.trim();
+  // 입력값으로부터 Chip 추가
+  const addChipsFromValue = (input: string) => {
+    input
+      .split(',')
+      .map((v) => v.trim())
+      .filter((v) => v && !chips.includes(v))
+      .forEach((v) => setChips((prev) => [...prev, v]));
+  };
 
-    if (!trimmed) return;
-    if (chips.includes(trimmed)) return; // chip 중복 방지
-    setChips((prev) => [...prev, trimmed]);
+  const addChip = () => {
+    if (!value) return;
+    addChipsFromValue(value);
     setValue('');
   };
 
@@ -86,11 +75,21 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
     if (e.key === 'Enter') {
       e.preventDefault();
       addChip();
-      return;
     }
 
     if (e.key === 'Backspace' && !value && chips.length) {
       removeChip(chips[chips.length - 1]);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.target.value;
+
+    if (inputValue.includes(',')) {
+      addChipsFromValue(inputValue);
+      setValue('');
+    } else {
+      setValue(inputValue);
     }
   };
 
@@ -123,7 +122,7 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
           onCompositionEnd={() => setIsComposing(false)}
           type='text'
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
           placeholder={chips.length === 0 ? placeholder : undefined}
           className='caret-color placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
