@@ -1,32 +1,72 @@
 'use client';
 
-import { useState } from 'react';
-
+import { useOnboarding } from '@/features/onboarding/hooks/useOnBoarding';
 import { Stepper } from '@/features/onboarding/ui';
-import { Header } from '@/shared/ui';
-import { STEP_ITEMS } from '@/features/onboarding/data/StepItems';
-import StepCard from '@/features/onboarding/ui/StepCard';
-
-const STEPS = [1, 2, 3, 4] as const;
-type Step = (typeof STEPS)[number];
+import { Button, Header } from '@/shared/ui';
+import clsx from 'clsx';
+import { useEffect } from 'react';
 
 const OnboardingPage = () => {
-  const [currentStep, setCurrentStep] = useState<Step>(1);
+  const {
+    currentStep,
+    currentItem,
+    isFirstStep,
+    isLastStep,
+    isStepValid,
+    showSkip,
+    onNext,
+    onPrev,
+    onValidChange,
+  } = useOnboarding();
 
-  const currentItem = STEP_ITEMS[currentStep];
-  const StepComponent = currentItem.Component;
+  const { label, description, Component } = currentItem;
+  const isCompleteStep = currentStep === 4;
+
+  useEffect(() => {
+    console.log('currentStep:', currentStep);
+    console.log('isStepValid:', isStepValid);
+    console.log('peak:', currentStep !== 4 && isStepValid);
+    console.log('disabled:', !isStepValid);
+    console.log('style:', isCompleteStep ? 'accent' : 'surface');
+  }, [currentStep, isStepValid]);
 
   return (
     <div className='flex items-center justify-center min-h-screen'>
-      <div className='flex flex-col w-160 bg-base rounded-static-frame min-h-94 max-h-123.5 gap-5 p-5'>
+      <main className='flex flex-col w-160 min-h-94 max-h-123.5 gap-5 p-5 bg-base rounded-static-frame'>
         <Stepper
           currentStep={currentStep}
           labels={['전공 분야', '관심 분야', '기술 역량', '관심 키워드']}
         />
 
-        <Header size='lg' label={currentItem.label} description={currentItem.description} />
-        <StepCard></StepCard>
-      </div>
+        <Header size='lg' label={label} description={description} />
+
+        <div>
+          <Component onValidChange={onValidChange} />
+        </div>
+
+        <div className='flex w-150 h-11 justify-between'>
+          {!isFirstStep ? (
+            <Button size='lg' label='이전' style='surface' peak={false} onClick={onPrev} />
+          ) : (
+            <div />
+          )}
+
+          <div className='flex gap-2'>
+            {showSkip && (
+              <Button size='lg' label='건너뛰기' style='surface' peak={false} onClick={onNext} />
+            )}
+
+            <Button
+              size='lg'
+              label={currentStep === 4 ? '완료' : '다음'}
+              style={currentStep === 4 ? 'accent' : 'surface'}
+              onClick={onNext}
+              peak={currentStep !== 4 && isStepValid}
+              disabled={!isStepValid}
+            />
+          </div>
+        </div>
+      </main>
     </div>
   );
 };
