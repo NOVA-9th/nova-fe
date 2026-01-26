@@ -13,13 +13,7 @@ interface FilterSectionProps {
   className?: string;
 }
 
-export const FilterSection = ({
-  title,
-  onReset,
-  badge,
-  children,
-  className,
-}: FilterSectionProps) => {
+const FilterSection = ({ title, onReset, badge, children, className }: FilterSectionProps) => {
   return (
     <section className={clsx('bg-white rounded-static-frame border border-outline p-5', className)}>
       <div className='flex items-center justify-between mb-5 flex-wrap'>
@@ -38,3 +32,5 @@ export const FilterSection = ({
     </section>
   );
 };
+
+export default FilterSection;
