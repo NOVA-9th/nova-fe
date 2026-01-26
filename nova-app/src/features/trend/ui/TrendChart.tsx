@@ -1,9 +1,10 @@
 'use client';
+
 import { Line } from 'react-chartjs-2';
-import { createTrendOptions } from '@/features/trend/lib/tredOption';
 import '../lib/chart';
 import { TrendLegend } from '@/features/trend/ui/ChaerLegend';
-import { trendChartData } from '@/features/trend/mock/cartData';
+import { trendChartData } from '@/features/trend/mock/lineChartData';
+import { createTrendOptions } from '@/features/trend/lib/lineOption';
 
 export const TrendChart = () => {
   return (
