@@ -16,7 +16,7 @@ export const TrendLegend = ({ datasets }: Props) => {
             <span className='absolute left-0 right-0 h-[2px] bg-current' />
             <span
               className={
-                'absolute left-1.5 z-10 w-2 h-2 rounded-full border-2 border-current bg-white'
+                'absolute left-1.5 z-10 w-2 h-2 rounded-full border-2 border-current bg-white '
               }
               style={{ borderColor: ds.pointBackgroundColor }}
             />

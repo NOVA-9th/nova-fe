@@ -3,7 +3,7 @@ import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
 
-const TextBadgeVariants = cva('flex items-center justify-center rounded-static-pill', {
+const TextBadgeVariants = cva('flex items-center justify-center rounded-static-pill shrink-0', {
   variants: {
     size: {
       sm: 'py-0.5 px-1.5 gap-0.5 typo-caption-base',
