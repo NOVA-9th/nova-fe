@@ -46,14 +46,28 @@ const OnboardingPage = () => {
 
         <div className='flex w-150 h-11 justify-between'>
           {!isFirstStep ? (
-            <Button size='lg' label='이전' style='surface' peak={false} onClick={onPrev} />
+            <Button
+              size='lg'
+              label='이전'
+              style='surface'
+              peak={false}
+              onClick={onPrev}
+              className='w-15'
+            />
           ) : (
             <div />
           )}
 
           <div className='flex gap-2'>
             {showSkip && (
-              <Button size='lg' label='건너뛰기' style='surface' peak={false} onClick={onNext} />
+              <Button
+                size='lg'
+                label='건너뛰기'
+                style='data'
+                peak={false}
+                onClick={onNext}
+                className='w-21.75'
+              />
             )}
 
             <Button
@@ -63,6 +77,7 @@ const OnboardingPage = () => {
               onClick={onNext}
               peak={currentStep !== 4 && isStepValid}
               disabled={!isStepValid}
+              className='w-15'
             />
           </div>
         </div>

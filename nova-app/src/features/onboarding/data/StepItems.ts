@@ -1,6 +1,7 @@
 import { MajorCard, InterestCard, SkillCard, InterestKeywordCard } from '@/features/onboarding/ui';
+import { Step, StepItem } from '@/features/onboarding/types/StepItem';
 
-export const STEP_ITEMS = {
+export const STEP_ITEMS: Record<Step, StepItem> = {
   1: {
     label: '전공 분야 선택',
     description: '현재 학교나 직장에서의 전공 분야를 선택해주세요',
@@ -21,4 +22,4 @@ export const STEP_ITEMS = {
     description: 'IT 직군 내에서의 난이도와 기술 역량을 선택해주세요',
     Component: InterestKeywordCard,
   },
-} as const;
+};
