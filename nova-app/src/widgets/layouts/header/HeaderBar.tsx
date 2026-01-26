@@ -8,7 +8,7 @@ import { usePathname, useRouter } from 'next/navigation';
 const HeaderBar = () => {
   const [keyword, setKeyword] = useState('');
   const pathname = usePathname();
-  const router = useRouter(); // ✅ 추가
+  const router = useRouter();
 
   const isHome = pathname === '/';
 
