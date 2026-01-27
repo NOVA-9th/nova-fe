@@ -19,7 +19,7 @@ export const STEP_ITEMS: Record<Step, StepItem> = {
   },
   4: {
     label: '관심 키워드 선택',
-    description: 'IT 직군 내에서의 난이도와 기술 역량을 선택해주세요',
+    description: 'IT 직군 내 관심있는 키워드를 선택해주세요 (최대 5개)',
     Component: InterestKeywordCard,
   },
 };

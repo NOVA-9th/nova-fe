@@ -140,7 +140,7 @@ const ChipInput = ({
       </div>
 
       {inputValue && filteredSuggestions.length > 0 && (
-        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base border-x border-b border-slate-ring rounded-b-static-frame'>
+        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_0_rgba(0,0,0,0.25)] border-slate-ring rounded-b-static-frame'>
           {filteredSuggestions.map((item) => (
             <li
               key={item}
