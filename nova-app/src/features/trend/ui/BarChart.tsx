@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 
 export const BarChart = () => {
   return (
-    <div className='h-80'>
+    <div className='h-90'>
       <Bar data={categoryRankData} options={categoryRankOptions} />
     </div>
   );

@@ -5,9 +5,10 @@ export const categoryRankData = {
       data: [3200, 2100, 3400, 2300, 1500, 1100],
       backgroundColor: '#151618',
       borderRadius: 16,
-      barThickness: 44,
-      //   categoryPercentage: 0.9,
-      //   barPercentage: 0.9,
+      // barThickness: 40,
+      categoryPercentage: 1,
+      barPercentage: 0.8,
+      clip: false,
     },
   ],
 };

@@ -76,6 +76,7 @@ const TrendPage = () => {
           </div>
         </div>
       </section>
+
       <section className='rounded-2xl bg-static p-5 mb-4'>
         <TitleText title='카테고리 내 키워드 언급량' subTitle='전체 언급 수 기준' />
         <BarChart />
