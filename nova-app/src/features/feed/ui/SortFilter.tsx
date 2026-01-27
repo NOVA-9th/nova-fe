@@ -3,7 +3,7 @@
 import { SelectionChip } from '@/shared/ui';
 import { SORT_ITEMS } from '@/features/feed/data/FilterData';
 import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
-import { FilterSection } from '@/features/feed/ui/FilterSection';
+import FilterSection from '@/features/feed/ui/FilterSection';
 
 const SortFilter = () => {
   const { resetSort, selectedSort, setSelectedSort } = useFeedFilters();
