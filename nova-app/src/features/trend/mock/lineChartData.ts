@@ -1,4 +1,5 @@
-export const trendChartData = {
+import type { ChartData, ScriptableContext } from 'chart.js';
+export const trendChartData: ChartData<'line', number[], string> = {
   labels: ['1월 15일', '1월 16일', '1월 17일', '1월 18일', '1월 19일', '1월 20일', '1월 21일'],
   datasets: [
     {
@@ -8,7 +9,7 @@ export const trendChartData = {
       pointBackgroundColor: '#287AF5',
       cubicInterpolationMode: 'monotone',
       borderWidth: 2, //선 굵기
-      pointRadius: (ctx) => {
+      pointRadius: (ctx: ScriptableContext<'line'>) => {
         const index = ctx.dataIndex;
         const lastIndex = ctx.dataset.data.length - 1;
         if (index === 0 || index === lastIndex) return 0;
@@ -25,7 +26,7 @@ export const trendChartData = {
       cubicInterpolationMode: 'monotone',
       clip: false,
       borderWidth: 2,
-      pointRadius: (ctx) => {
+      pointRadius: (ctx: ScriptableContext<'line'>) => {
         const index = ctx.dataIndex;
         const lastIndex = ctx.dataset.data.length - 1;
         if (index === 0 || index === lastIndex) return 0;

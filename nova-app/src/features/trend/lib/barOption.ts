@@ -42,8 +42,6 @@ export const categoryRankOptions = {
 
     y: {
       offset: true,
-      // offset: false,
-
       grid: {
         display: false,
         drawBorder: false,
@@ -56,7 +54,6 @@ export const categoryRankOptions = {
         // padding: 10,
         font: {
           size: 12,
-          // weight:
         },
       },
     },

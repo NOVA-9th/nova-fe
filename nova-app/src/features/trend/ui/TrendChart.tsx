@@ -2,7 +2,7 @@
 
 import { Line } from 'react-chartjs-2';
 import '../lib/chart';
-import { TrendLegend } from '@/features/trend/ui/ChaerLegend';
+import { LegendDataset, TrendLegend } from '@/features/trend/ui/ChartLegend';
 import { trendChartData } from '@/features/trend/mock/lineChartData';
 import { createTrendOptions } from '@/features/trend/lib/lineOption';
 
@@ -15,7 +15,7 @@ export const TrendChart = () => {
       </div>
 
       {/* legend */}
-      <TrendLegend datasets={trendChartData.datasets} />
+      <TrendLegend datasets={trendChartData.datasets as LegendDataset[]} />
     </div>
   );
 };

@@ -4,7 +4,6 @@ export interface KeywordItem {
   category: string;
   count: number;
   changeRate: string;
-  // selected: boolean;
 }
 
 export const KEYWORDS: KeywordItem[] = [
@@ -17,7 +16,6 @@ export const KEYWORDS: KeywordItem[] = [
     category: 'AI / ML',
     count: 840,
     changeRate: '-23',
-    // selected: false,
   },
   {
     rank: 5,
@@ -25,7 +23,6 @@ export const KEYWORDS: KeywordItem[] = [
     category: 'DevOps',
     count: 720,
     changeRate: '+15',
-    // selected: false,
   },
   {
     rank: 6,
@@ -33,7 +30,6 @@ export const KEYWORDS: KeywordItem[] = [
     category: 'Frontend',
     count: 1590,
     changeRate: '-23',
-    // selected: false,
   },
   {
     rank: 7,
@@ -41,7 +37,6 @@ export const KEYWORDS: KeywordItem[] = [
     category: 'DevOps',
     count: 1220,
     changeRate: '-23',
-    // selected: false,
   },
   {
     rank: 8,
@@ -49,7 +44,6 @@ export const KEYWORDS: KeywordItem[] = [
     category: 'Backend',
     count: 850,
     changeRate: '+15',
-    // selected: false,
   },
   {
     rank: 9,
@@ -57,7 +51,6 @@ export const KEYWORDS: KeywordItem[] = [
     category: 'Cloud',
     count: 840,
     changeRate: '-23',
-    // selected: false,
   },
   {
     rank: 10,
@@ -65,6 +58,5 @@ export const KEYWORDS: KeywordItem[] = [
     category: 'Language',
     count: 720,
     changeRate: '+15',
-    // selected: false,
   },
 ];
