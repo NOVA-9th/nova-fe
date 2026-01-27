@@ -1,6 +1,6 @@
 'use client';
 
-import SearchInput from './SearchInput';
+import SearchInput from '@/features/onboarding/ui/SearchInput';
 import { useEffect, useState } from 'react';
 
 interface InterestKeywordCardProps {

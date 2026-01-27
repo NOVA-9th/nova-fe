@@ -1,4 +1,4 @@
-import { InsertKey, KeywordCategory } from '../types/KeywordMap';
+import { InsertKey, KeywordCategory } from '@/features/onboarding/types/KeywordMap';
 
 export const KEYWORD_MAP: Record<InsertKey, KeywordCategory> = {
   '모바일 앱': {

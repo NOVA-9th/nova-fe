@@ -1,6 +1,6 @@
 import { Button, ChipInput, SectionHeader, TextBadge } from '@/shared/ui';
-import { InsertKey } from '../types/KeywordMap';
-import { KEYWORD_MAP } from '../data/KeywordMaps';
+import { InsertKey } from '@/features/onboarding/types/KeywordMap';
+import { KEYWORD_MAP } from '@/features/onboarding/data/KeywordMaps';
 
 interface SearchInputProps {
   category: InsertKey;

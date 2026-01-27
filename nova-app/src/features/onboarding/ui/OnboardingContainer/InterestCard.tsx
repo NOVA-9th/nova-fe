@@ -1,11 +1,14 @@
 'use client';
 
-import { StepComponentProps } from '@/features/onboarding/types/StepItem';
 import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState } from 'react';
-import { INTEREST_OPTIONS } from '../data/InterestOptions';
+import { INTEREST_OPTIONS } from '@/features/onboarding/data/InterestOptions';
 
-const InterestCard = ({ onValidChange }: StepComponentProps) => {
+interface InterestCardProps {
+  onValidChange: (isValid: boolean) => void;
+}
+
+const InterestCard = ({ onValidChange }: InterestCardProps) => {
   const [selected, setSelected] = useState<string[]>([]);
 
   useEffect(() => {

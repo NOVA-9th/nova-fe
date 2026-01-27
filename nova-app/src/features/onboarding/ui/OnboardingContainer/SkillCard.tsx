@@ -1,11 +1,14 @@
 'use client';
 
-import { StepComponentProps } from '@/features/onboarding/types/StepItem';
 import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState } from 'react';
-import { MAJOR_OPTIONS } from '../data/MajorOptions';
+import { SKILL_OPTIONS } from '@/features/onboarding/data/SkillOptions';
 
-const MajorCard = ({ onValidChange }: StepComponentProps) => {
+interface SkillCardProps {
+  onValidChange: (isValid: boolean) => void;
+}
+
+const SkillCard = ({ onValidChange }: SkillCardProps) => {
   const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
@@ -18,7 +21,7 @@ const MajorCard = ({ onValidChange }: StepComponentProps) => {
 
   return (
     <div className='w-150 h-24.5 flex flex-wrap gap-2.5'>
-      {MAJOR_OPTIONS.map((text) => (
+      {SKILL_OPTIONS.map((text) => (
         <ToggleButton
           size='lg'
           key={text}
@@ -26,11 +29,11 @@ const MajorCard = ({ onValidChange }: StepComponentProps) => {
           variant='outline'
           selected={selected === text}
           onClick={() => toggleItem(text)}
-          className='w-[142.5px] h-11'
+          className='w-73.5 h-11'
         />
       ))}
     </div>
   );
 };
 
-export default MajorCard;
+export default SkillCard;

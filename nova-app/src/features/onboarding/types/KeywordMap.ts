@@ -1,4 +1,4 @@
-import { INTEREST_OPTIONS } from '../data/InterestOptions';
+import { INTEREST_OPTIONS } from '@/features/onboarding/data/InterestOptions';
 
 export type InsertKey = (typeof INTEREST_OPTIONS)[number];
 
