@@ -2,15 +2,13 @@ import CategoriesKeyword from '@/features/trend/ui/CategoriesKeyword';
 import KeywordTop from '@/features/trend/ui/KeywordTop';
 import TrendChart from '@/features/trend/ui/TrendChart';
 import BarChart from '@/features/trend/ui/BarChart';
-import { Header, SectionHeader, SelectionChip } from '@/shared/ui';
+import { Header, PageHeader, SelectionChip } from '@/shared/ui';
 import { ChartBar } from 'lucide-react';
 
 const TrendPage = () => {
   return (
     <div className='px-5 py-4 overflow-x-auto '>
-      <header className='flex pb-4 w-full rounded-static-frame bg-alternative'>
-        <SectionHeader text='트렌드' size='sm' leftIcon={ChartBar} className='px-[6px]' />
-      </header>
+      <PageHeader text='트렌드' icon={ChartBar} className='p-0 mb-4 -mx-1' />
       {/* 트렌드차트 */}
       <section className='rounded-static-frame bg-base p-5 mb-4'>
         <SelectionChip
