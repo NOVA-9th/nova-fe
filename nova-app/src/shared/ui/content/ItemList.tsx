@@ -5,17 +5,14 @@ import { LucideIcon } from 'lucide-react';
 import Image from 'next/image';
 import TextIconButton from '@/shared/ui/action/TextIconButton';
 
-const ItemListVariants = cva(
-  'flex items-center gap-2 px-2 py-padding-light rounded-interactive-default',
-  {
-    variants: {
-      size: {
-        md: 'gap-1.5',
-        lg: 'gap-2',
-      },
+const ItemListVariants = cva('flex items-center gap-2 px-1 rounded-interactive-default', {
+  variants: {
+    size: {
+      md: 'gap-1.5',
+      lg: 'gap-2',
     },
   },
-);
+});
 
 interface ItemListProps extends VariantProps<typeof ItemListVariants> {
   label: string;

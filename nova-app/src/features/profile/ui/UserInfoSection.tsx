@@ -25,18 +25,18 @@ export const UserInfoSection = ({
   setValue,
 }: UserInfoSectionProps) => {
   return (
-    <section className='flex flex-col justify-start items-start w-full h-full gap-5 bg-base rounded-static-frame p-5'>
+    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
       <SectionHeader text='사용자 정보' size='lg' />
-      <div className='flex flex-col w-full items-center justify-start p-2 gap-2'>
+      <div className='flex flex-col w-full items-center justify-start gap-2'>
         <div className='flex w-full items-center justify-start p-2 gap-2'>
           <Image
             src={image}
             alt='User Profile'
-            width={40}
-            height={40}
+            width={48}
+            height={48}
             className='rounded-full object-cover bg-black'
           />
-          <ItemList size='lg' label={name} description={description} className='px-1 py-0 gap-0' />
+          <ItemList size='lg' label={name} description={description} />
         </div>
         <div className='flex w-full gap-2'>
           <TextIconButton
