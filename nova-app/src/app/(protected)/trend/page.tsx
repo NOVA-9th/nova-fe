@@ -31,7 +31,12 @@ const TrendPage = () => {
       <KeywordTop />
 
       <section className='rounded-static-frame bg-base p-5 mb-4'>
-        <Header size='md' label='카테고리 내 키워드 언급량' description='전체 언급 수 기준' />
+        <Header
+          size='md'
+          label='카테고리 내 키워드 언급량'
+          description='전체 언급 수 기준'
+          className='mb-3'
+        />
         <BarChart />
       </section>
       {/* 카테고리 키워드 */}
