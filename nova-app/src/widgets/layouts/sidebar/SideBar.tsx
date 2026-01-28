@@ -52,7 +52,7 @@ const SideBar = () => {
             className='rounded-full object-cover bg-black'
           />
           <div className='flex flex-col gap-1 px-1'>
-            <h3 className='text-base-color'>조현우님</h3>
+            <h3 className='typo-body-base text-base-color'>조현우님</h3>
             <p className='typo-callout-base text-additive'>디자인 전공 | 프론트엔드</p>
           </div>
         </div>
