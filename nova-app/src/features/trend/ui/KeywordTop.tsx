@@ -1,19 +1,20 @@
 'use client';
 import { KEYWORDS } from '@/features/trend/mock/topKeyword';
-import { useCompanyStore } from '@/features/trend/model/useKeywordTop';
-import { TitleText } from '@/features/trend/ui/TitleText';
-import { Button, TextBadge } from '@/shared/ui';
+import useCompanyStore from '@/features/trend/model/useKeywordTop';
+import { Button, Header, TextBadge } from '@/shared/ui';
 import { cn } from '@/shared/utils/cn';
 
-export const KeywordTop = () => {
+const KeywordTop = () => {
   const gridCols = 'grid grid-cols-[0.95fr_2.86fr_2.86fr_1.43fr_1.35fr_0.55fr] gap-x-[20px]';
 
   const { keywords, toggleKeyword } = useCompanyStore();
   return (
     <section className='rounded-2xl bg-static p-5 mb-4'>
-      <TitleText
-        title='인기 키워드 TOP 10'
-        subTitle='아래의 표를 클릭하여 비교할 키워드를 추가하세요'
+      <Header
+        size='md'
+        label='인기 키워드 TOP 10'
+        description='아래의 표를 클릭하여 비교할 키워드를 추가하세요'
+        className='mb-5'
       />
 
       <div className='border-outline rounded-interactive-default border '>
@@ -64,3 +65,5 @@ export const KeywordTop = () => {
     </section>
   );
 };
+
+export default KeywordTop;

@@ -2,11 +2,10 @@
 
 import { Line } from 'react-chartjs-2';
 import '../lib/chart';
-import { LegendDataset, TrendLegend } from '@/features/trend/ui/ChartLegend';
 import { trendChartData } from '@/features/trend/mock/lineChartData';
-import { createTrendOptions } from '@/features/trend/lib/lineOption';
-
-export const TrendChart = () => {
+import createTrendOptions from '@/features/trend/lib/lineOption';
+import TrendLegend, { LegendDataset } from '@/features/trend/ui/ChartLegend';
+const TrendChart = () => {
   return (
     <div className='bg-static rounded-2xl'>
       {/* 차트 */}
@@ -19,3 +18,5 @@ export const TrendChart = () => {
     </div>
   );
 };
+
+export default TrendChart;

@@ -8,7 +8,7 @@ interface keywordStore {
   toggleKeyword: (company: string) => void;
   resetKeyword: () => void;
 }
-export const useCompanyStore = create<keywordStore>((set) => ({
+const useCompanyStore = create<keywordStore>((set) => ({
   keywords: [],
   //   setKeyword: (keywords) => set({ keywords }),
   toggleKeyword: (keyword) =>
@@ -19,3 +19,5 @@ export const useCompanyStore = create<keywordStore>((set) => ({
     })),
   resetKeyword: () => set({ keywords: [] }),
 }));
+
+export default useCompanyStore;

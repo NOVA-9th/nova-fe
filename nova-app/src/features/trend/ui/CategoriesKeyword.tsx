@@ -3,12 +3,13 @@ import { keyword_data } from '@/features/trend/mock/keyword';
 import { cn } from '@/shared/utils/cn';
 import { useState } from 'react';
 
-export const CategoriesKeyword = () => {
+const CategoriesKeyword = () => {
   const [selected, setSelected] = useState<string | null>('');
 
   const handleClick = (title: string) => {
     setSelected((pre) => (pre === title ? null : title));
   };
+
   return (
     <section className='grid grid-cols-2 gap-4 '>
       {keyword_data.map((item) => {
@@ -39,3 +40,5 @@ export const CategoriesKeyword = () => {
     </section>
   );
 };
+
+export default CategoriesKeyword;
