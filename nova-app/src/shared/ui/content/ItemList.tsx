@@ -49,9 +49,12 @@ const ItemList = ({
     <div className={cn(ItemListVariants({ size }), className)}>
       {leftIcon && (
         <div className='flex items-center justify-center size-5'>
-          {typeof leftIcon === 'function' ? (
+          {typeof leftIcon === 'function' ||
+          (leftIcon &&
+            typeof leftIcon === 'object' &&
+            ('render' in leftIcon || '$$typeof' in leftIcon)) ? (
             React.createElement(leftIcon as LucideIcon, {
-              size: 5,
+              size: 20,
             })
           ) : typeof leftIcon === 'string' ||
             (leftIcon && typeof leftIcon === 'object' && 'src' in leftIcon) ? (
@@ -61,8 +64,10 @@ const ItemList = ({
               width={20}
               height={20}
             />
+          ) : React.isValidElement(leftIcon) ? (
+            leftIcon
           ) : (
-            <div className='size-5 flex items-center justify-center'>{leftIcon}</div>
+            <div className='size-5 flex items-center justify-center'>{String(leftIcon)}</div>
           )}
         </div>
       )}

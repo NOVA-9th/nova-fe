@@ -2,6 +2,7 @@
 import { LinkedAccountsSection } from '@/features/profile/ui/LinkedAccountsSection';
 import { PersonalizationSettings } from '@/features/profile/ui/PersonalizationSettings';
 import { UserInfoSection } from '@/features/profile/ui/UserInfoSection';
+import { DataManagementSection } from '@/features/profile/ui/DataManagementSection';
 import { SectionHeader } from '@/shared/ui';
 import { User } from 'lucide-react';
 import { useState } from 'react';
@@ -28,6 +29,7 @@ const ProfilePage = () => {
           </div>
           <div className='flex flex-col justify-start items-start w-full h-full gap-4'>
             <PersonalizationSettings />
+            <DataManagementSection />
           </div>
         </div>
       </div>
