@@ -1,4 +1,5 @@
 'use client';
+import { LinkedAccountsSection } from '@/features/profile/LinkedAccountsSection';
 import { UserInfoSection } from '@/features/profile/UserInfoSection';
 import { SectionHeader } from '@/shared/ui';
 import { User } from 'lucide-react';
@@ -22,6 +23,7 @@ const ProfilePage = () => {
               value={value}
               setValue={setValue}
             />
+            <LinkedAccountsSection />
           </div>
         </div>
       </div>
