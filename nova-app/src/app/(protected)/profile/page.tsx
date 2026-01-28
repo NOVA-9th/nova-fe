@@ -1,6 +1,7 @@
 'use client';
-import { LinkedAccountsSection } from '@/features/profile/LinkedAccountsSection';
-import { UserInfoSection } from '@/features/profile/UserInfoSection';
+import { LinkedAccountsSection } from '@/features/profile/ui/LinkedAccountsSection';
+import { PersonalizationSettings } from '@/features/profile/ui/PersonalizationSettings';
+import { UserInfoSection } from '@/features/profile/ui/UserInfoSection';
 import { SectionHeader } from '@/shared/ui';
 import { User } from 'lucide-react';
 import { useState } from 'react';
@@ -24,6 +25,9 @@ const ProfilePage = () => {
               setValue={setValue}
             />
             <LinkedAccountsSection />
+          </div>
+          <div className='flex flex-col justify-start items-start w-full h-full gap-4'>
+            <PersonalizationSettings />
           </div>
         </div>
       </div>
