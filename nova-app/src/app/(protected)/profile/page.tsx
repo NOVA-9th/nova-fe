@@ -1,8 +1,10 @@
 'use client';
-import { LinkedAccountsSection } from '@/features/profile/ui/LinkedAccountsSection';
-import { PersonalizationSettings } from '@/features/profile/ui/PersonalizationSettings';
-import { UserInfoSection } from '@/features/profile/ui/UserInfoSection';
-import { DataManagementSection } from '@/features/profile/ui/DataManagementSection';
+import {
+  LinkedAccountsSection,
+  PersonalizationSettings,
+  UserInfoSection,
+  DataManagementSection,
+} from '@/features/profile/ui';
 import { SectionHeader } from '@/shared/ui';
 import { User } from 'lucide-react';
 import { useState } from 'react';

@@ -1,4 +1,4 @@
-export type articleData = {
+export type ArticleData = {
   id: string;
   type: 'news' | 'recruitment' | 'community';
   relevance: number;
