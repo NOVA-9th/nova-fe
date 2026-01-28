@@ -100,7 +100,7 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
         >
           <p>접기</p>
           <ChevronDownIcon
-            size={4}
+            size={14}
             className={`transition-transform duration-300 ${isOpen ? '' : '-rotate-180'}`}
           />
         </button>
