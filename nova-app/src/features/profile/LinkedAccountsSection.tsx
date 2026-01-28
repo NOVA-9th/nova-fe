@@ -13,7 +13,7 @@ export const LinkedAccountsSection = () => {
           label='Google'
           description='ivory.ma9ic@gmail.com'
           leftIcon={GoogleLogoIcon}
-          rightButton={{ label: '취소', size: 'lg', style: 'surface', peak: true }}
+          rightButton={{ label: '취소', size: 'md', style: 'surface', peak: true }}
           className='w-full'
         />
         <ItemList
@@ -21,7 +21,7 @@ export const LinkedAccountsSection = () => {
           label='KakaoTalk'
           description='연결안됨'
           leftIcon={KakaoLogoIcon}
-          rightButton={{ label: '연결', size: 'lg', style: 'surface', peak: false }}
+          rightButton={{ label: '연결', size: 'md', style: 'surface', peak: false }}
           className='w-full'
         />
         <ItemList
@@ -29,7 +29,7 @@ export const LinkedAccountsSection = () => {
           label='Github'
           description='@2ssac'
           leftIcon={GithubLogoIcon}
-          rightButton={{ label: '취소', size: 'lg', style: 'surface', peak: true }}
+          rightButton={{ label: '취소', size: 'md', style: 'surface', peak: true }}
           className='w-full'
         />
       </div>
