@@ -15,7 +15,7 @@ const ProfilePage = () => {
       <header className='flex h-15 p-4 w-full rounded-static-frame bg-alternative'>
         <SectionHeader text='프로필' size='sm' leftIcon={User} className='px-2' />
       </header>
-      <div className='flex w-full justify-start items-start bg-alternative'>
+      <div className='flex w-full justify-start items-start bg-alternative rounded-b-static-frame'>
         <div className='flex w-full h-full justify-center items-start px-5 pb-5 gap-4'>
           <div className='flex flex-col flex-1 justify-start items-start w-full h-full gap-4'>
             <UserInfoSection
