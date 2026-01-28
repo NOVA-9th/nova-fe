@@ -17,7 +17,7 @@ const ProfilePage = () => {
       </header>
       <div className='flex w-full h-full justify-start items-center bg-alternative'>
         <div className='flex w-full h-full justify-center items-center px-5 pb-5 gap-4'>
-          <div className='flex flex-col justify-start items-start w-full h-full gap-4'>
+          <div className='flex flex-col flex-1 justify-start items-start w-full h-full gap-4'>
             <UserInfoSection
               name='이름'
               description='디자인 전공 | 프론트엔드'
@@ -27,7 +27,7 @@ const ProfilePage = () => {
             />
             <LinkedAccountsSection />
           </div>
-          <div className='flex flex-col justify-start items-start w-full h-full gap-4'>
+          <div className='flex flex-col flex-2 justify-start items-start w-full h-full gap-4'>
             <PersonalizationSettings />
             <DataManagementSection />
           </div>
