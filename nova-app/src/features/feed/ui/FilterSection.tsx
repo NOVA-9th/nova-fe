@@ -15,7 +15,7 @@ interface FilterSectionProps {
 
 const FilterSection = ({ title, onReset, badge, children, className }: FilterSectionProps) => {
   return (
-    <section className={clsx('bg-white rounded-static-frame border border-outline p-5', className)}>
+    <section className={clsx('bg-base rounded-static-frame border border-outline p-5', className)}>
       <div className='flex items-center justify-between mb-5 flex-wrap'>
         <div className='flex items-center gap-2.5'>
           <SectionHeader size='lg' text={title} />
