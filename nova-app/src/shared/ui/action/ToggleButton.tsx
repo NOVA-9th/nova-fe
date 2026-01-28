@@ -31,7 +31,7 @@ const ToggleButtonVariants = cva(
       {
         variant: 'outline',
         selected: false,
-        class: '',
+        class: 'border-slate-outline',
       },
     ],
   },

@@ -6,7 +6,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
       <HeaderBar />
       <div className='grid grid-cols-[320px_1fr]'>
         <SideBar />
-        <main className='bg-base bg-alternative rounded-static-frame mr-4 mb-4 border border-outline'>
+        <main className='bg-alternative rounded-static-frame mr-4 mb-4 border border-outline'>
           {children}
         </main>
       </div>
