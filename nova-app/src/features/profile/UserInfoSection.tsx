@@ -1,5 +1,12 @@
-import { Button, ItemList, SectionHeader, TextIconButton, TextInput } from '@/shared/ui';
-import { RefreshCw, X } from 'lucide-react';
+import {
+  Button,
+  IconButton,
+  ItemList,
+  SectionHeader,
+  TextIconButton,
+  TextInput,
+} from '@/shared/ui';
+import { LogOut, RefreshCw, UserX, X } from 'lucide-react';
 import Image from 'next/image';
 
 interface UserInfoSectionProps {
@@ -18,7 +25,7 @@ export const UserInfoSection = ({
   setValue,
 }: UserInfoSectionProps) => {
   return (
-    <section className='flex flex-col justify-start items-start w-full h-full gap-4 bg-base rounded-static-frame p-5'>
+    <section className='flex flex-col justify-start items-start w-full h-full gap-5 bg-base rounded-static-frame p-5'>
       <SectionHeader text='사용자 정보' size='lg' />
       <div className='flex flex-col w-full items-center justify-start p-2 gap-2'>
         <div className='flex w-full items-center justify-start p-2 gap-2'>
@@ -76,8 +83,22 @@ export const UserInfoSection = ({
           />
         </div>
         <div className='flex justify-between items-center w-full gap-4'>
-          <Button label='회원 탈퇴' size='lg' style='surface' peak={false} className='w-full' />
-          <Button label='로그아웃' size='lg' style='surface' peak={false} className='w-full' />
+          <TextIconButton
+            label='회원 탈퇴'
+            size='md'
+            style='surface'
+            peak={false}
+            leftIcon={UserX}
+            className='w-full gap-1.5'
+          />
+          <TextIconButton
+            label='로그아웃'
+            size='md'
+            style='surface'
+            peak={false}
+            leftIcon={LogOut}
+            className='w-full gap-1.5'
+          />
         </div>
       </div>
     </section>
