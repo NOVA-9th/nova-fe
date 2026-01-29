@@ -38,7 +38,7 @@ const ARTICLE_TYPE_CONFIG: Record<
 interface ArticleCardProps {
   className?: string;
   children?: React.ReactNode;
-  articleData: articleData;
+  articleData: ArticleData;
 }
 
 const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
