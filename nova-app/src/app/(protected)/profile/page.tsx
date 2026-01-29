@@ -5,7 +5,7 @@ import {
   UserInfoSection,
   DataManagementSection,
 } from '@/features/profile/ui';
-import { PageHeader, SectionHeader } from '@/shared/ui';
+import { PageHeader } from '@/shared/ui';
 import { User } from 'lucide-react';
 import { useState } from 'react';
 

@@ -1,10 +1,11 @@
 'use client';
 
-import { TextInput } from '@/shared/ui';
+import { IconButton, TextInput } from '@/shared/ui';
 import { Search } from 'lucide-react';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Logo, NovaLabel } from '@/shared/assets';
+import Image from 'next/image';
 
 const HeaderBar = () => {
   const [keyword, setKeyword] = useState('');
@@ -24,16 +25,29 @@ const HeaderBar = () => {
         <NovaLabel width={60} height={15.83} />
       </button>
 
-      {isHome && (
-        <TextInput
-          size='lg'
-          value={keyword}
-          onChange={setKeyword}
-          icon={Search}
-          placeholder='아티클 및 트렌드를 검색해보세요'
-          className='w-100'
+      <div className='flex items-center gap-3'>
+        {isHome && (
+          <>
+            <TextInput
+              size='lg'
+              value={keyword}
+              onChange={setKeyword}
+              icon={Search}
+              placeholder='아티클 및 트렌드를 검색해보세요'
+              className='w-100 max-sm:hidden'
+            />
+            <IconButton size='lg' peak={false} icon={Search} className='sm:hidden' />
+          </>
+        )}
+
+        <Image
+          src='/test.png'
+          alt='User Profile'
+          width={40}
+          height={40}
+          className='rounded-full object-cover sm:hidden'
         />
-      )}
+      </div>
     </header>
   );
 };
