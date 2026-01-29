@@ -1,6 +1,4 @@
 import {
-  Button,
-  IconButton,
   ItemList,
   SectionHeader,
   TextIconButton,
@@ -61,7 +59,7 @@ export const UserInfoSection = ({
         <div className='flex flex-col justify-start items-start w-full gap-2'>
           <SectionHeader text='이름' />
           <TextInput
-            size='md'
+            size='lg'
             variant='surface'
             data={false}
             value={value}
@@ -73,7 +71,7 @@ export const UserInfoSection = ({
         <div className='flex flex-col justify-start items-start w-full gap-2'>
           <SectionHeader text='이메일' />
           <TextInput
-            size='md'
+            size='lg'
             variant='surface'
             data={false}
             value={description}
@@ -85,7 +83,7 @@ export const UserInfoSection = ({
         <div className='flex justify-between items-center w-full gap-4'>
           <TextIconButton
             label='회원 탈퇴'
-            size='md'
+            size='lg'
             style='surface'
             peak={false}
             leftIcon={UserX}
@@ -93,7 +91,7 @@ export const UserInfoSection = ({
           />
           <TextIconButton
             label='로그아웃'
-            size='md'
+            size='lg'
             style='surface'
             peak={false}
             leftIcon={LogOut}
