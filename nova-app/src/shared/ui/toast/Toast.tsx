@@ -12,7 +12,7 @@ const Toast = () => {
           style: {
             background: '#FFFFFF',
             color: '#00BD75',
-            borderRadius: '8px',
+            borderRadius: '10px',
             border: '2px solid rgba(0, 189, 117, 0.3)',
             padding: '12px 16px',
             fontSize: '16px',
@@ -28,7 +28,7 @@ const Toast = () => {
           style: {
             background: '#FFFFFF',
             color: '#F04C5A',
-            borderRadius: '8px',
+            borderRadius: '10px',
             border: '2px solid #F04C5A80',
             padding: '12px 16px',
             fontSize: '16px',
