@@ -1,4 +1,5 @@
 import { HeaderBar, SideBar } from '@/widgets/layouts';
+import FloatingBar from '@/widgets/layouts/footer/FloatingBar';
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,6 +12,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </main>
       </div>
+      <FloatingBar />
     </div>
   );
 };

@@ -126,7 +126,7 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
           onClick={() => {
             window.open(articleData.originalUrl, '_blank');
           }}
-          className='gap-1'
+          className='gap-1.5'
         />
         <div className='flex justify-center items-center gap-2.5'>
           <Button label='숨김' style='data' peak={false} size='lg' onClick={() => {}} />
