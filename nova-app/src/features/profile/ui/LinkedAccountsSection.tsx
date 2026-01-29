@@ -1,7 +1,7 @@
 import { ItemList, SectionHeader } from '@/shared/ui';
-import GoogleLogoIcon from '@/assets/icons/google_logo_icon.svg';
-import KakaoLogoIcon from '@/assets/icons/kakaoTalk_logo_icon.svg';
-import GithubLogoIcon from '@/assets/icons/github_logo_icon.svg';
+import GoogleLogoIcon from '@/shared/assets/GoogleIcon.svg';
+import KakaoLogoIcon from '@/shared/assets/KakaoTalkIcon.svg';
+import GithubLogoIcon from '@/shared/assets/GithubIcon.svg';
 
 export const LinkedAccountsSection = () => {
   return (

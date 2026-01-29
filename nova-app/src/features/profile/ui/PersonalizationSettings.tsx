@@ -1,7 +1,13 @@
+'use client';
+
 import { Button, ChipInput, SectionHeader, SelectionChip, TextBadge } from '@/shared/ui';
 import { PERSONALIZATION_TEXT } from '../data/PersonalizationText';
+import { useState } from 'react';
 
 export const PersonalizationSettings = () => {
+  const [keywords, setKeywords] = useState<string[]>([
+    ...PERSONALIZATION_TEXT.sections.keyword.initialKeywords,
+  ]);
   return (
     <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
       <SectionHeader text='개인화 설정' size='lg' />
@@ -72,7 +78,7 @@ export const PersonalizationSettings = () => {
               size='sm'
             />
             <TextBadge
-              text={`${PERSONALIZATION_TEXT.sections.keyword.initialKeywords.length}개`}
+              text={`${keywords.length}개`}
               size='sm'
               variant='surface'
               peak={false}
@@ -84,7 +90,15 @@ export const PersonalizationSettings = () => {
         </div>
 
         <div className='flex w-full items-start gap-3'>
-          <ChipInput size='lg' variant='surface' data={false} placeholder='' className='flex-1' />
+          <ChipInput
+            size='lg'
+            variant='surface'
+            data={false}
+            placeholder='키워드를 입력하세요'
+            className='flex-1'
+            value={keywords}
+            onChange={setKeywords}
+          />
 
           <Button
             size='lg'
