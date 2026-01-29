@@ -28,7 +28,7 @@ const SideBar = () => {
   };
 
   return (
-    <nav className='w-80 px-4 pb-4 flex flex-col justify-between'>
+    <nav className='min-w-80 h-full px-4 pb-4 flex flex-col justify-between'>
       <section className='flex flex-col gap-1'>
         {SIDE_ITEMS.map((item) => (
           <Link key={item.href} href={item.href} className='block'>

@@ -14,7 +14,7 @@ const IconButton = ({ onClick, size, style, className, peak, icon }: IconButtonP
     <button onClick={onClick} className={cn(IconButtonVariants({ size, style, peak }), className)}>
       <span>
         {React.createElement(icon, {
-          size: size === 'sm' ? 12 : 14,
+          size: size === 'sm' ? 12 : size === 'lg' ? 16 : 14,
         })}
       </span>
     </button>
