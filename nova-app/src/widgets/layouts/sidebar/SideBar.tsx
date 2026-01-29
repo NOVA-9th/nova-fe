@@ -1,19 +1,30 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { SideTabItemCustom, TextBadge } from '@/shared/ui';
 import { LogOut } from 'lucide-react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { SIDE_ITEMS } from '@/widgets/layouts/sidebar/data/SideItems';
+import { useState } from 'react';
+import Modal from '@/shared/ui/modal/Modal';
+import { showToast } from '@/shared/utils/toast';
 
 const SideBar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
     return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
+  const handleLogoutConfirm = () => {
+    setIsModalOpen(false);
+    router.push('/login');
+    showToast.success('로그아웃 되었습니다.');
   };
 
   return (
@@ -56,10 +67,21 @@ const SideBar = () => {
             <p className='typo-callout-base text-additive'>디자인 전공 | 프론트엔드</p>
           </div>
         </div>
-        <button type='button' className='text-optional hover:text-additive transition-colors'>
+        <button
+          type='button'
+          onClick={() => setIsModalOpen(true)}
+          className='text-optional hover:text-additive transition-colors'
+        >
           <LogOut size={16} />
         </button>
       </section>
+      {isModalOpen && (
+        <Modal
+          content='로그아웃 하시겠습니까?'
+          onCancel={() => setIsModalOpen(false)}
+          onConfirm={handleLogoutConfirm}
+        />
+      )}
     </nav>
   );
 };
