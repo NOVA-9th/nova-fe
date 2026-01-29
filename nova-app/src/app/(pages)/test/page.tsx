@@ -1,8 +1,12 @@
 'use client';
 
+import Modal from '@/shared/ui/modal/Modal';
 import { showToast } from '@/shared/utils/toast';
+import { useState } from 'react';
 
-const testPage = () => {
+const TestPage = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className='bg-base flex min-h-dvh flex-col items-center justify-center gap-5 rounded-interactive-default px-4 text-xl'>
       <button
@@ -21,8 +25,19 @@ const testPage = () => {
       >
         토스트 띄우기
       </button>
+      <button onClick={() => setIsModalOpen(true)} className='bg-black text-white p-2'>
+        모달 띄우기
+      </button>
+
+      {isModalOpen && (
+        <Modal
+          content='로그아웃 하시겠어요?'
+          onCancel={() => setIsModalOpen(false)}
+          onConfirm={() => setIsModalOpen(false)}
+        />
+      )}
     </div>
   );
 };
 
-export default testPage;
+export default TestPage;
