@@ -1,3 +1,5 @@
+'use client';
+
 interface ModalProps {
   content: string;
   onConfirm: () => void;
@@ -15,14 +17,14 @@ const Modal = ({ content, onConfirm, onCancel }: ModalProps) => {
         <div className='flex items-center justify-center gap-2 typo-body-key'>
           <button
             type='button'
-            onClick={onConfirm}
+            onClick={onCancel}
             className='flex-1 bg-surface hover:bg-surface active:bg-surface rounded-step4 px-6 py-2.5'
           >
             취소
           </button>
           <button
             type='button'
-            onClick={onCancel}
+            onClick={onConfirm}
             className='flex-1 bg-peak hover:bg-peak active:bg-peak text-white rounded-step4 px-6 py-2.5'
           >
             확인

@@ -1,3 +1,5 @@
+'use client';
+
 import { MessageCircleWarning, CircleCheck } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
 
@@ -18,9 +20,10 @@ const Toast = () => {
             fontSize: '16px',
             fontWeight: '400',
             lineHeight: '16px',
-            whiteSpace: 'nowrap',
+            whiteSpace: 'normal',
             wordBreak: 'keep-all',
             minWidth: '200px',
+            maxWidth: '90vw',
           },
         },
         error: {
@@ -34,9 +37,10 @@ const Toast = () => {
             fontSize: '16px',
             fontWeight: '400',
             lineHeight: '16px',
-            whiteSpace: 'nowrap',
+            whiteSpace: 'normal',
             wordBreak: 'keep-all',
             minWidth: '200px',
+            maxWidth: '90vw',
           },
         },
       }}
