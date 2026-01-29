@@ -1,20 +1,39 @@
-import { SectionHeader } from "@/shared/ui";
-import { User } from "lucide-react";
-
+'use client';
+import {
+  LinkedAccountsSection,
+  PersonalizationSettings,
+  UserInfoSection,
+  DataManagementSection,
+} from '@/features/profile/ui';
+import { SectionHeader } from '@/shared/ui';
+import { User } from 'lucide-react';
+import { useState } from 'react';
 
 const ProfilePage = () => {
+  const [value, setValue] = useState('김진성');
+
   return (
     <>
       <header className='flex h-15 p-4 w-full rounded-static-frame bg-alternative'>
-        <SectionHeader text='저장함' peak={true} size='sm' leftIcon={User} className='px-2' />
+        <SectionHeader text='프로필' size='sm' leftIcon={User} className='px-2' />
       </header>
-      <div className='flex w-full h-full justify-start items-center bg-alternative px-5 pb-5 sm:gap-4 max-sm:px-3 max-sm:pb-4 '>
-        <section className='flex flex-col w-full h-full justify-start items-center'>
-
-        </section>
-        <aside className='flex flex-col w-full h-full justify-start items-center'>
-
-        </aside>
+      <div className='flex w-full justify-start items-start bg-alternative rounded-b-static-frame'>
+        <div className='flex w-full h-full justify-center items-start px-5 pb-5 gap-4'>
+          <div className='flex flex-col flex-1 justify-start items-start w-full h-full gap-4'>
+            <UserInfoSection
+              name='이름'
+              description='디자인 전공 | 프론트엔드'
+              image='/test.png'
+              value={value}
+              setValue={setValue}
+            />
+            <LinkedAccountsSection />
+          </div>
+          <div className='flex flex-col flex-2 justify-start items-start w-full h-full gap-4'>
+            <PersonalizationSettings />
+            <DataManagementSection />
+          </div>
+        </div>
       </div>
     </>
   );
