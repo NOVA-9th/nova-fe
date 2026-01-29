@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import React, { useState } from 'react';
 import { Button, Header, IconButton, SectionHeader, TextBadge, TextIconButton } from '@/shared/ui';
-import { articleData } from '@/features/saved/types/ArticleType';
+import { ArticleData } from '@/features/saved/types/ArticleType';
 import { EvidenceCard } from '@/features/saved/ui';
 
 const ARTICLE_TYPE_CONFIG: Record<
@@ -38,7 +38,7 @@ const ARTICLE_TYPE_CONFIG: Record<
 interface ArticleCardProps {
   className?: string;
   children?: React.ReactNode;
-  articleData: articleData;
+  articleData: ArticleData;
 }
 
 const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
@@ -100,7 +100,7 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
         >
           <p>접기</p>
           <ChevronDownIcon
-            size={4}
+            size={14}
             className={`transition-transform duration-300 ${isOpen ? '' : '-rotate-180'}`}
           />
         </button>
