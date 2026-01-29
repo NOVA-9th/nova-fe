@@ -1,9 +1,10 @@
 'use client';
 
 import { TextInput } from '@/shared/ui';
-import { Lightbulb, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import { Logo, NovaLabel } from '@/shared/assets';
 
 const HeaderBar = () => {
   const [keyword, setKeyword] = useState('');
@@ -16,11 +17,11 @@ const HeaderBar = () => {
     <header className='p-4 px-5 flex justify-between items-center h-19'>
       <button
         type='button'
-        className='flex items-center gap-1.5 text-base-color'
+        className='flex items-center gap-3.5 text-base-color px-2'
         onClick={() => router.push('/')}
       >
-        <Lightbulb size={24} />
-        <span className='text-lg font-semibold'>nova</span>
+        <Logo width={36} height={36} />
+        <NovaLabel width={60} height={15.83} />
       </button>
 
       {isHome && (
