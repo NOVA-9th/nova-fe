@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority';
 export const SelectionChipVariants = cva(
   `
   inline-flex items-center justify-center
-  py-padding-light px-padding-regular
+  py-padding-light px-padding-medium
   rounded-interactive-default
   `,
   {
@@ -59,7 +59,7 @@ export const SelectionChipVariants = cva(
     defaultVariants: {
       size: 'md',
       style: 'surface',
-      selected: true,
+      selected: false,
     },
   },
 );

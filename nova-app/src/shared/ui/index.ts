@@ -30,6 +30,9 @@ import SideTabItemCustom from '@/shared/ui/navigation/SideTabItemCustom';
 // article
 import ArticleCard from '@/shared/ui/article/ArticleCard';
 
+// header
+import PageHeader from '@/shared/ui/header/PageHeader';
+
 export {
   Button,
   GuidanceChip,
@@ -53,4 +56,5 @@ export {
   SideTabItem,
   SideTabItemCustom,
   ArticleCard,
+  PageHeader,
 };

@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 const InputTestPage = () => {
   const [value, setValue] = useState('');
+  const [chipValue, setChipValue] = useState<string[]>([]);
 
   return (
     <div className='bg-base flex min-h-dvh items-center justify-center'>
@@ -98,6 +99,8 @@ const InputTestPage = () => {
             placeholder='Placeholder'
             icon={SquareDashed}
             className='h-9 w-90'
+            value={chipValue}
+            onChange={setChipValue}
           />
           <ChipInput
             variant='surface'
@@ -106,6 +109,8 @@ const InputTestPage = () => {
             placeholder='Placeholder'
             icon={SquareDashed}
             className='h-9 w-90'
+            value={chipValue}
+            onChange={setChipValue}
           />
           <ChipInput
             variant='outline'
@@ -114,6 +119,8 @@ const InputTestPage = () => {
             placeholder='Placeholder'
             icon={SquareDashed}
             className='h-9 w-90'
+            value={chipValue}
+            onChange={setChipValue}
           />
           <ChipInput
             variant='surface'
@@ -122,6 +129,8 @@ const InputTestPage = () => {
             placeholder='Placeholder'
             icon={SquareDashed}
             className='h-9 w-90'
+            value={chipValue}
+            onChange={setChipValue}
           />
           <ChipInput
             variant='outline'
@@ -130,6 +139,8 @@ const InputTestPage = () => {
             placeholder='Placeholder'
             icon={SquareDashed}
             className='h-11 w-90'
+            value={chipValue}
+            onChange={setChipValue}
           />
           <ChipInput
             variant='surface'
@@ -138,6 +149,8 @@ const InputTestPage = () => {
             placeholder='Placeholder'
             icon={SquareDashed}
             className='h-11 w-90'
+            value={chipValue}
+            onChange={setChipValue}
           />
           <ChipInput
             variant='outline'
@@ -146,6 +159,8 @@ const InputTestPage = () => {
             placeholder='Placeholder'
             icon={SquareDashed}
             className='h-11 w-90'
+            value={chipValue}
+            onChange={setChipValue}
           />
           <ChipInput
             variant='surface'
@@ -154,6 +169,8 @@ const InputTestPage = () => {
             placeholder='Placeholder'
             icon={SquareDashed}
             className='h-11 w-90'
+            value={chipValue}
+            onChange={setChipValue}
           />
         </div>
         <div className='flex items-center justify-center gap-10'>

@@ -4,7 +4,7 @@ import { LucideIcon } from 'lucide-react';
 import React from 'react';
 
 const SideTabItemCustomVariants = cva(
-  'flex items-center rounded-interactive-default size-lg px-padding-medium py-padding-regular',
+  'flex items-center rounded-interactive-default size-lg px-padding-medium py-padding-regular hover:bg-surface active:bg-surface transition-colors',
   {
     variants: {
       peak: {

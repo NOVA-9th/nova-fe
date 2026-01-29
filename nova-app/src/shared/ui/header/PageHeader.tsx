@@ -1,0 +1,19 @@
+import { Breadcrumb } from '@/shared/ui';
+import { cn } from '@/shared/utils/cn';
+import { LucideIcon } from 'lucide-react';
+
+interface PageHeaderProps {
+  text: string;
+  icon: LucideIcon;
+  className?: string;
+}
+
+const PageHeader = ({ text, icon, className }: PageHeaderProps) => {
+  return (
+    <header className={cn('p-4', className)}>
+      <Breadcrumb items={[text]} depth={1} icon={icon} />
+    </header>
+  );
+};
+
+export default PageHeader;
