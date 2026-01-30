@@ -89,13 +89,13 @@ export const PersonalizationSettings = () => {
           </span>
         </div>
 
-        <div className='flex w-full items-start gap-3'>
+        <div className='flex w-full items-center gap-3 min-w-0'>
           <ChipInput
             size='lg'
             variant='surface'
             data={false}
             placeholder='키워드를 입력하세요'
-            className='flex-1'
+            className='w-full min-w-0'
             value={keywords}
             onChange={setKeywords}
           />
