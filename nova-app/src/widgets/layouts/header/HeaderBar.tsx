@@ -18,6 +18,7 @@ const HeaderBar = () => {
     <header className='p-4 px-5 flex justify-between items-center h-19'>
       <button
         type='button'
+        aria-label='Go to home'
         className='flex items-center gap-3.5 text-base-color px-2'
         onClick={() => router.push('/')}
       >
@@ -36,7 +37,14 @@ const HeaderBar = () => {
               placeholder='아티클 및 트렌드를 검색해보세요'
               className='w-100 max-sm:hidden'
             />
-            <IconButton size='lg' peak={false} icon={Search} className='sm:hidden' />
+            <IconButton
+              size='lg'
+              peak={false}
+              icon={Search}
+              className='sm:hidden'
+              aria-label='검색'
+              onClick={() => {}}
+            />
           </>
         )}
 

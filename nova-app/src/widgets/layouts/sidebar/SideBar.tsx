@@ -21,10 +21,10 @@ const SideBar = () => {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const handleLogoutConfirm = () => {
+  const handleLogout = () => {
     setIsModalOpen(false);
-    router.push('/login');
     showToast.success('로그아웃 되었습니다.');
+    router.push('/login');
   };
 
   return (
@@ -69,8 +69,9 @@ const SideBar = () => {
         </div>
         <button
           type='button'
+          aria-label='로그아웃'
           onClick={() => setIsModalOpen(true)}
-          className='text-optional hover:text-additive transition-colors'
+          className='text-optional hover:text-additive transition-colors outline-none'
         >
           <LogOut size={16} />
         </button>
@@ -79,7 +80,7 @@ const SideBar = () => {
         <Modal
           content='로그아웃 하시겠습니까?'
           onCancel={() => setIsModalOpen(false)}
-          onConfirm={handleLogoutConfirm}
+          onConfirm={handleLogout}
         />
       )}
     </nav>
