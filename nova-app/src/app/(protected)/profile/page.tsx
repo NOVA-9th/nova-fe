@@ -14,9 +14,9 @@ const ProfilePage = () => {
 
   return (
     <>
-      <PageHeader text='프로필' icon={User} className='' />
+      <PageHeader text='프로필' icon={User} />
       <div className='flex w-full justify-start items-start bg-alternative rounded-b-static-frame'>
-        <div className='flex flex-col xl:flex-row w-full h-full justify-center items-start px-5 pb-5 gap-4'>
+        <div className='flex flex-col xl:flex-row w-full h-full justify-center items-start md:px-5 px-4 pb-5 gap-4'>
           <div className='flex flex-col flex-1 justify-start items-start w-full h-full gap-4'>
             <UserInfoSection
               name='이름'

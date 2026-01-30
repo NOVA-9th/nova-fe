@@ -77,12 +77,7 @@ export const PersonalizationSettings = () => {
               peak={false}
               size='sm'
             />
-            <TextBadge
-              text={`${keywords.length}개`}
-              size='sm'
-              variant='surface'
-              peak={false}
-            />
+            <TextBadge text={`${keywords.length}개`} size='sm' variant='surface' peak={false} />
           </div>
           <span className='typo-callout-base text-optional text-right'>
             {PERSONALIZATION_TEXT.sections.keyword.helperText}

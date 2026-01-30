@@ -4,7 +4,7 @@ export const SelectionChipVariants = cva(
   `
   inline-flex items-center justify-center
   py-padding-light px-padding-medium
-  rounded-interactive-default
+  rounded-interactive-default whitespace-nowrap
   `,
   {
     variants: {

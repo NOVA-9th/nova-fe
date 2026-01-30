@@ -58,6 +58,7 @@ interface TextInputProps extends VariantProps<typeof TextInputVariants> {
   placeholder?: string;
   icon?: LucideIcon;
   className?: string;
+  isBadge?: boolean;
 }
 
 export const TextInput = ({
@@ -69,6 +70,7 @@ export const TextInput = ({
   placeholder,
   icon,
   className,
+  isBadge = false,
 }: TextInputProps) => {
   return (
     <div className={cn(TextInputVariants({ size, variant, data }), className)}>
@@ -87,7 +89,7 @@ export const TextInput = ({
         className='caret-color placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
       />
 
-      {!value && <TextBadge size='md' variant='surface' peak={false} text='Cmd + K' />}
+      {!value && isBadge && <TextBadge size='md' variant='surface' peak={false} text='Cmd + K' />}
 
       <button type='button' onClick={() => onChange('')} className='text-charcoal-optional'>
         <X size={size === 'md' ? 14 : 16} />
