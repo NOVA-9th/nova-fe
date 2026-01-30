@@ -59,6 +59,7 @@ export const OnboardingContainer = () => {
               size='lg'
               label='건너뛰기'
               style='data'
+              peak={false}
               onClick={handleSkip}
               className='w-21.75'
             />
