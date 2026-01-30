@@ -1,14 +1,13 @@
 import { Header } from '@/shared/ui';
-import { Lightbulb } from 'lucide-react';
-import { NovaLabel } from '@/shared/assets';
-import LoginButton from './LoginButton';
+import { Logo, NovaLabel } from '@/shared/assets';
+import { LoginButton } from './LoginButton';
 
-const LoginForm = () => {
+export const LoginForm = () => {
   return (
     <main className='w-160 h-107.5 rounded-static-frame p-5 gap-5 flex flex-col items-center justify-center bg-base'>
-      <div className='flex gap-2.25 items-center justify-center py-5 px-1 w-150 h-22'>
-        <Lightbulb size={36} className='text-base' />
-        <NovaLabel className='w-[68.5px] h-[17.5px]' />
+      <div className='flex gap-3.5 items-center justify-center py-5 px-1 w-150 h-22'>
+        <Logo width={60} height={60} />
+        <NovaLabel width={100} height={26} />
       </div>
       <Header
         size='lg'
@@ -27,5 +26,3 @@ const LoginForm = () => {
     </main>
   );
 };
-
-export default LoginForm;

@@ -8,7 +8,7 @@ interface TrendLegendProps {
   datasets: LegendDataset[];
 }
 
-const TrendLegend = ({ datasets }: TrendLegendProps) => {
+export const TrendLegend = ({ datasets }: TrendLegendProps) => {
   console.log(datasets);
   return (
     <div className='flex justify-center gap-6 mb-3 pt-6'>
@@ -30,4 +30,3 @@ const TrendLegend = ({ datasets }: TrendLegendProps) => {
     </div>
   );
 };
-export default TrendLegend;

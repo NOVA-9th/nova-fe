@@ -1,5 +1,6 @@
 import type { ChartOptions, ScriptableScaleContext } from 'chart.js';
-const createTrendOptions = (): ChartOptions<'line'> => ({
+
+export const createTrendOptions = (): ChartOptions<'line'> => ({
   responsive: true,
   maintainAspectRatio: false,
 
@@ -62,4 +63,3 @@ const createTrendOptions = (): ChartOptions<'line'> => ({
     },
   },
 });
-export default createTrendOptions;

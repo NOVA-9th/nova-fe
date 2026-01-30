@@ -4,7 +4,7 @@ import { PeriodFilter, SortFilter, TypeFilter, KeywordFilter } from '@/features/
 
 const FeedFilterSidebar = () => {
   return (
-    <aside className='w-80 space-y-4 max-sm:hidden'>
+    <aside className='w-80 space-y-4 max-lg:hidden'>
       <SortFilter />
       <PeriodFilter />
       <TypeFilter />

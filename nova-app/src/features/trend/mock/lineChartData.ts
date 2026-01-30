@@ -1,4 +1,5 @@
 import type { ChartData, ScriptableContext } from 'chart.js';
+
 export const trendChartData: ChartData<'line', number[], string> = {
   labels: ['1월 15일', '1월 16일', '1월 17일', '1월 18일', '1월 19일', '1월 20일', '1월 21일'],
   datasets: [

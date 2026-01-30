@@ -41,7 +41,7 @@ interface ArticleCardProps {
   articleData: ArticleData;
 }
 
-const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
+export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const typeConfig = articleData.type
@@ -98,7 +98,7 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
           className='flex justify-center items-center gap-1 typo-callout-key text-optional'
           onClick={() => setIsOpen(!isOpen)}
         >
-          <p>접기</p>
+          <p>{isOpen ? '접기' : '펼치기'}</p>
           <ChevronDownIcon
             size={14}
             className={`transition-transform duration-300 ${isOpen ? '' : '-rotate-180'}`}
@@ -126,15 +126,13 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
           onClick={() => {
             window.open(articleData.originalUrl, '_blank');
           }}
-          className='gap-1'
+          className='gap-1.5'
         />
         <div className='flex justify-center items-center gap-2.5'>
-          <Button label='숨김' style='surface' peak={false} size='lg' onClick={() => {}} />
-          <IconButton size='lg' style='surface' peak={false} icon={Bookmark} />
+          <Button label='숨김' style='data' peak={false} size='lg' onClick={() => {}} />
+          <IconButton size='lg' style='accent' peak={false} icon={Bookmark} />
         </div>
       </div>
     </article>
   );
 };
-
-export default ArticleCard;

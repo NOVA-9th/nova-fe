@@ -9,7 +9,7 @@ interface ButtonProps extends VariantProps<typeof ButtonVariants> {
   disabled?: boolean;
 }
 
-const Button = ({ onClick, className, label, peak, style, size, disabled }: ButtonProps) => {
+export const Button = ({ onClick, className, label, peak, style, size, disabled }: ButtonProps) => {
   return (
     <button
       onClick={disabled ? undefined : onClick}
@@ -24,5 +24,3 @@ const Button = ({ onClick, className, label, peak, style, size, disabled }: Butt
     </button>
   );
 };
-
-export default Button;

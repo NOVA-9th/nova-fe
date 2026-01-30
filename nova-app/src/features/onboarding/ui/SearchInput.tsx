@@ -9,7 +9,7 @@ interface SearchInputProps {
   onChangeKeywords: (chips: string[]) => void;
 }
 
-const SearchInput = ({ category, selectedKeywords, onChangeKeywords }: SearchInputProps) => {
+export const SearchInput = ({ category, selectedKeywords, onChangeKeywords }: SearchInputProps) => {
   const suggestions = [...KEYWORD_MAP[category].advanced, ...KEYWORD_MAP[category].keywords];
   const handleAddClick = () => {};
 
@@ -41,5 +41,3 @@ const SearchInput = ({ category, selectedKeywords, onChangeKeywords }: SearchInp
     </div>
   );
 };
-
-export default SearchInput;

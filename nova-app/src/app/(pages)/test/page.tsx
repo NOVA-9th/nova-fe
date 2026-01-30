@@ -1,6 +1,6 @@
 'use client';
 
-import Modal from '@/shared/ui/modal/Modal';
+import { Modal } from '@/shared/ui/modal/Modal';
 import { showToast } from '@/shared/utils/toast';
 import { useState } from 'react';
 

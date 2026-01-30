@@ -3,7 +3,7 @@
 import { MessageCircleWarning, CircleCheck } from 'lucide-react';
 import { Toaster } from 'react-hot-toast';
 
-const Toast = () => {
+export const Toast = () => {
   return (
     <Toaster
       position='top-center'
@@ -52,5 +52,3 @@ const Toast = () => {
     />
   );
 };
-
-export default Toast;

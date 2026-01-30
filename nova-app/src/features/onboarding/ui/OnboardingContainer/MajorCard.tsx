@@ -8,7 +8,7 @@ interface MajorCardProps {
   onValidChange: (isValid: boolean) => void;
 }
 
-const MajorCard = ({ onValidChange }: MajorCardProps) => {
+export const MajorCard = ({ onValidChange }: MajorCardProps) => {
   const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
@@ -35,5 +35,3 @@ const MajorCard = ({ onValidChange }: MajorCardProps) => {
     </div>
   );
 };
-
-export default MajorCard;

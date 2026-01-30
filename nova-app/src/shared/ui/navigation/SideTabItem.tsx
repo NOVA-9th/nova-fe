@@ -30,7 +30,7 @@ interface SideTabItemProps extends VariantProps<typeof SideTabItemVariants> {
   className?: string;
 }
 
-const SideTabItem = ({ peak, minimized, className, icon, label }: SideTabItemProps) => {
+export const SideTabItem = ({ peak, minimized, className, icon, label }: SideTabItemProps) => {
   return (
     <div className={cn(SideTabItemVariants({ peak, minimized }), className)}>
       {icon && (
@@ -44,5 +44,3 @@ const SideTabItem = ({ peak, minimized, className, icon, label }: SideTabItemPro
     </div>
   );
 };
-
-export default SideTabItem;

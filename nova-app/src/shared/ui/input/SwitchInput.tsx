@@ -55,7 +55,7 @@ interface SwitchInputProps extends VariantProps<typeof SwitchInputVariants> {
   className?: string;
 }
 
-const SwitchInput = ({ label, className, size }: SwitchInputProps) => {
+export const SwitchInput = ({ label, className, size }: SwitchInputProps) => {
   const [isSwitched, setIsSwitched] = useState(false);
 
   return (
@@ -83,5 +83,3 @@ const SwitchInput = ({ label, className, size }: SwitchInputProps) => {
     </div>
   );
 };
-
-export default SwitchInput;

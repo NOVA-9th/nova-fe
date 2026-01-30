@@ -25,7 +25,7 @@ interface SectionHeaderProps extends VariantProps<typeof SectionHeaderVariants> 
   className?: string;
 }
 
-const SectionHeader = ({
+export const SectionHeader = ({
   size,
   peak,
   text,
@@ -53,5 +53,3 @@ const SectionHeader = ({
     </div>
   );
 };
-
-export default SectionHeader;

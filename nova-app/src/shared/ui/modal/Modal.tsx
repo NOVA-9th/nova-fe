@@ -6,11 +6,11 @@ interface ModalProps {
   onCancel: () => void;
 }
 
-const Modal = ({ content, onConfirm, onCancel }: ModalProps) => {
+export const Modal = ({ content, onConfirm, onCancel }: ModalProps) => {
   return (
     <div className='fixed inset-0 bg-black/40 flex justify-center items-center' onClick={onCancel}>
       <div
-        className='bg-white rounded-[20px] flex flex-col overflow-hidden p-5 w-80 text-base-color shadow-[1px_-1px_10px_rgba(0,0,0,0.25),0px_4px_4px_rgba(0,0,0,0.25)]'
+        className='bg-base rounded-[20px] flex flex-col overflow-hidden p-5 w-80 text-base-color shadow-[1px_-1px_10px_rgba(0,0,0,0.25),0px_4px_4px_rgba(0,0,0,0.25)] z-50'
         onClick={(e) => e.stopPropagation()}
       >
         <p className='text-center typo-headline-strong py-6'>{content}</p>
@@ -34,5 +34,3 @@ const Modal = ({ content, onConfirm, onCancel }: ModalProps) => {
     </div>
   );
 };
-
-export default Modal;

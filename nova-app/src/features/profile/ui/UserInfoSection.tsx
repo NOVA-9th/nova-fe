@@ -1,9 +1,4 @@
-import {
-  ItemList,
-  SectionHeader,
-  TextIconButton,
-  TextInput,
-} from '@/shared/ui';
+import { ItemList, SectionHeader, TextIconButton, TextInput } from '@/shared/ui';
 import { LogOut, RefreshCw, UserX, X } from 'lucide-react';
 import Image from 'next/image';
 

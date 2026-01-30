@@ -17,7 +17,7 @@ const ICON_SIZE_BY_CHIP_SIZE = {
   md: 14,
 } as const;
 
-const SelectionChip = ({
+export const SelectionChip = ({
   size,
   style,
   selected,
@@ -45,5 +45,3 @@ const SelectionChip = ({
     </button>
   );
 };
-
-export default SelectionChip;

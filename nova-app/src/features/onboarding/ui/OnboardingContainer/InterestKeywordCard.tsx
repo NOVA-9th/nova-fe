@@ -1,13 +1,13 @@
 'use client';
 
-import SearchInput from '@/features/onboarding/ui/SearchInput';
+import { SearchInput } from '@/features/onboarding/ui';
 import { useEffect, useState } from 'react';
 
 interface InterestKeywordCardProps {
   onValidChange: (isValid: boolean) => void;
 }
 
-const InterestKeywordCard = ({ onValidChange }: InterestKeywordCardProps) => {
+export const InterestKeywordCard = ({ onValidChange }: InterestKeywordCardProps) => {
   const category = '웹 프론트엔드'; // Step2 관심분야 값 (목 데이터)
   const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
 
@@ -26,5 +26,3 @@ const InterestKeywordCard = ({ onValidChange }: InterestKeywordCardProps) => {
     />
   );
 };
-
-export default InterestKeywordCard;

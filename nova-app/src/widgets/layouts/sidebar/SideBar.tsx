@@ -1,23 +1,34 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { SideTabItemCustom, TextBadge } from '@/shared/ui';
 import { LogOut } from 'lucide-react';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { SIDE_ITEMS } from '@/widgets/layouts/sidebar/data/SideItems';
+import { useState } from 'react';
+import { Modal } from '@/shared/ui';
+import { showToast } from '@/shared/utils/toast';
 
-const SideBar = () => {
+export const SideBar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
+  const handleLogout = () => {
+    setIsModalOpen(false);
+    showToast.success('로그아웃 되었습니다.');
+    router.push('/login');
+  };
+
   return (
-    <nav className='w-80 px-4 pb-4 flex flex-col justify-between'>
+    <nav className='min-w-80 h-full px-4 pb-4 flex flex-col justify-between max-md:hidden'>
       <section className='flex flex-col gap-1'>
         {SIDE_ITEMS.map((item) => (
           <Link key={item.href} href={item.href} className='block'>
@@ -56,12 +67,22 @@ const SideBar = () => {
             <p className='typo-callout-base text-additive'>디자인 전공 | 프론트엔드</p>
           </div>
         </div>
-        <button type='button' className='text-optional hover:text-additive transition-colors'>
+        <button
+          type='button'
+          aria-label='로그아웃'
+          onClick={() => setIsModalOpen(true)}
+          className='text-optional hover:text-additive transition-colors outline-none'
+        >
           <LogOut size={16} />
         </button>
       </section>
+      {isModalOpen && (
+        <Modal
+          content='로그아웃 하시겠습니까?'
+          onCancel={() => setIsModalOpen(false)}
+          onConfirm={handleLogout}
+        />
+      )}
     </nav>
   );
 };
-
-export default SideBar;

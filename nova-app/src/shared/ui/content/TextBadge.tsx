@@ -78,7 +78,7 @@ interface TextBadgeProps extends VariantProps<typeof TextBadgeVariants> {
   className?: string;
 }
 
-const TextBadge = ({ size, variant, peak, text, icon, className }: TextBadgeProps) => {
+export const TextBadge = ({ size, variant, peak, text, icon, className }: TextBadgeProps) => {
   return (
     <div className={cn(TextBadgeVariants({ size, variant, peak }), className)}>
       {icon && (
@@ -92,5 +92,3 @@ const TextBadge = ({ size, variant, peak, text, icon, className }: TextBadgeProp
     </div>
   );
 };
-
-export default TextBadge;

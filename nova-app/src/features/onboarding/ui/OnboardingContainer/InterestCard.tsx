@@ -8,7 +8,7 @@ interface InterestCardProps {
   onValidChange: (isValid: boolean) => void;
 }
 
-const InterestCard = ({ onValidChange }: InterestCardProps) => {
+export const InterestCard = ({ onValidChange }: InterestCardProps) => {
   const [selected, setSelected] = useState<string[]>([]);
 
   useEffect(() => {
@@ -42,5 +42,3 @@ const InterestCard = ({ onValidChange }: InterestCardProps) => {
     </div>
   );
 };
-
-export default InterestCard;
