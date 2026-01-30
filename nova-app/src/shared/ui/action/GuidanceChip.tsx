@@ -29,7 +29,14 @@ interface GuidanceChipProps extends VariantProps<typeof GuidanceChipVariants> {
   className?: string;
 }
 
-const GuidanceChip = ({ size, variant, text, icon, onClick, className }: GuidanceChipProps) => {
+export const GuidanceChip = ({
+  size,
+  variant,
+  text,
+  icon,
+  onClick,
+  className,
+}: GuidanceChipProps) => {
   return (
     <button
       type='button'
@@ -44,5 +51,3 @@ const GuidanceChip = ({ size, variant, text, icon, onClick, className }: Guidanc
     </button>
   );
 };
-
-export default GuidanceChip;

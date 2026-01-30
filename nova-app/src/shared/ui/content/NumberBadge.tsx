@@ -78,10 +78,8 @@ interface NumberBadgeProps extends VariantProps<typeof NumberBadgeVariants> {
   className?: string;
 }
 
-const NumberBadge = ({ size, variant, peak, number, className }: NumberBadgeProps) => {
+export const NumberBadge = ({ size, variant, peak, number, className }: NumberBadgeProps) => {
   return (
     <div className={cn(NumberBadgeVariants({ size, variant, peak }), className)}>{number}</div>
   );
 };
-
-export default NumberBadge;

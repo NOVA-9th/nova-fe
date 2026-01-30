@@ -7,7 +7,7 @@ interface SavedStaticsProps {
   value: number;
 }
 
-const SavedStatics = ({ icon, label, value }: SavedStaticsProps) => {
+export const SavedStatics = ({ icon, label, value }: SavedStaticsProps) => {
   return (
     <div className='flex w-full h-fit justify-between items-center px-3 py-2.5'>
       <div className='flex w-fit h-fit justify-center items-center typo-body-key text-additive gap-2.5'>
@@ -22,5 +22,3 @@ const SavedStatics = ({ icon, label, value }: SavedStaticsProps) => {
     </div>
   );
 };
-
-export default SavedStatics;

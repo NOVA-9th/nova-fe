@@ -6,14 +6,21 @@ interface ButtonProps extends VariantProps<typeof ButtonVariants> {
   onClick?: () => void;
   label: string;
   className?: string;
+  disabled?: boolean;
 }
 
-const Button = ({ onClick, className, label, peak, style, size }: ButtonProps) => {
+export const Button = ({ onClick, className, label, peak, style, size, disabled }: ButtonProps) => {
   return (
-    <button onClick={onClick} className={cn(ButtonVariants({ size, peak, style }), className)}>
+    <button
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
+      className={cn(
+        ButtonVariants({ size, peak: disabled ? false : peak, style }),
+        disabled && 'cursor-not-allowed opacity-50',
+        className,
+      )}
+    >
       {label}
     </button>
   );
 };
-
-export default Button;

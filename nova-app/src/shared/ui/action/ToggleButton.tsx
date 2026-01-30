@@ -2,6 +2,7 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
+
 const ToggleButtonVariants = cva(
   'flex items-center justify-center rounded-interactive-default px-padding-regular py-padding-medium gap-1.5 hover:bg-surface active:bg-surface ',
   {
@@ -31,7 +32,7 @@ const ToggleButtonVariants = cva(
       {
         variant: 'outline',
         selected: false,
-        class: '',
+        class: 'border-slate-outline',
       },
     ],
   },
@@ -44,7 +45,7 @@ interface ToggleButtonProps extends VariantProps<typeof ToggleButtonVariants> {
   className?: string;
 }
 
-const ToggleButton = ({
+export const ToggleButton = ({
   size,
   variant,
   selected,
@@ -69,5 +70,3 @@ const ToggleButton = ({
     </button>
   );
 };
-
-export default ToggleButton;

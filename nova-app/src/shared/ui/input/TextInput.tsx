@@ -60,7 +60,7 @@ interface TextInputProps extends VariantProps<typeof TextInputVariants> {
   className?: string;
 }
 
-const TextInput = ({
+export const TextInput = ({
   size,
   variant,
   data,
@@ -95,5 +95,3 @@ const TextInput = ({
     </div>
   );
 };
-
-export default TextInput;

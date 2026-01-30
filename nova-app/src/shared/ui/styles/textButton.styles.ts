@@ -2,7 +2,7 @@ import { cva } from 'class-variance-authority';
 
 export const TextBtnVariants = cva(
   `
-    flex items-center
+    flex items-center px-2
     `,
   {
     variants: {

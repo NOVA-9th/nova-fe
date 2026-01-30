@@ -3,7 +3,7 @@ import { cn } from '@/shared/utils/cn';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 
-const SectionHeaderVariants = cva('flex items-center justify-center py-0.5', {
+const SectionHeaderVariants = cva('flex items-center py-0.5', {
   variants: {
     size: {
       sm: 'gap-1.5 typo-body-key',
@@ -25,10 +25,10 @@ interface SectionHeaderProps extends VariantProps<typeof SectionHeaderVariants> 
   className?: string;
 }
 
-const SectionHeader = ({
+export const SectionHeader = ({
   size,
   peak,
-  text = 'Label',
+  text,
   leftIcon,
   rightIcon,
   className,
@@ -53,5 +53,3 @@ const SectionHeader = ({
     </div>
   );
 };
-
-export default SectionHeader;

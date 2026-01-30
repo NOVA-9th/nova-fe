@@ -4,7 +4,7 @@ export const ButtonVariants = cva(
   `
   inline-flex items-center justify-center
   py-padding-regular px-padding-bold
-  rounded-interactive-default
+  rounded-interactive-default whitespace-nowrap
   `,
   {
     variants: {

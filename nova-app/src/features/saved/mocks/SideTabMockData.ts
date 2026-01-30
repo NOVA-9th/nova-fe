@@ -1,5 +1,13 @@
-import { Brain, Chrome, Earth, FileUser, Grid2X2Icon, LucideIcon, Newspaper, Settings } from "lucide-react";
-
+import {
+  Brain,
+  Chrome,
+  Earth,
+  FileUser,
+  Grid2X2Icon,
+  LucideIcon,
+  Newspaper,
+  Settings,
+} from 'lucide-react';
 
 export const SideTabCollectionMockData: {
   id: number;

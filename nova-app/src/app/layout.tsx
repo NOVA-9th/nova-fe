@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import { ThemeProvider } from './_providers';
+import { Toast } from '@/shared/ui';
 
 export const metadata: Metadata = {
   title: 'Nova',
@@ -39,6 +40,7 @@ export default function RootLayout({
           enableSystem={false}
           disableTransitionOnChange={true}
         >
+          <Toast />
           {children}
         </ThemeProvider>
       </body>

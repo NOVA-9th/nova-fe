@@ -3,14 +3,13 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
-import { useState } from 'react';
-
+import { useState, useMemo } from 'react';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
-import InputChip from '@/shared/ui/action/InputChip';
+import { InputChip } from '@/shared/ui';
 
 const ChipInputVariants = cva(
-  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
+  'flex items-center rounded-interactive-default px-padding-medium py-padding-regular relative',
   {
     variants: {
       size: {
@@ -27,79 +26,89 @@ const ChipInputVariants = cva(
       },
     },
     compoundVariants: [
-      {
-        variant: 'outline',
-        data: true,
-        class: 'focus-within:border-data-selected',
-      },
-      {
-        variant: 'surface',
-        data: true,
-        class: 'bg-data-surface danger',
-      },
-      {
-        variant: 'surface',
-        data: false,
-        class: 'bg-slate-surface',
-      },
-      {
-        variant: 'outline',
-        data: false,
-        class: 'focus-within:border-selected',
-      },
+      { variant: 'outline', data: true, class: 'focus-within:border-data-selected' },
+      { variant: 'surface', data: true, class: 'bg-data-surface danger' },
+      { variant: 'surface', data: false, class: 'bg-slate-surface' },
+      { variant: 'outline', data: false, class: 'focus-within:border-selected' },
     ],
   },
 );
 
 interface ChipInputProps extends VariantProps<typeof ChipInputVariants> {
+  value: string[];
+  onChange: (chips: string[]) => void;
   placeholder?: string;
   icon?: LucideIcon;
   className?: string;
+  suggestions?: string[];
 }
 
-const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipInputProps) => {
-  const [value, setValue] = useState('');
-  const [chips, setChips] = useState<string[]>([]);
+export const ChipInput = ({
+  size,
+  variant,
+  data,
+  placeholder,
+  icon,
+  className,
+  suggestions = [],
+  value,
+  onChange,
+}: ChipInputProps) => {
+  const [inputValue, setInputValue] = useState('');
   const [isComposing, setIsComposing] = useState(false);
 
-  const addChip = () => {
-    const trimmed = value.trim();
+  const addChipsFromValue = (input: string) => {
+    const newChips = input
+      .split(',')
+      .map((v) => v.trim())
+      .filter((v) => v && !value.includes(v));
+    if (newChips.length) onChange([...value, ...newChips]);
+    setInputValue('');
+  };
 
-    if (!trimmed) return;
-    if (chips.includes(trimmed)) return; // chip 중복 방지
-    setChips((prev) => [...prev, trimmed]);
-    setValue('');
+  const addChip = (chipValue?: string) => {
+    const finalValue = chipValue ?? inputValue;
+    if (!finalValue) return;
+    addChipsFromValue(finalValue);
   };
 
   const removeChip = (chip: string) => {
-    setChips((prev) => prev.filter((c) => c !== chip));
+    onChange(value.filter((c) => c !== chip));
   };
 
   const clearAll = () => {
-    setValue('');
-    setChips([]);
+    setInputValue('');
+    onChange([]);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isComposing) return;
 
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.key === ',') {
       e.preventDefault();
       addChip();
-      return;
     }
 
-    if (e.key === 'Backspace' && !value && chips.length) {
-      removeChip(chips[chips.length - 1]);
+    if (e.key === 'Backspace' && !inputValue && value.length) {
+      removeChip(value[value.length - 1]);
     }
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  const filteredSuggestions = useMemo(
+    () =>
+      suggestions.filter(
+        (item) => item.toLowerCase().includes(inputValue.toLowerCase()) && !value.includes(item),
+      ),
+    [inputValue, suggestions, value],
+  );
+
   return (
     <div className={cn(ChipInputVariants({ size, variant, data }), className)}>
-      {icon &&
-        React.createElement(icon, {
-          size: size === 'md' ? 14 : 16,
-        })}
+      {icon && React.createElement(icon, { size: size === 'md' ? 14 : 16 })}
 
       <div
         className={cn(
@@ -107,7 +116,7 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
           size === 'md' ? 'gap-1' : 'gap-1.5',
         )}
       >
-        {chips.map((chip) => (
+        {value.map((chip) => (
           <InputChip
             key={chip}
             size={size === 'md' ? 'sm' : 'md'}
@@ -122,15 +131,29 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
           onCompositionStart={() => setIsComposing(true)}
           onCompositionEnd={() => setIsComposing(false)}
           type='text'
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
+          value={inputValue}
+          onChange={handleChange}
           onKeyDown={handleKeyDown}
-          placeholder={chips.length === 0 ? placeholder : undefined}
+          placeholder={value.length === 0 ? placeholder : undefined}
           className='caret-color placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
         />
       </div>
 
-      {(value || chips.length > 0) && (
+      {inputValue && filteredSuggestions.length > 0 && (
+        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_0_rgba(0,0,0,0.25)] border-slate-ring rounded-b-static-frame thin-scrollbar'>
+          {filteredSuggestions.map((item) => (
+            <li
+              key={item}
+              className='px-4 py-2.5 typo-body-base h-12 text-charcoal-optional hover:bg-surface active:bg-surface '
+              onClick={() => addChip(item)}
+            >
+              {item}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {(inputValue || value.length > 0) && (
         <button type='button' onClick={clearAll} className='text-charcoal-optional'>
           <X size={size === 'md' ? 14 : 16} />
         </button>
@@ -138,5 +161,3 @@ const ChipInput = ({ size, variant, data, placeholder, icon, className }: ChipIn
     </div>
   );
 };
-
-export default ChipInput;

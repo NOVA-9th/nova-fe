@@ -1,6 +1,6 @@
-import { articleData } from '../types/ArticleType';
+import { ArticleData } from '../types/ArticleType';
 
-export const mockArticleData: articleData[] = [
+export const mockArticleData: ArticleData[] = [
   {
     id: '1',
     type: 'news',

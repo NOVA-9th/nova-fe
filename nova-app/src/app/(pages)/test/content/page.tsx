@@ -70,39 +70,27 @@ const testPage = () => {
 
       <ItemList
         size='md'
-        align='Center'
         label='ItemList'
-        subLabel='SubLabel'
         description='Description'
         leftIcon={SquareDashed}
-        rightIcon={SquareDashed}
       />
       <ItemList
         size='md'
-        align='Top'
         label='ItemList'
-        subLabel='SubLabel'
         description='Description'
         leftIcon={SquareDashed}
-        rightIcon={SquareDashed}
       />
       <ItemList
         size='lg'
-        align='Center'
         label='ItemList'
-        subLabel='SubLabel'
         description='Description'
         leftIcon={SquareDashed}
-        rightIcon={SquareDashed}
       />
       <ItemList
         size='lg'
-        align='Center'
         label='ItemList'
-        subLabel='SubLabel'
         description='Description'
         leftIcon={SquareDashed}
-        rightIcon={SquareDashed}
       />
 
       <Header size='md' subLabel='SubLabel' label='Header' description='Description' />
