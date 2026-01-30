@@ -6,7 +6,7 @@ interface StepperProps {
   labels: string[];
 }
 
-const Stepper = ({ currentStep, labels }: StepperProps) => {
+export const Stepper = ({ currentStep, labels }: StepperProps) => {
   const STEP_ORDER: Step[] = ['step1', 'step2', 'step3', 'step4'];
   const currentIndex = STEP_ORDER.indexOf(currentStep) + 1;
 
@@ -68,5 +68,3 @@ const Stepper = ({ currentStep, labels }: StepperProps) => {
     </div>
   );
 };
-
-export default Stepper;

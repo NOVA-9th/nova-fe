@@ -3,9 +3,9 @@
 import { SelectionChip } from '@/shared/ui';
 import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
 import { PERIOD_ITEMS } from '@/features/feed/data/FilterData';
-import FilterSection from '@/features/feed/ui/FilterSection';
+import { FilterSection } from '@/features/feed/ui/FilterSection';
 
-const PeriodFilter = () => {
+export const PeriodFilter = () => {
   const { resetPeriod, selectedPeriod, setSelectedPeriod } = useFeedFilters();
 
   return (
@@ -24,5 +24,3 @@ const PeriodFilter = () => {
     </FilterSection>
   );
 };
-
-export default PeriodFilter;

@@ -6,7 +6,7 @@ interface EvidenceCardProps {
   content: string;
 }
 
-const EvidenceCard = ({ evidenceSource, content }: EvidenceCardProps) => {
+export const EvidenceCard = ({ evidenceSource, content }: EvidenceCardProps) => {
   return (
     <div className='flex flex-col w-full h-fit justify-start items-start gap-4'>
       <TextBadge
@@ -20,5 +20,3 @@ const EvidenceCard = ({ evidenceSource, content }: EvidenceCardProps) => {
     </div>
   );
 };
-
-export default EvidenceCard;

@@ -6,7 +6,7 @@ import { X } from 'lucide-react';
 import { useState, useMemo } from 'react';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
-import InputChip from '@/shared/ui/action/InputChip';
+import { InputChip } from '@/shared/ui';
 
 const ChipInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular relative',
@@ -43,7 +43,7 @@ interface ChipInputProps extends VariantProps<typeof ChipInputVariants> {
   suggestions?: string[];
 }
 
-const ChipInput = ({
+export const ChipInput = ({
   size,
   variant,
   data,
@@ -161,5 +161,3 @@ const ChipInput = ({
     </div>
   );
 };
-
-export default ChipInput;

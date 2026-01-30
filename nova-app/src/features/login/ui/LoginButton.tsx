@@ -35,7 +35,7 @@ interface LoginButtonProps {
   className?: string;
 }
 
-const LoginButton = ({ type, onClick, className }: LoginButtonProps) => {
+export const LoginButton = ({ type, onClick, className }: LoginButtonProps) => {
   const Icon = SOCIAL_ICON_BY_TYPE[type];
   const text = SOCIAL_TEXT_BY_TYPE[type];
 
@@ -50,5 +50,3 @@ const LoginButton = ({ type, onClick, className }: LoginButtonProps) => {
     </button>
   );
 };
-
-export default LoginButton;

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import { ThemeProvider } from './_providers';
-import Toast from '@/shared/ui/toast/Toast';
+import { Toast } from '@/shared/ui';
 
 export const metadata: Metadata = {
   title: 'Nova',

@@ -1,4 +1,4 @@
-const categoryRankOptions = {
+export const categoryRankOptions = {
   indexAxis: 'y' as const, //y축배치
   responsive: true,
   maintainAspectRatio: false,
@@ -59,4 +59,3 @@ const categoryRankOptions = {
     },
   },
 };
-export default categoryRankOptions;

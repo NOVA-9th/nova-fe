@@ -8,7 +8,7 @@ interface SkillCardProps {
   onValidChange: (isValid: boolean) => void;
 }
 
-const SkillCard = ({ onValidChange }: SkillCardProps) => {
+export const SkillCard = ({ onValidChange }: SkillCardProps) => {
   const [selected, setSelected] = useState<string | null>(null);
 
   useEffect(() => {
@@ -35,5 +35,3 @@ const SkillCard = ({ onValidChange }: SkillCardProps) => {
     </div>
   );
 };
-
-export default SkillCard;

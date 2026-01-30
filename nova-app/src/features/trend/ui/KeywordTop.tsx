@@ -1,10 +1,10 @@
 'use client';
 import { KEYWORDS } from '@/features/trend/mock/topKeyword';
-import useCompanyStore from '@/features/trend/model/useKeywordTop';
+import { useCompanyStore } from '@/features/trend/model/useKeywordTop';
 import { Button, Header, TextBadge } from '@/shared/ui';
 import { cn } from '@/shared/utils/cn';
 
-const KeywordTop = () => {
+export const KeywordTop = () => {
   const gridCols = 'grid grid-cols-[0.95fr_2.86fr_2.86fr_1.43fr_1.35fr_0.55fr] gap-x-[20px]';
 
   const { keywords, toggleKeyword } = useCompanyStore();
@@ -65,5 +65,3 @@ const KeywordTop = () => {
     </section>
   );
 };
-
-export default KeywordTop;

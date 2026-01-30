@@ -1,4 +1,5 @@
 import type { ChartData } from 'chart.js';
+
 export const categoryRankData: ChartData<'bar', number[], string> = {
   labels: ['Frontend', 'AI / ML', 'Backend', 'DevOps', 'Cloud', 'Database'],
   datasets: [

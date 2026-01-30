@@ -30,7 +30,7 @@ interface SideTabItemCustomProps extends VariantProps<typeof SideTabItemCustomVa
   children?: React.ReactNode;
 }
 
-const SideTabItemCustom = ({
+export const SideTabItemCustom = ({
   peak,
   minimized,
   className,
@@ -50,5 +50,3 @@ const SideTabItemCustom = ({
     </div>
   );
 };
-
-export default SideTabItemCustom;

@@ -3,7 +3,7 @@ import { cn } from '@/shared/utils/cn';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import Image from 'next/image';
-import TextIconButton from '@/shared/ui/action/TextIconButton';
+import { TextIconButton } from '@/shared/ui';
 
 const ItemListVariants = cva('flex items-center gap-2 px-2 rounded-interactive-default', {
   variants: {
@@ -34,7 +34,7 @@ interface ItemListProps extends VariantProps<typeof ItemListVariants> {
   className?: string;
 }
 
-const ItemList = ({
+export const ItemList = ({
   size,
   label,
   description,
@@ -87,5 +87,3 @@ const ItemList = ({
     </div>
   );
 };
-
-export default ItemList;

@@ -9,7 +9,7 @@ interface IconButtonProps extends VariantProps<typeof IconButtonVariants> {
   icon: LucideIcon;
 }
 
-const IconButton = ({ onClick, size, style, className, peak, icon }: IconButtonProps) => {
+export const IconButton = ({ onClick, size, style, className, peak, icon }: IconButtonProps) => {
   return (
     <button onClick={onClick} className={cn(IconButtonVariants({ size, style, peak }), className)}>
       <span>
@@ -20,5 +20,3 @@ const IconButton = ({ onClick, size, style, className, peak, icon }: IconButtonP
     </button>
   );
 };
-
-export default IconButton;

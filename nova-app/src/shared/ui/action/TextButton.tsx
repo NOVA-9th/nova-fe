@@ -12,7 +12,7 @@ interface TextButtonProps extends VariantProps<typeof TextBtnVariants> {
   rightIcon?: LucideIcon;
 }
 
-const TextButton = ({
+export const TextButton = ({
   label,
   onClick,
   className,
@@ -41,5 +41,3 @@ const TextButton = ({
     </button>
   );
 };
-
-export default TextButton;

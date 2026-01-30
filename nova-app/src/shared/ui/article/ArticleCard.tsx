@@ -41,7 +41,7 @@ interface ArticleCardProps {
   articleData: ArticleData;
 }
 
-const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
+export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const typeConfig = articleData.type
@@ -136,5 +136,3 @@ const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
     </article>
   );
 };
-
-export default ArticleCard;

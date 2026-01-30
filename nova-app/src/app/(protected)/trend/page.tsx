@@ -1,7 +1,4 @@
-import CategoriesKeyword from '@/features/trend/ui/CategoriesKeyword';
-import KeywordTop from '@/features/trend/ui/KeywordTop';
-import TrendChart from '@/features/trend/ui/TrendChart';
-import BarChart from '@/features/trend/ui/BarChart';
+import { CategoriesKeyword, KeywordTop, TrendChart, BarChart } from '@/features/trend/ui';
 import { Header, PageHeader, SelectionChip } from '@/shared/ui';
 import { ChartBar } from 'lucide-react';
 

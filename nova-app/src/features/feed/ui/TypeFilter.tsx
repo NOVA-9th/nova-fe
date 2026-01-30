@@ -4,9 +4,9 @@ import { SelectionChip } from '@/shared/ui';
 import { Newspaper } from 'lucide-react';
 import { TYPE_ITEMS } from '@/features/feed/data/FilterData';
 import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
-import FilterSection from '@/features/feed/ui/FilterSection';
+import { FilterSection } from '@/features/feed/ui/FilterSection';
 
-const TypeFilter = () => {
+export const TypeFilter = () => {
   const { resetTypes, selectedTypes, setSelectedTypes, toggleType } = useFeedFilters();
 
   return (
@@ -35,5 +35,3 @@ const TypeFilter = () => {
     </FilterSection>
   );
 };
-
-export default TypeFilter;

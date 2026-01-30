@@ -6,7 +6,7 @@ interface ModalProps {
   onCancel: () => void;
 }
 
-const Modal = ({ content, onConfirm, onCancel }: ModalProps) => {
+export const Modal = ({ content, onConfirm, onCancel }: ModalProps) => {
   return (
     <div className='fixed inset-0 bg-black/40 flex justify-center items-center' onClick={onCancel}>
       <div
@@ -34,5 +34,3 @@ const Modal = ({ content, onConfirm, onCancel }: ModalProps) => {
     </div>
   );
 };
-
-export default Modal;

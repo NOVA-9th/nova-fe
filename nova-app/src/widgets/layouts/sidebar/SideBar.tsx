@@ -8,10 +8,10 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import { SIDE_ITEMS } from '@/widgets/layouts/sidebar/data/SideItems';
 import { useState } from 'react';
-import Modal from '@/shared/ui/modal/Modal';
+import { Modal } from '@/shared/ui';
 import { showToast } from '@/shared/utils/toast';
 
-const SideBar = () => {
+export const SideBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
@@ -86,5 +86,3 @@ const SideBar = () => {
     </nav>
   );
 };
-
-export default SideBar;

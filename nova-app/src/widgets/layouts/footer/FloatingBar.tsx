@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { SIDE_ITEMS } from '@/widgets/layouts/sidebar/data/SideItems';
 
-const FloatingBar = () => {
+export const FloatingBar = () => {
   const pathname = usePathname();
 
   const isActive = (href: string) => {
@@ -48,5 +48,3 @@ const FloatingBar = () => {
     </nav>
   );
 };
-
-export default FloatingBar;

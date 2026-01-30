@@ -7,7 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Logo, NovaLabel } from '@/shared/assets';
 import Image from 'next/image';
 
-const HeaderBar = () => {
+export const HeaderBar = () => {
   const [keyword, setKeyword] = useState('');
   const pathname = usePathname();
   const router = useRouter();
@@ -59,5 +59,3 @@ const HeaderBar = () => {
     </header>
   );
 };
-
-export default HeaderBar;

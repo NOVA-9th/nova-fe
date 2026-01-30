@@ -3,7 +3,7 @@ import { keyword_data } from '@/features/trend/mock/keyword';
 import { cn } from '@/shared/utils/cn';
 import { useState } from 'react';
 
-const CategoriesKeyword = () => {
+export const CategoriesKeyword = () => {
   const [selected, setSelected] = useState<string | null>('');
 
   const handleClick = (title: string) => {
@@ -40,5 +40,3 @@ const CategoriesKeyword = () => {
     </section>
   );
 };
-
-export default CategoriesKeyword;

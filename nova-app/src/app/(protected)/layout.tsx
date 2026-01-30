@@ -1,5 +1,5 @@
 import { HeaderBar, SideBar } from '@/widgets/layouts';
-import FloatingBar from '@/widgets/layouts/footer/FloatingBar';
+import { FloatingBar } from '@/widgets/layouts';
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
   return (
