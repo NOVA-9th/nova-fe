@@ -5,7 +5,7 @@ import { GoogleIcon } from '@/shared/assets';
 import { GithubIcon } from '@/shared/assets';
 
 const LoginButtonVariants = cva(
-  'w-75 h-11 rounded-interactive-default py-padding-regular px-padding-bold typo-body-key flex flex-row items-center justify-center',
+  'h-11 rounded-interactive-default py-padding-regular px-padding-bold typo-body-key flex flex-row items-center justify-center',
   {
     variants: {
       type: {
