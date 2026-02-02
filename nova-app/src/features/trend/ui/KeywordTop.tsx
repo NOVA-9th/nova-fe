@@ -56,7 +56,7 @@ export const KeywordTop = () => {
                   size='md'
                   variant={item.changeRate.slice(0, 1) === '+' ? 'data' : 'accent'}
                   peak={false}
-                  className='md:w-fit items-left w-12.5 mr-3 md:mr-0'
+                  className='w-fit mr-3 md:mr-0'
                 />
                 <Button
                   label={isSelected ? '취소' : '선택'}
