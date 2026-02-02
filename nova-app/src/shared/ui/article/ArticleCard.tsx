@@ -88,7 +88,7 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
         <div className='flex gap-1.5'>
           <SectionHeader size='sm' peak={false} leftIcon={BookOpenText} text='Evidence' />
           <TextBadge
-            size='lg'
+            size='md'
             variant='surface'
             peak={false}
             text={`${articleData.evidences.length}개`}
