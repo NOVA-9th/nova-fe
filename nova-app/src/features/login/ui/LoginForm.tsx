@@ -4,7 +4,7 @@ import { LoginButton } from './LoginButton';
 
 export const LoginForm = () => {
   return (
-    <main className='w-full h-107.5 rounded-static-frame p-5 gap-5 flex flex-col items-center justify-center bg-base'>
+    <main className='w-full h-107.5 rounded-static-frame p-5 gap-5 flex flex-col items-center justify-center bg-base max-w-160'>
       <div className='flex gap-1.5 items-center justify-center pt-7 px-1 w-full h-22 sm:w-150'>
         <Logo width={50} height={50} />
         <NovaLabel width={100} height={26} />
