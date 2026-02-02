@@ -6,6 +6,12 @@ import {
   MemberUpdateResponseDto,
 } from './types';
 
+export type {
+  MemberRequestDto,
+  MemberResponseDto,
+  MemberUpdateResponseDto,
+} from './types';
+
 /**
  * 멤버 정보 조회
  * @param memberId 멤버 ID

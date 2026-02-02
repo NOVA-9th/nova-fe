@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority';
 import { KakaoIcon } from '@/shared/assets';
 import { GoogleIcon } from '@/shared/assets';
 import { GithubIcon } from '@/shared/assets';
-import { redirectToGoogle, redirectToKakao } from '../api';
+import { redirectToGoogle, redirectToKakao } from '@/features/login/api';
 
 const LoginButtonVariants = cva(
   'w-75 h-11 rounded-interactive-default py-padding-regular px-padding-bold typo-body-key flex flex-row items-center justify-center',

@@ -2,6 +2,8 @@ import { axiosInstance } from '@/shared/api';
 import { ApiResponse } from '@/shared/types';
 import { AuthResponse, OAuthCallbackParams } from './types';
 
+export type { AuthResponse, OAuthCallbackParams } from './types';
+
 /**
  * Google OAuth 인증 URL로 리다이렉트
  */
