@@ -4,9 +4,9 @@ import { LoginButton } from './LoginButton';
 
 export const LoginForm = () => {
   return (
-    <main className='w-160 h-107.5 rounded-static-frame p-5 gap-5 flex flex-col items-center justify-center bg-base'>
-      <div className='flex gap-3.5 items-center justify-center py-5 px-1 w-150 h-22'>
-        <Logo width={60} height={60} />
+    <main className='w-full h-107.5 rounded-static-frame p-5 gap-5 flex flex-col items-center justify-center bg-base max-w-160'>
+      <div className='flex gap-1.5 items-center justify-center pt-7 px-1 w-full h-22 sm:w-150'>
+        <Logo width={50} height={50} />
         <NovaLabel width={100} height={26} />
       </div>
       <Header
@@ -15,10 +15,9 @@ export const LoginForm = () => {
         description='AI 요약, 트렌드 분석, 맞춤 추천까지'
         className='items-center'
       />
-      <div className='flex flex-col gap-2.5 w-150 h-38 justify-center items-center'>
+      <div className='flex flex-col gap-3 w-full justify-center items-center sm:w-150'>
         <LoginButton type='google' />
         <LoginButton type='kakao' />
-        <LoginButton type='github' />
       </div>
       <span className='typo-footnote-base text-charcoal-optional'>
         로그인 시 서비스 이용약관 및 개인정보 처리방침에 동의하게 됩니다.
