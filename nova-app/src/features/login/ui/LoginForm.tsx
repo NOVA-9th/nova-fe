@@ -15,10 +15,9 @@ export const LoginForm = () => {
         description='AI 요약, 트렌드 분석, 맞춤 추천까지'
         className='items-center'
       />
-      <div className='flex flex-col gap-2.5 w-full h-38 justify-center items-center sm:w-150'>
+      <div className='flex flex-col gap-2.5 w-full justify-center items-center sm:w-150'>
         <LoginButton type='google' />
         <LoginButton type='kakao' />
-        <LoginButton type='github' />
       </div>
       <span className='typo-footnote-base text-charcoal-optional'>
         로그인 시 서비스 이용약관 및 개인정보 처리방침에 동의하게 됩니다.
