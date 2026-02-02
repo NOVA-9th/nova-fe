@@ -35,8 +35,8 @@ export const KeywordCard = () => {
           className='flex h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-surface'
         />
       </div>
-      <div className='flex w-full h-fit items-center gap-8 md:flex-row flex-col'>
-        <div className='flex flex-col w-full h-full justify-start items-start gap-4'>
+      <div className='flex flex-col lg:flex-row w-full h-fit justify-between items-start gap-8'>
+        <div className='flex flex-col w-fit h-full justify-start items-start gap-4'>
           <SectionHeader text='정렬' />
           <div className='flex gap-2'>
             <SelectionChip
@@ -57,7 +57,7 @@ export const KeywordCard = () => {
             />
           </div>
         </div>
-        <div className='flex flex-col w-full h-full justify-start items-start gap-4'>
+        <div className='flex flex-col w-fit h-full justify-start items-start gap-4'>
           <SectionHeader text='유형' />
           <div className='flex flex-wrap gap-2 w-full'>
             <SelectionChip
