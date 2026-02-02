@@ -9,7 +9,7 @@ export const STEP_ITEMS: Record<Step, StepItem> = {
   },
   step2: {
     label: '관심 분야 선택',
-    description: 'IT 직군 내 관심있는 분야를 선택해주세요 (최대 2개)',
+    description: 'IT 직군 내 관심있는 분야를 선택해주세요\n (최대 2개)',
     Component: InterestCard,
   },
   step3: {

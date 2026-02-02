@@ -43,10 +43,14 @@ export const OnboardingContainer = () => {
         labels={['전공 분야', '관심 분야', '기술 역량', '관심 키워드']}
       />
 
-      <Header size='lg' label={label} description={description} />
+      <div>
+        <Header size='lg' label={label} />
+        <span className='px-1 typo-body-base text-additive hidden sm:block'>{description}</span>
+        <span className='px-1 typo-callout-base text-additive block sm:hidden'>{description}</span>
+      </div>
       <Component onValidChange={onValidChange} />
 
-      <div className='mt-auto flex w-full max-80 sm:max-w-150 justify-between'>
+      <div className='mt-auto flex w-full max-w-80 sm:max-w-150 justify-between'>
         {!isFirstStep ? (
           <Button
             size='lg'

@@ -3,6 +3,7 @@
 import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState } from 'react';
 import { INTEREST_OPTIONS } from '@/features/onboarding/data/InterestOptions';
+import { cn } from '@/shared/utils/cn';
 
 interface InterestCardProps {
   onValidChange: (isValid: boolean) => void;
@@ -27,16 +28,16 @@ export const InterestCard = ({ onValidChange }: InterestCardProps) => {
   };
 
   return (
-    <div className='w-full h-full sm:max-w-150 sm:max-h-53 max-w-80 max-h-10 flex flex-wrap gap-2.5'>
+    <div className='w-full h-full sm:max-w-150 sm:max-h-53 max-w-80 max-h-143.5 flex flex-wrap gap-2 sm:gap-2.5'>
       {INTEREST_OPTIONS.map((text) => (
         <ToggleButton
-          size='lg'
+          size='md'
           key={text}
           text={text}
           variant='outline'
           selected={selected.includes(text)}
           onClick={() => toggleItem(text)}
-          className='w-full h-full sm:max-w-[142.5px] sm:max-h-11 max-w-[72.5] max-h-10'
+          className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11 sm:text-base!')}
         />
       ))}
     </div>
