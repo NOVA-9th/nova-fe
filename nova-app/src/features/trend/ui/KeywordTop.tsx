@@ -32,44 +32,46 @@ export const KeywordTop = () => {
           <div className='w-12.5 md:w-auto text-center  md:text-left mr-3 md:mr-0'>변화율</div>
           <div className='w-10 text-center'>선택</div>
         </div>
-        <div className='divide-y divide-outline'>
-          {KEYWORDS.map((item) => {
-            const isSelected = keywords.includes(item.keyword);
-            return (
-              <div
-                key={item.rank}
-                className={cn(
-                  'flex justify-between  items-center border-b border-outline p-3 md:px-8 md:py-3',
-                  gridCols,
-                  'typo-callout-base text-optional',
-                  isSelected && 'bg-surface text-base-color border-black',
-                )}
-              >
-                <p className=' text-center w-10 md:w-auto'>{item.rank}</p>
-                <p className='flex-1 md:flex-none  md:w-auto  text-left  '>{item.keyword}</p>
-                <p className='hidden md:block md:w-auto text-center '>{item.category}</p>
-                <p className='hidden md:block md:w-auto text-center '>
-                  {item.count.toLocaleString()}
-                </p>
-                <TextBadge
-                  text={`${item.changeRate}%`}
-                  size='md'
-                  variant={item.changeRate.slice(0, 1) === '+' ? 'data' : 'accent'}
-                  peak={false}
-                  className='w-fit mr-3 md:mr-0'
-                />
-                <Button
-                  label={isSelected ? '취소' : '선택'}
-                  style='surface'
-                  peak={isSelected}
-                  size='sm'
-                  onClick={() => toggleKeyword(item.keyword)}
-                  className='w-fit'
-                />
-              </div>
-            );
-          })}
-        </div>
+        {KEYWORDS.map((item) => {
+          const isSelected = keywords.includes(item.keyword);
+          return (
+            <div
+              key={item.rank}
+              className={cn(
+                'flex  items-center p-3 md:px-8 md:py-3 relative',
+                gridCols,
+                'typo-callout-base text-optional',
+                'border-b border-outline ',
+                isSelected && [
+                  'z-10 bg-surface text-base-color border-black',
+                  'before:absolute before:-top-px before:left-0 before:w-full before:h-px before:bg-black ',
+                ],
+              )}
+            >
+              <p className=' text-center w-10 md:w-auto'>{item.rank}</p>
+              <p className='flex-1 md:flex-none  md:w-auto  text-left  '>{item.keyword}</p>
+              <p className='hidden md:block md:w-auto text-center '>{item.category}</p>
+              <p className='hidden md:block md:w-auto text-center '>
+                {item.count.toLocaleString()}
+              </p>
+              <TextBadge
+                text={`${item.changeRate}%`}
+                size='md'
+                variant={item.changeRate.slice(0, 1) === '+' ? 'data' : 'accent'}
+                peak={false}
+                className='w-fit mr-3 md:mr-0'
+              />
+              <Button
+                label={isSelected ? '취소' : '선택'}
+                style='surface'
+                peak={isSelected}
+                size='sm'
+                onClick={() => toggleKeyword(item.keyword)}
+                className='w-fit'
+              />
+            </div>
+          );
+        })}
       </div>
     </>
   );
