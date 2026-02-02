@@ -1,4 +1,3 @@
-'use client';
 import { CategoriesKeyword, KeywordTop, TrendChart, BarChart } from '@/features/trend/ui';
 import { Header, PageHeader, SelectionChip } from '@/shared/ui';
 import { ChartBar } from 'lucide-react';
@@ -26,7 +25,7 @@ const TrendPage = () => {
       </section>
 
       {/* 인기키워드 */}
-      <section className='rounded-2xl bg-static p-5 flex flex-col gap-4 mb-4 md:gap-5'>
+      <section className='rounded-static-frame bg-base p-5 flex flex-col gap-4 mb-4 md:gap-5'>
         <KeywordTop />
       </section>
 
