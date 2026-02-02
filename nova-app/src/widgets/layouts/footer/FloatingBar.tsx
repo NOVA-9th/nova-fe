@@ -15,7 +15,7 @@ export const FloatingBar = () => {
 
   return (
     <nav
-      className='md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-32px)]'
+      className='md:hidden fixed bottom-2 left-1/2 -translate-x-1/2 z-50 w-[calc(100vw-32px)]'
       aria-label='Floating navigation'
     >
       <div className='flex items-center justify-between gap-1.5 rounded-static-pill border border-outline bg-base p-1.5 shadow-lg'>
