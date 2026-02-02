@@ -1,14 +1,16 @@
 'use client';
 import { keyword_data } from '@/features/trend/mock/keyword';
 import { cn } from '@/shared/utils/cn';
-import { useState } from 'react';
 
-export const CategoriesKeyword = () => {
-  const [selected, setSelected] = useState<string | null>('');
-
+interface CategoriesKeywordProp {
+  selected: string;
+  onSelected: (value: string) => void;
+}
+export const CategoriesKeyword = ({ selected, onSelected }: CategoriesKeywordProp) => {
   const handleClick = (title: string) => {
-    setSelected((pre) => (pre === title ? null : title));
+    onSelected(selected === title ? '' : title);
   };
+  console.log(selected);
 
   return (
     <section className='grid grid-cols-2 md:gap-4 gap-2.5'>
@@ -25,7 +27,7 @@ export const CategoriesKeyword = () => {
           >
             <h6
               className={cn(
-                'md:text-left! text-center text-optional typo-headline-strong',
+                'md:text-left! text-center text-optional typo-body-strong',
                 isSelected && 'text-peak',
               )}
             >

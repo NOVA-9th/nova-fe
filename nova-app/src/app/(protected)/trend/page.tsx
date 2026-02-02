@@ -1,8 +1,13 @@
+'use client';
+
 import { CategoriesKeyword, KeywordTop, TrendChart, BarChart } from '@/features/trend/ui';
 import { Header, PageHeader, SelectionChip } from '@/shared/ui';
 import { ChartBar } from 'lucide-react';
+import { useState } from 'react';
 
 const TrendPage = () => {
+  const [selected, setSelected] = useState<string>('');
+
   return (
     <div className='md:px-5 p-4 '>
       <PageHeader text='트렌드' icon={ChartBar} className='p-0 mb-4 md:-mx-1' />
@@ -30,11 +35,15 @@ const TrendPage = () => {
       </section>
 
       <section className='rounded-static-frame bg-base p-5 mb-4'>
-        <Header size='md' label='카테고리 내 키워드 언급량' description='전체 언급 수 기준' />
+        <Header
+          size='md'
+          label={` ${selected} 카테고리 내 키워드 언급량`}
+          description='전체 언급 수 기준'
+        />
         <BarChart />
       </section>
       {/* 카테고리 키워드 */}
-      <CategoriesKeyword />
+      <CategoriesKeyword selected={selected} onSelected={setSelected} />
     </div>
   );
 };
