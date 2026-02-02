@@ -9,12 +9,11 @@ export const KeywordTop = () => {
 
   const { keywords, toggleKeyword } = useCompanyStore();
   return (
-    <section className='rounded-2xl bg-static p-5 mb-4'>
+    <>
       <Header
         size='md'
         label='인기 키워드 TOP 10'
         description='아래의 표를 클릭하여 비교할 키워드를 추가하세요'
-        className='mb-5'
       />
 
       <div className='border-outline rounded-interactive-default border '>
@@ -22,9 +21,9 @@ export const KeywordTop = () => {
           className={`${gridCols} px-8 py-3 bg-peak text-white  typo-body-strong  rounded-t-interactive-default items-center `}
         >
           <div className='text-center'>순위</div>
-          <div className='text-left'>키워드</div>
+          <div className='text-left '>키워드</div>
           <div className='text-center'>카테고리</div>
-          <div className='text-center'>언급수</div>
+          <div className=' text-center'>언급수</div>
           <div className='text-left'>변화율</div>
           <div className='text-center'>선택</div>
         </div>
@@ -41,7 +40,7 @@ export const KeywordTop = () => {
               >
                 <p className=' text-center'>{item.rank}</p>
                 <p className='text-left'>{item.keyword}</p>
-                <p className=' text-center'>{item.category}</p>
+                <p className=' text-center '>{item.category}</p>
                 <p className='text-center'>{item.count.toLocaleString()}</p>
                 <TextBadge
                   text={`${item.changeRate}%`}
@@ -62,6 +61,7 @@ export const KeywordTop = () => {
           })}
         </div>
       </div>
-    </section>
+    </>
+    // </section>
   );
 };

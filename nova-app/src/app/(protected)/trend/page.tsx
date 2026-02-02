@@ -1,20 +1,21 @@
+'use client';
 import { CategoriesKeyword, KeywordTop, TrendChart, BarChart } from '@/features/trend/ui';
 import { Header, PageHeader, SelectionChip } from '@/shared/ui';
 import { ChartBar } from 'lucide-react';
 
 const TrendPage = () => {
   return (
-    <div className='md:px-5 p-4 overflow-x-auto'>
+    <div className='md:px-5 p-4 '>
       <PageHeader text='트렌드' icon={ChartBar} className='p-0 mb-4 md:-mx-1' />
       {/* 트렌드차트 */}
-      <section className='rounded-static-frame bg-base p-5 mb-4'>
+      <section className='rounded-static-frame bg-base p-5 flex flex-col gap-4 mb-4 md:gap-5'>
         <SelectionChip
           isShowChevron={false}
           label='최근 7일'
           size={'md'}
           style={'surface'}
           selected={true}
-          className='mb-5'
+          className='w-fit'
         />
         <Header
           size='md'
@@ -25,15 +26,12 @@ const TrendPage = () => {
       </section>
 
       {/* 인기키워드 */}
-      <KeywordTop />
+      <section className='rounded-2xl bg-static p-5 flex flex-col gap-4 mb-4 md:gap-5'>
+        <KeywordTop />
+      </section>
 
       <section className='rounded-static-frame bg-base p-5 mb-4'>
-        <Header
-          size='md'
-          label='카테고리 내 키워드 언급량'
-          description='전체 언급 수 기준'
-          className='mb-3'
-        />
+        <Header size='md' label='카테고리 내 키워드 언급량' description='전체 언급 수 기준' />
         <BarChart />
       </section>
       {/* 카테고리 키워드 */}
