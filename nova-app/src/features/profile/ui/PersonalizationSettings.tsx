@@ -90,7 +90,7 @@ export const PersonalizationSettings = () => {
             variant='surface'
             data={false}
             placeholder='키워드를 입력하세요'
-            className='w-full min-w-0'
+            className='w-full h-11 min-w-0'
             value={keywords}
             onChange={setKeywords}
           />
