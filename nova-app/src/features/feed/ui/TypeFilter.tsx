@@ -1,7 +1,7 @@
 'use client';
 
 import { SelectionChip } from '@/shared/ui';
-import { Newspaper } from 'lucide-react';
+import { Grid2X2Icon } from 'lucide-react';
 import { TYPE_ITEMS } from '@/features/feed/data/FilterData';
 import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
 import { FilterSection } from '@/features/feed/ui/FilterSection';
@@ -16,7 +16,7 @@ export const TypeFilter = () => {
           label='전체'
           selected={selectedTypes.length === 0}
           isShowChevron={false}
-          icon={Newspaper}
+          icon={Grid2X2Icon}
           onClick={() => setSelectedTypes([])}
         />
       </div>

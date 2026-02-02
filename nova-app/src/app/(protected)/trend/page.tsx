@@ -4,8 +4,8 @@ import { ChartBar } from 'lucide-react';
 
 const TrendPage = () => {
   return (
-    <div className='px-5 py-4 overflow-x-auto '>
-      <PageHeader text='트렌드' icon={ChartBar} className='p-0 mb-4 -mx-1' />
+    <div className='md:px-5 p-4 overflow-x-auto'>
+      <PageHeader text='트렌드' icon={ChartBar} className='p-0 mb-4 md:-mx-1' />
       {/* 트렌드차트 */}
       <section className='rounded-static-frame bg-base p-5 mb-4'>
         <SelectionChip

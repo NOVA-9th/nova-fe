@@ -77,25 +77,20 @@ export const PersonalizationSettings = () => {
               peak={false}
               size='sm'
             />
-            <TextBadge
-              text={`${keywords.length}개`}
-              size='sm'
-              variant='surface'
-              peak={false}
-            />
+            <TextBadge text={`${keywords.length}개`} size='sm' variant='surface' peak={false} />
           </div>
           <span className='typo-callout-base text-optional text-right'>
             {PERSONALIZATION_TEXT.sections.keyword.helperText}
           </span>
         </div>
 
-        <div className='flex w-full items-start gap-3'>
+        <div className='flex flex-col lg:flex-row w-full items-center gap-3 min-w-0'>
           <ChipInput
             size='lg'
             variant='surface'
             data={false}
             placeholder='키워드를 입력하세요'
-            className='flex-1'
+            className='w-full h-11 min-w-0'
             value={keywords}
             onChange={setKeywords}
           />
@@ -105,6 +100,7 @@ export const PersonalizationSettings = () => {
             style='surface'
             peak={true}
             label={PERSONALIZATION_TEXT.sections.keyword.saveButtonLabel}
+            className='w-full xl:w-auto'
           />
         </div>
       </div>
