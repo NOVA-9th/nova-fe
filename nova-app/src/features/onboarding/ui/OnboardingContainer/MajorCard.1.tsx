@@ -1,14 +1,9 @@
 'use client';
-
 import { ToggleButton } from '@/shared/ui';
-import { useEffect, useState } from 'react';
-import { MAJOR_OPTIONS } from '@/features/onboarding/data/MajorOptions';
 import { cn } from '@/shared/utils/cn';
-import clsx from 'clsx';
-
-interface MajorCardProps {
-  onValidChange: (isValid: boolean) => void;
-}
+import { useState, useEffect } from 'react';
+import { MAJOR_OPTIONS } from '../../data/MajorOptions';
+import { MajorCardProps } from './MajorCard';
 
 export const MajorCard = ({ onValidChange }: MajorCardProps) => {
   const [selected, setSelected] = useState<string | null>(null);
@@ -22,17 +17,22 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
   };
 
   return (
-    <div className='w-full h-full sm:max-w-150 max-w-80 flex flex-wrap gap-2 sm:gap-2.5'>
+    <div className='w-full h-full sm:max-w-150 max-w-80 flex flex-wrap gap-2.5'>
       {MAJOR_OPTIONS.map((text) => {
+        const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+        const formattedText = isMobile && text.includes('&') ? text.replace('&', '&\n') : text;
+
         return (
           <ToggleButton
             key={text}
-            size='md'
-            text={text}
+            size={isMobile ? 'md' : 'lg'}
+            text={formattedText}
             variant='outline'
             selected={selected === text}
             onClick={() => toggleItem(text)}
-            className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11')}
+            className={cn(
+              'w-full max-w-[72.5px] sm:max-w-[142.5px] h-11 whitespace-pre-line sm:whitespace-normal sm:break-words',
+            )}
           />
         );
       })}
