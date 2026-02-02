@@ -37,7 +37,7 @@ export const OnboardingContainer = () => {
   };
 
   return (
-    <main className='flex flex-col w-160 min-h-94 max-h-123.5 gap-5 p-5 bg-base rounded-static-frame'>
+    <main className='flex flex-col w-full max-w-90 min-h-94 max-h-123.5 gap-5 p-5 bg-base rounded-static-frame sm:max-w-160'>
       <Stepper
         currentStep={currentStep}
         labels={['전공 분야', '관심 분야', '기술 역량', '관심 키워드']}
@@ -46,7 +46,7 @@ export const OnboardingContainer = () => {
       <Header size='lg' label={label} description={description} />
       <Component onValidChange={onValidChange} />
 
-      <div className='flex w-150 h-11 justify-between'>
+      <div className='flex w-full max-80 sm:max-w-150 h-11 justify-between'>
         {!isFirstStep ? (
           <Button size='lg' label='이전' style='surface' onClick={onPrev} className='w-15' />
         ) : (
