@@ -48,7 +48,13 @@ export const OnboardingContainer = () => {
 
       <div className='flex w-full max-80 sm:max-w-150 h-11 justify-between'>
         {!isFirstStep ? (
-          <Button size='lg' label='이전' style='surface' onClick={onPrev} className='w-15' />
+          <Button
+            size='lg'
+            label='이전'
+            style='surface'
+            onClick={onPrev}
+            className='w-full sm:max-w-15 max-w-14 typo-callout-key'
+          />
         ) : (
           <div />
         )}
@@ -61,7 +67,7 @@ export const OnboardingContainer = () => {
               style='data'
               peak={false}
               onClick={handleSkip}
-              className='w-21.75'
+              className='w-full sm:max-w-21.75 max-w-20 typo-callout-key'
             />
           )}
 
@@ -72,7 +78,7 @@ export const OnboardingContainer = () => {
             onClick={handleNext}
             peak={isStepValid}
             disabled={!isStepValid}
-            className='w-15 h-11'
+            className='w-full sm:max-w-15 max-w-14 typo-callout-key'
           />
         </div>
       </div>
