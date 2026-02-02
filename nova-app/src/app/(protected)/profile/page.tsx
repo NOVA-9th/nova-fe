@@ -20,7 +20,7 @@ const ProfilePage = () => {
           <div className='flex flex-col flex-1 justify-start items-start w-full h-full gap-4'>
             <UserInfoSection
               name='이름'
-              description='디자인 전공 | 프론트엔드'
+              description='ivory.ma9ic@gmail.com'
               image='/test.png'
               value={value}
               setValue={setValue}
