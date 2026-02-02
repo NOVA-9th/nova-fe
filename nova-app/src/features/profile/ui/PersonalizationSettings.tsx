@@ -84,7 +84,7 @@ export const PersonalizationSettings = () => {
           </span>
         </div>
 
-        <div className='flex w-full items-center gap-3 min-w-0'>
+        <div className='flex flex-col lg:flex-row w-full items-center gap-3 min-w-0'>
           <ChipInput
             size='lg'
             variant='surface'
@@ -100,6 +100,7 @@ export const PersonalizationSettings = () => {
             style='surface'
             peak={true}
             label={PERSONALIZATION_TEXT.sections.keyword.saveButtonLabel}
+            className='w-full xl:w-auto'
           />
         </div>
       </div>
