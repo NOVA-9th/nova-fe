@@ -10,8 +10,10 @@ export const TrendChart = () => {
   return (
     <div className='bg-static rounded-2xl'>
       {/* 차트 */}
-      <div className='h-77.5 px-2'>
-        <Line data={trendChartData} options={createTrendOptions()} />
+      <div className='overflow-x-auto'>
+        <div className='min-w-[640px] h-77.5'>
+          <Line data={trendChartData} options={createTrendOptions()} />
+        </div>
       </div>
 
       {/* legend */}
