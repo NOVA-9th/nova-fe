@@ -6,7 +6,7 @@ import { cn } from '@/shared/utils/cn';
 
 export const KeywordTop = () => {
   const gridCols =
-    'md:grid md:grid-cols-[0.95fr_2.86fr_2.86fr_1.43fr_1.35fr_0.55fr] md:gap-x-[20px]';
+    'lg:grid lg:grid-cols-[0.95fr_2.86fr_2.86fr_1.43fr_1.35fr_0.55fr] lg:gap-x-[20px]';
 
   const { keywords, toggleKeyword } = useCompanyStore();
   return (
@@ -22,14 +22,14 @@ export const KeywordTop = () => {
           className={cn(
             'flex justify-between items-center p-3 bg-peak text-white typo-body-strong rounded-t-interactive-default',
             gridCols,
-            'md:px-8 md:py-3',
+            'lg:px-8 lg:py-3',
           )}
         >
-          <div className='w-10 md:w-auto text-center'>순위</div>
-          <div className='flex-1 w-30 md:flex-none md:w-auto text-left '>키워드</div>
-          <div className='hidden md:block  text-center md:w-auto'>카테고리</div>
-          <div className='hidden md:block text-center md:w-auto'>언급수</div>
-          <div className='w-12.5 md:w-auto text-center  md:text-left mr-3 md:mr-0'>변화율</div>
+          <div className='w-10 lg:w-auto text-center'>순위</div>
+          <div className='flex-1 w-30 ;g:flex-none lg:w-auto text-left '>키워드</div>
+          <div className='hidden lg:block  text-center lg:w-auto'>카테고리</div>
+          <div className='hidden lg:block text-center lg:w-auto'>언급수</div>
+          <div className='w-12.5 lg:w-auto text-center  lg:text-left mr-3 lg:mr-0'>변화율</div>
           <div className='w-10 text-center'>선택</div>
         </div>
         {KEYWORDS.map((item) => {
@@ -38,7 +38,7 @@ export const KeywordTop = () => {
             <div
               key={item.rank}
               className={cn(
-                'flex  items-center p-3 md:px-8 md:py-3 relative',
+                'flex  items-center p-3 lg:px-8 lg:py-3 relative',
                 gridCols,
                 'typo-callout-base text-optional',
                 'border-b border-outline ',
@@ -48,10 +48,10 @@ export const KeywordTop = () => {
                 ],
               )}
             >
-              <p className=' text-center w-10 md:w-auto'>{item.rank}</p>
-              <p className='flex-1 md:flex-none  md:w-auto  text-left  '>{item.keyword}</p>
-              <p className='hidden md:block md:w-auto text-center '>{item.category}</p>
-              <p className='hidden md:block md:w-auto text-center '>
+              <p className=' text-center w-10 lg:w-auto'>{item.rank}</p>
+              <p className='flex-1 lg:flex-none  lg:w-auto  text-left  '>{item.keyword}</p>
+              <p className='hidden lg:block lg:w-auto text-center '>{item.category}</p>
+              <p className='hidden lg:block lg:w-auto text-center '>
                 {item.count.toLocaleString()}
               </p>
               <TextBadge
@@ -59,7 +59,7 @@ export const KeywordTop = () => {
                 size='md'
                 variant={item.changeRate.slice(0, 1) === '+' ? 'data' : 'accent'}
                 peak={false}
-                className='w-fit mr-3 md:mr-0'
+                className='w-fit mr-3 lg:mr-0'
               />
               <Button
                 label={isSelected ? '취소' : '선택'}
