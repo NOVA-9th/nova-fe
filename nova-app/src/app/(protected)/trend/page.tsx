@@ -39,6 +39,7 @@ const TrendPage = () => {
           size='md'
           label={` ${selected} 카테고리 내 키워드 언급량`}
           description='전체 언급 수 기준'
+          className='break-keep'
         />
         <BarChart />
       </section>
