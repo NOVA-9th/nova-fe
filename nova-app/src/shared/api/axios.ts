@@ -1,8 +1,12 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { ApiResponse } from '../types/api';
 
-// API Base URL - 환경 변수로 관리하거나 기본값 설정
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:8080';
+// API Base URL - 환경 변수 필수 설정
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+if (!API_BASE_URL) {
+  throw new Error('NEXT_PUBLIC_API_BASE_URL is not defined');
+}
 
 // AxiosInstance 생성
 export const axiosInstance: AxiosInstance = axios.create({

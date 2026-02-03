@@ -1,22 +1,13 @@
 /**
  * 백엔드 ApiResponse 구조에 맞춘 공통 응답 타입
  */
-export interface ApiResponse<T> {
+export type ApiResponse<T> = {
   success: boolean;
   code: string;
   message: string;
   data: T | null;
-}
+};
 
-/**
- * API 에러 응답 타입
- */
-export interface ApiErrorResponse {
-  success: false;
-  code: string;
-  message: string;
-  data: null;
-}
 
 /**
  * 공통 에러 코드

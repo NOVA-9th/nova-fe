@@ -1,25 +1,25 @@
 /**
  * 멤버 정보 요청 DTO
  */
-export interface MemberRequestDto {
+export type MemberRequestDto = {
   name: string;
-}
+};
 
 /**
  * 멤버 정보 응답 DTO
  */
-export interface MemberResponseDto {
+export type MemberResponseDto = {
   id: number;
   name: string;
   email: string;
   profileImage: string | null;
-}
+};
 
 /**
  * 멤버 정보 수정 응답 DTO
  */
-export interface MemberUpdateResponseDto {
+export type MemberUpdateResponseDto = {
   id: number;
   name: string;
-}
+};
 
