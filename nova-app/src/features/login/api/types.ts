@@ -14,4 +14,3 @@ export type AuthResponse = {
 export type OAuthCallbackParams = {
   code: string;
 };
-

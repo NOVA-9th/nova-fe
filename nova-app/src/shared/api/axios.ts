@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
-import { ApiResponse } from '../types/api';
+import { ApiResponse } from '@/shared/types';
 
 // API Base URL - 환경 변수 필수 설정
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -22,16 +22,16 @@ axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
     // 로컬 스토리지나 쿠키에서 토큰 가져오기
     const token = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null;
-    
+
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
+
     return config;
   },
   (error: AxiosError) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Response Interceptor - 에러 처리
@@ -62,8 +62,7 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
-
