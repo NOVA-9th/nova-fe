@@ -13,8 +13,6 @@ export type ApiResponse<T> = {
  * 공통 에러 코드
  */
 export enum CommonErrorCode {
-  INVALID_PARAMETER = 'COMMON400',
-  INVALID_BODY = 'COMMON400',
   BAD_REQUEST = 'COMMON400',
   FORBIDDEN = 'COMMON403',
   RESOURCE_NOT_FOUND = 'COMMON404',
