@@ -45,7 +45,12 @@ export const SearchInput = ({
           placeholder='키워드를 입력하세요'
           className='flex-1 min-w-0 h-11'
         />
-        <Button size='lg' label='추가' className='w-15 h-11' onClick={handleAddClick} />
+        <Button
+          size='lg'
+          label='추가'
+          className='w-14 sm:w-15 h-11 typo-callout-key sm:typo-body-key'
+          onClick={handleAddClick}
+        />
       </div>
     </div>
   );
