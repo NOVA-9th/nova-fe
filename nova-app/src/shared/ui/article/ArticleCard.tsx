@@ -85,13 +85,14 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
         <span className='typo-body-base text-base'>{articleData.aiSummary}</span>
       </div>
       <div className='flex w-full h-fit justify-between items-center gap-2.5'>
-        <div className='flex gap-1.5'>
+        <div className='flex gap-1.5 items-center'>
           <SectionHeader size='sm' peak={false} leftIcon={BookOpenText} text='Evidence' />
           <TextBadge
             size='md'
             variant='surface'
             peak={false}
             text={`${articleData.evidences.length}개`}
+            className='h-5'
           />
         </div>
         <button
