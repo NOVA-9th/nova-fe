@@ -21,7 +21,7 @@ export const SkillCard = ({ onValidChange }: SkillCardProps) => {
   };
 
   return (
-    <div className='sm:w-150 sm:h-24.5 flex flex-wrap gap-2.5'>
+    <div className='sm:w-150 sm:h-24.5 flex flex-wrap gap-2.5 h-22.5'>
       {SKILL_OPTIONS.map((text) => (
         <ToggleButton
           size='lg'
