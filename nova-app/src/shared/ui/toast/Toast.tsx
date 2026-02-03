@@ -39,7 +39,7 @@ export const Toast = () => {
             lineHeight: '16px',
             whiteSpace: 'normal',
             wordBreak: 'keep-all',
-            minWidth: '200px',
+            minWidth: '300px',
             maxWidth: '90vw',
           },
         },

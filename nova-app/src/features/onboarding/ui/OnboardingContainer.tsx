@@ -57,7 +57,7 @@ export const OnboardingContainer = () => {
             label='이전'
             style='surface'
             onClick={onPrev}
-            className='w-full sm:max-w-15 max-w-14 typo-callout-key'
+            className='w-14 sm:w-15 typo-callout-key sm:typo-body-key'
           />
         ) : (
           <div />
@@ -71,7 +71,7 @@ export const OnboardingContainer = () => {
               style='data'
               peak={false}
               onClick={handleSkip}
-              className='w-full sm:max-w-21.75 max-w-20 typo-callout-key'
+              className='sm:w-21.75 w-20 typo-callout-key sm:typo-body-key'
             />
           )}
 
@@ -82,7 +82,7 @@ export const OnboardingContainer = () => {
             onClick={handleNext}
             peak={isStepValid}
             disabled={!isStepValid}
-            className='w-full sm:max-w-15 max-w-14 typo-callout-key'
+            className='w-14 sm:w-15 sm:max-w-15 max-w-14 typo-callout-key sm:typo-body-key'
           />
         </div>
       </div>

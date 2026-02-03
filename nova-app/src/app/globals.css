@@ -25,6 +25,12 @@
   .font-interface {
     font-family: var(--font-interface);
   }
+
+  @media (min-width: 640px) {
+    .sm\:typo-body-key {
+      @apply text-body font-200 leading-6 tracking-tight;
+    }
+  }
 }
 
 html,

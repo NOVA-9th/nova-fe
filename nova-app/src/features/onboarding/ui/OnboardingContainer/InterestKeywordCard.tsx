@@ -23,7 +23,6 @@ export const InterestKeywordCard = ({ onValidChange }: InterestKeywordCardProps)
       selectedKeywords={selectedKeywords}
       onAddKeyword={handleAddKeyword}
       onChangeKeywords={setSelectedKeywords}
-      className='sm:max-w-'
     />
   );
 };

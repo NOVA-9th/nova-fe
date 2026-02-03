@@ -4,7 +4,6 @@ import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState } from 'react';
 import { MAJOR_OPTIONS } from '@/features/onboarding/data/MajorOptions';
 import { cn } from '@/shared/utils/cn';
-import clsx from 'clsx';
 
 interface MajorCardProps {
   onValidChange: (isValid: boolean) => void;
@@ -32,7 +31,7 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
             variant='outline'
             selected={selected === text}
             onClick={() => toggleItem(text)}
-            className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11')}
+            className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11 sm:text-base!')}
           />
         );
       })}

@@ -34,7 +34,7 @@ export const SearchInput = ({
           className='w-9.5 h-5'
         />
       </div>
-      <div className='w-full max-w-63 sm:max-w-150 flex flex-row gap-3'>
+      <div className='flex w-full gap-3 items-center'>
         <ChipInput
           size='lg'
           variant='surface'
@@ -43,7 +43,7 @@ export const SearchInput = ({
           onChange={onChangeKeywords}
           suggestions={suggestions}
           placeholder='키워드를 입력하세요'
-          className='w-full h-11'
+          className='flex-1 min-w-0 h-11'
         />
         <Button size='lg' label='추가' className='w-15 h-11' onClick={handleAddClick} />
       </div>
