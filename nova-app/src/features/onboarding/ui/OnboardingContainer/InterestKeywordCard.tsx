@@ -23,6 +23,7 @@ export const InterestKeywordCard = ({ onValidChange }: InterestKeywordCardProps)
       selectedKeywords={selectedKeywords}
       onAddKeyword={handleAddKeyword}
       onChangeKeywords={setSelectedKeywords}
+      className='sm:h-24.5 h-22.5'
     />
   );
 };

@@ -3,6 +3,7 @@
 import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState } from 'react';
 import { MAJOR_OPTIONS } from '@/features/onboarding/data/MajorOptions';
+import { cn } from '@/shared/utils/cn';
 
 interface MajorCardProps {
   onValidChange: (isValid: boolean) => void;
@@ -20,18 +21,20 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
   };
 
   return (
-    <div className='w-150 h-24.5 flex flex-wrap gap-2.5'>
-      {MAJOR_OPTIONS.map((text) => (
-        <ToggleButton
-          size='lg'
-          key={text}
-          text={text}
-          variant='outline'
-          selected={selected === text}
-          onClick={() => toggleItem(text)}
-          className='w-[142.5px] h-11'
-        />
-      ))}
+    <div className='w-full h-full sm:max-w-150 max-w-80 flex flex-wrap gap-2 sm:gap-2.5'>
+      {MAJOR_OPTIONS.map((text) => {
+        return (
+          <ToggleButton
+            key={text}
+            size='md'
+            text={text}
+            variant='outline'
+            selected={selected === text}
+            onClick={() => toggleItem(text)}
+            className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11 sm:text-base!')}
+          />
+        );
+      })}
     </div>
   );
 };
