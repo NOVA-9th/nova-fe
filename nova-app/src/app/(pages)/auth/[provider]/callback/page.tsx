@@ -2,8 +2,8 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter, useParams } from 'next/navigation';
-import { handleGoogleCallback, handleKakaoCallback } from '@/features/login/api';
 import { showToast } from '@/shared/utils/toast';
+import { handleGoogleCallback, handleKakaoCallback } from '@/features/login/api/login';
 
 /**
  * URL에서 code 파라미터를 파싱하고 OAuth 콜백을 처리하는 컴포넌트
@@ -19,7 +19,7 @@ const OAuthCallbackContent = () => {
     const processCallback = async () => {
       // URL 경로에서 provider 추출 (예: /auth/google/callback 또는 /auth/kakao/callback)
       const provider = params.provider as string;
-      
+
       // 유효한 provider인지 확인
       if (provider !== 'google' && provider !== 'kakao') {
         setStatus('error');
@@ -61,14 +61,14 @@ const OAuthCallbackContent = () => {
         return;
       }
 
-      console.log('OAuth 콜백 처리 시작:', { 
-        provider, 
-        code: code.substring(0, 20) + '...' 
+      console.log('OAuth 콜백 처리 시작:', {
+        provider,
+        code: code.substring(0, 20) + '...',
       });
 
       try {
         let response;
-        
+
         // Provider에 따라 적절한 API 호출
         if (provider === 'kakao') {
           console.log('Kakao OAuth 콜백 처리 중...');
@@ -83,7 +83,7 @@ const OAuthCallbackContent = () => {
         if (response.success && response.data) {
           // 토큰을 localStorage에 저장
           localStorage.setItem('accessToken', response.data.accessToken);
-          
+
           // 사용자 정보도 저장
           localStorage.setItem('memberId', String(response.data.memberId));
           localStorage.setItem('userEmail', response.data.email);
@@ -91,7 +91,7 @@ const OAuthCallbackContent = () => {
 
           setStatus('success');
           showToast.success('로그인에 성공했습니다!');
-          
+
           // 성공 후 메인 페이지로 리다이렉트
           setTimeout(() => {
             router.push('/');
@@ -108,7 +108,7 @@ const OAuthCallbackContent = () => {
       } catch (error: any) {
         console.error('OAuth 콜백 처리 중 오류:', error);
         setStatus('error');
-        
+
         // 에러 메시지 추출
         let message = '로그인 처리 중 오류가 발생했습니다.';
         if (error?.response?.data?.message) {
@@ -116,7 +116,7 @@ const OAuthCallbackContent = () => {
         } else if (error?.message) {
           message = error.message;
         }
-        
+
         setErrorMessage(message);
         showToast.error(message);
         setTimeout(() => {
@@ -142,7 +142,9 @@ const OAuthCallbackContent = () => {
           <div className='space-y-4'>
             <div className='text-6xl mb-4 text-success'>✓</div>
             <p className='text-body-lg text-charcoal-base font-medium'>로그인 성공!</p>
-            <p className='text-body-base text-charcoal-additive'>잠시 후 메인 페이지로 이동합니다.</p>
+            <p className='text-body-base text-charcoal-additive'>
+              잠시 후 메인 페이지로 이동합니다.
+            </p>
           </div>
         )}
         {status === 'error' && (
@@ -150,7 +152,9 @@ const OAuthCallbackContent = () => {
             <div className='text-6xl mb-4 text-error'>✗</div>
             <p className='text-body-lg text-error font-medium'>로그인 실패</p>
             <p className='text-body-base text-charcoal-additive'>{errorMessage}</p>
-            <p className='text-footnote-base text-charcoal-optional'>잠시 후 로그인 페이지로 이동합니다.</p>
+            <p className='text-footnote-base text-charcoal-optional'>
+              잠시 후 로그인 페이지로 이동합니다.
+            </p>
           </div>
         )}
       </div>
@@ -182,4 +186,3 @@ const OAuthCallbackPage = () => {
 };
 
 export default OAuthCallbackPage;
-
