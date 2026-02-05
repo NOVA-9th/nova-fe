@@ -1,7 +1,7 @@
 export type CardNews = {
   id: number;
   title: string;
-  cardtype: 'NEWS' | 'JOB' | 'COMMUNITY';
+  cardtype: string[];
   author: string;
   publishedAt: string;
   summary: string;
@@ -16,7 +16,7 @@ export type FeedSearchRequest = {
   sort: 'LATEST' | 'RELEVANCE';
   startDate: string;
   endDate: string;
-  type: 'NEWS' | 'JOB' | 'COMMUNITY';
+  type: string[];
   keywords: string[];
   page: number;
   size: number;
