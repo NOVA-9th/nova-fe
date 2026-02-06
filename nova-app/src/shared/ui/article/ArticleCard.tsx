@@ -77,7 +77,7 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
       <Header
         size='md'
         label={articleData.title}
-        subLabel={`${articleData.source} | ${articleData.author} | ${articleData.date}`}
+        subLabel={`${articleData.source} | ${articleData.author || '익명'} | ${articleData.date}`}
         className='py-0'
       />
       <div className='flex flex-col w-full h-fit justify-start items-start rounded-interactive-default bg-surface p-4 gap-4'>
@@ -87,13 +87,7 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
       <div className='flex w-full h-fit justify-between items-center gap-2.5'>
         <div className='flex gap-1.5 items-center'>
           <SectionHeader size='sm' peak={false} leftIcon={BookOpenText} text='Evidence' />
-          <TextBadge
-            size='md'
-            variant='surface'
-            peak={false}
-            text={`${articleData.evidences.length}개`}
-            className='h-5'
-          />
+          <TextBadge size='md' variant='surface' peak={false} text='3개' className='h-5' />
         </div>
         <button
           className='flex justify-center items-center gap-1 typo-callout-key text-optional'
