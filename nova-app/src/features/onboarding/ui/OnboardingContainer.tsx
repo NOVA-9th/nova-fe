@@ -44,8 +44,8 @@ export const OnboardingContainer = () => {
       />
 
       <div>
-        <Header size='lg' label={label} />
-        <span className='px-1 typo-body-base text-additive hidden sm:block'>{description}</span>
+        <Header size='lg' label={label} description={description} className='hidden sm:flex' />
+        <Header size='md' label={label} className='flex sm:hidden' />
         <span className='px-1 typo-callout-base text-additive block sm:hidden'>{description}</span>
       </div>
       <Component onValidChange={onValidChange} />
