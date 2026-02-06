@@ -18,7 +18,7 @@ export const SortFilter = () => {
             label={option}
             selected={selectedSort === option}
             isShowChevron={false}
-            // onClick={() => setSelectedSort(option)}
+            onClick={() => setSelectedSort(option as any)}
           />
         ))}
       </div>

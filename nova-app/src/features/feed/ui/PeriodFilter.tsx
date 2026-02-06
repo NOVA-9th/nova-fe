@@ -17,7 +17,7 @@ export const PeriodFilter = () => {
             label={option}
             selected={selectedPeriod === option}
             isShowChevron={false}
-            // onClick={() => setSelectedPeriod(option)}
+            onClick={() => setSelectedPeriod(option as any)}
           />
         ))}
       </div>
