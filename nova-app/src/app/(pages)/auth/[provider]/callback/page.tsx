@@ -2,8 +2,9 @@
 
 import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter, useParams } from 'next/navigation';
-import { handleGoogleCallback, handleKakaoCallback } from '@/features/login/api';
 import { showToast } from '@/shared/utils/toast';
+import { handleGoogleCallback, handleKakaoCallback } from '@/features/login/api/login';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
 
 /**
  * URL에서 code 파라미터를 파싱하고 OAuth 콜백을 처리하는 컴포넌트
@@ -12,40 +13,35 @@ const OAuthCallbackContent = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const params = useParams();
+
+  const login = useAuthStore((state) => state.login);
+
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
   useEffect(() => {
     const processCallback = async () => {
-      // URL 경로에서 provider 추출 (예: /auth/google/callback 또는 /auth/kakao/callback)
       const provider = params.provider as string;
-      
-      // 유효한 provider인지 확인
+
       if (provider !== 'google' && provider !== 'kakao') {
-        setStatus('error');
         const message = '지원하지 않는 OAuth 제공자입니다.';
+        setStatus('error');
         setErrorMessage(message);
         showToast.error(message);
-        setTimeout(() => {
-          router.push('/login');
-        }, 2000);
+        setTimeout(() => router.push('/login'), 2000);
         return;
       }
 
-      // URL에서 code 파라미터 파싱
       const code = searchParams.get('code');
       const error = searchParams.get('error');
       const errorDescription = searchParams.get('error_description');
 
-      // OAuth 에러가 있는 경우
       if (error) {
-        setStatus('error');
         const message = errorDescription || error || '인증에 실패했습니다.';
+        setStatus('error');
         setErrorMessage(message);
         showToast.error(message);
-        setTimeout(() => {
-          router.push('/login');
-        }, 2000);
+        setTimeout(() => router.push('/login'), 2000);
         return;
       }
 
@@ -55,43 +51,22 @@ const OAuthCallbackContent = () => {
         const message = '인증 코드를 받지 못했습니다.';
         setErrorMessage(message);
         showToast.error(message);
-        setTimeout(() => {
-          router.push('/login');
-        }, 2000);
+        setTimeout(() => router.push('/login'), 2000);
         return;
       }
 
-      console.log('OAuth 콜백 처리 시작:', { 
-        provider, 
-        code: code.substring(0, 20) + '...' 
-      });
-
       try {
-        let response;
-        
-        // Provider에 따라 적절한 API 호출
-        if (provider === 'kakao') {
-          console.log('Kakao OAuth 콜백 처리 중...');
-          response = await handleKakaoCallback({ code });
-        } else {
-          console.log('Google OAuth 콜백 처리 중...');
-          response = await handleGoogleCallback({ code });
-        }
-
-        console.log('OAuth 응답:', { success: response.success, hasData: !!response.data });
+        const response =
+          provider === 'kakao'
+            ? await handleKakaoCallback({ code })
+            : await handleGoogleCallback({ code });
 
         if (response.success && response.data) {
-          // 토큰을 localStorage에 저장
-          localStorage.setItem('accessToken', response.data.accessToken);
-          
-          // 사용자 정보도 저장
-          localStorage.setItem('memberId', String(response.data.memberId));
-          localStorage.setItem('userEmail', response.data.email);
-          localStorage.setItem('userName', response.data.name);
+          login(response.data.accessToken, response.data.memberId);
 
           setStatus('success');
           showToast.success('로그인에 성공했습니다!');
-          
+
           // 성공 후 메인 페이지로 리다이렉트
           setTimeout(() => {
             router.push('/');
@@ -101,14 +76,12 @@ const OAuthCallbackContent = () => {
           const message = response.message || '로그인에 실패했습니다.';
           setErrorMessage(message);
           showToast.error(message);
-          setTimeout(() => {
-            router.push('/login');
-          }, 2000);
+          setTimeout(() => router.push('/login'), 2000);
         }
       } catch (error: any) {
         console.error('OAuth 콜백 처리 중 오류:', error);
         setStatus('error');
-        
+
         // 에러 메시지 추출
         let message = '로그인 처리 중 오류가 발생했습니다.';
         if (error?.response?.data?.message) {
@@ -116,17 +89,15 @@ const OAuthCallbackContent = () => {
         } else if (error?.message) {
           message = error.message;
         }
-        
+
         setErrorMessage(message);
         showToast.error(message);
-        setTimeout(() => {
-          router.push('/login');
-        }, 2000);
+        setTimeout(() => router.push('/login'), 2000);
       }
     };
 
     processCallback();
-  }, [searchParams, router, params]);
+  }, [searchParams, router, params, login]);
 
   return (
     <div className='flex items-center justify-center min-h-screen w-full bg-base'>
@@ -138,19 +109,25 @@ const OAuthCallbackContent = () => {
             <p className='text-footnote-base text-charcoal-optional'>잠시만 기다려주세요</p>
           </div>
         )}
+
         {status === 'success' && (
           <div className='space-y-4'>
             <div className='text-6xl mb-4 text-success'>✓</div>
             <p className='text-body-lg text-charcoal-base font-medium'>로그인 성공!</p>
-            <p className='text-body-base text-charcoal-additive'>잠시 후 메인 페이지로 이동합니다.</p>
+            <p className='text-body-base text-charcoal-additive'>
+              잠시 후 메인 페이지로 이동합니다.
+            </p>
           </div>
         )}
+
         {status === 'error' && (
           <div className='space-y-4 max-w-md'>
             <div className='text-6xl mb-4 text-error'>✗</div>
             <p className='text-body-lg text-error font-medium'>로그인 실패</p>
             <p className='text-body-base text-charcoal-additive'>{errorMessage}</p>
-            <p className='text-footnote-base text-charcoal-optional'>잠시 후 로그인 페이지로 이동합니다.</p>
+            <p className='text-footnote-base text-charcoal-optional'>
+              잠시 후 로그인 페이지로 이동합니다.
+            </p>
           </div>
         )}
       </div>
@@ -182,4 +159,3 @@ const OAuthCallbackPage = () => {
 };
 
 export default OAuthCallbackPage;
-
