@@ -10,10 +10,7 @@ export const LoginForm = () => {
         <NovaLabel width={100} height={26} />
       </div>
       <div>
-        <span className='sm:hidden block typo-headline-strong'>
-          IT 취준생을 위한 AI 큐레이션 플랫폼
-        </span>
-        <span className='hidden sm:block typo-title-strong'>
+        <span className='typo-headline-strong sm:typo-title-strong'>
           IT 취준생을 위한 AI 큐레이션 플랫폼
         </span>
         <Header
