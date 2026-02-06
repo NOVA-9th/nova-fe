@@ -3,8 +3,9 @@
 import { getFeedList } from '@/features/feed/api/feed';
 import { ArticleCard } from '@/shared/ui';
 import { useQuery } from '@tanstack/react-query';
-import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
+import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 import type { FeedSearchRequest } from '@/features/feed/types/api';
+import { useMemo } from 'react';
 
 const ALL_TYPES: FeedSearchRequest['type'] = ['NEWS', 'JOB', 'COMMUNITY'];
 
@@ -18,23 +19,26 @@ const periodToDays = (ui: string) => {
 };
 
 const FeedArticle = () => {
-  const { selectedSort, selectedPeriod, selectedTypes, selectedKeywords } = useFeedFilters();
+  const { selectedSort, selectedPeriod, selectedTypes, selectedKeywords } = useFeedFilterStore();
 
-  const endDate = new Date();
-  const days = periodToDays(selectedPeriod);
-  const startDate = new Date(endDate);
-  startDate.setDate(endDate.getDate() - days);
+  // 메모이제이션으로 무한 호출 방지
+  const params = useMemo<FeedSearchRequest>(() => {
+    const endDate = new Date();
+    const days = periodToDays(selectedPeriod);
+    const startDate = new Date(endDate);
+    startDate.setDate(endDate.getDate() - days);
 
-  const params: FeedSearchRequest = {
-    sort: sortToApi(selectedSort),
-    startDate: startDate.toISOString(),
-    endDate: endDate.toISOString(),
-    type: selectedTypes.length === 0 ? ALL_TYPES : selectedTypes,
-    keywords: selectedKeywords,
-    page: 1,
-    size: 10,
-    saved: false,
-  };
+    return {
+      sort: sortToApi(selectedSort),
+      startDate: startDate.toISOString(),
+      endDate: endDate.toISOString(),
+      type: selectedTypes.length === 0 ? ALL_TYPES : selectedTypes,
+      keywords: selectedKeywords,
+      page: 1,
+      size: 10,
+      saved: false,
+    };
+  }, [selectedSort, selectedPeriod, selectedTypes, selectedKeywords]);
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ['feedList', params],
@@ -46,11 +50,11 @@ const FeedArticle = () => {
   if (isLoading) return <div>로딩중...</div>;
   if (isError) return <div>에러가 발생했어요</div>;
 
-  const feedList = data?.data?.cardnews ?? [];
+  const feedArticle = data?.data?.cardnews ?? [];
 
   return (
     <section className='space-y-4'>
-      {feedList.map((article: any) => (
+      {feedArticle.map((article) => (
         <ArticleCard key={article.id} articleData={article} />
       ))}
     </section>
