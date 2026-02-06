@@ -9,14 +9,14 @@ export const LoginForm = () => {
         <div className='flex flex-row w-49.5 h-15 justify-between items-center'>
           <Logo width={60} height={60} />
           <span className='pr-5'>
-            <NovaLabel width={108} height={30} />
+            <NovaLabel width={108} height={26} />
           </span>
         </div>
         <Header
           size='md'
           label='IT 취준생을 위한 AI 큐레이션 플랫폼'
           description='AI 요약, 트렌드 분석, 맞춤 추천까지'
-          className='items-center'
+          className='items-center pt-3'
         />
       </div>
       <div className='flex flex-col gap-2.5 w-full px-10 py-7.75 justify-center items-center sm:w-150'>
