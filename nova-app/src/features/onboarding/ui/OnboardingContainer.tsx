@@ -37,7 +37,7 @@ export const OnboardingContainer = () => {
   };
 
   return (
-    <main className='flex flex-col w-full max-w-90 gap-5 p-5 bg-base rounded-static-frame sm:max-w-160'>
+    <main className='flex flex-col w-full max-w-90 gap-5 px-7 py-5 bg-base rounded-static-frame sm:max-w-170 sm:px-10 sm:py-7.5 '>
       <Stepper
         currentStep={currentStep}
         labels={['전공 분야', '관심 분야', '기술 역량', '관심 키워드']}
