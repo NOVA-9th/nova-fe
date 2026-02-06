@@ -3,11 +3,11 @@
 import { SelectionChip } from '@/shared/ui';
 import { Grid2X2Icon } from 'lucide-react';
 import { TYPE_ITEMS } from '@/features/feed/data/FilterData';
-import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
 import { FilterSection } from '@/features/feed/ui/FilterSection';
+import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 
 export const TypeFilter = () => {
-  const { resetTypes, selectedTypes, setSelectedTypes, toggleType } = useFeedFilters();
+  const { resetTypes, selectedTypes, setSelectedTypes, toggleType } = useFeedFilterStore();
 
   return (
     <FilterSection title='유형' onReset={resetTypes} className='space-y-4'>
