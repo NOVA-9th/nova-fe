@@ -4,7 +4,7 @@ import { LoginButton } from './LoginButton';
 
 export const LoginForm = () => {
   return (
-    <main className='w-full h-107.5 rounded-static-frame p-5 gap-5 flex flex-col items-center bg-base max-w-160'>
+    <main className='w-full min-h-107.5 rounded-static-frame p-5 gap-5 flex flex-col items-center bg-base max-w-160'>
       <div className='flex flex-col pt-5 gap-1.5 items-center'>
         <div className='flex flex-row w-49.5 h-15 justify-between items-center'>
           <Logo width={60} height={60} />
