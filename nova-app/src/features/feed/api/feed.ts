@@ -11,7 +11,7 @@ export const getFeedList = async (
     params,
     paramsSerializer: (params) =>
       qs.stringify(params, {
-        arrayFormat: 'brackets', // type[]=NEWS&type[]=JOB
+        arrayFormat: 'repeat', // ✅ type=NEWS&type=COMMUNITY
         skipNulls: true,
       }),
   });

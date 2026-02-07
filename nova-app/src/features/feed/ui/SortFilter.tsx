@@ -18,6 +18,7 @@ export const SortFilter = () => {
             label={option}
             selected={selectedSort === option}
             isShowChevron={false}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onClick={() => setSelectedSort(option as any)}
           />
         ))}

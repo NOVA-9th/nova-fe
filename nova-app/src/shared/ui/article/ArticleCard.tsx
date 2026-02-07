@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@/shared/utils/cn';
 import {
   SquareArrowOutUpRight,
   BookOpenText,
@@ -12,49 +11,41 @@ import {
   Newspaper,
   Bookmark,
 } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Header, IconButton, SectionHeader, TextBadge, TextIconButton } from '@/shared/ui';
-import { ArticleData } from '@/features/saved/types/ArticleType';
 import { EvidenceCard } from '@/features/saved/ui';
+import { CardNews } from '@/features/feed/types/api';
 
 const ARTICLE_TYPE_CONFIG: Record<
-  'news' | 'recruitment' | 'community',
+  'NEWS' | 'JOB' | 'COMMUNITY',
   { icon: LucideIcon; title: string }
 > = {
-  news: {
+  NEWS: {
     icon: Newspaper,
     title: '뉴스',
   },
-  recruitment: {
+  JOB: {
     icon: FileUser,
     title: '채용',
   },
-  community: {
+  COMMUNITY: {
     icon: EarthIcon,
     title: '커뮤니티',
   },
 };
 
-interface ArticleCardProps {
-  className?: string;
-  children?: React.ReactNode;
-  articleData: ArticleData;
-}
-
-export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
+export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const typeConfig = articleData.type
-    ? ARTICLE_TYPE_CONFIG[articleData.type]
-    : ARTICLE_TYPE_CONFIG['news'];
+  const firstType = Array.isArray(articleData.cardtype) ? articleData.cardtype[0] : undefined;
+
+  const typeKey: 'NEWS' | 'JOB' | 'COMMUNITY' =
+    firstType === 'NEWS' || firstType === 'JOB' || firstType === 'COMMUNITY' ? firstType : 'NEWS';
+
+  const typeConfig = ARTICLE_TYPE_CONFIG[typeKey];
 
   return (
-    <article
-      className={cn(
-        'flex flex-col w-full h-fit items-start rounded-static-frame bg-white p-5 gap-5',
-        className,
-      )}
-    >
+    <article className='flex flex-col w-full h-fit items-start rounded-static-frame bg-white p-5 gap-5'>
       <div className='flex w-full h-fit justify-start items-center gap-2.5'>
         {typeConfig && (
           <TextBadge
@@ -65,24 +56,18 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
             text={typeConfig.title}
           />
         )}
-        {articleData.relevance && (
-          <TextBadge
-            size='lg'
-            variant='data'
-            peak={false}
-            text={`관련도 ${articleData.relevance}%`}
-          />
-        )}
+
+        <TextBadge size='lg' variant='data' peak={false} text='관련도 91%' />
       </div>
       <Header
         size='md'
         label={articleData.title}
-        subLabel={`${articleData.source} | ${articleData.author || '익명'} | ${articleData.date}`}
+        subLabel={`${articleData.originalUrl} | ${articleData.author || '익명'} | ${articleData.publishedAt}`}
         className='py-0'
       />
       <div className='flex flex-col w-full h-fit justify-start items-start rounded-interactive-default bg-surface p-4 gap-4'>
         <TextBadge size='lg' variant='surface' peak={false} icon={Brain} text='AI 요약' />
-        <span className='typo-body-base text-base'>{articleData.aiSummary}</span>
+        <span className='typo-body-base text-base'>{articleData.summary}</span>
       </div>
       <div className='flex w-full h-fit justify-between items-center gap-2.5'>
         <div className='flex gap-1.5 items-center'>
@@ -96,19 +81,13 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
           <p>{isOpen ? '접기' : '펼치기'}</p>
           <ChevronDownIcon
             size={14}
-            className={`transition-transform duration-300 ${isOpen ? '' : '-rotate-180'}`}
+            className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
           />
         </button>
       </div>
-      {isOpen && articleData.evidences.length > 0 && (
+      {isOpen && articleData.evidence.trim().length > 0 && (
         <div className='flex flex-col w-full justify-start items-start border border-outline rounded-static-frame p-4 gap-4'>
-          {articleData.evidences.map((evidence) => (
-            <EvidenceCard
-              key={evidence.id}
-              evidenceSource={evidence.evidenceSource}
-              content={evidence.content}
-            />
-          ))}
+          <EvidenceCard evidenceSource='LangChain 공식 문서' content={articleData.evidence} />
         </div>
       )}
       <div className='flex w-full h-fit justify-between items-start gap-2.5'>
