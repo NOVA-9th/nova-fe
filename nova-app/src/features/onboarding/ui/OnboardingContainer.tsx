@@ -5,6 +5,7 @@ import { Stepper } from '@/features/onboarding/ui';
 import { Button, Header } from '@/shared/ui';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
+import { useOnboardingStore } from '../models/useOnBoardingStore';
 
 export const OnboardingContainer = () => {
   const {
@@ -30,6 +31,13 @@ export const OnboardingContainer = () => {
   }, [currentStep, onNext, router]);
 
   const handleSkip = useCallback(() => {
+    useOnboardingStore.setState((state) => ({
+      stepData: {
+        ...state.stepData,
+        [currentStep]: currentStep === 'step1' ? null : [],
+      },
+    }));
+
     if (currentStep === 'step4') {
       router.replace('/');
       return;
