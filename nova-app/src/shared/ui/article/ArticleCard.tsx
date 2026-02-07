@@ -21,18 +21,9 @@ const ARTICLE_TYPE_CONFIG: Record<
   'NEWS' | 'JOB' | 'COMMUNITY',
   { icon: LucideIcon; title: string }
 > = {
-  NEWS: {
-    icon: Newspaper,
-    title: '뉴스',
-  },
-  JOB: {
-    icon: FileUser,
-    title: '채용',
-  },
-  COMMUNITY: {
-    icon: EarthIcon,
-    title: '커뮤니티',
-  },
+  NEWS: { icon: Newspaper, title: '뉴스' },
+  JOB: { icon: FileUser, title: '채용' },
+  COMMUNITY: { icon: EarthIcon, title: '커뮤니티' },
 };
 
 export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
@@ -44,6 +35,9 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
     firstType === 'NEWS' || firstType === 'JOB' || firstType === 'COMMUNITY' ? firstType : 'NEWS';
 
   const typeConfig = ARTICLE_TYPE_CONFIG[typeKey];
+
+  const evidences = (articleData.evidence ?? []).map((e) => e.trim()).filter(Boolean);
+  const evidenceCount = evidences.length;
 
   return (
     <article className='flex flex-col w-full min-w-0 h-fit items-start rounded-static-frame bg-white p-5 gap-5'>
@@ -63,7 +57,9 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
       <Header
         size='md'
         label={articleData.title}
-        subLabel={`${articleData.siteName} | ${articleData.author || '익명'} | ${getRelativeTime(articleData.publishedAt)}`}
+        subLabel={`${articleData.siteName} | ${articleData.author || '익명'} | ${getRelativeTime(
+          articleData.publishedAt,
+        )}`}
         className='py-0'
       />
       <div className='flex flex-col w-full h-fit justify-start items-start rounded-interactive-default bg-surface p-4 gap-4'>
@@ -73,22 +69,38 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
       <div className='flex w-full h-fit justify-between items-center gap-2.5'>
         <div className='flex gap-1.5 items-center'>
           <SectionHeader size='sm' peak={false} leftIcon={BookOpenText} text='Evidence' />
-          <TextBadge size='md' variant='surface' peak={false} text='3개' className='h-5' />
-        </div>
-        <button
-          className='flex justify-center items-center gap-1 typo-callout-key text-optional'
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <p>{isOpen ? '접기' : '펼치기'}</p>
-          <ChevronDownIcon
-            size={14}
-            className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+          <TextBadge
+            size='md'
+            variant='surface'
+            peak={false}
+            text={`${evidenceCount}개`}
+            className='h-5'
           />
-        </button>
+        </div>
+
+        {evidenceCount > 0 && (
+          <button
+            className='flex justify-center items-center gap-1 typo-callout-key text-optional'
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <p>{isOpen ? '접기' : '펼치기'}</p>
+            <ChevronDownIcon
+              size={14}
+              className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+        )}
       </div>
-      {isOpen && articleData.evidence.trim().length > 0 && (
+
+      {isOpen && evidenceCount > 0 && (
         <div className='flex flex-col w-full justify-start items-start border border-outline rounded-static-frame p-4 gap-4'>
-          <EvidenceCard evidenceSource='사례 정리' content={articleData.evidence} />
+          {evidences.map((content, idx) => (
+            <EvidenceCard
+              key={`${articleData.id}-evidence-${idx}`}
+              evidenceSource='사례 정리'
+              content={content}
+            />
+          ))}
         </div>
       )}
       {articleData.keywords && (
@@ -115,9 +127,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           size='lg'
           label='원문 보기'
           leftIcon={SquareArrowOutUpRight}
-          onClick={() => {
-            window.open(articleData.originalUrl, '_blank');
-          }}
+          onClick={() => window.open(articleData.originalUrl, '_blank')}
           className='gap-1.5'
         />
         <div className='flex justify-center items-center gap-2.5'>

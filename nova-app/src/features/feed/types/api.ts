@@ -5,7 +5,7 @@ export type CardNews = {
   author: string;
   publishedAt: string;
   summary: string;
-  evidence: string;
+  evidence: string[];
   originalUrl: string;
   siteName: string;
   keywords: string[];
