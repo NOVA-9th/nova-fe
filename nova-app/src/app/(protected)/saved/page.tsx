@@ -18,7 +18,7 @@ const SavedPage = () => {
     <>
       <PageHeader text='저장함' icon={Bookmark} />
       <div className='flex flex-col xl:flex-row w-full justify-start items-start md:px-5 px-4 pb-5 gap-4'>
-        <section className='flex flex-col h-full gap-4 flex-1 min-w-0'>
+        <section className='flex flex-col h-full gap-4 flex-1 min-w-0 overflow-hidden'>
           <KeywordCard />
           {mockArticleData.map((article) => (
             <ArticleCard key={article.id} articleData={article} />

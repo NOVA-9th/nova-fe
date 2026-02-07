@@ -35,6 +35,17 @@ const ARTICLE_TYPE_CONFIG: Record<
   },
 };
 
+const keywordSample = [
+  'React',
+  'Server Components',
+  'Frontend',
+  'Backend',
+  'Transformer',
+  'Deep Learning',
+  'TypeScript',
+  'JavaScript',
+];
+
 export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,7 +57,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const typeConfig = ARTICLE_TYPE_CONFIG[typeKey];
 
   return (
-    <article className='flex flex-col w-full h-fit items-start rounded-static-frame bg-white p-5 gap-5'>
+    <article className='flex flex-col w-full min-w-0 h-fit items-start rounded-static-frame bg-white p-5 gap-5'>
       <div className='flex w-full h-fit justify-start items-center gap-2.5'>
         {typeConfig && (
           <TextBadge
@@ -63,7 +74,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
       <Header
         size='md'
         label={articleData.title}
-        subLabel={`${articleData.originalUrl} | ${articleData.author || '익명'} | ${getRelativeTime(articleData.publishedAt)}`}
+        subLabel={`${articleData.siteName} | ${articleData.author || '익명'} | ${getRelativeTime(articleData.publishedAt)}`}
         className='py-0'
       />
       <div className='flex flex-col w-full h-fit justify-start items-start rounded-interactive-default bg-surface p-4 gap-4'>
@@ -91,6 +102,19 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           <EvidenceCard evidenceSource='LangChain 공식 문서' content={articleData.evidence} />
         </div>
       )}
+      <div className='flex w-full max-w-full min-w-0 gap-2.5 flex-nowrap overflow-x-auto overflow-y-hidden overscroll-x-contain sm:flex-wrap sm:overflow-visible'>
+        {keywordSample.map((chip) => (
+          <TextBadge
+            key={chip}
+            size='lg'
+            variant='surface'
+            peak={false}
+            text={`#${chip}`}
+            className='shrink-0'
+          />
+        ))}
+      </div>
+
       <div className='flex w-full h-fit justify-between items-start gap-2.5'>
         <TextIconButton
           style='surface'
