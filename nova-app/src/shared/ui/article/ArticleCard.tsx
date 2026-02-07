@@ -99,20 +99,24 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
       </div>
       {isOpen && articleData.evidence.trim().length > 0 && (
         <div className='flex flex-col w-full justify-start items-start border border-outline rounded-static-frame p-4 gap-4'>
-          <EvidenceCard evidenceSource='LangChain 공식 문서' content={articleData.evidence} />
+          <EvidenceCard evidenceSource='사례 정리' content={articleData.evidence} />
         </div>
       )}
-      <div className='flex w-full max-w-full min-w-0 gap-2.5 flex-nowrap overflow-x-auto overflow-y-hidden overscroll-x-contain sm:flex-wrap sm:overflow-visible'>
-        {keywordSample.map((chip) => (
-          <TextBadge
-            key={chip}
-            size='lg'
-            variant='surface'
-            peak={false}
-            text={`#${chip}`}
-            className='shrink-0'
-          />
-        ))}
+      <div className='min-w-0 w-full max-w-full'>
+        <div className='min-w-0 w-full max-w-full overflow-x-auto no-scrollbar sm:overflow-x-visible'>
+          <div className='inline-flex w-max gap-2.5 whitespace-nowrap sm:flex sm:flex-wrap sm:w-full sm:whitespace-normal'>
+            {keywordSample.map((chip) => (
+              <TextBadge
+                key={chip}
+                size='lg'
+                variant='surface'
+                peak={false}
+                text={`#${chip}`}
+                className='shrink-0'
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className='flex w-full h-fit justify-between items-start gap-2.5'>
