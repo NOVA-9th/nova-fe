@@ -23,12 +23,12 @@ export const TypeFilter = () => {
       <div className='flex items-center gap-2 flex-wrap'>
         {TYPE_ITEMS.map((item) => (
           <SelectionChip
-            key={item.label}
+            key={item.value}
             label={item.label}
-            selected={selectedTypes.includes(item.label)}
+            selected={selectedTypes.includes(item.value)}
             isShowChevron={false}
             icon={item.icon}
-            onClick={() => toggleType(item.label)}
+            onClick={() => toggleType(item.value)}
           />
         ))}
       </div>

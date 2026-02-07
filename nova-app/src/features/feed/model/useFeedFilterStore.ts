@@ -2,6 +2,7 @@
 
 import { create } from 'zustand';
 import { toggleArray } from '@/features/feed/utils/toggleArray';
+import type { CardType } from '@/features/feed/data/FilterData';
 
 export type SortUI = '최신순' | '관련도순';
 export type PeriodUI = '1일' | '7일' | '30일';
@@ -10,15 +11,15 @@ interface FeedFilterState {
   // state
   selectedSort: SortUI;
   selectedPeriod: PeriodUI;
-  selectedTypes: string[];
+  selectedTypes: CardType[];
   selectedKeywords: string[];
 
   // actions
   setSelectedSort: (sort: SortUI) => void;
   setSelectedPeriod: (period: PeriodUI) => void;
-  setSelectedTypes: (types: string[]) => void;
+  setSelectedTypes: (types: CardType[]) => void;
 
-  toggleType: (type: string) => void;
+  toggleType: (type: CardType) => void;
   toggleKeyword: (keyword: string) => void;
 
   resetSort: () => void;
