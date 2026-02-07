@@ -103,7 +103,8 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           ))}
         </div>
       )}
-      {articleData.keywords && (
+
+      {articleData.keywords?.length > 0 && (
         <div className='min-w-0 w-full max-w-full overflow-x-auto sm:overflow-x-visible'>
           <div className='inline-flex w-max gap-2.5 whitespace-nowrap sm:flex sm:flex-wrap sm:w-full sm:whitespace-normal'>
             {articleData.keywords.map((keyword) => (

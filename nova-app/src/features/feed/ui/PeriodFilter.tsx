@@ -17,8 +17,7 @@ export const PeriodFilter = () => {
             label={option}
             selected={selectedPeriod === option}
             isShowChevron={false}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            onClick={() => setSelectedPeriod(option as any)}
+            onClick={() => setSelectedPeriod(option)}
           />
         ))}
       </div>

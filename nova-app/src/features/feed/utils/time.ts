@@ -1,8 +1,8 @@
 export const getRelativeTime = (isoDate: string) => {
   const now = new Date();
   const target = new Date(isoDate);
-
-  const diffMs = now.getTime() - target.getTime();
+  if (Number.isNaN(target.getTime())) return '날짜 정보 없음';
+  const diffMs = Math.max(0, now.getTime() - target.getTime());
   const diffMinutes = Math.floor(diffMs / (1000 * 60));
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
   const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
