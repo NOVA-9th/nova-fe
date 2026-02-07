@@ -97,7 +97,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           {evidences.map((content, idx) => (
             <EvidenceCard
               key={`${articleData.id}-evidence-${idx}`}
-              evidenceSource='사례 정리'
+              evidenceSource='근거'
               content={content}
             />
           ))}
