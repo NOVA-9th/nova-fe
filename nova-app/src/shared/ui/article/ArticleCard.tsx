@@ -15,6 +15,7 @@ import { useState } from 'react';
 import { Button, Header, IconButton, SectionHeader, TextBadge, TextIconButton } from '@/shared/ui';
 import { EvidenceCard } from '@/features/saved/ui';
 import { CardNews } from '@/features/feed/types/api';
+import { getRelativeTime } from '@/features/feed/utils/time';
 
 const ARTICLE_TYPE_CONFIG: Record<
   'NEWS' | 'JOB' | 'COMMUNITY',
@@ -62,7 +63,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
       <Header
         size='md'
         label={articleData.title}
-        subLabel={`${articleData.originalUrl} | ${articleData.author || '익명'} | ${articleData.publishedAt}`}
+        subLabel={`${articleData.originalUrl} | ${articleData.author || '익명'} | ${getRelativeTime(articleData.publishedAt)}`}
         className='py-0'
       />
       <div className='flex flex-col w-full h-fit justify-start items-start rounded-interactive-default bg-surface p-4 gap-4'>
