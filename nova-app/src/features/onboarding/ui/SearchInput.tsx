@@ -23,8 +23,8 @@ export const SearchInput = ({
   const handleAddClick = () => {};
 
   return (
-    <div className={cn('flex flex-col items-start sm:max-w-150 h-21 gap-3', className)}>
-      <div className='flex flex-row sm:max-w-150 h-7 gap-2.5 items-center'>
+    <div className={cn('flex flex-col items-start h-21 gap-3', className)}>
+      <div className='flex flex-row h-7 gap-2.5 items-center'>
         <SectionHeader size='sm' text='검색' />
         <TextBadge
           size={'sm'}

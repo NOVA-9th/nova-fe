@@ -35,16 +35,16 @@ export const InterestCard = ({ onValidChange }: InterestCardProps) => {
   };
 
   return (
-    <div className='w-full h-full sm:max-w-150 sm:max-h-53 max-w-80 max-h-143.5 flex flex-wrap gap-2 sm:gap-2.5'>
+    <div className='grid grid-cols-2 gap-3 sm:gap-2.5 sm:grid-cols-4'>
       {INTEREST_OPTIONS.map((text) => (
         <ToggleButton
-          size='md'
           key={text}
+          size='md'
           text={text}
           variant='outline'
           selected={selected.includes(text)}
           onClick={() => toggleItem(text)}
-          className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11 sm:text-base!')}
+          className={cn('w-full max-w-38.5 sm:h-11 h-9 ')}
         />
       ))}
     </div>

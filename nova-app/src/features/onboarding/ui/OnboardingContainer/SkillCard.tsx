@@ -21,7 +21,7 @@ export const SkillCard = ({ onValidChange }: SkillCardProps) => {
   };
 
   return (
-    <div className='sm:w-150 sm:h-24.5 flex flex-wrap gap-2.5 h-22.5'>
+    <div className='sm:h-24.5 grid grid-cols-2 gap-3 h-22.5'>
       {SKILL_OPTIONS.map((text) => (
         <ToggleButton
           size='lg'
@@ -30,7 +30,7 @@ export const SkillCard = ({ onValidChange }: SkillCardProps) => {
           variant='outline'
           selected={selected === text}
           onClick={() => toggleItem(text)}
-          className={cn('w-full max-w-38.5 sm:max-w-73.5 max-h-10 sm:h-11')}
+          className={cn('w-full max-h-10')}
         />
       ))}
     </div>
