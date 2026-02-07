@@ -1,5 +1,5 @@
 'use client';
-import { keyword_data } from '@/features/trend/mock/keyword';
+import { keyword_data } from '@/features/trend/data/keyword';
 import { cn } from '@/shared/utils/cn';
 
 interface CategoriesKeywordProp {
@@ -13,7 +13,7 @@ export const CategoriesKeyword = ({ selected, onSelected }: CategoriesKeywordPro
   console.log(selected);
 
   return (
-    <section className='grid grid-cols-2 md:gap-4 gap-2.5'>
+    <section className='grid grid-cols-2 md:gap-4 gap-2.5 mb-12 md:mb-0'>
       {keyword_data.map((item) => {
         const isSelected = selected === item.title;
         return (
