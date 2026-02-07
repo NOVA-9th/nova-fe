@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import { ThemeProvider } from './_providers';
 import { Toast } from '@/shared/ui';
-import { AuthHydration } from '@/shared/utils/authHydration';
+import { QueryProvider } from '@/app/_providers/QueryProvider';
+import { ThemeProvider } from 'next-themes';
 
 export const metadata: Metadata = {
   title: 'Nova',
@@ -35,16 +35,17 @@ export default function RootLayout({
   return (
     <html lang='ko' suppressHydrationWarning>
       <body className={`${pretendardJP.variable} ${wantedSans.variable} font-sans antialiased`}>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='light'
-          enableSystem={false}
-          disableTransitionOnChange={true}
-        >
-          <AuthHydration />
-          <Toast />
-          {children}
-        </ThemeProvider>
+        <QueryProvider>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='light'
+            enableSystem={false}
+            disableTransitionOnChange={true}
+          >
+            <Toast />
+            {children}
+          </ThemeProvider>
+        </QueryProvider>
       </body>
     </html>
   );
