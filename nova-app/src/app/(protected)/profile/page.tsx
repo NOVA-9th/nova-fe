@@ -5,12 +5,12 @@ import {
   UserInfoSection,
   DataManagementSection,
 } from '@/features/profile/ui';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { PageHeader } from '@/shared/ui';
 import { User } from 'lucide-react';
-import { useState } from 'react';
 
 const ProfilePage = () => {
-  const [value, setValue] = useState('김진성');
+  const { memberId } = useAuthStore();
 
   return (
     <>
@@ -18,17 +18,11 @@ const ProfilePage = () => {
       <div className='flex w-full justify-start items-start bg-alternative rounded-b-static-frame'>
         <div className='flex flex-col xl:flex-row w-full h-full justify-center items-start md:px-5 px-4 pb-5 gap-4'>
           <div className='flex flex-col flex-1 justify-start items-start w-full h-full gap-4'>
-            <UserInfoSection
-              name='이름'
-              description='ivory.ma9ic@gmail.com'
-              image='/test.png'
-              value={value}
-              setValue={setValue}
-            />
-            <LinkedAccountsSection />
+            <UserInfoSection memberId={memberId} />
+            <LinkedAccountsSection memberId={memberId} />
           </div>
           <div className='flex flex-col flex-2 justify-start items-start w-full h-full gap-4'>
-            <PersonalizationSettings />
+            <PersonalizationSettings memberId={memberId} />
             <DataManagementSection />
           </div>
         </div>
