@@ -12,7 +12,7 @@ export const HeaderBar = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const isHome = pathname === '/';
+  const isInputVisible = pathname === '/' || pathname === '/saved';
 
   return (
     <header className='p-4 px-5 flex justify-between items-center h-19'>
@@ -27,7 +27,7 @@ export const HeaderBar = () => {
       </button>
 
       <div className='flex items-center gap-3'>
-        {isHome && (
+        {isInputVisible && (
           <>
             <TextInput
               size='lg'
