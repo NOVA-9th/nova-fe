@@ -1,14 +1,14 @@
 'use client';
 
 import { IconButton, TextInput } from '@/shared/ui';
-import { Search } from 'lucide-react';
+import { Moon, Search, Sun } from 'lucide-react';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Logo, NovaLabel } from '@/shared/assets';
-import Image from 'next/image';
 
 export const HeaderBar = () => {
   const [keyword, setKeyword] = useState('');
+  const [isDark, setIsDark] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -36,7 +36,6 @@ export const HeaderBar = () => {
               icon={Search}
               placeholder='아티클 및 트렌드를 검색해보세요'
               className='w-100 max-sm:hidden'
-              isBadge={true}
             />
             <IconButton
               size='lg'
@@ -49,13 +48,14 @@ export const HeaderBar = () => {
           </>
         )}
 
-        <Image
-          src='/test.png'
-          alt='User Profile'
-          width={40}
-          height={40}
-          className='rounded-full object-cover sm:hidden'
-        />
+        <button
+          type='button'
+          aria-label='검색'
+          className='inline-flex items-center justify-center rounded-step4 bg-surface text-additive hover:bg-surface active:bg-surface h-11 w-11'
+          onClick={() => setIsDark((prev) => !prev)}
+        >
+          {isDark ? <Sun size={24} /> : <Moon size={24} />}
+        </button>
       </div>
     </header>
   );

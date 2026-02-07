@@ -2,7 +2,6 @@ import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon, X } from 'lucide-react';
 import React from 'react';
-import { TextBadge } from '@/shared/ui';
 
 const TextInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
@@ -58,7 +57,6 @@ interface TextInputProps extends VariantProps<typeof TextInputVariants> {
   placeholder?: string;
   icon?: LucideIcon;
   className?: string;
-  isBadge?: boolean;
 }
 
 export const TextInput = ({
@@ -70,7 +68,6 @@ export const TextInput = ({
   placeholder,
   icon,
   className,
-  isBadge = false,
 }: TextInputProps) => {
   return (
     <div className={cn(TextInputVariants({ size, variant, data }), className)}>
@@ -88,8 +85,6 @@ export const TextInput = ({
         placeholder={placeholder}
         className='caret-color placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
       />
-
-      {!value && isBadge && <TextBadge size='md' variant='surface' peak={false} text='Cmd + K' />}
 
       <button type='button' onClick={() => onChange('')} className='text-charcoal-optional'>
         <X size={size === 'md' ? 14 : 16} />
