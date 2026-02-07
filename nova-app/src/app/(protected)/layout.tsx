@@ -1,7 +1,16 @@
-import { HeaderBar, SideBar } from '@/widgets/layouts';
-import { FloatingBar } from '@/widgets/layouts';
+'use client';
+
+import { useAuthRedirect } from '@/features/login/model/useAuthRedirect';
+import { HeaderBar, SideBar, FloatingBar } from '@/widgets/layouts';
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
+  const { isBlocked } = useAuthRedirect({
+    when: 'loggedOut',
+    redirectTo: '/login',
+  });
+
+  if (isBlocked) return null;
+
   return (
     <div className='mx-auto flex h-dvh max-w-360 flex-col overflow-hidden md:border-l md:border-r border-outline'>
       <HeaderBar />
@@ -12,6 +21,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </main>
       </div>
+
       <FloatingBar />
     </div>
   );

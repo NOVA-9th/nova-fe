@@ -35,17 +35,6 @@ const ARTICLE_TYPE_CONFIG: Record<
   },
 };
 
-const keywordSample = [
-  'React',
-  'Server Components',
-  'Frontend',
-  'Backend',
-  'Transformer',
-  'Deep Learning',
-  'TypeScript',
-  'JavaScript',
-];
-
 export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -102,22 +91,22 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           <EvidenceCard evidenceSource='사례 정리' content={articleData.evidence} />
         </div>
       )}
-      <div className='min-w-0 w-full max-w-full'>
-        <div className='min-w-0 w-full max-w-full overflow-x-auto no-scrollbar sm:overflow-x-visible'>
+      {articleData.keywords && (
+        <div className='min-w-0 w-full max-w-full overflow-x-auto sm:overflow-x-visible'>
           <div className='inline-flex w-max gap-2.5 whitespace-nowrap sm:flex sm:flex-wrap sm:w-full sm:whitespace-normal'>
-            {keywordSample.map((chip) => (
+            {articleData.keywords.map((keyword) => (
               <TextBadge
-                key={chip}
+                key={keyword}
                 size='lg'
                 variant='surface'
                 peak={false}
-                text={`#${chip}`}
+                text={`#${keyword}`}
                 className='shrink-0'
               />
             ))}
           </div>
         </div>
-      </div>
+      )}
 
       <div className='flex w-full h-fit justify-between items-start gap-2.5'>
         <TextIconButton
