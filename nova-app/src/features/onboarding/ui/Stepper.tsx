@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 import { Step } from '@/features/onboarding/types/StepItem';
+import { memo } from 'react';
 
 interface StepperProps {
   currentStep: Step;
   labels: string[];
 }
 
-export const Stepper = ({ currentStep, labels }: StepperProps) => {
+export const Stepper = memo(({ currentStep, labels }: StepperProps) => {
   const STEP_ORDER: Step[] = ['step1', 'step2', 'step3', 'step4'];
   const currentIndex = STEP_ORDER.indexOf(currentStep) + 1;
 
@@ -67,4 +68,4 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
       })}
     </div>
   );
-};
+});

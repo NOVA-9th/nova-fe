@@ -4,6 +4,7 @@ import { useOnboarding } from '@/features/onboarding/models/useOnBoarding';
 import { Stepper } from '@/features/onboarding/ui';
 import { Button, Header } from '@/shared/ui';
 import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
 
 export const OnboardingContainer = () => {
   const {
@@ -20,21 +21,21 @@ export const OnboardingContainer = () => {
   const router = useRouter();
   const { label, description, Component } = currentItem;
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     if (currentStep === 'step4') {
       router.replace('/');
       return;
     }
     onNext();
-  };
+  }, [currentStep, onNext, router]);
 
-  const handleSkip = () => {
+  const handleSkip = useCallback(() => {
     if (currentStep === 'step4') {
       router.replace('/');
       return;
     }
     onNext();
-  };
+  }, [currentStep, onNext, router]);
 
   return (
     <main className='flex flex-col w-full max-w-90 gap-5 p-5 bg-base rounded-static-frame sm:max-w-160'>
