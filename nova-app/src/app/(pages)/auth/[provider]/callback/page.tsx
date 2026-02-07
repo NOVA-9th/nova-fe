@@ -5,6 +5,7 @@ import { useSearchParams, useRouter, useParams } from 'next/navigation';
 import { showToast } from '@/shared/utils/toast';
 import { handleGoogleCallback, handleKakaoCallback } from '@/features/login/api/login';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { getPersonalization } from '@/features/onboarding/api/onboarding';
 
 /**
  * URL에서 code 파라미터를 파싱하고 OAuth 콜백을 처리하는 컴포넌트
@@ -62,18 +63,29 @@ const OAuthCallbackContent = () => {
             : await handleGoogleCallback({ code });
 
         if (response.success && response.data) {
-          login(response.data.accessToken, response.data.memberId);
+          const { accessToken, memberId } = response.data;
+
+          // 로그인 상태 저장
+          login(accessToken, memberId);
 
           setStatus('success');
           showToast.success('로그인에 성공했습니다!');
 
-          // 성공 후 메인 페이지로 리다이렉트
-          setTimeout(() => {
-            router.push('/');
-          }, 1000);
+          try {
+            const personalization = await getPersonalization(memberId);
+
+            if (personalization?.background === null) {
+              router.replace('/onboarding?firstLogin=true'); // query param 추가
+            } else {
+              router.replace('/');
+            }
+          } catch (e) {
+            console.error('개인화 조회 실패:', e);
+            router.replace('/');
+          }
         } else {
-          setStatus('error');
           const message = response.message || '로그인에 실패했습니다.';
+          setStatus('error');
           setErrorMessage(message);
           showToast.error(message);
           setTimeout(() => router.push('/login'), 2000);
