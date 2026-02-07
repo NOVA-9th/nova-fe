@@ -16,7 +16,7 @@ export const EvidenceCard = ({ evidenceSource, content }: EvidenceCardProps) => 
         icon={CircleQuestionMark}
         text={evidenceSource}
       />
-      <span className='typo-body-base text-base line-clamp-2'>{content}</span>
+      <span className='typo-body-base text-base'>{content}</span>
     </div>
   );
 };
