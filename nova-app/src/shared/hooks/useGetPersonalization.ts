@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getPersonalization } from '@/features/onboarding/api/onboarding';
 import { MemberPersonalizationDto } from '@/features/onboarding/types/api';
 
-export const usePersonalization = (memberId: number) => {
+export const useGetPersonalization = (memberId: number) => {
   return useQuery<MemberPersonalizationDto | null>({
     queryKey: [memberId, 'background'],
     queryFn: () => getPersonalization(memberId),
