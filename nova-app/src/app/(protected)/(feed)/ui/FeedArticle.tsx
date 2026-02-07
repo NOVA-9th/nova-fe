@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 import type { FeedSearchRequest } from '@/features/feed/types/api';
 import { useMemo } from 'react';
+import ArticleCardSkeleton from './FeedArticleSkeleton';
+import FeedArticleError from './FeedArticleError';
 
 const ALL_TYPES: FeedSearchRequest['type'] = ['NEWS', 'JOB', 'COMMUNITY'];
 
@@ -40,15 +42,29 @@ const FeedArticle = () => {
     };
   }, [selectedSort, selectedPeriod, selectedTypes, selectedKeywords]);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['feedList', params],
     queryFn: () => getFeedList(params),
     gcTime: 10 * 60 * 1000,
     staleTime: 5 * 60 * 1000,
+    retry: 3,
   });
 
-  if (isLoading) return <div>로딩중...</div>;
-  if (isError) return <div>에러가 발생했어요</div>;
+  if (isLoading)
+    return (
+      <section className='space-y-4'>
+        {Array.from({ length: 5 }).map((_, idx) => (
+          <ArticleCardSkeleton key={idx} />
+        ))}
+      </section>
+    );
+
+  if (isError)
+    return (
+      <section className='space-y-4'>
+        <FeedArticleError onRetry={refetch} />
+      </section>
+    );
 
   const feedArticle = data?.data?.cardnews ?? [];
 
