@@ -1,18 +1,50 @@
 'use client';
 
-import { ItemList, SectionHeader } from '@/shared/ui';
+import { useState } from 'react';
+import { ItemList, SectionHeader, Modal } from '@/shared/ui';
 import { LinkedAccountsSectionSkeleton } from './skeletons';
 import GoogleLogoIcon from '@/shared/assets/GoogleIcon.svg';
 import KakaoLogoIcon from '@/shared/assets/KakaoTalkIcon.svg';
 import GithubLogoIcon from '@/shared/assets/GithubIcon.svg';
-import { useConnectedAccounts } from '../hooks/useProfile';
+import { showToast } from '@/shared/utils/toast';
+import {
+  useConnectedAccounts,
+  useDisconnectConnectedAccount,
+} from '../hooks/useProfile';
+import type { ConnectedAccountProvider } from '../api/profile';
 
 interface LinkedAccountsSectionProps {
   memberId: number | null;
 }
 
+const PROVIDER_LABELS: Record<ConnectedAccountProvider, string> = {
+  google: 'Google',
+  kakao: 'KakaoTalk',
+  github: 'Github',
+};
+
 export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) => {
+  const [disconnectModalProvider, setDisconnectModalProvider] = useState<
+    ConnectedAccountProvider | null
+  >(null);
+
   const { data: accountsData, isLoading } = useConnectedAccounts(memberId);
+  const disconnectMutation = useDisconnectConnectedAccount();
+
+  const handleDisconnectClick = (provider: ConnectedAccountProvider) => {
+    setDisconnectModalProvider(provider);
+  };
+
+  const handleDisconnectConfirm = async () => {
+    if (!disconnectModalProvider) return;
+    try {
+      await disconnectMutation.mutateAsync(disconnectModalProvider);
+      setDisconnectModalProvider(null);
+      showToast.success(`${PROVIDER_LABELS[disconnectModalProvider]} 계정 연결이 해제되었습니다.`);
+    } catch {
+      showToast.error('연결 해제에 실패했습니다.');
+    }
+  };
 
   if (isLoading) {
     return <LinkedAccountsSectionSkeleton />;
@@ -43,6 +75,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
             size: 'md',
             style: 'surface',
             peak: googleConnected,
+            onClick: googleConnected ? () => handleDisconnectClick('google') : undefined,
           }}
           className='w-full p-2'
         />
@@ -56,6 +89,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
             size: 'md',
             style: 'surface',
             peak: kakaoConnected,
+            onClick: kakaoConnected ? () => handleDisconnectClick('kakao') : undefined,
           }}
           className='w-full p-2'
         />
@@ -69,10 +103,20 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
             size: 'md',
             style: 'surface',
             peak: githubConnected,
+            onClick: githubConnected ? () => handleDisconnectClick('github') : undefined,
           }}
           className='w-full p-2'
         />
       </div>
+
+      {disconnectModalProvider && (
+        <Modal
+          content={`${PROVIDER_LABELS[disconnectModalProvider]} 계정 연결을 해제할까요?`}
+          confirmLabel='해제'
+          onConfirm={handleDisconnectConfirm}
+          onCancel={() => setDisconnectModalProvider(null)}
+        />
+      )}
     </section>
   );
 };

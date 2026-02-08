@@ -4,6 +4,7 @@ import {
   updateMemberName,
   deleteMember,
   getConnectedAccounts,
+  disconnectConnectedAccount,
   getPersonalization,
   updatePersonalization,
   getProfileImage,
@@ -13,6 +14,7 @@ import {
   resetHiddenCardNews,
   type MemberRequestDto,
   type MemberPersonalizationDto,
+  type ConnectedAccountProvider,
 } from '../api/profile';
 
 /**
@@ -59,6 +61,21 @@ export const useConnectedAccounts = (memberId: number | null) => {
     queryKey: ['connectedAccounts', memberId],
     queryFn: () => getConnectedAccounts(memberId!),
     enabled: memberId !== null,
+  });
+};
+
+/**
+ * 연결된 계정 해제 (취소)
+ */
+export const useDisconnectConnectedAccount = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (provider: ConnectedAccountProvider) =>
+      disconnectConnectedAccount(provider),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['connectedAccounts'] });
+    },
   });
 };
 

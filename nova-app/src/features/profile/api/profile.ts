@@ -103,6 +103,25 @@ export const getConnectedAccounts = async (
   return response.data;
 };
 
+export type ConnectedAccountProvider = 'google' | 'kakao' | 'github';
+
+/**
+ * 연결된 계정 해제 (취소)
+ * @param provider google | kakao | github
+ */
+export const disconnectConnectedAccount = async (
+  provider: ConnectedAccountProvider
+): Promise<ApiResponse<void>> => {
+  const path =
+    provider === 'google'
+      ? '/auth/google/disconnect'
+      : provider === 'kakao'
+        ? '/auth/kakao/disconnect'
+        : '/auth/github/disconnect';
+  const response = await axiosInstance.post<ApiResponse<void>>(path);
+  return response.data;
+};
+
 /**
  * 프로필 이미지 조회
  * @param memberId 멤버 ID
