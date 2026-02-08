@@ -51,7 +51,7 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
   return (
     <article
       className={cn(
-        'flex flex-col w-full h-fit items-start rounded-static-frame bg-white p-5 gap-5',
+        'flex flex-col w-full h-fit items-start rounded-static-frame bg-base border border-outline p-5 gap-5',
         className,
       )}
     >

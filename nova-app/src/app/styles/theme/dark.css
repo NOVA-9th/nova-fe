@@ -158,7 +158,7 @@
   }
 
   /* ---------- Foreground ---------- */
-  .dark .text-base {
+  .dark .text-base-color {
     color: var(--color-white-full);
   }
 

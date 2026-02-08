@@ -5,14 +5,16 @@ import { Moon, Search, Sun } from 'lucide-react';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Logo, NovaLabel } from '@/shared/assets';
+import { useThemeToggle } from '@/shared/hooks';
 
 export const HeaderBar = () => {
   const [keyword, setKeyword] = useState('');
-  const [isDark, setIsDark] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
 
   const isInputVisible = pathname === '/' || pathname === '/saved';
+
+  const { isDark, toggleTheme } = useThemeToggle();
 
   return (
     <header className='p-4 px-5 flex justify-between items-center h-19'>
@@ -50,11 +52,11 @@ export const HeaderBar = () => {
 
         <button
           type='button'
-          aria-label='검색'
-          className='inline-flex items-center justify-center rounded-step4 bg-surface text-additive hover:bg-surface active:bg-surface h-11 w-11'
-          onClick={() => setIsDark((prev) => !prev)}
+          aria-label='테마 전환'
+          className='inline-flex items-center justify-center rounded-step4 bg-surface text-additive hover:bg-surface active:bg-surface h-11 w-11 outline-none'
+          onClick={toggleTheme}
         >
-          {isDark ? <Sun size={24} /> : <Moon size={24} />}
+          {isDark ? <Moon size={24} /> : <Sun size={24} />}
         </button>
       </div>
     </header>
