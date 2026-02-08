@@ -11,6 +11,8 @@ import {
   useDeleteProfileImage,
 } from '../hooks/useProfile';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { getProfileImageUrl } from '@/shared/utils/profileImage';
+import { UserInfoSectionSkeleton } from './skeletons';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -21,7 +23,7 @@ interface UserInfoSectionProps {
 export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   const router = useRouter();
   const { logout } = useAuthStore();
-  const { data: memberInfo, isLoading } = useMemberInfo(memberId);
+  const { data: memberInfo, isLoading, dataUpdatedAt } = useMemberInfo(memberId);
   const updateNameMutation = useUpdateMemberName();
   const deleteMemberMutation = useDeleteMember();
   const uploadImageMutation = useUploadProfileImage();
@@ -178,12 +180,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   const hasChanges = (hasNameChanged && nameValue.trim() !== '') || !!selectedFile;
 
   if (isLoading) {
-    return (
-      <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
-        <SectionHeader text='사용자 정보' size='lg' />
-        <div className='text-optional'>로딩 중...</div>
-      </section>
-    );
+    return <UserInfoSectionSkeleton />;
   }
 
   if (!memberInfo?.data) {
@@ -213,7 +210,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             }}
           >
             <Image
-              src={previewImage || profileImage || '/test.png'}
+              src={previewImage || getProfileImageUrl(profileImage, dataUpdatedAt) || '/test.png'}
               alt='User Profile'
               width={48}
               height={48}

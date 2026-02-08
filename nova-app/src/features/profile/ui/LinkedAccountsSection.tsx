@@ -1,6 +1,7 @@
 'use client';
 
 import { ItemList, SectionHeader } from '@/shared/ui';
+import { LinkedAccountsSectionSkeleton } from './skeletons';
 import GoogleLogoIcon from '@/shared/assets/GoogleIcon.svg';
 import KakaoLogoIcon from '@/shared/assets/KakaoTalkIcon.svg';
 import GithubLogoIcon from '@/shared/assets/GithubIcon.svg';
@@ -14,12 +15,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
   const { data: accountsData, isLoading } = useConnectedAccounts(memberId);
 
   if (isLoading) {
-    return (
-      <section className='flex flex-col justify-start items-start bg-base rounded-static-frame w-full gap-5 p-5'>
-        <SectionHeader text='연결된 계정' size='lg' />
-        <div className='text-optional'>로딩 중...</div>
-      </section>
-    );
+    return <LinkedAccountsSectionSkeleton />;
   }
 
   if (!accountsData?.data) {

@@ -10,11 +10,16 @@ import { SIDE_ITEMS } from '@/widgets/layouts/sidebar/data/SideItems';
 import { useState } from 'react';
 import { Modal } from '@/shared/ui';
 import { showToast } from '@/shared/utils/toast';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { useMemberInfo } from '@/features/profile/hooks/useProfile';
+import { getProfileImageUrl } from '@/shared/utils/profileImage';
 
 export const SideBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const { memberId } = useAuthStore();
+  const { data: memberInfo, isLoading, dataUpdatedAt } = useMemberInfo(memberId);
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -54,24 +59,41 @@ export const SideBar = () => {
       </section>
 
       <section className='flex items-center justify-between h-14.5 px-2'>
-        <div className='flex items-center gap-2'>
-          <Image
-            src='/test.png'
-            alt='User Profile'
-            width={40}
-            height={40}
-            className='rounded-full object-cover bg-black'
-          />
-          <div className='flex flex-col gap-1 px-1'>
-            <h3 className='typo-body-base text-base-color'>조현우님</h3>
-            <p className='typo-callout-base text-additive'>디자인 전공 | 프론트엔드</p>
+        <div className='flex items-center gap-2 min-w-0 flex-1'>
+          {isLoading ? (
+            <div className='w-10 h-10 rounded-full bg-alternative animate-pulse shrink-0' />
+          ) : (
+            <Image
+              src={getProfileImageUrl(memberInfo?.data?.profileImage, dataUpdatedAt)}
+              alt='User Profile'
+              width={40}
+              height={40}
+              className='rounded-full object-cover bg-black shrink-0'
+            />
+          )}
+          <div className='flex flex-col gap-1 px-1 min-w-0 flex-1'>
+            {isLoading ? (
+              <>
+                <div className='h-4 w-20 bg-alternative rounded animate-pulse' />
+                <div className='h-3 w-28 bg-alternative rounded animate-pulse' />
+              </>
+            ) : (
+              <>
+                <h3 className='typo-body-base text-base-color truncate'>
+                  {memberInfo?.data?.name ?? '사용자'}
+                </h3>
+                <p className='typo-callout-base text-additive truncate'>
+                  {memberInfo?.data?.email ?? ''}
+                </p>
+              </>
+            )}
           </div>
         </div>
         <button
           type='button'
           aria-label='로그아웃'
           onClick={() => setIsModalOpen(true)}
-          className='text-optional hover:text-additive transition-colors outline-none'
+          className='text-optional hover:text-additive transition-colors outline-none shrink-0'
         >
           <LogOut size={16} />
         </button>

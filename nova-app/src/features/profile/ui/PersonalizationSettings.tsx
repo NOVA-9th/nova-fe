@@ -2,6 +2,7 @@
 
 import { Button, ChipInput, SectionHeader, SelectionChip, TextBadge } from '@/shared/ui';
 import { PERSONALIZATION_TEXT } from '../data/PersonalizationText';
+import { PersonalizationSettingsSkeleton } from './skeletons';
 import { usePersonalization, useUpdatePersonalization } from '../hooks/useProfile';
 import { MemberLevel } from '../api/types';
 import { useState, useEffect } from 'react';
@@ -127,12 +128,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   };
 
   if (isLoading) {
-    return (
-      <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
-        <SectionHeader text='개인화 설정' size='lg' />
-        <div className='text-optional'>로딩 중...</div>
-      </section>
-    );
+    return <PersonalizationSettingsSkeleton />;
   }
 
   return (
