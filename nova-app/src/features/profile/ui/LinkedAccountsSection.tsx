@@ -63,6 +63,19 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           }}
           className='w-full p-2'
         />
+        <ItemList
+          size='lg'
+          label='Github'
+          description={githubConnected ? '연결됨' : '연결안됨'}
+          leftIcon={GithubLogoIcon}
+          rightButton={{
+            label: githubConnected ? '취소' : '연결',
+            size: 'md',
+            style: 'surface',
+            peak: githubConnected,
+          }}
+          className='w-full p-2'
+        />
       </div>
     </section>
   );
