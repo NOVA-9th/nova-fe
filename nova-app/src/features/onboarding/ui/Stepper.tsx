@@ -23,7 +23,7 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
               {/* 왼쪽 선 */}
               <div
                 className={clsx(
-                  'flex-1 max-w-5 h-0.75 sm:max-w-13.75 mr-2 rounded-r-static-pill',
+                  'flex-1 h-0.75 mr-2 rounded-r-static-pill',
                   step === 1
                     ? 'bg-transparent'
                     : step <= currentIndex
@@ -44,7 +44,7 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
               {/* 오른쪽 선 */}
               <div
                 className={clsx(
-                  'flex-1 ml-2 max-w-5 h-0.75 sm:max-w-13.75 rounded-l-static-pill',
+                  'flex-1 ml-2 h-0.75 rounded-l-static-pill',
                   step === STEP_ORDER.length
                     ? 'bg-transparent'
                     : step < currentIndex

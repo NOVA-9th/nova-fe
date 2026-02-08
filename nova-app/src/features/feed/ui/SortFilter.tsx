@@ -2,11 +2,11 @@
 
 import { SelectionChip } from '@/shared/ui';
 import { SORT_ITEMS } from '@/features/feed/data/FilterData';
-import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
 import { FilterSection } from '@/features/feed/ui/FilterSection';
+import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 
 export const SortFilter = () => {
-  const { resetSort, selectedSort, setSelectedSort } = useFeedFilters();
+  const { resetSort, selectedSort, setSelectedSort } = useFeedFilterStore();
 
   return (
     <FilterSection title='정렬' onReset={resetSort}>
