@@ -11,10 +11,10 @@ if (!API_BASE_URL) {
 // 커스텀 fetch adapter 구현 (GET, POST, PUT, PATCH, DELETE 모두 지원)
 const fetchAdapter: AxiosAdapter = async (config: InternalAxiosRequestConfig) => {
   const { url, method = 'GET', data, headers, timeout, signal, params } = config;
-
+  
   // URL 구성
   let fullUrl = url?.startsWith('http') ? url : `${config.baseURL}${url}`;
-
+  
   // Query 파라미터 추가
   if (params) {
     const searchParams = new URLSearchParams();
@@ -33,15 +33,15 @@ const fetchAdapter: AxiosAdapter = async (config: InternalAxiosRequestConfig) =>
       fullUrl += (fullUrl.includes('?') ? '&' : '?') + queryString;
     }
   }
-
+  
   // AbortController로 timeout 처리
   const controller = new AbortController();
   let timeoutId: NodeJS.Timeout | null = null;
-
+  
   if (timeout) {
     timeoutId = setTimeout(() => controller.abort(), timeout);
   }
-
+  
   // Request 옵션 구성
   const requestOptions: RequestInit = {
     method: method.toUpperCase(),
@@ -120,27 +120,27 @@ const fetchAdapter: AxiosAdapter = async (config: InternalAxiosRequestConfig) =>
     }
   } catch (error) {
     if (timeoutId) clearTimeout(timeoutId);
-
+    
     // AbortError (timeout) 처리
     if (error instanceof Error && error.name === 'AbortError') {
       const timeoutError = new axios.AxiosError(
         timeout ? `timeout of ${timeout}ms exceeded` : 'Request aborted',
         axios.AxiosError.ETIMEDOUT,
-        config as any,
+        config as any
       );
       throw timeoutError;
     }
-
+    
     // 이미 AxiosError인 경우 그대로 throw
     if (axios.isAxiosError(error)) {
       throw error;
     }
-
+    
     // 기타 에러
     throw new axios.AxiosError(
       error instanceof Error ? error.message : 'Network Error',
       axios.AxiosError.ERR_NETWORK,
-      config as any,
+      config as any
     );
   }
 };
@@ -162,7 +162,7 @@ axiosInstance.interceptors.request.use(
       // zustand persist 형식으로 저장된 토큰 읽기
       // zustand persist는 'auth-storage' 키에 JSON으로 저장
       let token: string | null = null;
-
+      
       try {
         const authStorage = localStorage.getItem('auth-storage');
         if (authStorage) {
@@ -172,7 +172,7 @@ axiosInstance.interceptors.request.use(
       } catch (error) {
         console.warn('[Axios] Failed to parse auth-storage from localStorage', error);
       }
-
+      
       // 토큰이 있으면 헤더에 추가
       if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`;

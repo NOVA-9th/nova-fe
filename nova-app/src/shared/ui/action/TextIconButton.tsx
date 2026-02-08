@@ -10,6 +10,7 @@ interface TextIconButtonProps extends VariantProps<typeof ButtonVariants> {
   className?: string;
   leftIcon?: LucideIcon;
   rightIcon?: LucideIcon;
+  disabled?: boolean;
 }
 
 export const TextIconButton = ({
@@ -21,9 +22,19 @@ export const TextIconButton = ({
   peak,
   leftIcon,
   rightIcon,
+  disabled = false,
 }: TextIconButtonProps) => {
   return (
-    <button onClick={onClick} className={cn(ButtonVariants({ size, style, peak }), className)}>
+    <button
+      type='button'
+      disabled={disabled}
+      onClick={disabled ? undefined : onClick}
+      className={cn(
+        ButtonVariants({ size, style, peak }),
+        disabled && 'opacity-50 cursor-not-allowed',
+        className
+      )}
+    >
       {leftIcon && (
         <span>
           {React.createElement(leftIcon, {

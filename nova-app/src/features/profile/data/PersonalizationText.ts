@@ -33,6 +33,9 @@ export const PERSONALIZATION_TEXT = {
         '시스템 개발',
         'QA / Testing',
       ],
+      // 백엔드 Interest 테이블 ID 매핑 (인덱스 기반)
+      // 각 옵션의 인덱스에 해당하는 백엔드 Interest ID
+      ids: [1, 2, 3, 4, 5, 12, 6, 7, 8, 9, 10, 11, 14, 13, 15, 16] as number[],
     },
     skillLevel: {
       title: '기술 역량',

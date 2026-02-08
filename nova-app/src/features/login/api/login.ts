@@ -47,3 +47,9 @@ export const handleKakaoCallback = async (
   });
   return response.data;
 };
+
+// 토큰 무효화
+export const invalidateToken = async (): Promise<ApiResponse<null>> => {
+  const response = await axiosInstance.post<ApiResponse<null>>('/auth/invalidate');
+  return response.data;
+};
