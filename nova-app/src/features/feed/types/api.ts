@@ -1,7 +1,7 @@
 export type CardNews = {
   id: number;
   title: string;
-  cardtype: string[];
+  cardType: string;
   author: string;
   publishedAt: string;
   summary: string;
