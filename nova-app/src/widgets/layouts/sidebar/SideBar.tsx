@@ -10,11 +10,14 @@ import { SIDE_ITEMS } from '@/widgets/layouts/sidebar/data/SideItems';
 import { useState } from 'react';
 import { Modal } from '@/shared/ui';
 import { showToast } from '@/shared/utils/toast';
+import { useSavedCount } from './hooks/useSaveCount';
 
 export const SideBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+
+  const { data: savedCount } = useSavedCount();
 
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
@@ -45,8 +48,12 @@ export const SideBar = () => {
                 </p>
               </div>
 
-              {item.badge && (
+              {item.badge && item.href === '/' && (
                 <TextBadge size='sm' variant='surface' peak={false} text={item.badge} />
+              )}
+
+              {item.href === '/saved' && typeof savedCount === 'number' && (
+                <TextBadge size='sm' variant='surface' peak={false} text={`${savedCount}개`} />
               )}
             </SideTabItemCustom>
           </Link>

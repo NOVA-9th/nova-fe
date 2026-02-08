@@ -20,7 +20,6 @@ export const SIDE_ITEMS: SideItem[] = [
     title: '저장함',
     description: '북마크한 아티클 관리',
     icon: Bookmark,
-    badge: '9개',
   },
   {
     href: '/profile',

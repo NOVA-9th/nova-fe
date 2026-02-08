@@ -13,7 +13,7 @@ export const useBookmarkToggle = (cardnewsId: number, initialSaved: boolean) => 
     mutationFn: () => postBookmark(cardnewsId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['feedList'] });
-      setOptimisticSaved(null); // 서버 동기화 시 실제 데이터로 복귀
+      queryClient.invalidateQueries({ queryKey: ['savedCount'] });
       showToast.success('북마크가 저장되었습니다');
     },
     onError: () => {
@@ -26,7 +26,7 @@ export const useBookmarkToggle = (cardnewsId: number, initialSaved: boolean) => 
     mutationFn: () => deleteBookmark(cardnewsId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['feedList'] });
-      setOptimisticSaved(null);
+      queryClient.invalidateQueries({ queryKey: ['savedCount'] });
       showToast.success('북마크가 삭제되었습니다');
     },
     onError: () => {

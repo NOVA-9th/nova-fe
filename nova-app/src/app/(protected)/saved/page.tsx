@@ -1,17 +1,12 @@
-import { mockArticleData } from '@/features/saved/mocks/articleMockData';
+import { PageHeader, SectionHeader, SideTabItemCustom, TextIconButton } from '@/shared/ui';
 import { Bookmark, Download } from 'lucide-react';
-import {
-  ArticleCard,
-  PageHeader,
-  SectionHeader,
-  SideTabItemCustom,
-  TextIconButton,
-} from '@/shared/ui';
+
 import {
   SavedStaticsMockData,
   SideTabCollectionMockData,
 } from '@/features/saved/mocks/SideTabMockData';
 import { KeywordCard, SavedStatics } from '@/features/saved/ui';
+import SavedArticle from '@/app/(protected)/saved/ui/SavedActicle';
 
 const SavedPage = () => {
   return (
@@ -20,10 +15,9 @@ const SavedPage = () => {
       <div className='flex flex-col xl:flex-row w-full justify-start items-start md:px-5 px-4 pb-5 gap-4'>
         <section className='flex flex-col h-full w-full gap-4 flex-1 min-w-0 overflow-hidden'>
           <KeywordCard />
-          {mockArticleData.map((article) => (
-            <ArticleCard key={article.id} articleData={article} />
-          ))}
+          <SavedArticle />
         </section>
+
         <aside className='flex flex-col w-full xl:w-80 lg:shrink-0 h-full bg-alternative gap-4'>
           <section className='flex flex-col w-full h-fit justify-start items-start p-5 rounded-static-frame bg-base gap-5'>
             <SectionHeader size='lg' text='컬렉션' />
@@ -43,6 +37,7 @@ const SavedPage = () => {
               ))}
             </section>
           </section>
+
           <section className='flex flex-col w-full h-fit justify-start items-start p-5 rounded-static-frame bg-base gap-5'>
             <SectionHeader size='lg' text='저장함 통계' />
             <section className='flex flex-col w-full h-fit justify-center items-start gap-1'>
