@@ -59,6 +59,11 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
         onSuccess: () => {
           showToast.success('저장되었습니다.');
         },
+        onError: (error: Error) => {
+          showToast.error(
+            error?.message || '개인화 설정 저장에 실패했습니다. 다시 시도해주세요.'
+          );
+        },
       }
     );
   };
@@ -145,7 +150,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
           })}
         </div>
       </div>
-      {/* 관심심 분야 */}
+      {/* 관심 분야 */}
       <div className='flex flex-col justify-start items-start w-full gap-3'>
         <SectionHeader
           text={PERSONALIZATION_TEXT.sections.interests.title}
