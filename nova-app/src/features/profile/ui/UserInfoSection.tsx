@@ -47,22 +47,6 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     }
   }, [memberInfo?.data]);
 
-  const handleNameUpdate = () => {
-    if (!memberId || !nameValue.trim()) return;
-
-    updateNameMutation.mutate(
-      {
-        memberId,
-        requestDto: { name: nameValue.trim() },
-      },
-      {
-        onSuccess: () => {
-          // 성공 시 처리 (캐시 자동 업데이트됨)
-        },
-      }
-    );
-  };
-
   const handleDeleteMemberClick = () => {
     if (!memberId) return;
     setIsDeleteMemberModalOpen(true);

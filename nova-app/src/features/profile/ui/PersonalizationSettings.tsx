@@ -12,19 +12,9 @@ interface PersonalizationSettingsProps {
   memberId: number | null;
 }
 
-// MemberLevel을 한국어로 매핑
-const memberLevelMap: Record<MemberLevel, string> = {
-  [MemberLevel.NOVICE]: '입문자',
-  [MemberLevel.BEGINNER]: '초급자',
-  [MemberLevel.INTERMEDIATE]: '중급자',
-  [MemberLevel.ADVANCED]: '숙련자',
-};
-
 export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsProps) => {
   const { data: personalizationData, isLoading } = usePersonalization(memberId);
   const updatePersonalizationMutation = useUpdatePersonalization();
-
-  const [selectedMajor, setSelectedMajor] = useState<number | null>(null);
   const [selectedInterests, setSelectedInterests] = useState<number[]>([]);
   const [selectedLevel, setSelectedLevel] = useState<MemberLevel | null>(null);
   const [keywords, setKeywords] = useState<string[]>([]);
@@ -76,11 +66,6 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   // 인덱스를 ID로 변환
   const getInterestIdByIndex = (index: number): number => {
     return PERSONALIZATION_TEXT.sections.interests.ids[index];
-  };
-
-  // ID를 인덱스로 변환
-  const getInterestIndexById = (id: number): number => {
-    return PERSONALIZATION_TEXT.sections.interests.ids.indexOf(id);
   };
 
   const toggleInterest = (index: number) => {
