@@ -1,6 +1,9 @@
 import { axiosInstance } from '@/shared/api';
 import { ApiResponse } from '@/shared/types';
-import { MemberPersonalizationDto } from '../types/api';
+import {
+  KeywordPersonalizationDto,
+  MemberPersonalizationDto,
+} from '@/features/onboarding/types/api';
 
 export const getPersonalization = async (
   memberId: number,
@@ -14,5 +17,16 @@ export const getPersonalization = async (
   } catch (error) {
     console.error('getPersonalization 호출 중 오류:', error);
     return null;
+  }
+};
+
+export const getKeywords = async () => {
+  try {
+    const response =
+      await axiosInstance.get<ApiResponse<KeywordPersonalizationDto>>(`/api/keywords`);
+    return response.data.data ?? [];
+  } catch (error) {
+    console.error('getKeywords 호출 중 오류:', error);
+    return [];
   }
 };
