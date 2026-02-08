@@ -9,7 +9,7 @@ type FeedArticleErrorProps = {
 
 const FeedArticleError = ({ onRetry }: FeedArticleErrorProps) => {
   return (
-    <article className='flex w-full flex-col gap-4 rounded-static-frame border border-outline bg-white p-5'>
+    <article className='flex w-full flex-col gap-4 rounded-static-frame border border-outline bg-base p-5'>
       <div className='flex items-center gap-3'>
         <div className='flex h-10 w-10 items-center justify-center rounded-full bg-surface'>
           <AlertTriangle size={18} />
