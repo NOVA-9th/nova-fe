@@ -1,6 +1,5 @@
 'use client';
 
-import { cn } from '@/shared/utils/cn';
 import {
   SquareArrowOutUpRight,
   BookOpenText,
@@ -12,49 +11,36 @@ import {
   Newspaper,
   Bookmark,
 } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button, Header, IconButton, SectionHeader, TextBadge, TextIconButton } from '@/shared/ui';
-import { ArticleData } from '@/features/saved/types/ArticleType';
 import { EvidenceCard } from '@/features/saved/ui';
+import { CardNews } from '@/features/feed/types/api';
+import { getRelativeTime } from '@/features/feed/utils/time';
 
 const ARTICLE_TYPE_CONFIG: Record<
-  'news' | 'recruitment' | 'community',
+  'NEWS' | 'JOB' | 'COMMUNITY',
   { icon: LucideIcon; title: string }
 > = {
-  news: {
-    icon: Newspaper,
-    title: '뉴스',
-  },
-  recruitment: {
-    icon: FileUser,
-    title: '채용',
-  },
-  community: {
-    icon: EarthIcon,
-    title: '커뮤니티',
-  },
+  NEWS: { icon: Newspaper, title: '뉴스' },
+  JOB: { icon: FileUser, title: '채용' },
+  COMMUNITY: { icon: EarthIcon, title: '커뮤니티' },
 };
 
-interface ArticleCardProps {
-  className?: string;
-  children?: React.ReactNode;
-  articleData: ArticleData;
-}
-
-export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
+export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const typeConfig = articleData.type
-    ? ARTICLE_TYPE_CONFIG[articleData.type]
-    : ARTICLE_TYPE_CONFIG['news'];
+  const firstType = Array.isArray(articleData.cardtype) ? articleData.cardtype[0] : undefined;
+
+  const typeKey: 'NEWS' | 'JOB' | 'COMMUNITY' =
+    firstType === 'NEWS' || firstType === 'JOB' || firstType === 'COMMUNITY' ? firstType : 'NEWS';
+
+  const typeConfig = ARTICLE_TYPE_CONFIG[typeKey];
+
+  const evidences = (articleData.evidence ?? []).map((e) => e.trim()).filter(Boolean);
+  const evidenceCount = evidences.length;
 
   return (
-    <article
-      className={cn(
-        'flex flex-col w-full h-fit items-start rounded-static-frame bg-white p-5 gap-5',
-        className,
-      )}
-    >
+    <article className='flex flex-col w-full min-w-0 h-fit items-start rounded-static-frame bg-white p-5 gap-5'>
       <div className='flex w-full h-fit justify-start items-center gap-2.5'>
         {typeConfig && (
           <TextBadge
@@ -65,57 +51,76 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
             text={typeConfig.title}
           />
         )}
-        {articleData.relevance && (
-          <TextBadge
-            size='lg'
-            variant='data'
-            peak={false}
-            text={`관련도 ${articleData.relevance}%`}
-          />
-        )}
+
+        <TextBadge size='lg' variant='data' peak={false} text='관련도 91%' />
       </div>
       <Header
         size='md'
         label={articleData.title}
-        subLabel={`${articleData.source} | ${articleData.author} | ${articleData.date}`}
+        subLabel={`${articleData.siteName} | ${articleData.author || '익명'} | ${getRelativeTime(
+          articleData.publishedAt,
+        )}`}
         className='py-0'
       />
       <div className='flex flex-col w-full h-fit justify-start items-start rounded-interactive-default bg-surface p-4 gap-4'>
         <TextBadge size='lg' variant='surface' peak={false} icon={Brain} text='AI 요약' />
-        <span className='typo-body-base text-base'>{articleData.aiSummary}</span>
+        <span className='typo-body-base text-base'>{articleData.summary}</span>
       </div>
       <div className='flex w-full h-fit justify-between items-center gap-2.5'>
-        <div className='flex gap-1.5'>
+        <div className='flex gap-1.5 items-center'>
           <SectionHeader size='sm' peak={false} leftIcon={BookOpenText} text='Evidence' />
           <TextBadge
             size='md'
             variant='surface'
             peak={false}
-            text={`${articleData.evidences.length}개`}
+            text={`${evidenceCount}개`}
+            className='h-5'
           />
         </div>
-        <button
-          className='flex justify-center items-center gap-1 typo-callout-key text-optional'
-          onClick={() => setIsOpen(!isOpen)}
-        >
-          <p>{isOpen ? '접기' : '펼치기'}</p>
-          <ChevronDownIcon
-            size={14}
-            className={`transition-transform duration-300 ${isOpen ? '' : '-rotate-180'}`}
-          />
-        </button>
+
+        {evidenceCount > 0 && (
+          <button
+            className='flex justify-center items-center gap-1 typo-callout-key text-optional'
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <p>{isOpen ? '접기' : '펼치기'}</p>
+            <ChevronDownIcon
+              size={14}
+              className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+            />
+          </button>
+        )}
       </div>
-      {isOpen && articleData.evidences.length > 0 && (
+
+      {isOpen && evidenceCount > 0 && (
         <div className='flex flex-col w-full justify-start items-start border border-outline rounded-static-frame p-4 gap-4'>
-          {articleData.evidences.map((evidence) => (
+          {evidences.map((content, idx) => (
             <EvidenceCard
-              key={evidence.id}
-              evidenceSource={evidence.evidenceSource}
-              content={evidence.content}
+              key={`${articleData.id}-evidence-${idx}`}
+              evidenceSource='근거'
+              content={content}
             />
           ))}
         </div>
       )}
+
+      {articleData.keywords?.length > 0 && (
+        <div className='min-w-0 w-full max-w-full overflow-x-auto sm:overflow-x-visible'>
+          <div className='inline-flex w-max gap-2.5 whitespace-nowrap sm:flex sm:flex-wrap sm:w-full sm:whitespace-normal'>
+            {articleData.keywords.map((keyword) => (
+              <TextBadge
+                key={keyword}
+                size='lg'
+                variant='surface'
+                peak={false}
+                text={`#${keyword}`}
+                className='shrink-0'
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
       <div className='flex w-full h-fit justify-between items-start gap-2.5'>
         <TextIconButton
           style='surface'
@@ -123,9 +128,7 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
           size='lg'
           label='원문 보기'
           leftIcon={SquareArrowOutUpRight}
-          onClick={() => {
-            window.open(articleData.originalUrl, '_blank');
-          }}
+          onClick={() => window.open(articleData.originalUrl, '_blank')}
           className='gap-1.5'
         />
         <div className='flex justify-center items-center gap-2.5'>
