@@ -2,10 +2,12 @@
 
 import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import { SKILL_OPTIONS } from '@/features/onboarding/data/SkillOptions';
 import { cn } from '@/shared/utils/cn';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useShallow } from 'zustand/shallow';
+import { PERSONALIZATION_TEXT } from '@/features/profile/data/PersonalizationText';
+import { MemberLevel } from '@/features/profile/api/profile';
+import { getLevelIndex } from '@/shared/utils/personalization';
 
 interface SkillCardProps {
   onValidChange: (isValid: boolean) => void;
@@ -19,36 +21,46 @@ export const SkillCard = ({ onValidChange }: SkillCardProps) => {
     })),
   );
 
-  const initialSelected = useMemo(() => stepData.step3?.[0] ?? null, [stepData.step3]);
-  const [selected, setSelected] = useState<string | null>(initialSelected);
+  const initialSelected = useMemo(() => stepData.step3 ?? null, [stepData.step3]);
+  const [selected, setSelected] = useState<MemberLevel | null>(initialSelected);
 
   useEffect(() => {
     onValidChange(!!selected);
   }, [selected, onValidChange]);
 
   useEffect(() => {
-    setStepData('step3', selected ? [selected] : []);
+    setStepData('step3', selected);
   }, [selected, setStepData]);
 
-  const toggleItem = useCallback((text: string) => {
+  const toggleItem = useCallback((text: MemberLevel) => {
     setSelected((prev) => (prev === text ? null : text));
   }, []);
 
-  const buttons = useMemo(
-    () =>
-      SKILL_OPTIONS.map((text) => (
+  const handleLevelChange = (index: number) => {
+    const levels = [
+      MemberLevel.NOVICE,
+      MemberLevel.BEGINNER,
+      MemberLevel.INTERMEDIATE,
+      MemberLevel.ADVANCED,
+    ];
+    setSelected(levels[index]);
+  };
+
+  const buttons = useMemo(() => {
+    return PERSONALIZATION_TEXT.sections.skillLevel.options.map((option, index) => {
+      return (
         <ToggleButton
           size='lg'
-          key={text}
-          text={text}
+          key={option}
+          text={option}
           variant='outline'
-          selected={selected === text}
-          onClick={() => toggleItem(text)}
+          selected={index === getLevelIndex(selected)}
+          onClick={() => handleLevelChange(index)}
           className={cn('w-full max-w-38.5 sm:max-w-73.5 max-h-10 sm:h-11')}
         />
-      )),
-    [selected, toggleItem],
-  );
+      );
+    });
+  }, [selected]);
 
   return <div className='sm:w-150 sm:h-24.5 flex flex-wrap gap-2.5 h-22.5'>{buttons}</div>;
 };

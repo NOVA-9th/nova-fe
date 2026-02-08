@@ -2,11 +2,12 @@
 
 import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import { INTEREST_OPTIONS } from '@/features/onboarding/data/InterestOptions';
+import { PERSONALIZATION_TEXT } from '@/features/profile/data/PersonalizationText';
 import { cn } from '@/shared/utils/cn';
 import { showToast } from '@/shared/utils/toast';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useShallow } from 'zustand/shallow';
+import { getInterestIdByIndex } from '@/shared/utils/personalization';
 
 interface InterestCardProps {
   onValidChange: (isValid: boolean) => void;
@@ -20,25 +21,33 @@ export const InterestCard = ({ onValidChange }: InterestCardProps) => {
     })),
   );
 
-  const initialSelected = useMemo(() => stepData.step2 ?? [], [stepData.step2]);
-  const [selected, setSelected] = useState<string[]>(initialSelected);
+  const initialSelectedIds = useMemo(() => stepData.step2 ?? [], [stepData.step2]);
+  const [selectedIds, setSelectedIds] = useState<number[]>(initialSelectedIds);
+
+  const selectedTexts = useMemo(
+    () => selectedIds.map((id) => PERSONALIZATION_TEXT.sections.interests.options[id]),
+    [selectedIds],
+  );
+
+  // 유효성 체크
+  useEffect(() => {
+    onValidChange(selectedIds.length > 0);
+  }, [selectedIds, onValidChange]);
 
   useEffect(() => {
-    onValidChange(selected.length > 0);
-  }, [selected, onValidChange]);
+    setStepData('step2', selectedIds);
+  }, [selectedIds, setStepData]);
 
-  useEffect(() => {
-    setStepData('step2', selected);
-  }, [selected, setStepData]);
+  const toggleItem = useCallback((index: number) => {
+    const id = getInterestIdByIndex(index);
 
-  const toggleItem = useCallback((text: string) => {
-    setSelected((prev) => {
-      if (prev.includes(text)) {
-        return prev.filter((item) => item !== text);
+    setSelectedIds((prev) => {
+      if (prev.includes(id)) {
+        return prev.filter((item) => item !== id);
       }
 
       if (prev.length < 2) {
-        return [...prev, text];
+        return [...prev, id];
       }
 
       setTimeout(() => {
@@ -49,21 +58,22 @@ export const InterestCard = ({ onValidChange }: InterestCardProps) => {
     });
   }, []);
 
-  const buttons = useMemo(
-    () =>
-      INTEREST_OPTIONS.map((text) => (
+  const buttons = useMemo(() => {
+    return PERSONALIZATION_TEXT.sections.interests.options.map((option, index) => {
+      const id = getInterestIdByIndex(index); // 백엔드 ID
+      return (
         <ToggleButton
-          key={text}
+          key={option}
           size='md'
-          text={text}
+          text={option}
           variant='outline'
-          selected={selected.includes(text)}
-          onClick={() => toggleItem(text)}
+          selected={selectedIds.includes(id)} // <- 여기 수정
+          onClick={() => toggleItem(index)}
           className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11 sm:text-base!')}
         />
-      )),
-    [selected, toggleItem],
-  );
+      );
+    });
+  }, [selectedIds, toggleItem]);
 
   return (
     <div className='w-full h-full sm:max-w-150 sm:max-h-53 max-w-80 max-h-143.5 flex flex-wrap gap-2 sm:gap-2.5'>

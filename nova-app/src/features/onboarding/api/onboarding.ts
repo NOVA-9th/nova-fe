@@ -1,9 +1,7 @@
 import { axiosInstance } from '@/shared/api';
 import { ApiResponse } from '@/shared/types';
-import {
-  KeywordPersonalizationDto,
-  MemberPersonalizationDto,
-} from '@/features/onboarding/types/api';
+import { KeywordPersonalizationDto } from '@/features/onboarding/types/api';
+import { MemberPersonalizationDto } from '@/features/profile/api/types';
 
 export const getPersonalization = async (
   memberId: number,

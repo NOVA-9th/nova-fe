@@ -2,13 +2,13 @@
 
 import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import { MAJOR_OPTIONS } from '@/features/onboarding/data/MajorOptions';
 import { cn } from '@/shared/utils/cn';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useShallow } from 'zustand/shallow';
+import { PERSONALIZATION_TEXT } from '@/features/profile/data/PersonalizationText';
 
 interface MajorCardProps {
-  onValidChange: (isValid: boolean) => void;
+  onValidChange: (isValid: boolean) => void; // 유효성 전달
 }
 
 export const MajorCard = ({ onValidChange }: MajorCardProps) => {
@@ -19,16 +19,13 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
     })),
   );
 
-  const initialSelected = useMemo(() => stepData.step1?.[0] ?? null, [stepData.step1]);
+  const initialSelected = useMemo(() => stepData.step1 ?? null, [stepData.step1]);
   const [selected, setSelected] = useState<string | null>(initialSelected);
 
   useEffect(() => {
+    setStepData('step1', selected);
     onValidChange(!!selected);
-  }, [selected, onValidChange]);
-
-  useEffect(() => {
-    setStepData('step1', selected ? [selected] : []);
-  }, [selected, setStepData]);
+  }, [selected, setStepData, onValidChange]);
 
   const toggleItem = useCallback((text: string) => {
     setSelected((prev) => (prev === text ? null : text));
@@ -36,7 +33,7 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
 
   const buttons = useMemo(
     () =>
-      MAJOR_OPTIONS.map((text) => (
+      PERSONALIZATION_TEXT.sections.major.options.map((text) => (
         <ToggleButton
           key={text}
           size='md'

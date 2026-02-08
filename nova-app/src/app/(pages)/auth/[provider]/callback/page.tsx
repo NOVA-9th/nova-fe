@@ -5,7 +5,7 @@ import { useSearchParams, useRouter, useParams } from 'next/navigation';
 import { showToast } from '@/shared/utils/toast';
 import { handleGoogleCallback, handleKakaoCallback } from '@/features/login/api/login';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
-import { useGetPersonalization } from '@/shared/hooks';
+import { usePersonalization } from '@/features/profile/hooks/useProfile';
 
 const OAuthCallbackContent = () => {
   const searchParams = useSearchParams();
@@ -17,7 +17,7 @@ const OAuthCallbackContent = () => {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const { data: personalization, isSuccess } = useGetPersonalization(memberId ?? 0);
+  const { data: personalization, isSuccess } = usePersonalization(memberId ?? 0);
 
   // OAuth 처리
   useEffect(() => {
@@ -91,7 +91,7 @@ const OAuthCallbackContent = () => {
 
   useEffect(() => {
     if (isSuccess && personalization) {
-      if (personalization.background === null) {
+      if (personalization.data?.background === null) {
         router.replace('/onboarding?firstLogin=true');
       } else {
         router.replace('/');
