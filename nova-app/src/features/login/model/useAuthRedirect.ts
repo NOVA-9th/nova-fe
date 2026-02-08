@@ -1,31 +1,41 @@
-import { useRouter } from 'next/navigation';
+'use client';
+
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuthStore } from './useAuthStore';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 interface UseAuthRedirectOptions {
   when: 'loggedIn' | 'loggedOut';
   redirectTo: string;
-  ignorePaths?: string[]; // 예외 경로
+  ignorePaths?: string[];
 }
 
 export const useAuthRedirect = ({ when, redirectTo, ignorePaths = [] }: UseAuthRedirectOptions) => {
   const router = useRouter();
-  const { isLoggedIn, accessToken } = useAuthStore();
-  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
+  const pathname = usePathname();
+
+  const { accessToken, hasHydrated } = useAuthStore();
+  const isLoggedIn = Boolean(accessToken);
+
+  const shouldIgnore = useMemo(
+    () => ignorePaths.some((p) => pathname.startsWith(p)),
+    [ignorePaths, pathname],
+  );
 
   useEffect(() => {
-    const loggedIn = Boolean(accessToken && isLoggedIn);
+    if (!hasHydrated) return;
+    if (shouldIgnore) return;
 
-    if (ignorePaths.some((p) => pathname.startsWith(p))) return;
-
-    if ((when === 'loggedIn' && loggedIn) || (when === 'loggedOut' && !loggedIn)) {
+    if (when === 'loggedIn' && isLoggedIn) {
       router.replace(redirectTo);
     }
-  }, [when, redirectTo, isLoggedIn, accessToken, router, pathname, ignorePaths]);
+
+    if (when === 'loggedOut' && !isLoggedIn) {
+      router.replace(redirectTo);
+    }
+  }, [hasHydrated, shouldIgnore, when, isLoggedIn, redirectTo, router]);
 
   return {
-    isBlocked:
-      (when === 'loggedIn' && Boolean(accessToken && isLoggedIn)) ||
-      (when === 'loggedOut' && !Boolean(accessToken && isLoggedIn)),
+    isBlocked: !hasHydrated, // ⭐ 여기만 막아야 함
   };
 };

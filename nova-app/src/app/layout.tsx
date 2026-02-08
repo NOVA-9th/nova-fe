@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { ThemeProvider, QueryProvider } from './_providers';
 import { Toast } from '@/shared/ui';
+import { AuthHydration } from '@/shared/utils/authHydration';
 
 export const metadata: Metadata = {
   title: 'Nova',
@@ -41,6 +42,7 @@ export default function RootLayout({
             enableSystem={false}
             disableTransitionOnChange={true}
           >
+            <AuthHydration />
             <Toast />
             {children}
           </ThemeProvider>
