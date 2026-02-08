@@ -30,6 +30,8 @@ interface ItemListProps extends VariantProps<typeof ItemListVariants> {
     size?: 'sm' | 'md' | 'lg';
     style?: 'surface' | 'outline' | 'accent' | 'data';
     peak?: boolean;
+    className?: string;
+    disabled?: boolean;
   };
   className?: string;
 }
@@ -81,7 +83,8 @@ export const ItemList = ({
           peak={rightButton.peak !== undefined ? rightButton.peak : true}
           leftIcon={rightButton.leftIcon}
           rightIcon={rightButton.rightIcon}
-          className='shrink-0'
+          className={cn('shrink-0', rightButton.className)}
+          disabled={rightButton.disabled}
         />
       )}
     </div>

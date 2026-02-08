@@ -60,6 +60,21 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
   }
 
   const { googleConnected, kakaoConnected, githubConnected } = accountsData.data;
+  const connectedCount = [googleConnected, kakaoConnected, githubConnected].filter(Boolean).length;
+  const isDisconnectDisabled = connectedCount <= 1;
+
+  const getDisconnectButtonProps = (connected: boolean, provider: ConnectedAccountProvider) => {
+    const isCancel = connected;
+    const canDisconnect = isCancel && !isDisconnectDisabled;
+    return {
+      label: connected ? '취소' : '연결',
+      size: 'md' as const,
+      style: 'surface' as const,
+      peak: connected,
+      onClick: isCancel && canDisconnect ? () => handleDisconnectClick(provider) : undefined,
+      disabled: isCancel && isDisconnectDisabled,
+    };
+  };
 
   return (
     <section className='flex flex-col justify-start items-start bg-base rounded-static-frame w-full gap-5 p-5'>
@@ -70,13 +85,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           label='Google'
           description={googleConnected ? '연결됨' : '연결안됨'}
           leftIcon={GoogleLogoIcon}
-          rightButton={{
-            label: googleConnected ? '취소' : '연결',
-            size: 'md',
-            style: 'surface',
-            peak: googleConnected,
-            onClick: googleConnected ? () => handleDisconnectClick('google') : undefined,
-          }}
+          rightButton={getDisconnectButtonProps(googleConnected, 'google')}
           className='w-full p-2'
         />
         <ItemList
@@ -84,13 +93,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           label='KakaoTalk'
           description={kakaoConnected ? '연결됨' : '연결안됨'}
           leftIcon={KakaoLogoIcon}
-          rightButton={{
-            label: kakaoConnected ? '취소' : '연결',
-            size: 'md',
-            style: 'surface',
-            peak: kakaoConnected,
-            onClick: kakaoConnected ? () => handleDisconnectClick('kakao') : undefined,
-          }}
+          rightButton={getDisconnectButtonProps(kakaoConnected, 'kakao')}
           className='w-full p-2'
         />
         <ItemList
@@ -98,13 +101,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           label='Github'
           description={githubConnected ? '연결됨' : '연결안됨'}
           leftIcon={GithubLogoIcon}
-          rightButton={{
-            label: githubConnected ? '취소' : '연결',
-            size: 'md',
-            style: 'surface',
-            peak: githubConnected,
-            onClick: githubConnected ? () => handleDisconnectClick('github') : undefined,
-          }}
+          rightButton={getDisconnectButtonProps(githubConnected, 'github')}
           className='w-full p-2'
         />
       </div>
