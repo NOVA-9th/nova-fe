@@ -52,11 +52,13 @@ const fetchAdapter: AxiosAdapter = async (config: InternalAxiosRequestConfig) =>
   };
 
   // Body 추가 (GET, HEAD, DELETE는 body 없이, 나머지는 body 포함)
-  const hasBody = data !== undefined && data !== null && 
-                  method !== 'GET' && 
-                  method !== 'HEAD' && 
-                  method !== 'DELETE';
-  
+  const hasBody =
+    data !== undefined &&
+    data !== null &&
+    method !== 'GET' &&
+    method !== 'HEAD' &&
+    method !== 'DELETE';
+
   if (hasBody) {
     // FormData인 경우 Content-Type을 설정하지 않음 (브라우저가 자동 설정)
     if (data instanceof FormData) {
@@ -75,13 +77,13 @@ const fetchAdapter: AxiosAdapter = async (config: InternalAxiosRequestConfig) =>
 
   try {
     const response = await fetch(fullUrl, requestOptions);
-    
+
     if (timeoutId) clearTimeout(timeoutId);
-    
+
     // Response 데이터 파싱
     const contentType = response.headers.get('content-type');
     let responseData: any;
-    
+
     // Content-Type이 없거나 빈 응답인 경우
     if (!contentType || response.status === 204) {
       responseData = null;
@@ -112,7 +114,7 @@ const fetchAdapter: AxiosAdapter = async (config: InternalAxiosRequestConfig) =>
         axios.AxiosError.ERR_BAD_RESPONSE,
         config as any,
         response as any,
-        axiosResponse
+        axiosResponse,
       );
       throw error;
     }
@@ -176,12 +178,12 @@ axiosInstance.interceptors.request.use(
         config.headers.Authorization = `Bearer ${token}`;
       }
     }
-    
+
     return config;
   },
   (error: AxiosError) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 // Response Interceptor - 에러 처리
@@ -212,8 +214,7 @@ axiosInstance.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default axiosInstance;
-

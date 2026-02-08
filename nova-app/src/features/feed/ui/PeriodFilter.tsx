@@ -1,12 +1,12 @@
 'use client';
 
 import { SelectionChip } from '@/shared/ui';
-import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
 import { PERIOD_ITEMS } from '@/features/feed/data/FilterData';
 import { FilterSection } from '@/features/feed/ui/FilterSection';
+import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 
 export const PeriodFilter = () => {
-  const { resetPeriod, selectedPeriod, setSelectedPeriod } = useFeedFilters();
+  const { resetPeriod, selectedPeriod, setSelectedPeriod } = useFeedFilterStore();
 
   return (
     <FilterSection title='업로드 기간' onReset={resetPeriod}>
