@@ -32,7 +32,7 @@ export const SideBar = () => {
 
   const handleLogout = async () => {
     setIsModalOpen(false);
-    
+
     // 토큰 무효화 API 호출 (실패해도 로그아웃은 진행)
     try {
       await invalidateToken();
@@ -40,7 +40,7 @@ export const SideBar = () => {
       // 토큰 무효화 실패해도 로그아웃은 진행
       console.error('토큰 무효화 실패:', error);
     }
-    
+
     logout();
     showToast.success('로그아웃 되었습니다.');
     router.push('/login');

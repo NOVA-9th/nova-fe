@@ -3,10 +3,13 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getFeedList } from '@/features/feed/api/feed';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
 
 export const useSavedCount = () => {
+  const { memberId } = useAuthStore();
   return useQuery({
-    queryKey: ['savedCount'],
+    queryKey: ['savedCount', memberId],
+    enabled: !!memberId,
     queryFn: () =>
       getFeedList({
         sort: 'LATEST',
