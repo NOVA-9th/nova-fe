@@ -10,6 +10,7 @@ import { useGetKeywords } from '@/shared/hooks/useGetKeywords';
 import useDebounce from '@/shared/hooks/useDebounce';
 import { addKeyword, sanitizeKeywords } from '@/shared/utils/keyword';
 import { showToast } from '@/shared/utils/toast';
+import { getInterestIdByIndex, getLevelIndex } from '@/shared/utils/personalization';
 
 interface PersonalizationSettingsProps {
   memberId: number | null;
@@ -90,10 +91,6 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     );
   };
 
-  // 5️⃣ 기타 선택 로직
-  const getInterestIdByIndex = (index: number) =>
-    PERSONALIZATION_TEXT.sections.interests.ids[index];
-
   const toggleInterest = (index: number) => {
     const id = getInterestIdByIndex(index);
     setSelectedInterests((prev) =>
@@ -103,17 +100,6 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
 
   const isInterestSelected = (index: number) =>
     selectedInterests.includes(getInterestIdByIndex(index));
-
-  const getLevelIndex = (level: MemberLevel | null) => {
-    if (!level) return 0;
-    const levels = [
-      MemberLevel.NOVICE,
-      MemberLevel.BEGINNER,
-      MemberLevel.INTERMEDIATE,
-      MemberLevel.ADVANCED,
-    ];
-    return levels.indexOf(level);
-  };
 
   const handleLevelChange = (index: number) => {
     const levels = [

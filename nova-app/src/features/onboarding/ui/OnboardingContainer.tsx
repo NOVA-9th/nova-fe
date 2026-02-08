@@ -6,6 +6,9 @@ import { Button, Header } from '@/shared/ui';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { useOnboardingStore } from '../models/useOnBoardingStore';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { useUpdatePersonalization } from '@/features/profile/hooks/useProfile';
+import { showToast } from '@/shared/utils/toast';
 
 export const OnboardingContainer = () => {
   const {
@@ -22,13 +25,46 @@ export const OnboardingContainer = () => {
   const router = useRouter();
   const { label, description, Component } = currentItem;
 
+  const memberId = useAuthStore((state) => state.memberId);
+  const updatePersonalizationMutation = useUpdatePersonalization();
+
+  const handleStepChange = useCallback(
+    (value: any) => {
+      onValidChange(!!value && (Array.isArray(value) ? value.length > 0 : true));
+    },
+    [onValidChange],
+  );
+  const handleSave = useCallback(() => {
+    if (!memberId) return;
+
+    const stepData = useOnboardingStore.getState().stepData;
+
+    updatePersonalizationMutation.mutate(
+      {
+        memberId,
+        requestDto: {
+          level: stepData.step3 || null, // 전공 분야
+          background: stepData.step1 ?? null, // 관심 분야
+          interests: stepData.step2 || [],
+          keywords: stepData.step4 || [], // 관심 키워드
+        },
+      },
+      {
+        onSuccess: () => showToast.success('저장되었습니다.'),
+        onError: (error: Error) =>
+          showToast.error(error?.message || '개인화 설정 저장에 실패했습니다. 다시 시도해주세요.'),
+      },
+    );
+  }, [memberId, updatePersonalizationMutation]);
+
   const handleNext = useCallback(() => {
     if (currentStep === 'step4') {
+      handleSave();
       router.replace('/');
       return;
     }
     onNext();
-  }, [currentStep, onNext, router]);
+  }, [currentStep, onNext, router, handleSave]);
 
   const handleSkip = useCallback(() => {
     useOnboardingStore.setState((state) => ({
@@ -46,7 +82,7 @@ export const OnboardingContainer = () => {
   }, [currentStep, onNext, router]);
 
   return (
-    <main className='flex flex-col w-full max-w-90 gap-5 px-7 py-5 bg-base rounded-static-frame sm:max-w-170 sm:px-10 sm:py-7.5 '>
+    <main className='flex flex-col w-full max-w-90 gap-5 px-7 py-5 bg-base rounded-static-frame sm:max-w-170 sm:px-10 sm:py-7.5'>
       <Stepper
         currentStep={currentStep}
         labels={['전공 분야', '관심 분야', '기술 역량', '관심 키워드']}
@@ -57,7 +93,8 @@ export const OnboardingContainer = () => {
         <Header size='md' label={label} className='flex sm:hidden' />
         <span className='px-1 typo-callout-base text-additive block sm:hidden'>{description}</span>
       </div>
-      <Component onValidChange={onValidChange} />
+
+      <Component onValidChange={handleStepChange} />
 
       <div className='mt-auto flex w-full max-w-80 sm:max-w-150 justify-between'>
         {!isFirstStep ? (
