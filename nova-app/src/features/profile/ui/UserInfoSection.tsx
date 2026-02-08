@@ -33,6 +33,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   const [nameValue, setNameValue] = useState('');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
   const [isDeleteImageModalOpen, setIsDeleteImageModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const [isDeleteMemberModalOpen, setIsDeleteMemberModalOpen] = useState(false);
@@ -79,6 +80,8 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   };
 
   const handleImageClick = () => {
+    // 저장 중일 때는 파일 선택 비활성화
+    if (isSaving || updateNameMutation.isPending || uploadImageMutation.isPending) return;
     fileInputRef.current?.click();
   };
 
@@ -116,7 +119,25 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   };
 
   const handleSave = () => {
-    if (!memberId) return;
+    // 중복 클릭 방지: 이미 저장 중이거나 mutation이 진행 중이면 early return
+    if (
+      !memberId ||
+      isSaving ||
+      updateNameMutation.isPending ||
+      uploadImageMutation.isPending
+    ) {
+      return;
+    }
+
+    // 저장 중이 아닐 때만 변경사항 확인
+    const hasNameChanged = nameValue.trim() !== (memberInfo?.data?.name || '') && nameValue.trim() !== '';
+    const hasSelectedFile = !!selectedFile;
+
+    // 변경사항이 없으면 실행하지 않음
+    if (!hasNameChanged && !hasSelectedFile) return;
+
+    // 저장 시작
+    setIsSaving(true);
 
     const promises: Promise<any>[] = [];
 
@@ -145,7 +166,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     }
 
     // 이미지가 선택되었으면 업로드
-    if (selectedFile) {
+    if (hasSelectedFile && selectedFile) {
       promises.push(
         new Promise((resolve, reject) => {
           uploadImageMutation.mutate(
@@ -170,13 +191,15 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
       );
     }
 
-    // 둘 다 없으면 실행하지 않음
-    if (promises.length === 0) return;
-
-    // 모든 저장 작업 완료 대기
-    Promise.all(promises).catch(() => {
-      // 에러 토스트는 각 mutation onError에서 처리
-    });
+    // 모든 저장 작업 완료 대기 (성공/실패 모두 처리)
+    Promise.all(promises)
+      .finally(() => {
+        // 저장 완료 후 플래그 클리어
+        setIsSaving(false);
+      })
+      .catch(() => {
+        // 에러 토스트는 각 mutation onError에서 처리
+      });
   };
 
   const handleImageDeleteClick = () => {
@@ -227,7 +250,11 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
       <div className='flex flex-col w-full items-center justify-start gap-2'>
         <div className='flex w-full items-center justify-start p-2 gap-2'>
           <div
-            className='relative cursor-pointer'
+            className={`relative ${
+              isSaving || updateNameMutation.isPending || uploadImageMutation.isPending
+                ? 'cursor-not-allowed opacity-50'
+                : 'cursor-pointer'
+            }`}
             onClick={handleImageClick}
             role='button'
             tabIndex={0}
@@ -249,6 +276,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               type='file'
               accept='image/*'
               onChange={handleFileChange}
+              disabled={isSaving || updateNameMutation.isPending || uploadImageMutation.isPending}
               className='hidden'
             />
           </div>
@@ -272,14 +300,14 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             style='surface'
             peak={hasChanges}
             leftIcon={RefreshCw}
-            className={`w-full gap-1.5 ${
+            className='w-full gap-1.5'
+            onClick={handleSave}
+            disabled={
               !hasChanges ||
+              isSaving ||
               updateNameMutation.isPending ||
               uploadImageMutation.isPending
-                ? 'opacity-50 cursor-not-allowed'
-                : ''
-            }`}
-            onClick={handleSave}
+            }
           />
         </div>
       </div>
