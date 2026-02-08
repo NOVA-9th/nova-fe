@@ -48,9 +48,16 @@ export const useFeedArticles = () => {
 
   const articles = query.data?.data?.cardnews ?? [];
 
+  const sortedArticles = [...articles].sort((a, b) => {
+    const aTime = new Date(a.publishedAt).getTime();
+    const bTime = new Date(b.publishedAt).getTime();
+    return aTime - bTime;
+  });
+
   return {
     ...query,
     params,
     articles,
+    sortedArticles,
   };
 };

@@ -6,7 +6,7 @@ import FeedArticleError from './FeedArticleError';
 import { useFeedArticles } from '@/features/feed/hooks/useFeedArticles';
 
 const FeedArticle = () => {
-  const { articles, isLoading, isError, refetch } = useFeedArticles();
+  const { sortedArticles, isLoading, isError, refetch } = useFeedArticles();
 
   if (isLoading)
     return (
@@ -26,7 +26,7 @@ const FeedArticle = () => {
 
   return (
     <section className='space-y-4'>
-      {articles.map((article) => (
+      {sortedArticles.map((article) => (
         <ArticleCard key={article.id} articleData={article} />
       ))}
     </section>
