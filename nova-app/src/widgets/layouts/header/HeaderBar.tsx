@@ -25,7 +25,7 @@ export const HeaderBar = () => {
         onClick={() => router.push('/')}
       >
         <Logo width={36} height={36} />
-        <NovaLabel width={60} height={15.83} />
+        <NovaLabel className='text-base-color' width={60} height={15.83} />
       </button>
 
       <div className='flex items-center gap-3'>

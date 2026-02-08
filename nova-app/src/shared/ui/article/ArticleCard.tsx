@@ -95,7 +95,7 @@ export const ArticleCard = ({ className, articleData }: ArticleCardProps) => {
           />
         </div>
         <button
-          className='flex justify-center items-center gap-1 typo-callout-key text-optional'
+          className='flex justify-center items-center gap-1 typo-callout-key text-optional hover:text-optional active:text-optional'
           onClick={() => setIsOpen(!isOpen)}
         >
           <p>{isOpen ? '접기' : '펼치기'}</p>

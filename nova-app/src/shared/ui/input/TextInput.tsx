@@ -83,10 +83,14 @@ export const TextInput = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className='caret-color placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
+        className='caret-color placeholder:text-optional flex-1 bg-transparent outline-none'
       />
 
-      <button type='button' onClick={() => onChange('')} className='text-charcoal-optional'>
+      <button
+        type='button'
+        onClick={() => onChange('')}
+        className='text-optional hover:text-optional active:text-optional'
+      >
         <X size={size === 'md' ? 14 : 16} />
       </button>
     </div>

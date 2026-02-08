@@ -4,7 +4,7 @@
     --bg-base: var(--color-charcoal-full);
     --bg-alternative: var(--color-black-full);
     --bg-surface: var(--color-slate-surface);
-    --bg-peak: var(--color-white-full);
+    --bg-peak: rgb(121, 126, 126);
     --bg-static: rgb(255 255 255 / 0.04); /* #FFFFFF @ 4% */
 
     --bg-data-surface: var(--color-dark-surface); /* #00AD65 @ 10% */
@@ -57,7 +57,7 @@
   }
 
   .dark .bg-peak {
-    background-color: var(--color-white-full);
+    background-color: var(--bg-peak);
   }
 
   .dark .bg-static {
@@ -86,7 +86,7 @@
   }
 
   .dark .hover\:bg-peak:hover {
-    background-color: color-mix(in srgb, var(--color-white-full), var(--color-charcoal-full) 2%);
+    background-color: color-mix(in srgb, var(--bg-peak), white 6%);
   }
 
   .dark .hover\:bg-data-surface:hover {
@@ -114,7 +114,7 @@
   }
 
   .dark .active\:bg-peak:active {
-    background-color: color-mix(in srgb, var(--color-white-full), var(--color-charcoal-full) 6%);
+    background-color: color-mix(in srgb, var(--bg-peak), white 10%);
   }
 
   .dark .active\:bg-data-surface:active {
@@ -207,7 +207,7 @@
   }
 
   .dark .hover\:text-optional:hover {
-    color: var(--color-white-optional);
+    color: color-mix(in srgb, var(--fg-optional), var(--fg-base) 12%);
   }
 
   .dark .hover\:text-peak:hover {
@@ -220,6 +220,10 @@
 
   .dark .hover\:text-accent-base:hover {
     color: var(--color-white-accent-base);
+  }
+
+  .dark .active\:text-optional:active {
+    color: color-mix(in srgb, var(--fg-optional), var(--fg-base) 20%);
   }
 
   .dark .disabled\:text-base:disabled,
