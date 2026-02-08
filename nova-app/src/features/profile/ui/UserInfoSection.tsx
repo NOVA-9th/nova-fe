@@ -13,6 +13,7 @@ import {
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { getProfileImageUrl } from '@/shared/utils/profileImage';
 import { showToast } from '@/shared/utils/toast';
+import { invalidateToken } from '@/features/login/api/login';
 import { UserInfoSectionSkeleton } from './skeletons';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -72,8 +73,17 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     setIsLogoutModalOpen(true);
   };
 
-  const handleConfirmLogout = () => {
+  const handleConfirmLogout = async () => {
     setIsLogoutModalOpen(false);
+    
+    // 토큰 무효화 API 호출 (실패해도 로그아웃은 진행)
+    try {
+      await invalidateToken();
+    } catch (error) {
+      // 토큰 무효화 실패해도 로그아웃은 진행
+      console.error('토큰 무효화 실패:', error);
+    }
+    
     logout();
     showToast.success('로그아웃 되었습니다.');
     router.push('/login');

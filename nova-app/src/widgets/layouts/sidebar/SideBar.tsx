@@ -13,6 +13,7 @@ import { showToast } from '@/shared/utils/toast';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { useMemberInfo } from '@/features/profile/hooks/useProfile';
 import { getProfileImageUrl } from '@/shared/utils/profileImage';
+import { invalidateToken } from '@/features/login/api/login';
 
 export const SideBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,8 +27,17 @@ export const SideBar = () => {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsModalOpen(false);
+    
+    // 토큰 무효화 API 호출 (실패해도 로그아웃은 진행)
+    try {
+      await invalidateToken();
+    } catch (error) {
+      // 토큰 무효화 실패해도 로그아웃은 진행
+      console.error('토큰 무효화 실패:', error);
+    }
+    
     logout();
     showToast.success('로그아웃 되었습니다.');
     router.push('/login');
