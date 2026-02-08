@@ -1,21 +1,30 @@
+'use client';
+
 import { Button, ChipInput, SectionHeader, TextBadge } from '@/shared/ui';
 import { InsertKey } from '@/features/onboarding/types/KeywordMap';
 import { KEYWORD_MAP } from '@/features/onboarding/data/KeywordMaps';
+import { cn } from '@/shared/utils/cn';
 
 interface SearchInputProps {
   category: InsertKey;
   selectedKeywords: string[];
-  onAddKeyword: (keyword: string) => void;
+  onAddKeyword?: (keyword: string) => void;
   onChangeKeywords: (chips: string[]) => void;
+  className?: string; // ← className props 추가
 }
 
-export const SearchInput = ({ category, selectedKeywords, onChangeKeywords }: SearchInputProps) => {
+export const SearchInput = ({
+  category,
+  selectedKeywords,
+  onChangeKeywords,
+  className,
+}: SearchInputProps) => {
   const suggestions = [...KEYWORD_MAP[category].advanced, ...KEYWORD_MAP[category].keywords];
   const handleAddClick = () => {};
 
   return (
-    <div className='flex flex-col items-start w-150 h-21 gap-3'>
-      <div className='flex flex-row w-150 h-7 gap-2.5 items-center'>
+    <div className={cn('flex flex-col items-start h-21 gap-3', className)}>
+      <div className='flex flex-row h-7 gap-2.5 items-center'>
         <SectionHeader size='sm' text='검색' />
         <TextBadge
           size={'sm'}
@@ -25,7 +34,7 @@ export const SearchInput = ({ category, selectedKeywords, onChangeKeywords }: Se
           className='w-9.5 h-5'
         />
       </div>
-      <div className='w-150 flex flex-row gap-3'>
+      <div className='flex w-full gap-3 items-center'>
         <ChipInput
           size='lg'
           variant='surface'
@@ -33,10 +42,15 @@ export const SearchInput = ({ category, selectedKeywords, onChangeKeywords }: Se
           value={selectedKeywords}
           onChange={onChangeKeywords}
           suggestions={suggestions}
-          placeholder='키워드를 입력하고 콤마(,)로 구분해주세요'
-          className='w-132 h-11'
+          placeholder='키워드를 입력하세요'
+          className='flex-1 min-w-0 h-11'
         />
-        <Button size='lg' label='추가' className='w-15 h-11' onClick={handleAddClick} />
+        <Button
+          size='lg'
+          label='추가'
+          className='w-14 sm:w-15 h-11 typo-callout-key sm:typo-body-key'
+          onClick={handleAddClick}
+        />
       </div>
     </div>
   );

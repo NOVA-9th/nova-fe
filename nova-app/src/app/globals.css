@@ -25,6 +25,18 @@
   .font-interface {
     font-family: var(--font-interface);
   }
+
+  @media (min-width: 640px) {
+    .sm\:typo-body-key {
+      @apply text-body font-200 leading-6 tracking-tight;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .sm\:typo-title-strong {
+      @apply text-title font-300 leading-8 tracking-tight;
+    }
+  }
 }
 
 html,

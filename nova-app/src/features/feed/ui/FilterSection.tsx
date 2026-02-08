@@ -22,7 +22,7 @@ export const FilterSection = ({
 }: FilterSectionProps) => {
   return (
     <section className={clsx('bg-base rounded-static-frame border border-outline p-5', className)}>
-      <div className='flex items-center justify-between mb-5 flex-wrap'>
+      <div className='flex items-center justify-between mb-5 flex-nowrap whitespace-nowrap'>
         <div className='flex items-center gap-2.5'>
           <SectionHeader size='lg' text={title} />
           {badge}

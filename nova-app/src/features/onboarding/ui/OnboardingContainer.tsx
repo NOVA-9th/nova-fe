@@ -37,18 +37,28 @@ export const OnboardingContainer = () => {
   };
 
   return (
-    <main className='flex flex-col w-160 min-h-94 max-h-123.5 gap-5 p-5 bg-base rounded-static-frame'>
+    <main className='flex flex-col w-full max-w-90 gap-5 px-7 py-5 bg-base rounded-static-frame sm:max-w-170 sm:px-10 sm:py-7.5 '>
       <Stepper
         currentStep={currentStep}
         labels={['전공 분야', '관심 분야', '기술 역량', '관심 키워드']}
       />
 
-      <Header size='lg' label={label} description={description} />
+      <div>
+        <Header size='lg' label={label} description={description} className='hidden sm:flex' />
+        <Header size='md' label={label} className='flex sm:hidden' />
+        <span className='px-1 typo-callout-base text-additive block sm:hidden'>{description}</span>
+      </div>
       <Component onValidChange={onValidChange} />
 
-      <div className='flex w-150 h-11 justify-between'>
+      <div className='mt-auto flex w-full max-w-80 sm:max-w-150 justify-between'>
         {!isFirstStep ? (
-          <Button size='lg' label='이전' style='surface' onClick={onPrev} className='w-15' />
+          <Button
+            size='lg'
+            label='이전'
+            style='surface'
+            onClick={onPrev}
+            className='w-14 sm:w-15 typo-callout-key sm:typo-body-key'
+          />
         ) : (
           <div />
         )}
@@ -61,7 +71,7 @@ export const OnboardingContainer = () => {
               style='data'
               peak={false}
               onClick={handleSkip}
-              className='w-21.75'
+              className='sm:w-21.75 w-20 typo-callout-key sm:typo-body-key'
             />
           )}
 
@@ -72,7 +82,7 @@ export const OnboardingContainer = () => {
             onClick={handleNext}
             peak={isStepValid}
             disabled={!isStepValid}
-            className='w-15 h-11'
+            className='w-14 sm:w-15 sm:max-w-15 max-w-14 typo-callout-key sm:typo-body-key'
           />
         </div>
       </div>

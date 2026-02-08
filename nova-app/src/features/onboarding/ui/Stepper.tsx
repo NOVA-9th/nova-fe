@@ -11,19 +11,19 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
   const currentIndex = STEP_ORDER.indexOf(currentStep) + 1;
 
   return (
-    <div className='flex items-center'>
+    <div className='flex items-center w-full'>
       {STEP_ORDER.map((_, index) => {
         const step = index + 1;
         const isActive = step <= currentIndex;
         const label = labels[index] ?? `Step ${step}`;
 
         return (
-          <div key={step} className='flex flex-col items-center justify-center'>
-            <div className='flex items-center'>
+          <div key={step} className='flex flex-col items-center justify-center flex-1'>
+            <div className='flex items-center w-full'>
               {/* 왼쪽 선 */}
               <div
                 className={clsx(
-                  'h-0.75 w-13.75 mr-2 rounded-r-static-pill',
+                  'flex-1 h-0.75 mr-2 rounded-r-static-pill',
                   step === 1
                     ? 'bg-transparent'
                     : step <= currentIndex
@@ -44,7 +44,7 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
               {/* 오른쪽 선 */}
               <div
                 className={clsx(
-                  'ml-2 h-0.75 w-13.75 rounded-l-static-pill',
+                  'flex-1 ml-2 h-0.75 rounded-l-static-pill',
                   step === STEP_ORDER.length
                     ? 'bg-transparent'
                     : step < currentIndex

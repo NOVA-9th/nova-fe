@@ -36,6 +36,7 @@ export const HeaderBar = () => {
               icon={Search}
               placeholder='아티클 및 트렌드를 검색해보세요'
               className='w-100 max-sm:hidden'
+              isBadge={true}
             />
             <IconButton
               size='lg'
