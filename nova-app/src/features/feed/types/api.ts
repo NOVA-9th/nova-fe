@@ -27,3 +27,9 @@ export type FeedSearchResponse = {
   totalCount: number;
   cardnews: CardNews[];
 };
+
+export type KeywordsResponse = {
+  id: number;
+  interestId: number;
+  name: string;
+};
