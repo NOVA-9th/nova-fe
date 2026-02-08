@@ -213,6 +213,20 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   const handleConfirmImageDelete = () => {
     if (!memberId) return;
     setIsDeleteImageModalOpen(false);
+
+    // 로컬 미리보기 이미지만 있는 경우 (아직 업로드되지 않은 파일)
+    if (selectedFile || previewImage) {
+      // 서버 API 호출 없이 로컬 상태만 클리어
+      setPreviewImage(null);
+      setSelectedFile(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      showToast.success('프로필 이미지가 삭제되었습니다.');
+      return;
+    }
+
+    // 서버에 업로드된 이미지가 있는 경우에만 API 호출
     deleteImageMutation.mutate(memberId, {
       onSuccess: () => {
         setPreviewImage(null);
@@ -376,10 +390,11 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
       )}
       {isDeleteMemberModalOpen && (
         <Modal
-          content='정말 회원 탈퇴를 하시겠습니까? 이 작업은 되돌릴 수 없습니다.'
+          content={`정말 회원 탈퇴를 하시겠습니까?\n이 작업은 되돌릴 수 없습니다.`}
           confirmLabel='탈퇴'
           onCancel={() => setIsDeleteMemberModalOpen(false)}
           onConfirm={handleConfirmDeleteMember}
+          className='w-90'
         />
       )}
     </section>
