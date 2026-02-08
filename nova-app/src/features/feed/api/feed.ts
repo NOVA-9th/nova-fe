@@ -20,8 +20,10 @@ export const getFeedList = async (
 };
 
 // 카드뉴스 숨기기
-export const postHiddenFeed = async (cardnewsId: number) => {
-  const response = await axiosInstance.delete<ApiResponse<void>>(`/api/cardnews/${cardnewsId}`);
+export const postHiddenFeed = async (cardNewsId: number) => {
+  const response = await axiosInstance.post<ApiResponse<void>>(
+    `/api/cardnews/${cardNewsId}/hidden`,
+  );
 
   return response.data;
 };

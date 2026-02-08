@@ -18,6 +18,7 @@ import { EvidenceCard } from '@/features/saved/ui';
 import { CardNews } from '@/features/feed/types/api';
 import { getRelativeTime } from '@/features/feed/utils/time';
 import { useBookmarkToggle } from '@/features/feed/hooks/useBookmarkToggle';
+import { useHideFeed } from '@/features/feed/hooks/useHideFeed';
 
 type ArticleType = 'NEWS' | 'JOB' | 'COMMUNITY';
 
@@ -32,14 +33,14 @@ const isArticleType = (v: string): v is ArticleType =>
 
 export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isPositiveSaved, toggle } = useBookmarkToggle(articleData.id, articleData.saved);
+  const { handleHideFeed } = useHideFeed(articleData.id);
 
   const typeKey: ArticleType = isArticleType(articleData.cardType) ? articleData.cardType : 'NEWS';
   const typeConfig = ARTICLE_TYPE_CONFIG[typeKey];
 
   const evidences = (articleData.evidence ?? []).map((e) => e.trim()).filter(Boolean);
   const evidenceCount = evidences.length;
-
-  const { isPositiveSaved, toggle } = useBookmarkToggle(articleData.id, articleData.saved);
 
   return (
     <article className='flex flex-col w-full min-w-0 h-fit items-start rounded-static-frame bg-base border border-outline p-5 gap-5'>
@@ -136,7 +137,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
         />
 
         <div className='flex justify-center items-center gap-2.5'>
-          <Button label='숨김' style='data' peak={false} size='lg' onClick={() => {}} />
+          <Button label='숨김' style='data' peak={false} size='lg' onClick={handleHideFeed} />
           <IconButton
             size='lg'
             style='accent'
