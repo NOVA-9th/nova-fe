@@ -67,9 +67,9 @@ export const SideBar = () => {
             <Image
               src={getProfileImageUrl(memberInfo?.data?.profileImage, dataUpdatedAt)}
               alt='User Profile'
-              width={40}
-              height={40}
-              className='rounded-full object-cover bg-black shrink-0'
+              width={200}
+              height={200}
+              className='rounded-full size-10 object-cover bg-black'
             />
           )}
           <div className='flex flex-col gap-1 px-1 min-w-0 flex-1'>

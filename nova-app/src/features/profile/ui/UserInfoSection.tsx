@@ -256,9 +256,9 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             <Image
               src={previewImage || getProfileImageUrl(profileImage, dataUpdatedAt) || '/test.png'}
               alt='User Profile'
-              width={48}
-              height={48}
-              className='rounded-full object-cover bg-black'
+              width={200}
+              height={200}
+              className='rounded-full size-12 object-cover bg-black'
             />
             <input
               ref={fileInputRef}
