@@ -56,9 +56,13 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
       return;
     }
 
-    setChips(sanitizeKeywords(debouncedChips));
-    prevRef.current = debouncedChips;
-    setKeywords(debouncedChips); // 외부 저장용
+    const sanitized = sanitizeKeywords(debouncedChips);
+
+    if (sanitized.join(',') !== prev.join(',')) {
+      setChips(sanitized);
+      prevRef.current = sanitized;
+      setKeywords(sanitized);
+    }
   }, [debouncedChips, suggestions]);
 
   const handleAddKeyword = (keyword: string) => {
