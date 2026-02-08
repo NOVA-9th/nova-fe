@@ -14,7 +14,7 @@ export const KeywordCard = () => {
 
   return (
     <div className='bg-base rounded-static-frame p-5 flex flex-col gap-5'>
-      <div className='flex w-full gap-3 flex-col items-start md:flex-row md:items-center'>
+      <div className='flex w-full gap-3 flex-col items-start lg:flex-row lg:items-center'>
         <TextInput
           size='lg'
           variant='surface'
