@@ -5,6 +5,7 @@ import { ItemList, SectionHeader, Modal } from '@/shared/ui';
 import { Trash2 } from 'lucide-react';
 import { showToast } from '@/shared/utils/toast';
 import { useDeleteAllBookmarks, useResetHiddenCardNews } from '../hooks/useProfile';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const DataManagementSection = () => {
   const [modalType, setModalType] = useState<'saved' | 'hidden' | null>(null);
@@ -15,11 +16,15 @@ export const DataManagementSection = () => {
   const handleSavedResetClick = () => setModalType('saved');
   const handleHiddenResetClick = () => setModalType('hidden');
 
+  const queryClient = useQueryClient();
+
   const handleSavedConfirm = async () => {
     try {
       await deleteAllBookmarksMutation.mutateAsync();
       setModalType(null);
       showToast.success('저장함 목록이 삭제되었습니다.');
+      queryClient.invalidateQueries({ queryKey: ['feedList'] });
+      queryClient.invalidateQueries({ queryKey: ['savedCount'] });
     } catch {
       showToast.error('저장함 목록 삭제에 실패했습니다.');
     }

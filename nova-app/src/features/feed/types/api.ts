@@ -10,6 +10,7 @@ export type CardNews = {
   siteName: string;
   keywords: string[];
   saved: boolean;
+  hidden: boolean;
 };
 
 export type FeedSearchRequest = {

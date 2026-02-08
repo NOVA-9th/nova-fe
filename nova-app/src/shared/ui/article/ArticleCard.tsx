@@ -42,6 +42,8 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const evidences = (articleData.evidence ?? []).map((e) => e.trim()).filter(Boolean);
   const evidenceCount = evidences.length;
 
+  if (articleData.hidden) return null;
+
   return (
     <article className='flex flex-col w-full min-w-0 h-fit items-start rounded-static-frame bg-base border border-outline p-5 gap-5'>
       <div className='flex w-full h-fit justify-start items-center gap-2.5'>
