@@ -24,11 +24,6 @@ export const InterestCard = ({ onValidChange }: InterestCardProps) => {
   const initialSelectedIds = useMemo(() => stepData.step2 ?? [], [stepData.step2]);
   const [selectedIds, setSelectedIds] = useState<number[]>(initialSelectedIds);
 
-  const selectedTexts = useMemo(
-    () => selectedIds.map((id) => PERSONALIZATION_TEXT.sections.interests.options[id]),
-    [selectedIds],
-  );
-
   // 유효성 체크
   useEffect(() => {
     onValidChange(selectedIds.length > 0);
