@@ -208,7 +208,7 @@
   }
 
   .hover\:text-optional:hover {
-    color: var(--color-charcoal-optional);
+    color: color-mix(in srgb, var(--fg-optional), var(--fg-base) 12%);
   }
 
   .hover\:text-peak:hover {
@@ -221,6 +221,10 @@
 
   .hover\:text-accent-base:hover {
     color: var(--color-primary-full);
+  }
+
+  .active\:text-optional:active {
+    color: color-mix(in srgb, var(--fg-optional), var(--fg-base) 20%);
   }
 
   .disabled\:text-base-color:disabled,

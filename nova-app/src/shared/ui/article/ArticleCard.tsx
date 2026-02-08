@@ -40,7 +40,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const evidenceCount = evidences.length;
 
   return (
-    <article className='flex flex-col w-full min-w-0 h-fit items-start rounded-static-frame bg-white p-5 gap-5'>
+    <article className='flex flex-col w-full min-w-0 h-fit items-start rounded-static-frame bg-base border border-outline p-5 gap-5'>
       <div className='flex w-full h-fit justify-start items-center gap-2.5'>
         {typeConfig && (
           <TextBadge
@@ -77,10 +77,9 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
             className='h-5'
           />
         </div>
-
         {evidenceCount > 0 && (
           <button
-            className='flex justify-center items-center gap-1 typo-callout-key text-optional'
+            className='flex justify-center items-center gap-1 typo-callout-key text-optional hover:text-optional active:text-optional'
             onClick={() => setIsOpen(!isOpen)}
           >
             <p>{isOpen ? '접기' : '펼치기'}</p>

@@ -23,7 +23,6 @@ export const KeywordCard = () => {
           placeholder='제목 혹은 키워드로 검색하기'
           onChange={onChange}
           icon={Search}
-          isBadge={false}
           className='w-full md:flex-1'
         />
         <TextButton

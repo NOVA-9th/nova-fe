@@ -30,7 +30,7 @@ export const FilterSection = ({
         <TextButton
           label='초기화'
           rightIcon={RotateCcw}
-          className='text-optional'
+          className='text-optional hover:text-optional active:text-optional'
           onClick={onReset}
         />
       </div>
