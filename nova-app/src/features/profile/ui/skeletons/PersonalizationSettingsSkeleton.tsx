@@ -13,11 +13,7 @@ export const PersonalizationSettingsSkeleton = () => {
       <SectionHeader text='개인화 설정' size='lg' />
       {/* 전공 분야 */}
       <div className='flex flex-col justify-start items-start w-full gap-3'>
-        <SectionHeader
-          text={PERSONALIZATION_TEXT.sections.major.title}
-          peak={false}
-          size='sm'
-        />
+        <SectionHeader text={PERSONALIZATION_TEXT.sections.major.title} peak={false} size='sm' />
         <div className='flex flex-wrap justify-start items-start w-full gap-2'>
           {PERSONALIZATION_TEXT.sections.major.options.map((_, i) => (
             <div
@@ -78,15 +74,12 @@ export const PersonalizationSettingsSkeleton = () => {
           </span>
         </div>
         <div className='flex flex-col lg:flex-row w-full items-center gap-3 min-w-0'>
-          <div
-            className='w-full h-11 min-w-0 rounded bg-alternative animate-pulse'
-            aria-hidden
-          />
+          <div className='w-full h-11 min-w-0 rounded bg-alternative animate-pulse' aria-hidden />
           <Button
             size='lg'
             style='surface'
             peak={true}
-            label={PERSONALIZATION_TEXT.sections.keyword.saveButtonLabel}
+            label={'저장'}
             className='w-full xl:w-auto'
             onClick={() => {}}
             disabled
