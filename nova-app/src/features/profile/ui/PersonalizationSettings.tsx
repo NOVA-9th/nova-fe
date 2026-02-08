@@ -2,8 +2,9 @@
 
 import { Button, ChipInput, SectionHeader, SelectionChip, TextBadge } from '@/shared/ui';
 import { PERSONALIZATION_TEXT } from '../data/PersonalizationText';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { showToast } from '@/shared/utils/toast';
+import { useGetKeywords } from '@/shared/hooks/useGetKeywords';
 
 export const PersonalizationSettings = () => {
   const [keywords, setKeywords] = useState<string[]>([
@@ -19,9 +20,11 @@ export const PersonalizationSettings = () => {
     }
 
     if (keywords.includes(keyword)) return;
-
     setKeywords((prev) => [...prev, keyword]);
   };
+
+  const { data } = useGetKeywords();
+  const suggestions = useMemo(() => data?.map((item) => item.name) ?? [], [data]);
 
   return (
     <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
@@ -111,6 +114,7 @@ export const PersonalizationSettings = () => {
             inputValue={inputValue}
             onInputChange={setInputValue}
             onAdd={handleAddKeyword}
+            suggestions={suggestions}
           />
 
           <Button
