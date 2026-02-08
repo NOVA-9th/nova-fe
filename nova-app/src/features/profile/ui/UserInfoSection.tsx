@@ -204,7 +204,8 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
 
   const handleImageDeleteClick = () => {
     if (!memberId) return;
-    const hasImage = memberInfo?.data?.profileImage ?? previewImage;
+    // previewImage를 우선시하고, 빈 문자열도 falsy로 처리
+    const hasImage = previewImage || memberInfo?.data?.profileImage;
     if (!hasImage) return;
     setIsDeleteImageModalOpen(true);
   };
@@ -290,7 +291,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             peak={false}
             leftIcon={X}
             className={`w-full gap-1.5 ${
-              !profileImage && !previewImage ? 'opacity-50 cursor-not-allowed' : ''
+              !(previewImage || profileImage) ? 'opacity-50 cursor-not-allowed' : ''
             }`}
             onClick={handleImageDeleteClick}
           />
