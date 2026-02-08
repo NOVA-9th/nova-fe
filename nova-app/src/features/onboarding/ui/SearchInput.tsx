@@ -1,7 +1,6 @@
 'use client';
 
 import { Button, ChipInput, SectionHeader, TextBadge } from '@/shared/ui';
-import { InsertKey } from '@/features/onboarding/types/KeywordMap';
 import { cn } from '@/shared/utils/cn';
 import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { useGetKeywords } from '@/shared/hooks/useGetKeywords';
