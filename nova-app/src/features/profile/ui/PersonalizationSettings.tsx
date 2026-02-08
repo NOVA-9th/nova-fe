@@ -5,6 +5,7 @@ import { PERSONALIZATION_TEXT } from '../data/PersonalizationText';
 import { PersonalizationSettingsSkeleton } from './skeletons';
 import { usePersonalization, useUpdatePersonalization } from '../hooks/useProfile';
 import { MemberLevel } from '../api/types';
+import { showToast } from '@/shared/utils/toast';
 import { useState, useEffect } from 'react';
 
 interface PersonalizationSettingsProps {
@@ -40,14 +41,19 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     }
   }, [personalizationData]);
 
+  const handleKeywordsChange = (newKeywords: string[]) => {
+    // 키워드 개수 제한 확인 (입력 시 실시간 검사)
+    if (newKeywords.length > PERSONALIZATION_TEXT.sections.keyword.maxCount) {
+      showToast.error(
+        `키워드는 최대 ${PERSONALIZATION_TEXT.sections.keyword.maxCount}개까지 선택할 수 있습니다.`
+      );
+      return; // 제한을 초과하면 업데이트하지 않음
+    }
+    setKeywords(newKeywords);
+  };
+
   const handleSave = () => {
     if (!memberId || selectedLevel === null) return;
-
-    // 키워드 개수 제한 확인
-    if (keywords.length > PERSONALIZATION_TEXT.sections.keyword.maxCount) {
-      alert(`키워드는 최대 ${PERSONALIZATION_TEXT.sections.keyword.maxCount}개까지 선택할 수 있습니다.`);
-      return;
-    }
 
     updatePersonalizationMutation.mutate(
       {
@@ -221,7 +227,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
             placeholder='키워드를 입력하세요'
             className='w-full h-11 min-w-0'
             value={keywords}
-            onChange={setKeywords}
+            onChange={handleKeywordsChange}
           />
 
           <Button
