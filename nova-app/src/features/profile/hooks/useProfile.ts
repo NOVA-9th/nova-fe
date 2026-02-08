@@ -9,6 +9,8 @@ import {
   getProfileImage,
   uploadProfileImage,
   deleteProfileImage,
+  deleteAllBookmarks,
+  resetHiddenCardNews,
   type MemberRequestDto,
   type MemberPersonalizationDto,
 } from '../api/profile';
@@ -137,3 +139,30 @@ export const useDeleteProfileImage = () => {
   });
 };
 
+/**
+ * 저장함 목록 삭제 (모든 북마크 삭제)
+ */
+export const useDeleteAllBookmarks = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => deleteAllBookmarks(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+    },
+  });
+};
+
+/**
+ * 카드뉴스 숨김 내역 초기화
+ */
+export const useResetHiddenCardNews = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => resetHiddenCardNews(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cardnews', 'hidden'] });
+    },
+  });
+};

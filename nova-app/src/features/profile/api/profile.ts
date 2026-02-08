@@ -162,3 +162,24 @@ export const deleteProfileImage = async (
   return response.data;
 };
 
+/**
+ * 저장함 목록 삭제 (모든 북마크 삭제)
+ * 복구 불가
+ */
+export const deleteAllBookmarks = async (): Promise<ApiResponse<void>> => {
+  const response = await axiosInstance.delete<ApiResponse<void>>(
+    '/api/bookmarks/delete/all'
+  );
+  return response.data;
+};
+
+/**
+ * 카드뉴스 숨김 내역 초기화
+ * 복구 불가
+ */
+export const resetHiddenCardNews = async (): Promise<ApiResponse<void>> => {
+  const response = await axiosInstance.delete<ApiResponse<void>>(
+    '/api/cardnews/hidden'
+  );
+  return response.data;
+};
