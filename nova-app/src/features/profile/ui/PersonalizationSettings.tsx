@@ -66,10 +66,29 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     );
   };
 
+  // 인덱스를 ID로 변환
+  const getInterestIdByIndex = (index: number): number => {
+    return PERSONALIZATION_TEXT.sections.interests.ids[index];
+  };
+
+  // ID를 인덱스로 변환
+  const getInterestIndexById = (id: number): number => {
+    return PERSONALIZATION_TEXT.sections.interests.ids.indexOf(id);
+  };
+
   const toggleInterest = (index: number) => {
+    const interestId = getInterestIdByIndex(index);
     setSelectedInterests((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+      prev.includes(interestId)
+        ? prev.filter((id) => id !== interestId)
+        : [...prev, interestId]
     );
+  };
+
+  // 인덱스에 해당하는 관심 분야가 선택되었는지 확인
+  const isInterestSelected = (index: number): boolean => {
+    const interestId = getInterestIdByIndex(index);
+    return selectedInterests.includes(interestId);
   };
 
   const getLevelIndex = (level: MemberLevel | null): number => {
@@ -153,7 +172,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               label={option}
               size='md'
               style='surface'
-              selected={selectedInterests.includes(index)}
+              selected={isInterestSelected(index)}
               isShowChevron={false}
               onClick={() => toggleInterest(index)}
             />

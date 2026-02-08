@@ -6,6 +6,9 @@ import {
   getConnectedAccounts,
   getPersonalization,
   updatePersonalization,
+  getProfileImage,
+  uploadProfileImage,
+  deleteProfileImage,
   type MemberRequestDto,
   type MemberPersonalizationDto,
 } from '../api/profile';
@@ -85,6 +88,51 @@ export const useUpdatePersonalization = () => {
     onSuccess: (_, variables) => {
       // 개인화 설정 캐시 무효화하여 자동 refetch
       queryClient.invalidateQueries({ queryKey: ['personalization', variables.memberId] });
+    },
+  });
+};
+
+/**
+ * 프로필 이미지 조회
+ */
+export const useProfileImage = (memberId: number | null) => {
+  return useQuery({
+    queryKey: ['profileImage', memberId],
+    queryFn: () => getProfileImage(memberId!),
+    enabled: memberId !== null,
+    staleTime: 5 * 60 * 1000, // 5분간 캐시 유지
+  });
+};
+
+/**
+ * 프로필 이미지 업로드
+ */
+export const useUploadProfileImage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ memberId, file }: { memberId: number; file: File }) =>
+      uploadProfileImage(memberId, file),
+    onSuccess: (_, variables) => {
+      // 멤버 정보 및 프로필 이미지 캐시 무효화하여 자동 refetch
+      queryClient.invalidateQueries({ queryKey: ['member', variables.memberId] });
+      queryClient.invalidateQueries({ queryKey: ['profileImage', variables.memberId] });
+    },
+  });
+};
+
+/**
+ * 프로필 이미지 삭제
+ */
+export const useDeleteProfileImage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (memberId: number) => deleteProfileImage(memberId),
+    onSuccess: (_, memberId) => {
+      // 멤버 정보 및 프로필 이미지 캐시 무효화하여 자동 refetch
+      queryClient.invalidateQueries({ queryKey: ['member', memberId] });
+      queryClient.invalidateQueries({ queryKey: ['profileImage', memberId] });
     },
   });
 };

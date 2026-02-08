@@ -103,3 +103,62 @@ export const getConnectedAccounts = async (
   return response.data;
 };
 
+/**
+ * 프로필 이미지 조회
+ * @param memberId 멤버 ID
+ * @returns 이미지 Blob 또는 null
+ */
+export const getProfileImage = async (
+  memberId: number
+): Promise<Blob | null> => {
+  try {
+    const response = await axiosInstance.get(`/api/members/${memberId}/profile-image`, {
+      responseType: 'blob',
+    });
+    return response.data;
+  } catch (error: any) {
+    // 404 Not Found인 경우 null 반환
+    if (error.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
+};
+
+/**
+ * 프로필 이미지 업로드
+ * @param memberId 멤버 ID
+ * @param file 이미지 파일
+ */
+export const uploadProfileImage = async (
+  memberId: number,
+  file: File
+): Promise<ApiResponse<void>> => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await axiosInstance.post<ApiResponse<void>>(
+    `/api/members/${memberId}/profile-image`,
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
+  return response.data;
+};
+
+/**
+ * 프로필 이미지 삭제
+ * @param memberId 멤버 ID
+ */
+export const deleteProfileImage = async (
+  memberId: number
+): Promise<ApiResponse<void>> => {
+  const response = await axiosInstance.delete<ApiResponse<void>>(
+    `/api/members/${memberId}/profile-image`
+  );
+  return response.data;
+};
+
