@@ -225,14 +225,14 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
             onAdd={handleAddKeyword}
             suggestions={suggestions}
             placeholder='키워드를 입력하세요'
-            className='flex-1 min-w-0 h-11 w-full'
+            className='w-full h-11 min-w-0'
           />
 
           <Button
             size='lg'
             style='surface'
             peak={true}
-            label={PERSONALIZATION_TEXT.sections.keyword.saveButtonLabel}
+            label={'저장'}
             className='w-full xl:w-auto'
             onClick={handleSave}
             disabled={updatePersonalizationMutation.isPending}
