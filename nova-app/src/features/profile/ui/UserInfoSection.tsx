@@ -35,6 +35,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isDeleteImageModalOpen, setIsDeleteImageModalOpen] = useState(false);
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isDeleteMemberModalOpen, setIsDeleteMemberModalOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // API 데이터가 로드되면 nameValue 초기화
@@ -62,17 +63,24 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     );
   };
 
-  const handleDeleteMember = () => {
+  const handleDeleteMemberClick = () => {
     if (!memberId) return;
+    setIsDeleteMemberModalOpen(true);
+  };
 
-    if (confirm('정말 회원 탈퇴를 하시겠습니까? 이 작업은 되돌릴 수 없습니다.')) {
-      deleteMemberMutation.mutate(memberId, {
-        onSuccess: () => {
-          logout();
-          router.push('/');
-        },
-      });
-    }
+  const handleConfirmDeleteMember = () => {
+    if (!memberId) return;
+    deleteMemberMutation.mutate(memberId, {
+      onSuccess: () => {
+        setIsDeleteMemberModalOpen(false);
+        logout();
+        showToast.success('회원 탈퇴가 완료되었습니다.');
+        router.push('/login');
+      },
+      onError: () => {
+        showToast.error('회원 탈퇴에 실패했습니다.');
+      },
+    });
   };
 
   const handleLogoutClick = () => {
@@ -326,7 +334,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             className={`w-full gap-1.5 ${
               deleteMemberMutation.isPending ? 'opacity-50 cursor-not-allowed' : ''
             }`}
-            onClick={handleDeleteMember}
+            onClick={handleDeleteMemberClick}
           />
           <TextIconButton
             label='로그아웃'
@@ -351,6 +359,14 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
           content='로그아웃 하시겠습니까?'
           onCancel={() => setIsLogoutModalOpen(false)}
           onConfirm={handleConfirmLogout}
+        />
+      )}
+      {isDeleteMemberModalOpen && (
+        <Modal
+          content='정말 회원 탈퇴를 하시겠습니까? 이 작업은 되돌릴 수 없습니다.'
+          confirmLabel='탈퇴'
+          onCancel={() => setIsDeleteMemberModalOpen(false)}
+          onConfirm={handleConfirmDeleteMember}
         />
       )}
     </section>
