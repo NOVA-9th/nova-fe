@@ -67,7 +67,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
       },
       {
         onSuccess: () => {
-          // 성공 시 처리 (캐시 자동 업데이트됨)
+          showToast.success('저장되었습니다.');
         },
       }
     );
