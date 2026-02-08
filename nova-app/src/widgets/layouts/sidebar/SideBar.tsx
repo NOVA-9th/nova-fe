@@ -18,7 +18,7 @@ export const SideBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { memberId } = useAuthStore();
+  const { memberId, logout } = useAuthStore();
   const { data: memberInfo, isLoading, dataUpdatedAt } = useMemberInfo(memberId);
 
   const isActive = (href: string) => {
@@ -28,6 +28,7 @@ export const SideBar = () => {
 
   const handleLogout = () => {
     setIsModalOpen(false);
+    logout();
     showToast.success('로그아웃 되었습니다.');
     router.push('/login');
   };

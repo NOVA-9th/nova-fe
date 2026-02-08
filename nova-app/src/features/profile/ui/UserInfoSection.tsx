@@ -1,6 +1,6 @@
 'use client';
 
-import { ItemList, SectionHeader, TextIconButton, TextInput } from '@/shared/ui';
+import { ItemList, Modal, SectionHeader, TextIconButton, TextInput } from '@/shared/ui';
 import { LogOut, RefreshCw, UserX, X } from 'lucide-react';
 import Image from 'next/image';
 import {
@@ -12,6 +12,7 @@ import {
 } from '../hooks/useProfile';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { getProfileImageUrl } from '@/shared/utils/profileImage';
+import { showToast } from '@/shared/utils/toast';
 import { UserInfoSectionSkeleton } from './skeletons';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
@@ -32,6 +33,8 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   const [nameValue, setNameValue] = useState('');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isDeleteImageModalOpen, setIsDeleteImageModalOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // API 데이터가 로드되면 nameValue 초기화
@@ -72,9 +75,15 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     }
   };
 
-  const handleLogout = () => {
+  const handleLogoutClick = () => {
+    setIsLogoutModalOpen(true);
+  };
+
+  const handleConfirmLogout = () => {
+    setIsLogoutModalOpen(false);
     logout();
-    router.push('/');
+    showToast.success('로그아웃 되었습니다.');
+    router.push('/login');
   };
 
   const handleImageClick = () => {
@@ -83,27 +92,35 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      // 파일 유효성 검사
-      if (!file.type.startsWith('image/')) {
-        alert('이미지 파일만 업로드 가능합니다.');
-        return;
-      }
+    if (!file) return;
 
-      // 파일 크기 제한 (예: 5MB)
-      if (file.size > 5 * 1024 * 1024) {
-        alert('파일 크기는 5MB 이하여야 합니다.');
-        return;
-      }
-
-      setSelectedFile(file);
-      // 미리보기 생성
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setPreviewImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    // JPG, PNG만 허용
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if (!allowedTypes.includes(file.type)) {
+      showToast.error('JPG, PNG 형식만 업로드 가능합니다.');
+      e.target.value = '';
+      return;
     }
+
+    // 용량 8MB 미만
+    const maxSize = 8 * 1024 * 1024;
+    if (file.size >= maxSize) {
+      showToast.error('파일 크기는 8MB 미만이어야 합니다.');
+      e.target.value = '';
+      return;
+    }
+
+    setSelectedFile(file);
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setPreviewImage(reader.result as string);
+    };
+    reader.onerror = () => {
+      showToast.error('이미지를 불러올 수 없습니다.');
+      setSelectedFile(null);
+      e.target.value = '';
+    };
+    reader.readAsDataURL(file);
   };
 
   const handleSave = () => {
@@ -121,8 +138,14 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               requestDto: { name: nameValue.trim() },
             },
             {
-              onSuccess: resolve,
-              onError: reject,
+              onSuccess: () => {
+                showToast.success('이름이 변경되었습니다.');
+                resolve(undefined);
+              },
+              onError: () => {
+                showToast.error('이름 변경에 실패했습니다.');
+                reject(new Error('Name update failed'));
+              },
             }
           );
         })
@@ -142,9 +165,13 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
                 if (fileInputRef.current) {
                   fileInputRef.current.value = '';
                 }
+                showToast.success('프로필 이미지가 변경되었습니다.');
                 resolve(undefined);
               },
-              onError: reject,
+              onError: () => {
+                showToast.error('이미지 업로드에 실패했습니다.');
+                reject(new Error('Upload failed'));
+              },
             }
           );
         })
@@ -155,22 +182,31 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     if (promises.length === 0) return;
 
     // 모든 저장 작업 완료 대기
-    Promise.all(promises).catch((error) => {
-      console.error('저장 중 오류 발생:', error);
+    Promise.all(promises).catch(() => {
+      // 에러 토스트는 각 mutation onError에서 처리
     });
   };
 
-  const handleImageDelete = () => {
+  const handleImageDeleteClick = () => {
     if (!memberId) return;
+    const hasImage = memberInfo?.data?.profileImage ?? previewImage;
+    if (!hasImage) return;
+    setIsDeleteImageModalOpen(true);
+  };
 
-    if (confirm('프로필 이미지를 삭제하시겠습니까?')) {
-      deleteImageMutation.mutate(memberId, {
-        onSuccess: () => {
-          setPreviewImage(null);
-          setSelectedFile(null);
-        },
-      });
-    }
+  const handleConfirmImageDelete = () => {
+    if (!memberId) return;
+    setIsDeleteImageModalOpen(false);
+    deleteImageMutation.mutate(memberId, {
+      onSuccess: () => {
+        setPreviewImage(null);
+        setSelectedFile(null);
+        showToast.success('프로필 이미지가 삭제되었습니다.');
+      },
+      onError: () => {
+        showToast.error('이미지 삭제에 실패했습니다.');
+      },
+    });
   };
 
   // 이름이 변경되었는지 확인 (빈 문자열이 아닌 경우만)
@@ -236,7 +272,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             className={`w-full gap-1.5 ${
               !profileImage && !previewImage ? 'opacity-50 cursor-not-allowed' : ''
             }`}
-            onClick={handleImageDelete}
+            onClick={handleImageDeleteClick}
           />
           <TextIconButton
             label='변경'
@@ -299,10 +335,24 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             peak={false}
             leftIcon={LogOut}
             className='w-full gap-1.5'
-            onClick={handleLogout}
+            onClick={handleLogoutClick}
           />
         </div>
       </div>
+      {isDeleteImageModalOpen && (
+        <Modal
+          content='이미지를 삭제하겠습니까?'
+          onCancel={() => setIsDeleteImageModalOpen(false)}
+          onConfirm={handleConfirmImageDelete}
+        />
+      )}
+      {isLogoutModalOpen && (
+        <Modal
+          content='로그아웃 하시겠습니까?'
+          onCancel={() => setIsLogoutModalOpen(false)}
+          onConfirm={handleConfirmLogout}
+        />
+      )}
     </section>
   );
 };
