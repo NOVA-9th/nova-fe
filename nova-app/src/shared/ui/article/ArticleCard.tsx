@@ -17,9 +17,7 @@ import { Button, Header, IconButton, SectionHeader, TextBadge, TextIconButton } 
 import { EvidenceCard } from '@/features/saved/ui';
 import { CardNews } from '@/features/feed/types/api';
 import { getRelativeTime } from '@/features/feed/utils/time';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteBookmark, postBookmark } from '@/features/feed/api/bookmark';
-import { showToast } from '@/shared/utils/toast';
+import { useBookmarkToggle } from '@/features/feed/hooks/useBookmarkToggle';
 
 type ArticleType = 'NEWS' | 'JOB' | 'COMMUNITY';
 
@@ -34,9 +32,6 @@ const isArticleType = (v: string): v is ArticleType =>
 
 export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [optimisticSaved, setOptimisticSaved] = useState<boolean | null>(null);
-
-  const queryClient = useQueryClient();
 
   const typeKey: ArticleType = isArticleType(articleData.cardType) ? articleData.cardType : 'NEWS';
   const typeConfig = ARTICLE_TYPE_CONFIG[typeKey];
@@ -44,45 +39,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const evidences = (articleData.evidence ?? []).map((e) => e.trim()).filter(Boolean);
   const evidenceCount = evidences.length;
 
-  const createBookmarkMutation = useMutation({
-    mutationFn: () => postBookmark(articleData.id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['feedList'] });
-      showToast.success('북마크가 저장되었습니다');
-    },
-    onError: () => {
-      showToast.success('북마크 저장에 실패했습니다');
-    },
-  });
-
-  const deleteBookmarkMutation = useMutation({
-    mutationFn: () => deleteBookmark(articleData.id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['feedList'] });
-      showToast.success('북마크가 삭제되었습니다');
-    },
-    onError: () => {
-      showToast.success('북마크 삭제에 실패했습니다');
-    },
-  });
-
-  const isPending = createBookmarkMutation.isPending || deleteBookmarkMutation.isPending;
-
-  const onClickBookmark = () => {
-    if (isPending) return;
-
-    // 먼저 UI 업데이트 API 요청
-    if (articleData.saved) {
-      setOptimisticSaved(false);
-      deleteBookmarkMutation.mutate();
-    } else {
-      setOptimisticSaved(true);
-      createBookmarkMutation.mutate();
-    }
-  };
-
-  // 낙관적 업데이트 값이 있으면 그것을 사용, 없으면 실제 데이터 사용
-  const displaySaved = optimisticSaved !== null ? optimisticSaved : articleData.saved;
+  const { isPositiveSaved, toggle } = useBookmarkToggle(articleData.id, articleData.saved);
 
   return (
     <article className='flex flex-col w-full min-w-0 h-fit items-start rounded-static-frame bg-base border border-outline p-5 gap-5'>
@@ -143,7 +100,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           {evidences.map((content, idx) => (
             <EvidenceCard
               key={`${articleData.id}-evidence-${idx}`}
-              evidenceSource='근거'
+              evidenceSource={`근거 ${idx + 1}`}
               content={content}
             />
           ))}
@@ -184,8 +141,8 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
             size='lg'
             style='accent'
             peak={false}
-            icon={displaySaved ? BookmarkCheck : Bookmark}
-            onClick={onClickBookmark}
+            icon={isPositiveSaved ? BookmarkCheck : Bookmark}
+            onClick={toggle}
           />
         </div>
       </div>
