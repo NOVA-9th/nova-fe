@@ -18,7 +18,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
   }, [pathname, accessToken, router]);
 
   return (
-    <div className='flex items-center justify-center min-h-screen mx-auto bg-white-full px-4'>
+    <div className='flex items-center justify-center min-h-screen mx-auto bg-alternative px-4'>
       {children}
     </div>
   );
