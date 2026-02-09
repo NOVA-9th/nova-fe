@@ -75,10 +75,9 @@ const OAuthCallbackContent = () => {
           showToast.error(message);
           setTimeout(() => router.push('/login'), 2000);
         }
-      } catch (err: any) {
-        console.error('OAuth 콜백 처리 중 오류:', err);
-        const message =
-          err?.response?.data?.message || err?.message || '로그인 처리 중 오류가 발생했습니다.';
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        console.error('OAuth 콜백 처리 중 오류:', error);
         setStatus('error');
         setErrorMessage(message);
         showToast.error(message);
@@ -104,17 +103,17 @@ const OAuthCallbackContent = () => {
       <div className='text-center px-4'>
         {status === 'loading' && (
           <div className='space-y-4'>
-            <div className='animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mx-auto'></div>
-            <p className='text-body-base text-charcoal-additive'>로그인 처리 중...</p>
-            <p className='text-footnote-base text-charcoal-optional'>잠시만 기다려주세요</p>
+            <div className='animate-spin rounded-full h-16 w-16 border-4 border-primary border-t-transparent mx-auto' />
+            <p className='text-body-base text-additive'>로그인 처리 중...</p>
+            <p className='text-footnote-base text-optional'>잠시만 기다려주세요</p>
           </div>
         )}
 
         {status === 'success' && (
           <div className='space-y-4'>
             <div className='text-6xl mb-4 text-success'>✓</div>
-            <p className='text-body-lg text-charcoal-base font-medium'>로그인 성공!</p>
-            <p className='text-body-base text-charcoal-additive'>잠시 후 페이지로 이동합니다.</p>
+            <p className='text-body-lg text-additive font-medium'>로그인 성공!</p>
+            <p className='text-body-base text-optional'>잠시 후 메인 페이지로 이동합니다.</p>
           </div>
         )}
 
@@ -122,10 +121,8 @@ const OAuthCallbackContent = () => {
           <div className='space-y-4 max-w-md'>
             <div className='text-6xl mb-4 text-error'>✗</div>
             <p className='text-body-lg text-error font-medium'>로그인 실패</p>
-            <p className='text-body-base text-charcoal-additive'>{errorMessage}</p>
-            <p className='text-footnote-base text-charcoal-optional'>
-              잠시 후 로그인 페이지로 이동합니다.
-            </p>
+            <p className='text-body-base text-additive'>{errorMessage}</p>
+            <p className='text-footnote-base text-optional'>잠시 후 로그인 페이지로 이동합니다.</p>
           </div>
         )}
       </div>

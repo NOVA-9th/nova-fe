@@ -1,13 +1,13 @@
 'use client';
 
 import { ArticleCard } from '@/shared/ui';
-import ArticleCardSkeleton from './FeedArticleSkeleton';
-import FeedArticleError from './FeedArticleError';
-import EmptyFeed from './EmptyFeed';
+import ArticleCardSkeleton from '@/app/(protected)/(feed)/ui/FeedArticleSkeleton';
+import FeedArticleError from '@/app/(protected)/(feed)/ui/FeedArticleError';
+import EmptyFeed from '@/app/(protected)/(feed)/ui/EmptyFeed';
 import { useFeedArticles } from '@/features/feed/hooks/useFeedArticles';
 
-const FeedArticle = () => {
-  const { sortedArticles, isLoading, isError, refetch } = useFeedArticles();
+const SavedArticleList = () => {
+  const { sortedArticles, isLoading, isError, refetch } = useFeedArticles(true);
 
   if (isLoading)
     return (
@@ -41,4 +41,4 @@ const FeedArticle = () => {
   );
 };
 
-export default FeedArticle;
+export default SavedArticleList;

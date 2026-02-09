@@ -7,8 +7,18 @@ export const createTrendOptions = (): ChartOptions<'line'> => ({
   plugins: {
     legend: { display: false },
     tooltip: {
-      mode: 'index' as const,
+      mode: 'index',
       intersect: false,
+      callbacks: {
+        label: (context) => {
+          const dataset: any = context.dataset;
+          const index = context.dataIndex;
+
+          const rawValue = dataset.rawData?.[index]; // 실제 count
+
+          return `${dataset.label}: ${rawValue}`;
+        },
+      },
     },
   },
 
