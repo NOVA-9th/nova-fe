@@ -70,30 +70,38 @@ export const OnboardingContainer = () => {
   }, [currentStep, onNext, router, handleSave]);
 
   const handleSkip = useCallback(() => {
+    if (currentStep === 'step2') {
+      useOnboardingStore.setState((state) => ({
+        stepData: {
+          ...state.stepData,
+          step2: [],
+        },
+      }));
+      onNext();
+      return;
+    }
+
     if (currentStep === 'step4') {
       if (!memberId) return;
 
-      const stepData = useOnboardingStore.getState().stepData;
+      const { step1, step2, step3 } = useOnboardingStore.getState().stepData;
 
       updatePersonalizationMutation.mutate(
         {
           memberId,
           requestDto: {
-            level: stepData.step3 ?? null,
-            background: stepData.step1 ?? null,
-            interests: stepData.step2 ?? [],
+            level: step3 ?? null,
+            background: step1 ?? null,
+            interests: step2 ?? [],
             keywords: [],
           },
         },
         {
-          onSuccess: () => {
-            router.replace('/');
-          },
-          onError: (error: Error) => {
+          onSuccess: () => router.replace('/'),
+          onError: (error: Error) =>
             showToast.error(
               error?.message || '개인화 설정 저장에 실패했습니다. 다시 시도해주세요.',
-            );
-          },
+            ),
         },
       );
       return;

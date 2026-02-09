@@ -27,6 +27,18 @@ export const SearchInput = memo(
 
     useEffect(() => {
       const prev = prevRef.current;
+
+      const isExternalChange =
+        selectedKeywords.length !== prev.length || selectedKeywords.some((k) => !prev.includes(k));
+
+      if (isExternalChange) {
+        setChips(selectedKeywords);
+        prevRef.current = selectedKeywords;
+      }
+    }, [selectedKeywords]);
+
+    useEffect(() => {
+      const prev = prevRef.current;
       const addedKeyword = debouncedChips.find((chip) => !prev.includes(chip));
 
       if (addedKeyword && !suggestions!.includes(addedKeyword)) {
