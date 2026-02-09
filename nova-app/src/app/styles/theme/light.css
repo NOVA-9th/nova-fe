@@ -13,6 +13,8 @@
   --bg-accent-surface: var(--color-primary-surface); /* #287AF5 @ 10% */
   --bg-accent-peak: var(--color-primary-full);
 
+  --bg-login: var(--color-slate-surface);
+
   /* ---------- Background / Interaction ---------- */
   --bg-interaction-surface: var(--color-interaction-surface);
   --bg-interaction-peak: var(--color-interaction-peak);
@@ -26,6 +28,7 @@
   --fg-inactive: var(--color-charcoal-inactive); /* #151618 @ 36% */
   --fg-peak: var(--color-white-full);
   --fg-static: #ffffff;
+  --fg-login: var(--color-charcoal-additive);
 
   --fg-data-base: var(--color-light-full);
   --fg-data-peak: var(--color-light-peak);
@@ -41,6 +44,9 @@
 
   --stroke-data-outline: var(--color-light-outline); /* #00BD75 @ 20% */
   --stroke-data-selected: var(--color-light-full);
+
+  /* ---------- Shadow ---------- */
+  --shadow-suggestion: rgb(0 0 0 / 0.25);
 }
 
 @layer utilities {
@@ -79,6 +85,14 @@
 
   .bg-accent-peak {
     background-color: var(--color-primary-full);
+  }
+
+  .bg-login {
+    background-color: var(--bg-login);
+  }
+
+  .bg-login-form {
+    background-color: rgba(255, 255, 255, 0.323);
   }
 
   /* ---------- Background / Interaction ---------- */
@@ -181,6 +195,14 @@
 
   .text-static {
     color: #ffffff;
+  }
+
+  .text-login {
+    color: var(--color-charcoal-additive);
+  }
+
+  .text-github {
+    color: #000000;
   }
 
   .text-data-base {

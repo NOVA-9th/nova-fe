@@ -140,16 +140,16 @@ export const ChipInput = ({
           onCompositionStart={() => setIsComposing(true)}
           onCompositionEnd={() => setIsComposing(false)}
           placeholder={value.length === 0 ? placeholder : undefined}
-          className='caret-color placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
+          className='caret-color placeholder:text-optional min-w-20 flex-1 bg-transparent outline-none'
         />
       </div>
 
       {inputValue && filteredSuggestions.length > 0 && (
-        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_0_rgba(0,0,0,0.25)] border-slate-ring rounded-b-static-frame thin-scrollbar'>
+        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'>
           {filteredSuggestions.map((item) => (
             <li
               key={item}
-              className='px-4 py-2.5 typo-body-base h-12 text-charcoal-optional hover:bg-surface active:bg-surface'
+              className='px-4 py-2.5 typo-body-base h-12 text-optional hover:bg-surface active:bg-surface'
               onClick={() => addChip(item)}
             >
               {item}
@@ -159,7 +159,7 @@ export const ChipInput = ({
       )}
 
       {(inputValue || value.length > 0) && (
-        <button type='button' onClick={clearAll} className='text-charcoal-optional'>
+        <button type='button' onClick={clearAll} className='text-optional'>
           <X size={size === 'md' ? 14 : 16} />
         </button>
       )}

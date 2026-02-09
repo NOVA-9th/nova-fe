@@ -13,8 +13,8 @@ const LoginButtonVariants = cva(
     variants: {
       type: {
         kakao: 'bg-[#FEE404] hover:bg-[#F6DC00] active:bg-[#EFD400] text-[#1A1A1C]',
-        google: 'bg-surface hover:bg-surface active:bg-surface text-charcoal-additive',
-        github: 'bg-surface hover:bg-surface active:bg-surface text-charcoal-additive',
+        google: 'bg-login hover:bg-surface active:bg-surface text-login',
+        github: 'bg-login hover:bg-surface active:bg-surface text-github',
       },
     },
   },
@@ -68,7 +68,9 @@ export const LoginButton = ({ type, onClick, className }: LoginButtonProps) => {
       className={cn(LoginButtonVariants({ type }), className)}
       onClick={handleClick}
     >
-      <span className='py-1'>{Icon && <Icon className='w-4 h-4' />}</span>
+      <span className='py-1'>
+        {Icon && <Icon className='w-4 h-4 text-inherit' fill='currentColor' />}
+      </span>
       <div className='w-62.5 h-6 px-0.5'>{text} 계정으로 시작하기</div>
     </button>
   );
