@@ -4,17 +4,23 @@ import { create } from 'zustand';
 
 interface keywordStore {
   keywords: string[];
-  toggleKeyword: (keyword: string) => void;
+  toggleKeyword: (keyword: string) => boolean;
   resetKeyword: () => void;
 }
 
-export const useKeywordStore = create<keywordStore>((set) => ({
+export const useKeywordStore = create<keywordStore>((set, get) => ({
   keywords: [],
-  toggleKeyword: (keyword) =>
-    set((state) => ({
-      keywords: state.keywords.includes(keyword)
-        ? state.keywords.filter((item) => item !== keyword)
-        : [...state.keywords, keyword],
-    })),
+  toggleKeyword: (keyword) => {
+    const { keywords } = get();
+    if (keywords.includes(keyword)) {
+      set({ keywords: keywords.filter((item) => item !== keyword) });
+      return true;
+    }
+    if (keywords.length >= 3) {
+      return false;
+    }
+    set({ keywords: [...keywords, keyword] });
+    return true;
+  },
   resetKeyword: () => set({ keywords: [] }),
 }));
