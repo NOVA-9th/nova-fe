@@ -2,7 +2,6 @@
 import { useGetKeywordTop } from '@/features/trend/api/trend';
 import { useKeywordStore } from '@/features/trend/model/useKeywordTop';
 import { getCategory } from '@/features/trend/utils/getCategory';
-// import { getCategory } from '@/features/trend/utils/getCategory';
 import { Button, Header, TextBadge } from '@/shared/ui';
 import { cn } from '@/shared/utils/cn';
 import { showToast } from '@/shared/utils/toast';

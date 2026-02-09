@@ -1,61 +1,59 @@
-export const categoryRankOptions = {
-  indexAxis: 'y' as const, //y축배치
-  responsive: true,
-  maintainAspectRatio: false,
-  layout: {
-    padding: {
-      bottom: 20,
-      left: 15,
-    },
-  },
+import { chartColors } from '@/features/trend/lib/chartColor';
+import type { ChartOptions } from 'chart.js';
 
-  plugins: {
-    legend: {
-      display: false,
-    },
-    tooltip: {
-      enabled: true,
-    },
-  },
+export const createCategoryRankOptions = (isDark: boolean): ChartOptions<'bar'> => {
+  const colors = isDark ? chartColors.dark : chartColors.light;
 
-  scales: {
-    x: {
-      // suggestedMax: 3600,
-      grid: {
-        drawOnChartArea: true,
-        color: 'rgba(0,0,0,0.04)',
-        borderDash: [4, 4],
-        drawTicks: false, //세로선 방지
-        drawBorder: false,
-        lineWidth: 1,
+  return {
+    indexAxis: 'y',
+    responsive: true,
+    maintainAspectRatio: false,
+
+    layout: {
+      padding: {
+        bottom: 20,
+        left: 15,
       },
-      ticks: {
-        color: 'rgba(21, 22, 24, 0.48)', //text-optional
+    },
+
+    plugins: {
+      legend: { display: false },
+      tooltip: { enabled: true },
+    },
+
+    scales: {
+      x: {
+        grid: {
+          drawOnChartArea: true,
+          color: 'rgba(0,0,0,0.04)',
+
+          drawTicks: false,
+          // drawBorder: false,
+        },
         ticks: {
-          padding: 10, // x축 숫자와 그래프 사이 간격
+          color: colors.textOptional,
+          padding: 10,
+          font: { size: 12 },
         },
-        font: {
-          size: 12,
-        },
+        // border: {
+        //   dash: [8, 8],
+        // },
       },
-    },
 
-    y: {
-      offset: true,
-      grid: {
-        display: false,
-        drawBorder: false,
-      },
-      ticks: {
-        color: 'rgba(21, 22, 24, 0.48)', //text-optional
-        padding: 2,
-        // align: 'center',
-        // crossAlign: 'center',
-        // padding: 10,
-        font: {
-          size: 12,
+      y: {
+        offset: true,
+        grid: {
+          display: false,
+          // drawBorder: false,
+          color: 'rgba(0,0,0,0.04)',
+          lineWidth: 1,
+        },
+        ticks: {
+          color: colors.textOptional,
+          padding: 2,
+          font: { size: 12 },
         },
       },
     },
-  },
+  };
 };
