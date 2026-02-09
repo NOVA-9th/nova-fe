@@ -1,17 +1,24 @@
 'use client';
 
-import { useAuthRedirect } from '@/features/login/model/useAuthRedirect';
+import { useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
 
 const PublicLayout = ({ children }: { children: React.ReactNode }) => {
-  const { isBlocked } = useAuthRedirect({
-    when: 'loggedIn',
-    redirectTo: '/',
-  });
+  const router = useRouter();
+  const pathname = usePathname();
+  const { accessToken } = useAuthStore();
 
-  if (isBlocked) return null;
+  useEffect(() => {
+    if (!accessToken) return;
+
+    if (pathname === '/login') {
+      router.replace('/');
+    }
+  }, [pathname, accessToken, router]);
 
   return (
-    <div className='flex items-center justify-center min-h-screen mx-auto bg-white-full px-4'>
+    <div className='flex items-center justify-center min-h-screen mx-auto bg-alternative px-4'>
       {children}
     </div>
   );

@@ -3,6 +3,7 @@ import { cn } from '@/shared/utils/cn';
 import { VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
+
 interface IconButtonProps extends VariantProps<typeof IconButtonVariants> {
   onClick?: () => void;
   className?: string;

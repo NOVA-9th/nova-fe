@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Grid2X2Icon, EarthIcon, FileUser, ListFilter, Newspaper, Search } from 'lucide-react';
-import { KeywordFilter } from '../mocks/KeywordFilter';
+import { KeywordFilter } from '@/features/saved/mocks/KeywordFilter';
 import { SectionHeader, SelectionChip, TextButton, TextInput } from '@/shared/ui';
 
 export const KeywordCard = () => {
@@ -23,7 +23,6 @@ export const KeywordCard = () => {
           placeholder='제목 혹은 키워드로 검색하기'
           onChange={onChange}
           icon={Search}
-          isBadge={false}
           className='w-full md:flex-1'
         />
         <TextButton

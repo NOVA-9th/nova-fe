@@ -3,7 +3,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
-import { useState, useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import { InputChip } from '@/shared/ui';
@@ -37,6 +37,11 @@ const ChipInputVariants = cva(
 interface ChipInputProps extends VariantProps<typeof ChipInputVariants> {
   value: string[];
   onChange: (chips: string[]) => void;
+
+  inputValue: string;
+  onInputChange: (value: string) => void;
+
+  onAdd?: (chip: string) => void;
   placeholder?: string;
   icon?: LucideIcon;
   className?: string;
@@ -53,23 +58,27 @@ export const ChipInput = ({
   suggestions = [],
   value,
   onChange,
+  inputValue,
+  onInputChange,
+  onAdd,
 }: ChipInputProps) => {
-  const [inputValue, setInputValue] = useState('');
   const [isComposing, setIsComposing] = useState(false);
 
-  const addChipsFromValue = (input: string) => {
-    const newChips = input
+  const addChip = (raw?: string) => {
+    const finalValue = raw ?? inputValue;
+    if (!finalValue.trim()) return;
+
+    const newChips = finalValue
       .split(',')
       .map((v) => v.trim())
       .filter((v) => v && !value.includes(v));
-    if (newChips.length) onChange([...value, ...newChips]);
-    setInputValue('');
-  };
 
-  const addChip = (chipValue?: string) => {
-    const finalValue = chipValue ?? inputValue;
-    if (!finalValue) return;
-    addChipsFromValue(finalValue);
+    if (newChips.length) {
+      onChange([...value, ...newChips]);
+      newChips.forEach((chip) => onAdd?.(chip));
+    }
+
+    onInputChange('');
   };
 
   const removeChip = (chip: string) => {
@@ -77,7 +86,7 @@ export const ChipInput = ({
   };
 
   const clearAll = () => {
-    setInputValue('');
+    onInputChange('');
     onChange([]);
   };
 
@@ -92,10 +101,6 @@ export const ChipInput = ({
     if (e.key === 'Backspace' && !inputValue && value.length) {
       removeChip(value[value.length - 1]);
     }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
   };
 
   const filteredSuggestions = useMemo(
@@ -128,12 +133,12 @@ export const ChipInput = ({
         ))}
 
         <input
-          onCompositionStart={() => setIsComposing(true)}
-          onCompositionEnd={() => setIsComposing(false)}
           type='text'
           value={inputValue}
-          onChange={handleChange}
+          onChange={(e) => onInputChange(e.target.value)}
           onKeyDown={handleKeyDown}
+          onCompositionStart={() => setIsComposing(true)}
+          onCompositionEnd={() => setIsComposing(false)}
           placeholder={value.length === 0 ? placeholder : undefined}
           className='caret-color placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
         />
@@ -144,7 +149,7 @@ export const ChipInput = ({
           {filteredSuggestions.map((item) => (
             <li
               key={item}
-              className='px-4 py-2.5 typo-body-base h-12 text-charcoal-optional hover:bg-surface active:bg-surface '
+              className='px-4 py-2.5 typo-body-base h-12 text-charcoal-optional hover:bg-surface active:bg-surface'
               onClick={() => addChip(item)}
             >
               {item}

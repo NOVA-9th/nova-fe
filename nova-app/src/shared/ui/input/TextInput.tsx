@@ -1,8 +1,10 @@
+'use client';
+
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon, X } from 'lucide-react';
-import React from 'react';
-import { TextBadge } from '@/shared/ui';
+import React, { useEffect, useState } from 'react';
+import useDebounce from '@/shared/hooks/useDebounce';
 
 const TextInputVariants = cva(
   'flex items-center rounded-interactive-default px-padding-medium py-padding-regular',
@@ -19,6 +21,10 @@ const TextInputVariants = cva(
       data: {
         true: '',
         false: 'border-outline hover:border-ring',
+      },
+      disabled: {
+        true: 'opacity-50 cursor-not-allowed',
+        false: '',
       },
     },
     compoundVariants: [
@@ -43,11 +49,11 @@ const TextInputVariants = cva(
         class: 'border focus-within:border-selected',
       },
     ],
-
     defaultVariants: {
       size: 'md',
       variant: 'surface',
       data: false,
+      disabled: false,
     },
   },
 );
@@ -58,7 +64,8 @@ interface TextInputProps extends VariantProps<typeof TextInputVariants> {
   placeholder?: string;
   icon?: LucideIcon;
   className?: string;
-  isBadge?: boolean;
+  debounceMs?: number;
+  disabled?: boolean;
 }
 
 export const TextInput = ({
@@ -70,10 +77,24 @@ export const TextInput = ({
   placeholder,
   icon,
   className,
-  isBadge = false,
+  debounceMs = 2000,
+  disabled = false,
 }: TextInputProps) => {
+  const [localValue, setLocalValue] = useState(value);
+  const debouncedValue = useDebounce(localValue, debounceMs);
+
+  useEffect(() => {
+    setLocalValue(value);
+  }, [value]);
+
+  useEffect(() => {
+    if (debouncedValue !== value) {
+      onChange(debouncedValue);
+    }
+  }, [debouncedValue, value, onChange]);
+
   return (
-    <div className={cn(TextInputVariants({ size, variant, data }), className)}>
+    <div className={cn(TextInputVariants({ size, variant, data, disabled }), className)}>
       <div className='text-additive'>
         {icon &&
           React.createElement(icon, {
@@ -83,17 +104,29 @@ export const TextInput = ({
 
       <input
         type='text'
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
+        value={localValue}
+        onChange={(e) => {
+          if (disabled) return;
+          setLocalValue(e.target.value);
+        }}
         placeholder={placeholder}
-        className='caret-color placeholder:text-charcoal-optional flex-1 bg-transparent outline-none'
+        disabled={disabled}
+        className='caret-color placeholder:text-optional flex-1 bg-transparent outline-none disabled:cursor-not-allowed'
       />
 
-      {!value && isBadge && <TextBadge size='md' variant='surface' peak={false} text='Cmd + K' />}
-
-      <button type='button' onClick={() => onChange('')} className='text-charcoal-optional'>
-        <X size={size === 'md' ? 14 : 16} />
-      </button>
+      {localValue && (
+        <button
+          type='button'
+          onClick={() => {
+            if (disabled) return;
+            setLocalValue('');
+          }}
+          disabled={disabled}
+          className='text-optional hover:text-optional active:text-optional disabled:cursor-not-allowed'
+        >
+          <X size={size === 'md' ? 14 : 16} />
+        </button>
+      )}
     </div>
   );
 };

@@ -1,29 +1,41 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { useEffect, useMemo } from 'react';
 
 interface UseAuthRedirectOptions {
   when: 'loggedIn' | 'loggedOut';
   redirectTo: string;
+  ignorePaths?: string[];
 }
 
-export const useAuthRedirect = ({ when, redirectTo }: UseAuthRedirectOptions) => {
+export const useAuthRedirect = ({ when, redirectTo, ignorePaths = [] }: UseAuthRedirectOptions) => {
   const router = useRouter();
-  const { isLoggedIn, accessToken } = useAuthStore();
+  const pathname = usePathname();
+
+  const { accessToken, hasHydrated } = useAuthStore();
+  const isLoggedIn = Boolean(accessToken);
+
+  const shouldIgnore = useMemo(
+    () => ignorePaths.some((p) => pathname.startsWith(p)),
+    [ignorePaths, pathname],
+  );
 
   useEffect(() => {
-    const loggedIn = Boolean(accessToken && isLoggedIn);
+    if (!hasHydrated) return;
+    if (shouldIgnore) return;
 
-    if ((when === 'loggedIn' && loggedIn) || (when === 'loggedOut' && !loggedIn)) {
+    if (when === 'loggedIn' && isLoggedIn) {
       router.replace(redirectTo);
     }
-  }, [when, redirectTo, isLoggedIn, accessToken, router]);
+
+    if (when === 'loggedOut' && !isLoggedIn) {
+      router.replace(redirectTo);
+    }
+  }, [hasHydrated, shouldIgnore, when, isLoggedIn, redirectTo, router]);
 
   return {
-    isBlocked:
-      (when === 'loggedIn' && Boolean(accessToken && isLoggedIn)) ||
-      (when === 'loggedOut' && !Boolean(accessToken && isLoggedIn)),
+    isBlocked: !hasHydrated,
   };
 };

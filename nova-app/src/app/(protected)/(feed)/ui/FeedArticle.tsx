@@ -3,6 +3,7 @@
 import { ArticleCard } from '@/shared/ui';
 import ArticleCardSkeleton from './FeedArticleSkeleton';
 import FeedArticleError from './FeedArticleError';
+import EmptyFeed from './EmptyFeed';
 import { useFeedArticles } from '@/features/feed/hooks/useFeedArticles';
 
 const FeedArticle = () => {
@@ -21,6 +22,13 @@ const FeedArticle = () => {
     return (
       <section className='space-y-4'>
         <FeedArticleError onRetry={refetch} />
+      </section>
+    );
+
+  if (!sortedArticles || sortedArticles.length === 0)
+    return (
+      <section className='space-y-4'>
+        <EmptyFeed />
       </section>
     );
 

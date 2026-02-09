@@ -1,0 +1,129 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import {
+  getMemberInfo,
+  updateMemberName,
+  deleteMember,
+  getConnectedAccounts,
+  disconnectConnectedAccount,
+  getProfileImage,
+  uploadProfileImage,
+  deleteProfileImage,
+  deleteAllBookmarks,
+  resetHiddenCardNews,
+  type ConnectedAccountProvider,
+} from '@/features/profile/api/profile';
+import { MemberRequestDto } from '@/features/profile/types/api';
+
+// 멤버 정보 조회
+export const useMemberInfo = (memberId: number | null) => {
+  return useQuery({
+    queryKey: ['member', memberId],
+    queryFn: () => getMemberInfo(memberId!),
+    enabled: memberId !== null,
+  });
+};
+
+// 멤버 이름 수정
+export const useUpdateMemberName = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ memberId, requestDto }: { memberId: number; requestDto: MemberRequestDto }) =>
+      updateMemberName(memberId, requestDto),
+    onSuccess: (_, variables) => {
+      // 멤버 정보 캐시 무효화하여 자동 refetch
+      queryClient.invalidateQueries({ queryKey: ['member', variables.memberId] });
+    },
+  });
+};
+
+// 멤버 삭제
+export const useDeleteMember = () => {
+  return useMutation({
+    mutationFn: (memberId: number) => deleteMember(memberId),
+  });
+};
+
+// 연결된 계정 조회
+export const useConnectedAccounts = (memberId: number | null) => {
+  return useQuery({
+    queryKey: ['connectedAccounts', memberId],
+    queryFn: () => getConnectedAccounts(memberId!),
+    enabled: memberId !== null,
+  });
+};
+
+// 연결된 계정 해제
+export const useDisconnectConnectedAccount = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (provider: ConnectedAccountProvider) => disconnectConnectedAccount(provider),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['connectedAccounts'] });
+    },
+  });
+};
+
+// 프로필 이미지 조회
+export const useProfileImage = (memberId: number | null) => {
+  return useQuery({
+    queryKey: ['profileImage', memberId],
+    queryFn: () => getProfileImage(memberId!),
+    enabled: memberId !== null,
+    staleTime: 5 * 60 * 1000, // 5분간 캐시 유지
+  });
+};
+
+// 프로필 이미지 업로드
+export const useUploadProfileImage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ memberId, file }: { memberId: number; file: File }) =>
+      uploadProfileImage(memberId, file),
+    onSuccess: (_, variables) => {
+      // 멤버 정보 및 프로필 이미지 캐시 무효화하여 자동 refetch
+      queryClient.invalidateQueries({ queryKey: ['member', variables.memberId] });
+      queryClient.invalidateQueries({ queryKey: ['profileImage', variables.memberId] });
+    },
+  });
+};
+
+// 프로필 이미지 삭제
+export const useDeleteProfileImage = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (memberId: number) => deleteProfileImage(memberId),
+    onSuccess: (_, memberId) => {
+      // 멤버 정보 및 프로필 이미지 캐시 무효화하여 자동 refetch
+      queryClient.invalidateQueries({ queryKey: ['member', memberId] });
+      queryClient.invalidateQueries({ queryKey: ['profileImage', memberId] });
+    },
+  });
+};
+
+//저장함 목록 삭제 (모든 북마크 삭제)
+export const useDeleteAllBookmarks = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => deleteAllBookmarks(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['bookmarks'] });
+    },
+  });
+};
+
+// 카드뉴스 숨김 내역 초기화
+export const useResetHiddenCardNews = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => resetHiddenCardNews(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['cardnews', 'hidden'] });
+    },
+  });
+};

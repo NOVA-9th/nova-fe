@@ -1,6 +1,6 @@
 import { Header } from '@/shared/ui';
 import { Logo, NovaLabel } from '@/shared/assets';
-import { LoginButton } from './LoginButton';
+import { LoginButton } from '@/features/login/ui/LoginButton';
 
 export const LoginForm = () => {
   return (
