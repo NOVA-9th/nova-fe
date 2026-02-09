@@ -1,12 +1,17 @@
 'use client';
 
 import { SelectionChip, TextBadge } from '@/shared/ui';
-import { KEYWORD_ITEMS } from '@/features/feed/data/FilterData';
 import { FilterSection } from '@/features/feed/ui/FilterSection';
 import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { usePersonalization } from '@/shared/hooks/usePersonalization';
 
 export const KeywordFilter = () => {
   const { selectedKeywords, resetKeywords, toggleKeyword } = useFeedFilterStore();
+  const { memberId } = useAuthStore();
+
+  const { data: personalization } = usePersonalization(memberId);
+  const keywords = personalization?.data?.keywords ?? [];
 
   return (
     <FilterSection
@@ -17,13 +22,13 @@ export const KeywordFilter = () => {
       }
     >
       <div className='flex items-center gap-2 flex-wrap'>
-        {KEYWORD_ITEMS.map((keyword) => (
+        {keywords.map((keyword) => (
           <SelectionChip
-            key={keyword.id}
-            label={`#${keyword.filter}`}
-            selected={selectedKeywords.includes(keyword.filter)}
+            key={keyword}
+            label={`#${keyword}`}
+            selected={selectedKeywords.includes(keyword)}
             isShowChevron={false}
-            onClick={() => toggleKeyword(keyword.filter)}
+            onClick={() => toggleKeyword(keyword)}
             className='whitespace-nowrap'
           />
         ))}

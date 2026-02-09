@@ -46,6 +46,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   useEffect(() => {
     if (personalizationData?.data) {
       const data = personalizationData.data;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedInterests(data.interests || []);
       setSelectedLevel(data.level);
       setChips(data.keywords || []);
