@@ -1,7 +1,7 @@
 'use client';
 import { useBarKeywordStore } from '@/features/trend/model/useBarKeywordTop';
 import { CategoriesKeyword, KeywordTop, TrendChart, BarChart } from '@/features/trend/ui';
-import TrendChartSkeleton from '@/features/trend/ui/LineChartSkeleton';
+import { TrendChartSkeleton } from '@/features/trend/ui/LineChartSkeleton';
 import { Header, PageHeader, SelectionChip } from '@/shared/ui';
 import { ChartBar } from 'lucide-react';
 import { Suspense } from 'react';
@@ -29,14 +29,15 @@ const TrendPage = () => {
           label='키워드 트렌드 차트'
           description='선택한 키워드의 시간별 언급 빈도'
         />
-        <Suspense fallback={<TrendChartSkeleton />}>
+        <Suspense fallback={<TrendChartSkeleton isLine={true} />}>
           <TrendChart />
         </Suspense>
       </section>
-
       {/* 인기키워드 */}
       <section className='rounded-static-frame  border border-outline bg-base p-5 flex flex-col gap-4 mb-4 md:gap-5'>
-        <KeywordTop />
+        <Suspense fallback={<TrendChartSkeleton />}>
+          <KeywordTop />
+        </Suspense>
       </section>
 
       <section className='rounded-static-frame  border border-outline bg-base p-5 mb-4'>
@@ -46,7 +47,9 @@ const TrendPage = () => {
           description='전체 언급 수 기준'
           className='break-keep'
         />
-        <BarChart />
+        <Suspense fallback={<TrendChartSkeleton />}>
+          <BarChart />
+        </Suspense>
       </section>
       {/* 카테고리 키워드 */}
       <CategoriesKeyword />
