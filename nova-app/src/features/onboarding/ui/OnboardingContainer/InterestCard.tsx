@@ -71,9 +71,5 @@ export const InterestCard = ({ onValidChange }: InterestCardProps) => {
     ));
   }, [selectedOptions, toggleItem]);
 
-  return (
-    <div className='w-full h-full sm:max-w-150 sm:max-h-53 max-w-80 max-h-143.5 flex flex-wrap gap-2 sm:gap-2.5'>
-      {buttons}
-    </div>
-  );
+  return <div className='grid grid-cols-2 gap-3 sm:gap-2.5 sm:grid-cols-4'>{buttons}</div>;
 };

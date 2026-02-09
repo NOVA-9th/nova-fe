@@ -44,9 +44,5 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
     [selected],
   );
 
-  return (
-    <div className='w-full h-full sm:max-w-150 max-w-80 flex flex-wrap gap-2 sm:gap-2.5'>
-      {buttons}
-    </div>
-  );
+  return <div className='grid grid-cols-2 w-full sm:grid-cols-4 gap-2 sm:gap-2.5'>{buttons}</div>;
 };
