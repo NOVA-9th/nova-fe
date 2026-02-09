@@ -44,6 +44,9 @@
 
   --stroke-data-outline: var(--color-light-outline); /* #00BD75 @ 20% */
   --stroke-data-selected: var(--color-light-full);
+
+  /* ---------- Shadow ---------- */
+  --shadow-suggestion: rgb(0 0 0 / 0.25);
 }
 
 @layer utilities {

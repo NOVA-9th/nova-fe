@@ -43,6 +43,9 @@
 
     --stroke-data-outline: var(--color-dark-outline); /* #00BD75 @ 20% */
     --stroke-data-selected: var(--color-dark-full);
+
+    /* ---------- Shadow ---------- */
+    --shadow-suggestion: rgb(255 255 255 / 0.15);
   }
 
   /* ---------- Background ---------- */
