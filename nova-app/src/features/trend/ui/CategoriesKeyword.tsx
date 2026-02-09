@@ -22,7 +22,7 @@ export const CategoriesKeyword = () => {
   console.log(categoryMapData);
 
   return (
-    <section className='grid grid-cols-2 md:gap-4 gap-2.5 mb-12 md:mb-0'>
+    <section className='grid grid-cols-2 md:gap-4 gap-2.5 '>
       {categoryMapData?.map((item) => {
         const isSelected = category === item.category;
         return (
