@@ -5,7 +5,7 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { cn } from '@/shared/utils/cn';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useShallow } from 'zustand/shallow';
-import { PERSONALIZATION_TEXT } from '@/features/profile/data/PersonalizationText';
+import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 
 interface MajorCardProps {
   onValidChange: (isValid: boolean) => void; // 유효성 전달

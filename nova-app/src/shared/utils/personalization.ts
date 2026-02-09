@@ -1,5 +1,5 @@
-import { MemberLevel } from '@/features/profile/api/types';
-import { PERSONALIZATION_TEXT } from '@/features/profile/data/PersonalizationText';
+import { MemberLevel } from '@/shared/types/memberLevel';
+import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 
 export const getInterestIdByIndex = (index: number) =>
   PERSONALIZATION_TEXT.sections.interests.ids[index];

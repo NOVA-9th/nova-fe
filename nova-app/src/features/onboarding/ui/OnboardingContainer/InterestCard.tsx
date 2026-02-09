@@ -2,7 +2,7 @@
 
 import { ToggleButton } from '@/shared/ui';
 import { useEffect, useState, useMemo, useCallback } from 'react';
-import { PERSONALIZATION_TEXT } from '@/features/profile/data/PersonalizationText';
+import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 import { cn } from '@/shared/utils/cn';
 import { showToast } from '@/shared/utils/toast';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';

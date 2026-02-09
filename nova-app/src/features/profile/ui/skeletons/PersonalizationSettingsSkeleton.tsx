@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, SectionHeader } from '@/shared/ui';
-import { PERSONALIZATION_TEXT } from '../../data/PersonalizationText';
+import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 
 /**
  * 개인화 설정 섹션 로딩 스켈레톤.

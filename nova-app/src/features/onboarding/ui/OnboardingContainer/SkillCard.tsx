@@ -5,9 +5,9 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { cn } from '@/shared/utils/cn';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useShallow } from 'zustand/shallow';
-import { PERSONALIZATION_TEXT } from '@/features/profile/data/PersonalizationText';
-import { MemberLevel } from '@/features/profile/api/profile';
+import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 import { getLevelIndex } from '@/shared/utils/personalization';
+import { MemberLevel } from '@/shared/types/memberLevel';
 
 interface SkillCardProps {
   onValidChange: (isValid: boolean) => void;

@@ -5,21 +5,16 @@ import {
   deleteMember,
   getConnectedAccounts,
   disconnectConnectedAccount,
-  getPersonalization,
-  updatePersonalization,
   getProfileImage,
   uploadProfileImage,
   deleteProfileImage,
   deleteAllBookmarks,
   resetHiddenCardNews,
-  type MemberRequestDto,
-  type MemberPersonalizationDto,
   type ConnectedAccountProvider,
-} from '../api/profile';
+} from '@/features/profile/api/profile';
+import { MemberRequestDto } from '@/features/profile/types/api';
 
-/**
- * 멤버 정보 조회
- */
+// 멤버 정보 조회
 export const useMemberInfo = (memberId: number | null) => {
   return useQuery({
     queryKey: ['member', memberId],
@@ -28,9 +23,7 @@ export const useMemberInfo = (memberId: number | null) => {
   });
 };
 
-/**
- * 멤버 이름 수정
- */
+// 멤버 이름 수정
 export const useUpdateMemberName = () => {
   const queryClient = useQueryClient();
 
@@ -44,18 +37,14 @@ export const useUpdateMemberName = () => {
   });
 };
 
-/**
- * 멤버 삭제
- */
+// 멤버 삭제
 export const useDeleteMember = () => {
   return useMutation({
     mutationFn: (memberId: number) => deleteMember(memberId),
   });
 };
 
-/**
- * 연결된 계정 조회
- */
+// 연결된 계정 조회
 export const useConnectedAccounts = (memberId: number | null) => {
   return useQuery({
     queryKey: ['connectedAccounts', memberId],
@@ -64,9 +53,7 @@ export const useConnectedAccounts = (memberId: number | null) => {
   });
 };
 
-/**
- * 연결된 계정 해제 (취소)
- */
+// 연결된 계정 해제
 export const useDisconnectConnectedAccount = () => {
   const queryClient = useQueryClient();
 
@@ -78,41 +65,7 @@ export const useDisconnectConnectedAccount = () => {
   });
 };
 
-/**
- * 개인화 설정 조회
- */
-export const usePersonalization = (memberId: number | null) => {
-  return useQuery({
-    queryKey: ['personalization', memberId],
-    queryFn: () => getPersonalization(memberId!),
-    enabled: !!memberId && memberId > 0,
-  });
-};
-
-/**
- * 개인화 설정 수정
- */
-export const useUpdatePersonalization = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: ({
-      memberId,
-      requestDto,
-    }: {
-      memberId: number;
-      requestDto: MemberPersonalizationDto;
-    }) => updatePersonalization(memberId, requestDto),
-    onSuccess: (_, variables) => {
-      // 개인화 설정 캐시 무효화하여 자동 refetch
-      queryClient.invalidateQueries({ queryKey: ['personalization', variables.memberId] });
-    },
-  });
-};
-
-/**
- * 프로필 이미지 조회
- */
+// 프로필 이미지 조회
 export const useProfileImage = (memberId: number | null) => {
   return useQuery({
     queryKey: ['profileImage', memberId],
@@ -122,9 +75,7 @@ export const useProfileImage = (memberId: number | null) => {
   });
 };
 
-/**
- * 프로필 이미지 업로드
- */
+// 프로필 이미지 업로드
 export const useUploadProfileImage = () => {
   const queryClient = useQueryClient();
 
@@ -139,9 +90,7 @@ export const useUploadProfileImage = () => {
   });
 };
 
-/**
- * 프로필 이미지 삭제
- */
+// 프로필 이미지 삭제
 export const useDeleteProfileImage = () => {
   const queryClient = useQueryClient();
 
@@ -155,9 +104,7 @@ export const useDeleteProfileImage = () => {
   });
 };
 
-/**
- * 저장함 목록 삭제 (모든 북마크 삭제)
- */
+//저장함 목록 삭제 (모든 북마크 삭제)
 export const useDeleteAllBookmarks = () => {
   const queryClient = useQueryClient();
 
@@ -169,9 +116,7 @@ export const useDeleteAllBookmarks = () => {
   });
 };
 
-/**
- * 카드뉴스 숨김 내역 초기화
- */
+// 카드뉴스 숨김 내역 초기화
 export const useResetHiddenCardNews = () => {
   const queryClient = useQueryClient();
 

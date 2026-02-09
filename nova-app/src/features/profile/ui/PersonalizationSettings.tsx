@@ -2,15 +2,16 @@
 
 import { Button, ChipInput, SectionHeader, SelectionChip, TextBadge } from '@/shared/ui';
 import { PersonalizationSettingsSkeleton } from './skeletons';
-import { usePersonalization, useUpdatePersonalization } from '../hooks/useProfile';
-import { MemberLevel } from '../api/types';
-import { PERSONALIZATION_TEXT } from '../data/PersonalizationText';
+import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useGetKeywords } from '@/shared/hooks/useGetKeywords';
 import useDebounce from '@/shared/hooks/useDebounce';
 import { addKeyword, sanitizeKeywords } from '@/shared/utils/keyword';
 import { showToast } from '@/shared/utils/toast';
 import { getInterestIdByIndex, getLevelIndex } from '@/shared/utils/personalization';
+import { usePersonalization } from '@/shared/hooks/usePersonalization';
+import { useUpdatePersonalization } from '@/shared/hooks/usUpdatePersonalization';
+import { MemberLevel } from '@/shared/types/memberLevel';
 
 interface PersonalizationSettingsProps {
   memberId: number | null;

@@ -5,7 +5,7 @@ import { useSearchParams, useRouter, useParams } from 'next/navigation';
 import { showToast } from '@/shared/utils/toast';
 import { handleGoogleCallback, handleKakaoCallback } from '@/features/login/api/login';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
-import { usePersonalization } from '@/features/profile/hooks/useProfile';
+import { usePersonalization } from '@/shared/hooks/usePersonalization';
 
 const OAuthCallbackContent = () => {
   const searchParams = useSearchParams();

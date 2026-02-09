@@ -1,4 +1,4 @@
-import { MemberLevel } from '@/features/profile/api/profile';
+import { MemberLevel } from '@/shared/types/memberLevel';
 import { create } from 'zustand';
 
 interface OnboardingState {

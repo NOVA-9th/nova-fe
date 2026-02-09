@@ -7,8 +7,8 @@ import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
 import { useOnboardingStore } from '../models/useOnBoardingStore';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
-import { useUpdatePersonalization } from '@/features/profile/hooks/useProfile';
 import { showToast } from '@/shared/utils/toast';
+import { useUpdatePersonalization } from '@/shared/hooks/usUpdatePersonalization';
 
 export const OnboardingContainer = () => {
   const {
