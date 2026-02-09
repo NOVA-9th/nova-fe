@@ -1,17 +1,15 @@
 'use client';
-import { useGetInterestSkillTop, useGetKeywordTop } from '@/features/trend/api';
+import { useGetInterestSkillTop } from '@/features/trend/api/trend';
 import { useBarKeywordStore } from '@/features/trend/model/useBarKeywordTop';
 import { getCategoryArray } from '@/features/trend/utils/getCategoryArray';
 import { cn } from '@/shared/utils/cn';
 
 export const CategoriesKeyword = () => {
-  const { data } = useGetKeywordTop();
-  const { setCategory, category } = useBarKeywordStore();
+  const { toggleCategory, category } = useBarKeywordStore();
   console.log(category);
-  if (!data || !data.trends) return null;
   const { data: skillData } = useGetInterestSkillTop();
 
-  const categoryMapData = skillData?.rankings?.map((item) => {
+  const categoryMapData = skillData.rankings.map((item) => {
     return {
       ...item,
       keyword: item.keywords[0],
@@ -32,7 +30,7 @@ export const CategoriesKeyword = () => {
             )}
             key={item.rank}
             onClick={() => {
-              setCategory(item.category);
+              toggleCategory(item.category);
             }}
           >
             <h6

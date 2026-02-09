@@ -7,6 +7,12 @@ export type ApiResponse<T> = {
   message: string;
   data: T | null;
 };
+export type ApiSuccessResponse<T> = {
+  success: boolean;
+  code: string;
+  message: string;
+  data: T;
+};
 
 /**
  * 공통 에러 코드

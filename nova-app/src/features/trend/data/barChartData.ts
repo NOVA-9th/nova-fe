@@ -1,16 +1,12 @@
 'use client';
-import { useGetInterestSkillTop, useGetKeywordTop } from '@/features/trend/api';
+import { useGetInterestSkillTop } from '@/features/trend/api/trend';
 import { useBarKeywordStore } from '@/features/trend/model/useBarKeywordTop';
 import { getCategoryArray } from '@/features/trend/utils/getCategoryArray';
 import type { ChartData } from 'chart.js';
 
 export const useCategoryRank = () => {
   const { data } = useGetInterestSkillTop();
-  const { data: keyword } = useGetKeywordTop();
-  console.log(keyword);
-  console.log(data);
   const { category } = useBarKeywordStore();
-  if (!data) return null;
 
   const filteredRankings = data.rankings.filter(
     (item) => getCategoryArray(item.keywords) === category,

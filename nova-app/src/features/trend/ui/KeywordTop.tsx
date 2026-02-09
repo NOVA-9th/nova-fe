@@ -1,10 +1,11 @@
 'use client';
-import { useGetKeywordTop } from '@/features/trend/api';
+import { useGetKeywordTop } from '@/features/trend/api/trend';
 import { useKeywordStore } from '@/features/trend/model/useKeywordTop';
 import { getCategory } from '@/features/trend/utils/getCategory';
 // import { getCategory } from '@/features/trend/utils/getCategory';
 import { Button, Header, TextBadge } from '@/shared/ui';
 import { cn } from '@/shared/utils/cn';
+import { showToast } from '@/shared/utils/toast';
 
 export const KeywordTop = () => {
   const { data } = useGetKeywordTop();
@@ -14,7 +15,6 @@ export const KeywordTop = () => {
 
   const { keywords, toggleKeyword } = useKeywordStore();
 
-  if (!data || !data.trends) return null;
   return (
     <>
       <Header
@@ -72,7 +72,12 @@ export const KeywordTop = () => {
                 style='surface'
                 peak={isSelected}
                 size='sm'
-                onClick={() => toggleKeyword(item.keyword)}
+                onClick={() => {
+                  const isMaxLength = toggleKeyword(item.keyword);
+                  if (!isMaxLength) {
+                    showToast.error('최대 3개까지만 선택할 수 있습니다.');
+                  }
+                }}
                 className='w-fit'
               />
             </div>
