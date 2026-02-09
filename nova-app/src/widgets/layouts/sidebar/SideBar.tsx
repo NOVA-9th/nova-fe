@@ -86,7 +86,7 @@ export const SideBar = () => {
               alt='User Profile'
               width={200}
               height={200}
-              className='rounded-full size-10 object-cover bg-red-300'
+              className='rounded-full size-10 object-cover'
             />
           )}
           <div className='flex flex-col px-1 min-w-0 flex-1'>
