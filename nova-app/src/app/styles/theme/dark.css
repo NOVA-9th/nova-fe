@@ -4,7 +4,7 @@
     --bg-base: var(--color-charcoal-full);
     --bg-alternative: var(--color-black-full);
     --bg-surface: var(--color-slate-surface);
-    --bg-peak: var(--color-white-full);
+    --bg-peak: rgb(121, 126, 126);
     --bg-static: rgb(255 255 255 / 0.04); /* #FFFFFF @ 4% */
 
     --bg-data-surface: var(--color-dark-surface); /* #00AD65 @ 10% */
@@ -57,7 +57,7 @@
   }
 
   .dark .bg-peak {
-    background-color: var(--color-white-full);
+    background-color: var(--bg-peak);
   }
 
   .dark .bg-static {
@@ -86,7 +86,7 @@
   }
 
   .dark .hover\:bg-peak:hover {
-    background-color: color-mix(in srgb, var(--color-white-full), var(--color-charcoal-full) 2%);
+    background-color: color-mix(in srgb, var(--bg-peak), white 6%);
   }
 
   .dark .hover\:bg-data-surface:hover {
@@ -114,7 +114,7 @@
   }
 
   .dark .active\:bg-peak:active {
-    background-color: color-mix(in srgb, var(--color-white-full), var(--color-charcoal-full) 6%);
+    background-color: color-mix(in srgb, var(--bg-peak), white 10%);
   }
 
   .dark .active\:bg-data-surface:active {
@@ -158,7 +158,7 @@
   }
 
   /* ---------- Foreground ---------- */
-  .dark .text-base {
+  .dark .text-base-color {
     color: var(--color-white-full);
   }
 
@@ -198,7 +198,7 @@
     color: var(--color-white-accent-peak);
   }
 
-  .dark .hover\:text-base:hover {
+  .dark .hover\:text-base-color:hover {
     color: var(--color-white-full);
   }
 
@@ -207,7 +207,7 @@
   }
 
   .dark .hover\:text-optional:hover {
-    color: var(--color-white-optional);
+    color: color-mix(in srgb, var(--fg-optional), var(--fg-base) 12%);
   }
 
   .dark .hover\:text-peak:hover {
@@ -222,8 +222,8 @@
     color: var(--color-white-accent-base);
   }
 
-  .dark .disabled\:text-base:disabled,
-  .dark .disabled\:text-base[aria-disabled='true'] {
+  .dark .disabled\:text-base-color:disabled,
+  .dark .disabled\:text-base-color[aria-disabled='true'] {
     color: var(--color-white-inactive);
   }
 

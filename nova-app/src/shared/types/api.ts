@@ -8,7 +8,6 @@ export type ApiResponse<T> = {
   data: T | null;
 };
 
-
 /**
  * 공통 에러 코드
  */
@@ -19,4 +18,3 @@ export enum CommonErrorCode {
   METHOD_NOT_ALLOWED = 'COMMON405',
   INTERNAL_SERVER_ERROR = 'COMMON500',
 }
-

@@ -3,11 +3,11 @@
 import { SelectionChip } from '@/shared/ui';
 import { Grid2X2Icon } from 'lucide-react';
 import { TYPE_ITEMS } from '@/features/feed/data/FilterData';
-import { useFeedFilters } from '@/features/feed/model/useFeedFilters';
 import { FilterSection } from '@/features/feed/ui/FilterSection';
+import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 
 export const TypeFilter = () => {
-  const { resetTypes, selectedTypes, setSelectedTypes, toggleType } = useFeedFilters();
+  const { resetTypes, selectedTypes, setSelectedTypes, toggleType } = useFeedFilterStore();
 
   return (
     <FilterSection title='유형' onReset={resetTypes} className='space-y-4'>
@@ -23,12 +23,12 @@ export const TypeFilter = () => {
       <div className='flex items-center gap-2 flex-wrap'>
         {TYPE_ITEMS.map((item) => (
           <SelectionChip
-            key={item.label}
+            key={item.value}
             label={item.label}
-            selected={selectedTypes.includes(item.label)}
+            selected={selectedTypes.includes(item.value)}
             isShowChevron={false}
             icon={item.icon}
-            onClick={() => toggleType(item.label)}
+            onClick={() => toggleType(item.value)}
           />
         ))}
       </div>

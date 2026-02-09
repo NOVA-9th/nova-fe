@@ -21,7 +21,7 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
   };
 
   return (
-    <div className='w-full h-full sm:max-w-150 max-w-80 flex flex-wrap gap-2 sm:gap-2.5'>
+    <div className='grid grid-cols-2 w-full sm:grid-cols-4 gap-2 sm:gap-2.5'>
       {MAJOR_OPTIONS.map((text) => {
         return (
           <ToggleButton
@@ -31,7 +31,7 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
             variant='outline'
             selected={selected === text}
             onClick={() => toggleItem(text)}
-            className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11 sm:text-base!')}
+            className={cn('w-full max-w-36.75 h-11 text-base!')}
           />
         );
       })}
