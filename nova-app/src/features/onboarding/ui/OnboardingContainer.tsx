@@ -8,7 +8,7 @@ import { useCallback, useMemo } from 'react';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { showToast } from '@/shared/utils/toast';
-import { useUpdatePersonalization } from '@/shared/hooks/usUpdatePersonalization';
+import { useUpdatePersonalization } from '@/shared/hooks/useUpdatePersonalization';
 
 export const OnboardingContainer = () => {
   const {
