@@ -1,7 +1,10 @@
 import { chartColors } from '@/features/trend/lib/chartColor';
 import type { ChartOptions } from 'chart.js';
 
-export const createCategoryRankOptions = (isDark: boolean): ChartOptions<'bar'> => {
+export const createCategoryRankOptions = (
+  isDark: boolean,
+  hasData: boolean,
+): ChartOptions<'bar'> => {
   const colors = isDark ? chartColors.dark : chartColors.light;
 
   return {
@@ -11,18 +14,19 @@ export const createCategoryRankOptions = (isDark: boolean): ChartOptions<'bar'> 
 
     layout: {
       padding: {
-        bottom: 20,
+        top: 10,
         left: 15,
       },
     },
 
     plugins: {
       legend: { display: false },
-      tooltip: { enabled: true },
+      tooltip: { enabled: hasData },
     },
 
     scales: {
       x: {
+        // display: hasData,
         grid: {
           drawOnChartArea: true,
           color: 'rgba(0,0,0,0.04)',
@@ -31,28 +35,39 @@ export const createCategoryRankOptions = (isDark: boolean): ChartOptions<'bar'> 
           // drawBorder: false,
         },
         ticks: {
-          color: colors.textOptional,
+          color: hasData ? colors.textOptional : 'transparent',
           padding: 10,
           font: { size: 12 },
         },
-        // border: {
-        //   dash: [8, 8],
-        // },
+        border: {
+          display: true,
+          color: colors.outline,
+          width: 1,
+        },
       },
 
       y: {
         offset: true,
         grid: {
-          display: false,
+          display: true,
           // drawBorder: false,
           color: 'rgba(0,0,0,0.04)',
           lineWidth: 1,
         },
+
         ticks: {
           color: colors.textOptional,
           padding: 2,
           font: { size: 12 },
         },
+        border: {
+          display: true,
+          color: colors.outline,
+          width: 1,
+        },
+        // afterFit: (axis) => {
+        //   axis.width = 70; //키워드 차지 넓이
+        // },
       },
     },
   };

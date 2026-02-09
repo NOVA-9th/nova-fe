@@ -6,11 +6,11 @@ import { Bar } from 'react-chartjs-2';
 
 export const BarChart = () => {
   const { isDark } = useThemeToggle();
-  const categoryRankData = useCategoryRank(isDark);
+  const { categoryRankData, hasData } = useCategoryRank(isDark);
 
   return (
     <div className='h-90 text-optional'>
-      <Bar data={categoryRankData} options={createCategoryRankOptions(isDark)} />
+      <Bar data={categoryRankData} options={createCategoryRankOptions(isDark, hasData)} />
     </div>
   );
 };

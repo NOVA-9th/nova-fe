@@ -25,7 +25,7 @@ export const CategoriesKeyword = () => {
         return (
           <div
             className={cn(
-              'rounded-static-frame bg-static md:p-5 px-5 py-2.5 cursor-pointer',
+              'rounded-static-frame bg-base md:p-5 px-5 py-2.5 cursor-pointer border border-outline',
               isSelected && 'bg-accent-peak shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]',
             )}
             key={item.rank}
@@ -43,7 +43,7 @@ export const CategoriesKeyword = () => {
             </h6>
             <p
               className={cn(
-                'hidden md:block! typo-subhead-base text-inactive  truncate',
+                'hidden md:block! typo-subhead-base text-inactive  truncate ',
                 isSelected && 'text-peak',
               )}
             >

@@ -19,6 +19,9 @@ export const useCategoryRank = (isDark: boolean) => {
   const values = filteredRankings.flatMap((item) =>
     item.keywords.map(() => item.totalMentionCount),
   );
+
+  const hasData = values.length > 0;
+
   const categoryRankData: ChartData<'bar', number[], string> = {
     labels,
     datasets: [
@@ -32,5 +35,5 @@ export const useCategoryRank = (isDark: boolean) => {
       },
     ],
   };
-  return categoryRankData;
+  return { categoryRankData, hasData };
 };
