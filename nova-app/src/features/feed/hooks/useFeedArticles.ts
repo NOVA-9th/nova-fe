@@ -46,13 +46,20 @@ export const useFeedArticles = (saved: boolean = false) => {
     retry: 3,
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const articles = query.data?.data?.cardnews ?? [];
 
-  const sortedArticles = [...articles].sort((a, b) => {
-    const aTime = new Date(a.publishedAt).getTime();
-    const bTime = new Date(b.publishedAt).getTime();
-    return aTime - bTime;
-  });
+  const sortedArticles = useMemo(() => {
+    if (selectedSort === '관련도 순') {
+      // score 높은 순(내림차순)
+      return [...articles].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+    }
+
+    // 최신순: publishedAt 최신이 먼저(내림차순)
+    return [...articles].sort(
+      (a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime(),
+    );
+  }, [articles, selectedSort]);
 
   return {
     ...query,
