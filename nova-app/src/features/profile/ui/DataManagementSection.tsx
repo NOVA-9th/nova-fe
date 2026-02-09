@@ -5,6 +5,7 @@ import { ItemList, SectionHeader, Modal } from '@/shared/ui';
 import { Trash2 } from 'lucide-react';
 import { showToast } from '@/shared/utils/toast';
 import { useDeleteAllBookmarks, useResetHiddenCardNews } from '@/features/profile/hooks/useProfile';
+import { useQueryClient } from '@tanstack/react-query';
 
 export const DataManagementSection = () => {
   const [modalType, setModalType] = useState<'saved' | 'hidden' | null>(null);

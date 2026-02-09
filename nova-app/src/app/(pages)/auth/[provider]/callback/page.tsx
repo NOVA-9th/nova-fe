@@ -77,10 +77,11 @@ const OAuthCallbackContent = () => {
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
+        const message =
+          error?.response?.data?.message || error?.message || '로그인 처리 중 오류가 발생했습니다.';
         console.error('OAuth 콜백 처리 중 오류:', error);
         setStatus('error');
         setErrorMessage(message);
-        showToast.error(message);
         setTimeout(() => router.push('/login'), 2000);
       }
     };
