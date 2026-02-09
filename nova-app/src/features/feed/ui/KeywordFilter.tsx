@@ -3,7 +3,7 @@
 import { SelectionChip, TextBadge } from '@/shared/ui';
 import { KEYWORD_ITEMS } from '@/features/feed/data/FilterData';
 import { FilterSection } from '@/features/feed/ui/FilterSection';
-import { useFeedFilterStore } from '../model/useFeedFilterStore';
+import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 
 export const KeywordFilter = () => {
   const { selectedKeywords, resetKeywords, toggleKeyword } = useFeedFilterStore();

@@ -1,52 +1,79 @@
 'use client';
 
 import { ToggleButton } from '@/shared/ui';
-import { useEffect, useState } from 'react';
-import { INTEREST_OPTIONS } from '@/features/onboarding/data/InterestOptions';
+import { useEffect, useState, useMemo, useCallback } from 'react';
+import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 import { cn } from '@/shared/utils/cn';
 import { showToast } from '@/shared/utils/toast';
+import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
+import { useShallow } from 'zustand/shallow';
+import { getInterestIdByIndex } from '@/shared/utils/personalization';
 
 interface InterestCardProps {
   onValidChange: (isValid: boolean) => void;
 }
 
 export const InterestCard = ({ onValidChange }: InterestCardProps) => {
-  const [selected, setSelected] = useState<string[]>([]);
+  const { stepData, setStepData } = useOnboardingStore(
+    useShallow((state) => ({
+      stepData: state.stepData,
+      setStepData: state.setStepData,
+    })),
+  );
+
+  const initialSelectedOptions = useMemo(() => {
+    if (!stepData.step2) return [];
+    return stepData.step2
+      .map((id) => {
+        const index = PERSONALIZATION_TEXT.sections.interests.ids.indexOf(id);
+        return PERSONALIZATION_TEXT.sections.interests.options[index];
+      })
+      .filter(Boolean) as string[];
+  }, [stepData.step2]);
+
+  const [selectedOptions, setSelectedOptions] = useState<string[]>(initialSelectedOptions);
 
   useEffect(() => {
-    onValidChange(selected.length > 0); // 1개 이상 선택 시 다음 버튼 활성화
-  }, [selected, onValidChange]);
+    onValidChange(selectedOptions.length > 0);
+  }, [selectedOptions, onValidChange]);
 
-  const toggleItem = (text: string) => {
-    // 이미 선택된 경우: 제거
-    if (selected.includes(text)) {
-      setSelected((prev) => prev.filter((item) => item !== text));
-      return;
-    }
+  useEffect(() => {
+    const ids = selectedOptions.map((option) => {
+      const opt = option as (typeof PERSONALIZATION_TEXT.sections.interests.options)[number];
+      const index = PERSONALIZATION_TEXT.sections.interests.options.indexOf(opt);
+      return getInterestIdByIndex(index);
+    });
 
-    // 2개 미만이면 추가
-    if (selected.length < 2) {
-      setSelected((prev) => [...prev, text]);
-      return;
-    }
+    setStepData('step2', ids);
+  }, [selectedOptions, setStepData]);
 
-    // 이미 2개면 토스트만
-    showToast.error('최대 2개까지 선택 가능합니다.');
-  };
+  const toggleItem = useCallback((option: string) => {
+    setSelectedOptions((prev) => {
+      if (prev.includes(option)) return prev.filter((o) => o !== option);
+      if (prev.length < 2) return [...prev, option];
+      setTimeout(() => showToast.error('최대 2개까지 선택 가능합니다.'), 0);
+      return prev;
+    });
+  }, []);
+
+  const buttons = useMemo(() => {
+    return PERSONALIZATION_TEXT.sections.interests.options.map((option) => (
+      <ToggleButton
+        key={option}
+        size='md'
+        text={option}
+        variant='outline'
+        selected={selectedOptions.includes(option)}
+        value={option}
+        onClick={toggleItem}
+        className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11 sm:text-base!')}
+      />
+    ));
+  }, [selectedOptions, toggleItem]);
 
   return (
-    <div className='grid grid-cols-2 gap-3 sm:gap-2.5 sm:grid-cols-4'>
-      {INTEREST_OPTIONS.map((text) => (
-        <ToggleButton
-          key={text}
-          size='md'
-          text={text}
-          variant='outline'
-          selected={selected.includes(text)}
-          onClick={() => toggleItem(text)}
-          className={cn('w-full max-w-38.5 sm:h-11 h-9 ')}
-        />
-      ))}
+    <div className='w-full h-full sm:max-w-150 sm:max-h-53 max-w-80 max-h-143.5 flex flex-wrap gap-2 sm:gap-2.5'>
+      {buttons}
     </div>
   );
 };
