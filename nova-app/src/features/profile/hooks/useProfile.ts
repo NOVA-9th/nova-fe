@@ -71,8 +71,7 @@ export const useDisconnectConnectedAccount = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (provider: ConnectedAccountProvider) =>
-      disconnectConnectedAccount(provider),
+    mutationFn: (provider: ConnectedAccountProvider) => disconnectConnectedAccount(provider),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['connectedAccounts'] });
     },
@@ -86,7 +85,7 @@ export const usePersonalization = (memberId: number | null) => {
   return useQuery({
     queryKey: ['personalization', memberId],
     queryFn: () => getPersonalization(memberId!),
-    enabled: memberId !== null,
+    enabled: !!memberId && memberId > 0,
   });
 };
 
