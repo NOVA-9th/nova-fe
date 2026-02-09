@@ -43,19 +43,23 @@ export const OnboardingContainer = () => {
       {
         memberId,
         requestDto: {
-          level: stepData.step3 || null, // 전공 분야
-          background: stepData.step1 ?? null, // 관심 분야
-          interests: stepData.step2 || [],
-          keywords: stepData.step4 || [], // 관심 키워드
+          level: stepData.step3 ?? null,
+          background: stepData.step1 ?? null,
+          interests: stepData.step2 ?? [],
+          keywords: stepData.step4 ?? [],
         },
       },
       {
-        onSuccess: () => showToast.success('저장되었습니다.'),
-        onError: (error: Error) =>
-          showToast.error(error?.message || '개인화 설정 저장에 실패했습니다. 다시 시도해주세요.'),
+        onSuccess: () => {
+          showToast.success('저장되었습니다.');
+          router.replace('/');
+        },
+        onError: (error: Error) => {
+          showToast.error(error?.message || '개인화 설정 저장에 실패했습니다. 다시 시도해주세요.');
+        },
       },
     );
-  }, [memberId, updatePersonalizationMutation]);
+  }, [memberId, updatePersonalizationMutation, router]);
 
   const handleNext = useCallback(() => {
     if (currentStep === 'step4') {
