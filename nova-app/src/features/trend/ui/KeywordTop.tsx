@@ -1,14 +1,20 @@
 'use client';
-import { KEYWORDS } from '@/features/trend/mock/topKeyword';
-import { useCompanyStore } from '@/features/trend/model/useKeywordTop';
+import { useGetKeywordTop } from '@/features/trend/api';
+import { useKeywordStore } from '@/features/trend/model/useKeywordTop';
+import { getCategory } from '@/features/trend/utils/getCategory';
+// import { getCategory } from '@/features/trend/utils/getCategory';
 import { Button, Header, TextBadge } from '@/shared/ui';
 import { cn } from '@/shared/utils/cn';
 
 export const KeywordTop = () => {
+  const { data } = useGetKeywordTop();
+
   const gridCols =
     'lg:grid lg:grid-cols-[0.95fr_2.86fr_2.86fr_1.43fr_1.35fr_0.55fr] lg:gap-x-[20px]';
 
-  const { keywords, toggleKeyword } = useCompanyStore();
+  const { keywords, toggleKeyword } = useKeywordStore();
+
+  if (!data || !data.trends) return null;
   return (
     <>
       <Header
@@ -32,11 +38,11 @@ export const KeywordTop = () => {
           <div className='w-12.5 lg:w-auto text-center  lg:text-left mr-3 lg:mr-0'>변화율</div>
           <div className='w-10 text-center'>선택</div>
         </div>
-        {KEYWORDS.map((item) => {
-          const isSelected = keywords.includes(item.keyword);
+        {data?.trends?.map((item, idx) => {
+          const isSelected = keywords?.includes(item.keyword);
           return (
             <div
-              key={item.rank}
+              key={idx}
               className={cn(
                 'flex  items-center p-3 lg:px-8 lg:py-3 relative',
                 gridCols,
@@ -50,16 +56,16 @@ export const KeywordTop = () => {
             >
               <p className=' text-center w-10 lg:w-auto'>{item.rank}</p>
               <p className='flex-1 lg:flex-none  lg:w-auto  text-left  '>{item.keyword}</p>
-              <p className='hidden lg:block lg:w-auto text-center '>{item.category}</p>
+              <p className='hidden lg:block lg:w-auto text-center '>{getCategory(item.keyword)}</p>
               <p className='hidden lg:block lg:w-auto text-center '>
-                {item.count.toLocaleString()}
+                {item.mentionCount.toLocaleString()}
               </p>
               <TextBadge
-                text={`${item.changeRate}%`}
+                text={`${item.growthRate}%`}
                 size='md'
-                variant={item.changeRate.slice(0, 1) === '+' ? 'data' : 'accent'}
+                variant={item.growthRate < 0 ? 'accent' : 'data'}
                 peak={false}
-                className='w-fit mr-3 lg:mr-0'
+                className='w-fit mr-3 lg:mr-0 text-center'
               />
               <Button
                 label={isSelected ? '취소' : '선택'}
