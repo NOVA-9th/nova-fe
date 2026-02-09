@@ -1,14 +1,14 @@
 'use client';
 
 import { ToggleButton } from '@/shared/ui';
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { cn } from '@/shared/utils/cn';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useShallow } from 'zustand/shallow';
 import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 
 interface MajorCardProps {
-  onValidChange: (isValid: boolean) => void; // 유효성 전달
+  onValidChange: (isValid: boolean) => void;
 }
 
 export const MajorCard = ({ onValidChange }: MajorCardProps) => {
@@ -27,10 +27,6 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
     onValidChange(!!selected);
   }, [selected, setStepData, onValidChange]);
 
-  const toggleItem = useCallback((text: string) => {
-    setSelected((prev) => (prev === text ? null : text));
-  }, []);
-
   const buttons = useMemo(
     () =>
       PERSONALIZATION_TEXT.sections.major.options.map((text) => (
@@ -40,11 +36,12 @@ export const MajorCard = ({ onValidChange }: MajorCardProps) => {
           text={text}
           variant='outline'
           selected={selected === text}
-          onClick={() => toggleItem(text)}
+          value={text}
+          onClick={setSelected}
           className={cn('w-full max-w-39 sm:max-w-[142.5px] h-11 sm:text-base!')}
         />
       )),
-    [selected, toggleItem],
+    [selected],
   );
 
   return (

@@ -1,17 +1,23 @@
 'use client';
 
 import { ToggleButton } from '@/shared/ui';
-import { useEffect, useState, useMemo, useCallback } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { cn } from '@/shared/utils/cn';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useShallow } from 'zustand/shallow';
 import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
-import { getLevelIndex } from '@/shared/utils/personalization';
 import { MemberLevel } from '@/shared/types/memberLevel';
 
 interface SkillCardProps {
   onValidChange: (isValid: boolean) => void;
 }
+
+const SKILL_LEVELS: MemberLevel[] = [
+  MemberLevel.NOVICE,
+  MemberLevel.BEGINNER,
+  MemberLevel.INTERMEDIATE,
+  MemberLevel.ADVANCED,
+];
 
 export const SkillCard = ({ onValidChange }: SkillCardProps) => {
   const { stepData, setStepData } = useOnboardingStore(
@@ -24,38 +30,33 @@ export const SkillCard = ({ onValidChange }: SkillCardProps) => {
   const initialSelected = useMemo(() => stepData.step3 ?? null, [stepData.step3]);
   const [selected, setSelected] = useState<MemberLevel | null>(initialSelected);
 
+  // 유효성 체크
   useEffect(() => {
     onValidChange(!!selected);
   }, [selected, onValidChange]);
 
+  // store 업데이트
   useEffect(() => {
     setStepData('step3', selected);
   }, [selected, setStepData]);
 
-  const toggleItem = useCallback((text: MemberLevel) => {
-    setSelected((prev) => (prev === text ? null : text));
-  }, []);
-
-  const handleLevelChange = (index: number) => {
-    const levels = [
-      MemberLevel.NOVICE,
-      MemberLevel.BEGINNER,
-      MemberLevel.INTERMEDIATE,
-      MemberLevel.ADVANCED,
-    ];
-    setSelected(levels[index]);
-  };
-
+  // 버튼 렌더링
   const buttons = useMemo(() => {
     return PERSONALIZATION_TEXT.sections.skillLevel.options.map((option, index) => {
+      const level = SKILL_LEVELS[index]; // MemberLevel enum
       return (
         <ToggleButton
-          size='lg'
           key={option}
+          size='lg'
           text={option}
           variant='outline'
-          selected={index === getLevelIndex(selected)}
-          onClick={() => handleLevelChange(index)}
+          value={level.toString()} // enum → string
+          selected={level === selected}
+          onClick={(valueStr) => {
+            // string → MemberLevel enum
+            const selectedLevel = SKILL_LEVELS.find((l) => l.toString() === valueStr) ?? null;
+            setSelected(selectedLevel);
+          }}
           className={cn('w-full max-w-38.5 sm:max-w-73.5 max-h-10 sm:h-11')}
         />
       );
