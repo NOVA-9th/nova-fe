@@ -4,14 +4,12 @@ import { create } from 'zustand';
 
 interface keywordStore {
   keywords: string[];
-  //   setKeyword: (ketwords: string[]) => void;
   toggleKeyword: (keyword: string) => void;
   resetKeyword: () => void;
 }
 
 export const useKeywordStore = create<keywordStore>((set) => ({
   keywords: [],
-  //   setKeyword: (keywords) => set({ keywords }),
   toggleKeyword: (keyword) =>
     set((state) => ({
       keywords: state.keywords.includes(keyword)
