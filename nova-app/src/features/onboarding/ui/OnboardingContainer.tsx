@@ -4,7 +4,7 @@ import { useOnboarding } from '@/features/onboarding/models/useOnBoarding';
 import { Stepper } from '@/features/onboarding/ui';
 import { Button, Header } from '@/shared/ui';
 import { useRouter } from 'next/navigation';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { showToast } from '@/shared/utils/toast';
@@ -27,6 +27,8 @@ export const OnboardingContainer = () => {
 
   const memberId = useAuthStore((state) => state.memberId);
   const updatePersonalizationMutation = useUpdatePersonalization();
+
+  const showHeader = true;
 
   const handleStepChange = useCallback(
     (value: any) => {
@@ -110,6 +112,17 @@ export const OnboardingContainer = () => {
     onNext();
   }, [currentStep, memberId, updatePersonalizationMutation, router, onNext]);
 
+  const headerMemo = useMemo(() => {
+    if (!showHeader) return null;
+    return (
+      <>
+        <Header size='lg' label={label} description={description} className='hidden sm:flex' />
+        <Header size='md' label={label} className='flex sm:hidden' />
+        <span className='px-1 typo-callout-base text-additive block sm:hidden'>{description}</span>
+      </>
+    );
+  }, [label, description, showHeader]);
+
   return (
     <main className='flex flex-col w-full max-w-90 gap-5 px-7 py-5 bg-base rounded-static-frame sm:max-w-170 sm:px-10 sm:py-7.5'>
       <Stepper
@@ -117,11 +130,7 @@ export const OnboardingContainer = () => {
         labels={['전공 분야', '관심 분야', '기술 역량', '관심 키워드']}
       />
 
-      <div>
-        <Header size='lg' label={label} description={description} className='hidden sm:flex' />
-        <Header size='md' label={label} className='flex sm:hidden' />
-        <span className='px-1 typo-callout-base text-additive block sm:hidden'>{description}</span>
-      </div>
+      <div>{headerMemo}</div>
 
       <Component onValidChange={handleStepChange} />
 
