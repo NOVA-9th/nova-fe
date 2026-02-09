@@ -43,17 +43,16 @@ export const SkillCard = ({ onValidChange }: SkillCardProps) => {
   // 버튼 렌더링
   const buttons = useMemo(() => {
     return PERSONALIZATION_TEXT.sections.skillLevel.options.map((option, index) => {
-      const level = SKILL_LEVELS[index]; // MemberLevel enum
+      const level = SKILL_LEVELS[index];
       return (
         <ToggleButton
           key={option}
           size='lg'
           text={option}
           variant='outline'
-          value={level.toString()} // enum → string
+          value={level.toString()}
           selected={level === selected}
           onClick={(valueStr) => {
-            // string → MemberLevel enum
             const selectedLevel = SKILL_LEVELS.find((l) => l.toString() === valueStr) ?? null;
             setSelected(selectedLevel);
           }}

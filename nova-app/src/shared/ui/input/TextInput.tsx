@@ -77,7 +77,7 @@ export const TextInput = ({
   placeholder,
   icon,
   className,
-  debounceMs = 300,
+  debounceMs = 2000,
   disabled = false,
 }: TextInputProps) => {
   const [localValue, setLocalValue] = useState(value);

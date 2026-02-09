@@ -37,7 +37,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   const [chips, setChips] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [keywords, setKeywords] = useState<string[]>([]); // 저장용
-  const debouncedChips = useDebounce(chips, 300);
+  const debouncedChips = useDebounce(chips, 2000);
   const prevRef = useRef<string[]>([]);
 
   const { data } = useGetKeywords();

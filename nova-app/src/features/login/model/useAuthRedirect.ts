@@ -36,6 +36,6 @@ export const useAuthRedirect = ({ when, redirectTo, ignorePaths = [] }: UseAuthR
   }, [hasHydrated, shouldIgnore, when, isLoggedIn, redirectTo, router]);
 
   return {
-    isBlocked: !hasHydrated, // ⭐ 여기만 막아야 함
+    isBlocked: !hasHydrated,
   };
 };

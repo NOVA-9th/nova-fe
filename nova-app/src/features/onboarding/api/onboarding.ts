@@ -3,12 +3,6 @@ import { ApiResponse } from '@/shared/types';
 import { KeywordPersonalizationDto } from '@/features/onboarding/types/api';
 
 export const getKeywords = async () => {
-  try {
-    const response =
-      await axiosInstance.get<ApiResponse<KeywordPersonalizationDto>>(`/api/keywords`);
-    return response.data.data ?? [];
-  } catch (error) {
-    console.error('getKeywords 호출 중 오류:', error);
-    return [];
-  }
+  const response = await axiosInstance.get<ApiResponse<KeywordPersonalizationDto>>(`/api/keywords`);
+  return response.data.data ?? [];
 };
