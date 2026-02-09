@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority';
 import { KakaoIcon } from '@/shared/assets';
 import { GoogleIcon } from '@/shared/assets';
 import { GithubIcon } from '@/shared/assets';
-import { redirectToGoogle, redirectToKakao } from '@/features/login/api/login';
+import { redirectToGoogle, redirectToKakao, redirectToGithub } from '@/features/login/api/login';
 
 const LoginButtonVariants = cva(
   'h-11 rounded-interactive-default py-padding-regular px-padding-bold typo-body-key flex flex-row items-center justify-center',
@@ -57,8 +57,7 @@ export const LoginButton = ({ type, onClick, className }: LoginButtonProps) => {
         redirectToKakao();
         break;
       case 'github':
-        // TODO: GitHub OAuth 구현 시 추가
-        console.warn('GitHub 로그인은 아직 구현되지 않았습니다.');
+        redirectToGithub();
         break;
     }
   };
