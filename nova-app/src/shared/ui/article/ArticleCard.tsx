@@ -34,7 +34,9 @@ const isArticleType = (v: string): v is ArticleType =>
 export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { isPositiveSaved, toggle } = useBookmarkToggle(articleData.id, articleData.saved);
-  const { handleHideFeed } = useHideFeed(articleData.id);
+  const { handleHideFeed } = useHideFeed(articleData.id, {
+    shouldUnbookmark: () => isPositiveSaved, // 현재 UI 기준 북마크 상태면 true
+  });
 
   const typeKey: ArticleType = isArticleType(articleData.cardType) ? articleData.cardType : 'NEWS';
   const typeConfig = ARTICLE_TYPE_CONFIG[typeKey];
