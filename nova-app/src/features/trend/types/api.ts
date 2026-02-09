@@ -25,7 +25,11 @@ export type RankingsData = {
   rank: number;
   interest: number;
   totalMentionCount: number;
-  keywords: string[];
+  keywords: keywordType[];
+};
+export type keywordType = {
+  name: string;
+  mentionCount: number;
 };
 
 export type skilltopDTO = {

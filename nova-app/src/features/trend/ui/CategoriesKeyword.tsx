@@ -8,12 +8,15 @@ export const CategoriesKeyword = () => {
   const { toggleCategory, category } = useBarKeywordStore();
   console.log(category);
   const { data: skillData } = useGetInterestSkillTop();
+  console.log(skillData);
 
   const categoryMapData = skillData.rankings.map((item) => {
+    const keywordNames = item.keywords.map((k) => k.name);
+    // console.log(keywordNames);
     return {
       ...item,
-      keyword: item.keywords[0],
-      category: getCategoryArray(item.keywords),
+      keywordNames,
+      category: getCategoryArray(keywordNames),
     };
   });
   console.log(categoryMapData);
@@ -47,7 +50,7 @@ export const CategoriesKeyword = () => {
                 isSelected && 'text-peak',
               )}
             >
-              {item.keywords.join(', ')}
+              {item.keywordNames.join(', ')}
             </p>
           </div>
         );

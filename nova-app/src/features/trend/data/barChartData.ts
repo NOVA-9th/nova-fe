@@ -10,16 +10,16 @@ export const useCategoryRank = (isDark: boolean) => {
   const { category } = useBarKeywordStore();
   const colors = isDark ? chartColors.dark : chartColors.light;
 
-  const filteredRankings = data.rankings.filter(
-    (item) => getCategoryArray(item.keywords) === category,
-  );
+  const selectedCategory = data.rankings.find((item) => {
+    const keywordName = item.keywords.map((keyword) => keyword.name);
+    return getCategoryArray(keywordName) === category;
+  });
 
-  const labels = filteredRankings.flatMap((item) => item.keywords);
+  const labels = selectedCategory?.keywords.map((item) => item.name);
 
-  const values = filteredRankings.flatMap((item) =>
-    item.keywords.map(() => item.totalMentionCount),
-  );
+  const values = selectedCategory?.keywords.map((item) => item.mentionCount) ?? [];
 
+  console.log(values);
   const hasData = values.length > 0;
 
   const categoryRankData: ChartData<'bar', number[], string> = {
