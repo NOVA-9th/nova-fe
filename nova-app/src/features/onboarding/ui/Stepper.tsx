@@ -25,18 +25,14 @@ export const Stepper = memo(({ currentStep, labels }: StepperProps) => {
               <div
                 className={clsx(
                   'flex-1 h-0.75 mr-2 rounded-r-static-pill',
-                  step === 1
-                    ? 'bg-transparent'
-                    : step <= currentIndex
-                      ? 'bg-charcoal-full'
-                      : 'bg-slate-outline',
+                  step === 1 ? 'bg-transparent' : step <= currentIndex ? 'bg-peak' : 'bg-surface',
                 )}
               />
 
               <div
                 className={clsx(
                   'flex items-center justify-center w-6 h-6 rounded-static-pill typo-body-key',
-                  isActive ? 'bg-peak text-peak' : 'bg-surface text-charcoal-additive',
+                  isActive ? 'bg-peak text-peak' : 'bg-surface text-login',
                 )}
               >
                 {step}
@@ -49,8 +45,8 @@ export const Stepper = memo(({ currentStep, labels }: StepperProps) => {
                   step === STEP_ORDER.length
                     ? 'bg-transparent'
                     : step < currentIndex
-                      ? 'bg-charcoal-full'
-                      : 'bg-slate-outline',
+                      ? 'bg-peak'
+                      : 'bg-surface',
                 )}
               />
             </div>
@@ -58,7 +54,7 @@ export const Stepper = memo(({ currentStep, labels }: StepperProps) => {
             <span
               className={clsx(
                 'typo-body-key mt-2 whitespace-nowrap',
-                isActive ? 'text-charcoal-full' : 'text-charcoal-additive',
+                isActive ? 'text-base-color' : 'text-additive',
               )}
             >
               {label}
