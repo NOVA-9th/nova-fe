@@ -3,7 +3,7 @@
 import { Button, ChipInput, SectionHeader, SelectionChip, TextBadge } from '@/shared/ui';
 import { PersonalizationSettingsSkeleton } from '@/features/profile/ui/skeletons';
 import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useGetKeywords } from '@/shared/hooks/useGetKeywords';
 import useDebounce from '@/shared/hooks/useDebounce';
 import { addKeyword, sanitizeKeywords } from '@/shared/utils/keyword';
@@ -16,6 +16,13 @@ import { MemberLevel } from '@/shared/types/memberLevel';
 interface PersonalizationSettingsProps {
   memberId: number | null;
 }
+
+const LEVELS = [
+  MemberLevel.NOVICE,
+  MemberLevel.BEGINNER,
+  MemberLevel.INTERMEDIATE,
+  MemberLevel.ADVANCED,
+];
 
 export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsProps) => {
   const { data: personalizationData, isLoading } = usePersonalization(memberId);
@@ -96,28 +103,26 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     );
   };
 
-  const toggleInterest = (index: number) => {
+  const toggleInterest = useCallback((index: number) => {
     const id = getInterestIdByIndex(index);
     setSelectedInterests((prev) =>
       prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
     );
-  };
+  }, []);
 
-  const isInterestSelected = (index: number) =>
-    selectedInterests.includes(getInterestIdByIndex(index));
+  const isInterestSelected = useCallback(
+    (index: number) => selectedInterests.includes(getInterestIdByIndex(index)),
+    [selectedInterests],
+  );
 
-  const handleLevelChange = (index: number) => {
-    const levels = [
-      MemberLevel.NOVICE,
-      MemberLevel.BEGINNER,
-      MemberLevel.INTERMEDIATE,
-      MemberLevel.ADVANCED,
-    ];
-    setSelectedLevel(levels[index]);
-  };
+  const handleLevelChange = useCallback((index: number) => {
+    setSelectedLevel(LEVELS[index]);
+  }, []);
 
-  const handleMajorChange = (index: number) =>
+  const handleMajorChange = useCallback((index: number) => {
     setBackground(PERSONALIZATION_TEXT.sections.major.options[index]);
+  }, []);
+
   const getSelectedMajorIndex = () =>
     PERSONALIZATION_TEXT.sections.major.options.findIndex((o) => o === background);
 
@@ -139,7 +144,8 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               style='surface'
               selected={getSelectedMajorIndex() === index}
               isShowChevron={false}
-              onClick={() => handleMajorChange(index)}
+              index={index}
+              onClick={handleMajorChange}
             />
           ))}
         </div>
@@ -161,7 +167,8 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               style='surface'
               selected={isInterestSelected(index)}
               isShowChevron={false}
-              onClick={() => toggleInterest(index)}
+              index={index}
+              onClick={toggleInterest}
             />
           ))}
         </div>
@@ -183,13 +190,14 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               style='surface'
               selected={index === getLevelIndex(selectedLevel)}
               isShowChevron={false}
-              onClick={() => handleLevelChange(index)}
+              onClick={handleLevelChange}
+              index={index}
             />
           ))}
         </div>
       </div>
 
-      {/* 키워드 */}
+      {/* 관심 키워드 */}
       <div className='flex flex-col gap-3 w-full'>
         <div className='flex justify-between items-center w-full gap-3'>
           <div className='flex items-center gap-1.5'>

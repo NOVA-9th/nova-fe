@@ -15,7 +15,7 @@ import { getProfileImageUrl } from '@/shared/utils/profileImage';
 import { showToast } from '@/shared/utils/toast';
 import { invalidateToken } from '@/features/login/api/login';
 import { UserInfoSectionSkeleton } from '@/features/profile/ui/skeletons';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface UserInfoSectionProps {
@@ -49,10 +49,10 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     }
   }, [memberInfo?.data]);
 
-  const handleDeleteMemberClick = () => {
+  const handleDeleteMemberClick = useCallback(() => {
     if (!memberId) return;
     setIsDeleteMemberModalOpen(true);
-  };
+  }, [memberId]);
 
   const handleConfirmDeleteMember = () => {
     if (!memberId) return;
@@ -69,9 +69,9 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     });
   };
 
-  const handleLogoutClick = () => {
+  const handleLogoutClick = useCallback(() => {
     setIsLogoutModalOpen(true);
-  };
+  }, []);
 
   const handleConfirmLogout = async () => {
     setIsLogoutModalOpen(false);
@@ -128,27 +128,22 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     reader.readAsDataURL(file);
   };
 
-  const handleSave = () => {
-    // 중복 클릭 방지: 이미 저장 중이거나 mutation이 진행 중이면 early return
+  const handleSave = useCallback(() => {
     if (!memberId || isSaving || updateNameMutation.isPending || uploadImageMutation.isPending) {
       return;
     }
 
-    // 저장 중이 아닐 때만 변경사항 확인
     const hasNameChanged =
       nameValue.trim() !== (memberInfo?.data?.name || '') && nameValue.trim() !== '';
     const hasSelectedFile = !!selectedFile;
 
-    // 변경사항이 없으면 실행하지 않음
     if (!hasNameChanged && !hasSelectedFile) return;
 
-    // 저장 시작
     setIsSaving(true);
 
     const promises: Promise<any>[] = [];
 
-    // 이름이 변경되었으면 저장
-    if (hasNameChanged && nameValue.trim()) {
+    if (hasNameChanged) {
       promises.push(
         new Promise((resolve, reject) => {
           updateNameMutation.mutate(
@@ -163,7 +158,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               },
               onError: () => {
                 showToast.error('이름 변경에 실패했습니다.');
-                reject(new Error('Name update failed'));
+                reject();
               },
             },
           );
@@ -171,7 +166,6 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
       );
     }
 
-    // 이미지가 선택되었으면 업로드
     if (hasSelectedFile && selectedFile) {
       promises.push(
         new Promise((resolve, reject) => {
@@ -181,15 +175,13 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               onSuccess: () => {
                 setPreviewImage(null);
                 setSelectedFile(null);
-                if (fileInputRef.current) {
-                  fileInputRef.current.value = '';
-                }
+                fileInputRef.current!.value = '';
                 showToast.success('프로필 이미지가 변경되었습니다.');
                 resolve(undefined);
               },
               onError: () => {
                 showToast.error('이미지 업로드에 실패했습니다.');
-                reject(new Error('Upload failed'));
+                reject();
               },
             },
           );
@@ -197,16 +189,18 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
       );
     }
 
-    // 모든 저장 작업 완료 대기 (성공/실패 모두 처리)
-    Promise.all(promises)
-      .finally(() => {
-        // 저장 완료 후 플래그 클리어
-        setIsSaving(false);
-      })
-      .catch(() => {
-        // 에러 토스트는 각 mutation onError에서 처리
-      });
-  };
+    Promise.all(promises).finally(() => {
+      setIsSaving(false);
+    });
+  }, [
+    memberId,
+    isSaving,
+    nameValue,
+    selectedFile,
+    memberInfo?.data?.name,
+    updateNameMutation,
+    uploadImageMutation,
+  ]);
 
   const handleImageDeleteClick = () => {
     if (!memberId) return;
@@ -245,12 +239,15 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     });
   };
 
-  // 이름이 변경되었는지 확인 (빈 문자열이 아닌 경우만)
-  const hasNameChanged =
-    nameValue.trim() !== (memberInfo?.data?.name || '') && nameValue.trim() !== '';
+  const hasNameChanged = useMemo(() => {
+    if (!memberInfo?.data?.name) return false;
+    const trimmed = nameValue.trim();
+    return trimmed !== '' && trimmed !== memberInfo.data.name;
+  }, [nameValue]);
 
-  // 저장할 내용이 있는지 확인 (이름 변경 또는 이미지 선택)
-  const hasChanges = (hasNameChanged && nameValue.trim() !== '') || !!selectedFile;
+  const hasChanges = useMemo(() => {
+    return hasNameChanged || !!selectedFile;
+  }, [hasNameChanged, selectedFile]);
 
   if (isLoading) {
     return <UserInfoSectionSkeleton />;
@@ -355,7 +352,8 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             value={email}
             onChange={() => {}}
             placeholder={email}
-            className='w-full opacity-50 cursor-not-allowed'
+            disabled
+            className='w-full opacity-50 cursor-not-allowed disabled:'
           />
         </div>
         <div className='flex justify-between items-center w-full gap-4'>
