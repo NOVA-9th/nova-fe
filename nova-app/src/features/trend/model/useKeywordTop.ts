@@ -5,11 +5,11 @@ import { create } from 'zustand';
 interface keywordStore {
   keywords: string[];
   //   setKeyword: (ketwords: string[]) => void;
-  toggleKeyword: (company: string) => void;
+  toggleKeyword: (keyword: string) => void;
   resetKeyword: () => void;
 }
 
-export const useCompanyStore = create<keywordStore>((set) => ({
+export const useKeywordStore = create<keywordStore>((set) => ({
   keywords: [],
   //   setKeyword: (keywords) => set({ keywords }),
   toggleKeyword: (keyword) =>
