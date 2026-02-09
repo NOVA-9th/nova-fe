@@ -37,6 +37,10 @@
       @apply text-title font-300 leading-8 tracking-tight;
     }
   }
+
+  .shadow-modal {
+    box-shadow: var(--shadow-modal);
+  }
 }
 
 html,

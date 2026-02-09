@@ -41,6 +41,8 @@
 
     --stroke-data-outline: var(--color-dark-outline); /* #00BD75 @ 20% */
     --stroke-data-selected: var(--color-dark-full);
+
+    --shadow-modal: 0 0 12px rgba(255, 255, 255, 0.2), 0 6px 16px rgba(0, 0, 0, 0.35);
   }
 
   /* ---------- Background ---------- */

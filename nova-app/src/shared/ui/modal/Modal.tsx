@@ -20,11 +20,14 @@ export const Modal = ({
   className,
 }: ModalProps) => {
   return (
-    <div className='fixed inset-0 bg-black/40 flex justify-center items-center z-99999' onClick={onCancel}>
+    <div
+      className='fixed inset-0 bg-black/40 flex justify-center items-center z-99999'
+      onClick={onCancel}
+    >
       <div
         className={cn(
-          'bg-base rounded-[20px] flex flex-col overflow-hidden p-5 w-80 text-base-color shadow-[1px_-1px_10px_rgba(0,0,0,0.25),0px_4px_4px_rgba(0,0,0,0.25)] z-50',
-          className
+          'bg-base rounded-[20px] flex flex-col overflow-hidden p-5 w-80 text-base-color shadow-modal z-50',
+          className,
         )}
         onClick={(e) => e.stopPropagation()}
       >
