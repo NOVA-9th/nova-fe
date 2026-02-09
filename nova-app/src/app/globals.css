@@ -129,7 +129,3 @@ button:disabled {
 .dark {
   --shadow-suggestion: rgba(255, 255, 255, 0.15);
 }
-
-ul.suggestion-list {
-  box-shadow: 2px 6px 6px var(--shadow-suggestion);
-}
