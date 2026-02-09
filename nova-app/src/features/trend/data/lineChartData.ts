@@ -4,10 +4,10 @@ import type { ChartData, ScriptableContext } from 'chart.js';
 
 export const useKeywordChart = () => {
   const { keywords } = useKeywordStore();
-  console.log(keywords);
+  // console.log(keywords);
   const { data } = useGetKeywordTop(); //서버 데이터
   // const
-  console.log(data);
+  // console.log(data);
 
   const COLORS = ['#287AF5', '#00BD75', '#F04C5A'];
 
@@ -18,7 +18,7 @@ export const useKeywordChart = () => {
   // const globalMax =
   //   Math.max(...selectedData.flatMap((trend) => (trend.dailyCounts ?? []).map((d) => d.count))) ||
   //   0;
-  console.log(selectedData);
+  // console.log(selectedData);
 
   const trendChartData: ChartData<'line', number[], string> = {
     labels,

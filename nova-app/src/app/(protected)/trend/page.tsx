@@ -1,17 +1,13 @@
 'use client';
-
-import { useGetKeywordTop } from '@/features/trend/api';
 import { useBarKeywordStore } from '@/features/trend/model/useBarKeywordTop';
 import { CategoriesKeyword, KeywordTop, TrendChart, BarChart } from '@/features/trend/ui';
 import { Header, PageHeader, SelectionChip } from '@/shared/ui';
 import { ChartBar } from 'lucide-react';
 
 const TrendPage = () => {
-  const { data } = useGetKeywordTop();
-  const { keyword } = useBarKeywordStore();
+  const { category } = useBarKeywordStore();
 
-  const categoryName = keyword?.keyword ? keyword?.keyword : '';
-  console.log(data);
+  const categoryName = category ?? '';
 
   return (
     <div className='md:px-5 p-4 '>
