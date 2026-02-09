@@ -12,6 +12,7 @@ import {
   useDisconnectConnectedAccount,
 } from '@/features/profile/hooks/useProfile';
 import type { ConnectedAccountProvider } from '@/features/profile/api/profile';
+import { redirectToGoogle, redirectToKakao, redirectToGithub } from '@/features/login/api/login';
 
 interface LinkedAccountsSectionProps {
   memberId: number | null;
@@ -45,6 +46,21 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
     }
   };
 
+  const handleConnectClick = (provider: ConnectedAccountProvider) => {
+    // state='connect'로 리다이렉트
+    switch (provider) {
+      case 'google':
+        redirectToGoogle('connect');
+        break;
+      case 'kakao':
+        redirectToKakao('connect');
+        break;
+      case 'github':
+        redirectToGithub('connect');
+        break;
+    }
+  };
+
   if (isLoading) {
     return <LinkedAccountsSectionSkeleton />;
   }
@@ -70,7 +86,12 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
       size: 'md' as const,
       style: 'surface' as const,
       peak: connected,
-      onClick: isCancel && canDisconnect ? () => handleDisconnectClick(provider) : undefined,
+      onClick:
+        isCancel && canDisconnect
+          ? () => handleDisconnectClick(provider)
+          : !connected
+            ? () => handleConnectClick(provider)
+            : undefined,
       disabled: isCancel && isDisconnectDisabled,
     };
   };
