@@ -1,16 +1,24 @@
 'use client';
 
-import { useState } from 'react';
 import { Grid2X2Icon, EarthIcon, FileUser, ListFilter, Newspaper, Search } from 'lucide-react';
 import { KeywordFilter } from '@/features/saved/mocks/KeywordFilter';
 import { SectionHeader, SelectionChip, TextButton, TextInput } from '@/shared/ui';
+import { useSavedFilterStore } from '@/features/saved/model/useSavedFilterStore';
+import { TYPE_ITEMS } from '@/features/feed/data/FilterData';
 
 export const KeywordCard = () => {
-  const [value, setValue] = useState('');
-
-  const onChange = (value: string) => {
-    setValue(value);
-  };
+  const {
+    searchKeyword,
+    selectedSort,
+    selectedTypes,
+    selectedKeywords,
+    setSearchKeyword,
+    setSelectedSort,
+    setSelectedTypes,
+    toggleType,
+    toggleKeyword,
+    resetAll,
+  } = useSavedFilterStore();
 
   return (
     <div className='bg-base rounded-static-frame p-5 flex flex-col gap-5'>
@@ -19,14 +27,14 @@ export const KeywordCard = () => {
           size='lg'
           variant='surface'
           data={false}
-          value={value}
+          value={searchKeyword}
           placeholder='제목 혹은 키워드로 검색하기'
-          onChange={onChange}
+          onChange={setSearchKeyword}
           icon={Search}
           className='w-full md:flex-1'
         />
         <TextButton
-          onClick={() => {}}
+          onClick={resetAll}
           size='lg'
           label='필터 초기화'
           leftIcon={ListFilter}
@@ -42,17 +50,17 @@ export const KeywordCard = () => {
               isShowChevron={false}
               size='md'
               style='surface'
-              selected={true}
+              selected={selectedSort === '최신순'}
               label='최신순'
-              onClick={() => {}}
+              onClick={() => setSelectedSort('최신순')}
             />
             <SelectionChip
               isShowChevron={false}
               size='md'
               style='surface'
-              selected={false}
+              selected={selectedSort === '관련도 순'}
               label='관련도 순'
-              onClick={() => {}}
+              onClick={() => setSelectedSort('관련도 순')}
             />
           </div>
         </div>
@@ -64,37 +72,22 @@ export const KeywordCard = () => {
               icon={Grid2X2Icon}
               size='md'
               style='surface'
-              selected={true}
+              selected={selectedTypes.length === 0}
               label='전체'
-              onClick={() => {}}
+              onClick={() => setSelectedTypes([])}
             />
-            <SelectionChip
-              isShowChevron={false}
-              icon={Newspaper}
-              size='md'
-              style='surface'
-              selected={true}
-              label='뉴스'
-              onClick={() => {}}
-            />
-            <SelectionChip
-              isShowChevron={false}
-              icon={FileUser}
-              size='md'
-              style='surface'
-              selected={false}
-              label='채용'
-              onClick={() => {}}
-            />
-            <SelectionChip
-              isShowChevron={false}
-              icon={EarthIcon}
-              size='md'
-              style='surface'
-              selected={true}
-              label='커뮤니티'
-              onClick={() => {}}
-            />
+            {TYPE_ITEMS.map((item) => (
+              <SelectionChip
+                key={item.value}
+                isShowChevron={false}
+                icon={item.icon}
+                size='md'
+                style='surface'
+                selected={selectedTypes.includes(item.value)}
+                label={item.label}
+                onClick={() => toggleType(item.value)}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -107,9 +100,9 @@ export const KeywordCard = () => {
               key={index}
               size='md'
               style='surface'
-              selected={false}
+              selected={selectedKeywords.includes(keyword.filter)}
               label={`#${keyword.filter}`}
-              onClick={() => {}}
+              onClick={() => toggleKeyword(keyword.filter)}
             />
           ))}
         </div>

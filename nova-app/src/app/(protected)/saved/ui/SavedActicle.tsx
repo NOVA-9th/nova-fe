@@ -4,10 +4,10 @@ import { ArticleCard } from '@/shared/ui';
 import ArticleCardSkeleton from '@/app/(protected)/(feed)/ui/FeedArticleSkeleton';
 import FeedArticleError from '@/app/(protected)/(feed)/ui/FeedArticleError';
 import EmptyFeed from '@/app/(protected)/(feed)/ui/EmptyFeed';
-import { useFeedArticles } from '@/features/feed/hooks/useFeedArticles';
+import { useSavedArticles } from '@/features/saved/hooks/useSavedArticles';
 
 const SavedArticleList = () => {
-  const { sortedArticles, isLoading, isError, refetch } = useFeedArticles(true);
+  const { sortedArticles, isLoading, isError, refetch } = useSavedArticles();
 
   if (isLoading)
     return (
