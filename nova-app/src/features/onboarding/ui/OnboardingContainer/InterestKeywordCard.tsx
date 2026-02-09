@@ -2,7 +2,7 @@
 
 import { SearchInput } from '@/features/onboarding/ui';
 import { useEffect, useMemo, useState } from 'react';
-import { useOnboardingStore } from '../../models/useOnBoardingStore';
+import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useShallow } from 'zustand/shallow';
 
 interface InterestKeywordCardProps {

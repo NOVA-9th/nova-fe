@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, usePathname } from 'next/navigation';
-import { useAuthStore } from './useAuthStore';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { useEffect, useMemo } from 'react';
 
 interface UseAuthRedirectOptions {

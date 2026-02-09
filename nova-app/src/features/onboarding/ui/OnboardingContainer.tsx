@@ -5,7 +5,7 @@ import { Stepper } from '@/features/onboarding/ui';
 import { Button, Header } from '@/shared/ui';
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-import { useOnboardingStore } from '../models/useOnBoardingStore';
+import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { showToast } from '@/shared/utils/toast';
 import { useUpdatePersonalization } from '@/shared/hooks/usUpdatePersonalization';

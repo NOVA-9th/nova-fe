@@ -1,7 +1,7 @@
 'use client';
 
 import { Button, ChipInput, SectionHeader, SelectionChip, TextBadge } from '@/shared/ui';
-import { PersonalizationSettingsSkeleton } from './skeletons';
+import { PersonalizationSettingsSkeleton } from '@/features/profile/ui/skeletons';
 import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useGetKeywords } from '@/shared/hooks/useGetKeywords';

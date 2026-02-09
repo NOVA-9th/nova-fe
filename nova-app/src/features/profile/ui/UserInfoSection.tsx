@@ -9,12 +9,12 @@ import {
   useDeleteMember,
   useUploadProfileImage,
   useDeleteProfileImage,
-} from '../hooks/useProfile';
+} from '@/features/profile/hooks/useProfile';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { getProfileImageUrl } from '@/shared/utils/profileImage';
 import { showToast } from '@/shared/utils/toast';
 import { invalidateToken } from '@/features/login/api/login';
-import { UserInfoSectionSkeleton } from './skeletons';
+import { UserInfoSectionSkeleton } from '@/features/profile/ui/skeletons';
 import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
@@ -75,7 +75,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
 
   const handleConfirmLogout = async () => {
     setIsLogoutModalOpen(false);
-    
+
     // 토큰 무효화 API 호출 (실패해도 로그아웃은 진행)
     try {
       await invalidateToken();
@@ -83,7 +83,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
       // 토큰 무효화 실패해도 로그아웃은 진행
       console.error('토큰 무효화 실패:', error);
     }
-    
+
     logout();
     showToast.success('로그아웃 되었습니다.');
     router.push('/login');
@@ -130,17 +130,13 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
 
   const handleSave = () => {
     // 중복 클릭 방지: 이미 저장 중이거나 mutation이 진행 중이면 early return
-    if (
-      !memberId ||
-      isSaving ||
-      updateNameMutation.isPending ||
-      uploadImageMutation.isPending
-    ) {
+    if (!memberId || isSaving || updateNameMutation.isPending || uploadImageMutation.isPending) {
       return;
     }
 
     // 저장 중이 아닐 때만 변경사항 확인
-    const hasNameChanged = nameValue.trim() !== (memberInfo?.data?.name || '') && nameValue.trim() !== '';
+    const hasNameChanged =
+      nameValue.trim() !== (memberInfo?.data?.name || '') && nameValue.trim() !== '';
     const hasSelectedFile = !!selectedFile;
 
     // 변경사항이 없으면 실행하지 않음
@@ -169,9 +165,9 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
                 showToast.error('이름 변경에 실패했습니다.');
                 reject(new Error('Name update failed'));
               },
-            }
+            },
           );
-        })
+        }),
       );
     }
 
@@ -195,9 +191,9 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
                 showToast.error('이미지 업로드에 실패했습니다.');
                 reject(new Error('Upload failed'));
               },
-            }
+            },
           );
-        })
+        }),
       );
     }
 
@@ -250,7 +246,8 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   };
 
   // 이름이 변경되었는지 확인 (빈 문자열이 아닌 경우만)
-  const hasNameChanged = nameValue.trim() !== (memberInfo?.data?.name || '') && nameValue.trim() !== '';
+  const hasNameChanged =
+    nameValue.trim() !== (memberInfo?.data?.name || '') && nameValue.trim() !== '';
 
   // 저장할 내용이 있는지 확인 (이름 변경 또는 이미지 선택)
   const hasChanges = (hasNameChanged && nameValue.trim() !== '') || !!selectedFile;

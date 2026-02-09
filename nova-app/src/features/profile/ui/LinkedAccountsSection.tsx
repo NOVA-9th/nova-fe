@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ItemList, SectionHeader, Modal } from '@/shared/ui';
-import { LinkedAccountsSectionSkeleton } from './skeletons';
+import { LinkedAccountsSectionSkeleton } from '@/features/profile/ui/skeletons';
 import GoogleLogoIcon from '@/shared/assets/GoogleIcon.svg';
 import KakaoLogoIcon from '@/shared/assets/KakaoTalkIcon.svg';
 import GithubLogoIcon from '@/shared/assets/GithubIcon.svg';
@@ -10,8 +10,8 @@ import { showToast } from '@/shared/utils/toast';
 import {
   useConnectedAccounts,
   useDisconnectConnectedAccount,
-} from '../hooks/useProfile';
-import type { ConnectedAccountProvider } from '../api/profile';
+} from '@/features/profile/hooks/useProfile';
+import type { ConnectedAccountProvider } from '@/features/profile/api/profile';
 
 interface LinkedAccountsSectionProps {
   memberId: number | null;
@@ -24,9 +24,8 @@ const PROVIDER_LABELS: Record<ConnectedAccountProvider, string> = {
 };
 
 export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) => {
-  const [disconnectModalProvider, setDisconnectModalProvider] = useState<
-    ConnectedAccountProvider | null
-  >(null);
+  const [disconnectModalProvider, setDisconnectModalProvider] =
+    useState<ConnectedAccountProvider | null>(null);
 
   const { data: accountsData, isLoading } = useConnectedAccounts(memberId);
   const disconnectMutation = useDisconnectConnectedAccount();
