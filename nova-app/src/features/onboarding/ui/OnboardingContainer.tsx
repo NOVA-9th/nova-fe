@@ -64,26 +64,43 @@ export const OnboardingContainer = () => {
   const handleNext = useCallback(() => {
     if (currentStep === 'step4') {
       handleSave();
-      router.replace('/');
       return;
     }
     onNext();
   }, [currentStep, onNext, router, handleSave]);
 
   const handleSkip = useCallback(() => {
-    useOnboardingStore.setState((state) => ({
-      stepData: {
-        ...state.stepData,
-        [currentStep]: currentStep === 'step1' ? null : [],
-      },
-    }));
-
     if (currentStep === 'step4') {
-      router.replace('/');
+      if (!memberId) return;
+
+      const stepData = useOnboardingStore.getState().stepData;
+
+      updatePersonalizationMutation.mutate(
+        {
+          memberId,
+          requestDto: {
+            level: stepData.step3 ?? null,
+            background: stepData.step1 ?? null,
+            interests: stepData.step2 ?? [],
+            keywords: [],
+          },
+        },
+        {
+          onSuccess: () => {
+            router.replace('/');
+          },
+          onError: (error: Error) => {
+            showToast.error(
+              error?.message || '개인화 설정 저장에 실패했습니다. 다시 시도해주세요.',
+            );
+          },
+        },
+      );
       return;
     }
+
     onNext();
-  }, [currentStep, onNext, router]);
+  }, [currentStep, memberId, updatePersonalizationMutation, router, onNext]);
 
   return (
     <main className='flex flex-col w-full max-w-90 gap-5 px-7 py-5 bg-base rounded-static-frame sm:max-w-170 sm:px-10 sm:py-7.5'>
