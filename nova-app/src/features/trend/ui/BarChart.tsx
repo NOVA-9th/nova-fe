@@ -5,6 +5,9 @@ import { Bar } from 'react-chartjs-2';
 
 export const BarChart = () => {
   const chartData = useCategoryRank();
+  if (!chartData) {
+    return null;
+  }
   console.log('');
   return (
     <div className='h-90'>
