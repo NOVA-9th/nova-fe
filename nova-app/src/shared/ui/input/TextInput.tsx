@@ -88,6 +88,7 @@ export const TextInput = ({
 
       <button
         type='button'
+        aria-label='입력 지우기'
         onClick={() => onChange('')}
         className='text-optional hover:text-optional active:text-optional'
       >

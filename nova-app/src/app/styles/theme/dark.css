@@ -198,7 +198,7 @@
     color: var(--color-white-accent-peak);
   }
 
-  .dark .hover\:text-base:hover {
+  .dark .hover\:text-base-color:hover {
     color: var(--color-white-full);
   }
 
@@ -222,12 +222,8 @@
     color: var(--color-white-accent-base);
   }
 
-  .dark .active\:text-optional:active {
-    color: color-mix(in srgb, var(--fg-optional), var(--fg-base) 20%);
-  }
-
-  .dark .disabled\:text-base:disabled,
-  .dark .disabled\:text-base[aria-disabled='true'] {
+  .dark .disabled\:text-base-color:disabled,
+  .dark .disabled\:text-base-color[aria-disabled='true'] {
     color: var(--color-white-inactive);
   }
 

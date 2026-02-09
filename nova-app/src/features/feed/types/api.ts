@@ -1,7 +1,7 @@
 export type CardNews = {
   id: number;
   title: string;
-  cardtype: string[];
+  cardType: string;
   author: string;
   publishedAt: string;
   summary: string;
@@ -10,6 +10,7 @@ export type CardNews = {
   siteName: string;
   keywords: string[];
   saved: boolean;
+  hidden: boolean;
 };
 
 export type FeedSearchRequest = {
@@ -26,4 +27,10 @@ export type FeedSearchRequest = {
 export type FeedSearchResponse = {
   totalCount: number;
   cardnews: CardNews[];
+};
+
+export type KeywordsResponse = {
+  id: number;
+  interestId: number;
+  name: string;
 };

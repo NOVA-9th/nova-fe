@@ -10,6 +10,7 @@ import { SIDE_ITEMS } from '@/widgets/layouts/sidebar/data/SideItems';
 import { useState } from 'react';
 import { Modal } from '@/shared/ui';
 import { showToast } from '@/shared/utils/toast';
+import { useSavedCount } from './hooks/useSaveCount';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { useMemberInfo } from '@/features/profile/hooks/useProfile';
 import { getProfileImageUrl } from '@/shared/utils/profileImage';
@@ -22,6 +23,8 @@ export const SideBar = () => {
   const { memberId, logout } = useAuthStore();
   const { data: memberInfo, isLoading, dataUpdatedAt } = useMemberInfo(memberId);
 
+  const { data: savedCount } = useSavedCount();
+
   const isActive = (href: string) => {
     if (href === '/') return pathname === '/';
     return pathname === href || pathname.startsWith(`${href}/`);
@@ -29,7 +32,7 @@ export const SideBar = () => {
 
   const handleLogout = async () => {
     setIsModalOpen(false);
-    
+
     // 토큰 무효화 API 호출 (실패해도 로그아웃은 진행)
     try {
       await invalidateToken();
@@ -37,7 +40,7 @@ export const SideBar = () => {
       // 토큰 무효화 실패해도 로그아웃은 진행
       console.error('토큰 무효화 실패:', error);
     }
-    
+
     logout();
     showToast.success('로그아웃 되었습니다.');
     router.push('/login');
@@ -61,8 +64,12 @@ export const SideBar = () => {
                 </p>
               </div>
 
-              {item.badge && (
+              {item.badge && item.href === '/' && (
                 <TextBadge size='sm' variant='surface' peak={false} text={item.badge} />
+              )}
+
+              {item.href === '/saved' && typeof savedCount === 'number' && (
+                <TextBadge size='sm' variant='surface' peak={false} text={`${savedCount}개`} />
               )}
             </SideTabItemCustom>
           </Link>

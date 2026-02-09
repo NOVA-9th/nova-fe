@@ -17,7 +17,7 @@ const periodToDays = (ui: string) => {
   return 30;
 };
 
-export const useFeedArticles = () => {
+export const useFeedArticles = (saved: boolean = false) => {
   const { selectedSort, selectedPeriod, selectedTypes, selectedKeywords } = useFeedFilterStore();
 
   const params = useMemo<FeedSearchRequest>(() => {
@@ -34,9 +34,9 @@ export const useFeedArticles = () => {
       keywords: selectedKeywords,
       page: 1,
       size: 10,
-      saved: false,
+      saved,
     };
-  }, [selectedSort, selectedPeriod, selectedTypes, selectedKeywords]);
+  }, [selectedSort, selectedPeriod, selectedTypes, selectedKeywords, saved]);
 
   const query = useQuery({
     queryKey: ['feedList', params],
