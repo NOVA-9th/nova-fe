@@ -44,8 +44,6 @@ export const PERSONALIZATION_TEXT = {
     keyword: {
       title: '관심 키워드',
       helperText: '최대 5개까지 선택할 수 있습니다',
-      saveButtonLabel: '저장',
-      maxCount: 5,
       initialKeywords: ['React', 'TypeScript', 'LLM', 'RAG'],
     },
   },

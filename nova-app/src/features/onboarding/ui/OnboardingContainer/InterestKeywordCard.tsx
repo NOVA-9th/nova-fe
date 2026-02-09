@@ -1,27 +1,33 @@
 'use client';
 
 import { SearchInput } from '@/features/onboarding/ui';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useOnboardingStore } from '@/features/onboarding/models/useOnBoardingStore';
+import { useShallow } from 'zustand/shallow';
 
 interface InterestKeywordCardProps {
   onValidChange: (isValid: boolean) => void;
 }
 
 export const InterestKeywordCard = ({ onValidChange }: InterestKeywordCardProps) => {
-  const category = '웹 프론트엔드'; // Step2 관심분야 값 (목 데이터)
-  const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
+  const { stepData, setStepData } = useOnboardingStore(
+    useShallow((state) => ({
+      stepData: state.stepData,
+      setStepData: state.setStepData,
+    })),
+  );
 
-  const handleAddKeyword = (keyword: string) => {};
+  const initialSelected = useMemo(() => stepData.step4 ?? [], [stepData.step4]);
+  const [selectedKeywords, setSelectedKeywords] = useState<string[]>(initialSelected);
 
   useEffect(() => {
+    setStepData('step4', selectedKeywords);
     onValidChange(selectedKeywords.length > 0);
-  }, [selectedKeywords, onValidChange]);
+  }, [selectedKeywords, setStepData, onValidChange]);
 
   return (
     <SearchInput
-      category={category}
       selectedKeywords={selectedKeywords}
-      onAddKeyword={handleAddKeyword}
       onChangeKeywords={setSelectedKeywords}
       className='sm:h-24.5 h-22.5'
     />

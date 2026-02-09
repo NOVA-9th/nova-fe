@@ -1,45 +1,85 @@
 'use client';
 
 import { Button, ChipInput, SectionHeader, SelectionChip, TextBadge } from '@/shared/ui';
-import { PERSONALIZATION_TEXT } from '../data/PersonalizationText';
-import { PersonalizationSettingsSkeleton } from './skeletons';
-import { usePersonalization, useUpdatePersonalization } from '../hooks/useProfile';
-import { MemberLevel } from '../api/types';
+import { PersonalizationSettingsSkeleton } from '@/features/profile/ui/skeletons';
+import { PERSONALIZATION_TEXT } from '@/shared/data/PersonalizationText';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useGetKeywords } from '@/shared/hooks/useGetKeywords';
+import useDebounce from '@/shared/hooks/useDebounce';
+import { addKeyword, sanitizeKeywords } from '@/shared/utils/keyword';
 import { showToast } from '@/shared/utils/toast';
-import { useState, useEffect } from 'react';
+import { getInterestIdByIndex, getLevelIndex } from '@/shared/utils/personalization';
+import { usePersonalization } from '@/shared/hooks/usePersonalization';
+import { useUpdatePersonalization } from '@/shared/hooks/usUpdatePersonalization';
+import { MemberLevel } from '@/shared/types/memberLevel';
 
 interface PersonalizationSettingsProps {
   memberId: number | null;
 }
 
+const LEVELS = [
+  MemberLevel.NOVICE,
+  MemberLevel.BEGINNER,
+  MemberLevel.INTERMEDIATE,
+  MemberLevel.ADVANCED,
+];
+
 export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsProps) => {
   const { data: personalizationData, isLoading } = usePersonalization(memberId);
   const updatePersonalizationMutation = useUpdatePersonalization();
+
+  // 선택 상태
   const [selectedInterests, setSelectedInterests] = useState<number[]>([]);
   const [selectedLevel, setSelectedLevel] = useState<MemberLevel | null>(null);
-  const [keywords, setKeywords] = useState<string[]>([]);
   const [background, setBackground] = useState<string>('');
 
-  // API 데이터가 로드되면 상태 초기화
+  // 키워드 상태
+  const [chips, setChips] = useState<string[]>([]);
+  const [inputValue, setInputValue] = useState('');
+  const [keywords, setKeywords] = useState<string[]>([]); // 저장용
+  const debouncedChips = useDebounce(chips, 2000);
+  const prevRef = useRef<string[]>([]);
+
+  const { data } = useGetKeywords();
+  const suggestions = useMemo(() => data?.map((item) => item.name) ?? [], [data]);
+
   useEffect(() => {
     if (personalizationData?.data) {
       const data = personalizationData.data;
       setSelectedInterests(data.interests || []);
       setSelectedLevel(data.level);
+      setChips(data.keywords || []);
       setKeywords(data.keywords || []);
       setBackground(data.background || '');
+      prevRef.current = data.keywords || [];
     }
   }, [personalizationData]);
 
-  const handleKeywordsChange = (newKeywords: string[]) => {
-    // 키워드 개수 제한 확인 (입력 시 실시간 검사)
-    if (newKeywords.length > PERSONALIZATION_TEXT.sections.keyword.maxCount) {
-      showToast.error(
-        `키워드는 최대 ${PERSONALIZATION_TEXT.sections.keyword.maxCount}개까지 선택할 수 있습니다.`
-      );
-      return; // 제한을 초과하면 업데이트하지 않음
+  useEffect(() => {
+    const prev = prevRef.current;
+    const addedKeyword = debouncedChips.find((chip) => !prev.includes(chip));
+
+    if (addedKeyword && !suggestions.includes(addedKeyword)) {
+      setChips(prev);
+      return;
     }
-    setKeywords(newKeywords);
+
+    const sanitized = sanitizeKeywords(debouncedChips);
+
+    if (sanitized.join(',') !== prev.join(',')) {
+      setChips(sanitized);
+      prevRef.current = sanitized;
+      setKeywords(sanitized);
+    }
+  }, [debouncedChips, suggestions]);
+
+  const handleAddKeyword = (keyword: string) => {
+    const { newKeywords, error } = addKeyword(chips, keyword, suggestions);
+    if (error) {
+      showToast.error(error);
+    }
+    setChips(newKeywords);
+    setInputValue('');
   };
 
   const handleSave = () => {
@@ -50,114 +90,75 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
         memberId,
         requestDto: {
           level: selectedLevel,
-          background: background,
+          background,
           interests: selectedInterests,
-          keywords: keywords,
+          keywords,
         },
       },
       {
-        onSuccess: () => {
-          showToast.success('저장되었습니다.');
-        },
-        onError: (error: Error) => {
-          showToast.error(
-            error?.message || '개인화 설정 저장에 실패했습니다. 다시 시도해주세요.'
-          );
-        },
-      }
+        onSuccess: () => showToast.success('저장되었습니다.'),
+        onError: (error: Error) =>
+          showToast.error(error?.message || '개인화 설정 저장에 실패했습니다. 다시 시도해주세요.'),
+      },
     );
   };
 
-  // 인덱스를 ID로 변환
-  const getInterestIdByIndex = (index: number): number => {
-    return PERSONALIZATION_TEXT.sections.interests.ids[index];
-  };
-
-  const toggleInterest = (index: number) => {
-    const interestId = getInterestIdByIndex(index);
+  const toggleInterest = useCallback((index: number) => {
+    const id = getInterestIdByIndex(index);
     setSelectedInterests((prev) =>
-      prev.includes(interestId)
-        ? prev.filter((id) => id !== interestId)
-        : [...prev, interestId]
+      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
     );
-  };
+  }, []);
 
-  // 인덱스에 해당하는 관심 분야가 선택되었는지 확인
-  const isInterestSelected = (index: number): boolean => {
-    const interestId = getInterestIdByIndex(index);
-    return selectedInterests.includes(interestId);
-  };
+  const isInterestSelected = useCallback(
+    (index: number) => selectedInterests.includes(getInterestIdByIndex(index)),
+    [selectedInterests],
+  );
 
-  const getLevelIndex = (level: MemberLevel | null): number => {
-    if (!level) return 0;
-    const levels = [
-      MemberLevel.NOVICE,
-      MemberLevel.BEGINNER,
-      MemberLevel.INTERMEDIATE,
-      MemberLevel.ADVANCED,
-    ];
-    return levels.indexOf(level);
-  };
+  const handleLevelChange = useCallback((index: number) => {
+    setSelectedLevel(LEVELS[index]);
+  }, []);
 
-  const handleLevelChange = (index: number) => {
-    const levels = [
-      MemberLevel.NOVICE,
-      MemberLevel.BEGINNER,
-      MemberLevel.INTERMEDIATE,
-      MemberLevel.ADVANCED,
-    ];
-    setSelectedLevel(levels[index]);
-  };
+  const handleMajorChange = useCallback((index: number) => {
+    setBackground(PERSONALIZATION_TEXT.sections.major.options[index]);
+  }, []);
 
-  const handleMajorChange = (index: number) => {
-    // 전공 분야는 하나만 선택 가능
-    const selectedMajorOption = PERSONALIZATION_TEXT.sections.major.options[index];
-    setBackground(selectedMajorOption);
-  };
+  const getSelectedMajorIndex = () =>
+    PERSONALIZATION_TEXT.sections.major.options.findIndex((o) => o === background);
 
-  // background 값이 전공 분야 옵션 중 하나와 일치하는지 확인
-  const getSelectedMajorIndex = (): number | null => {
-    const index = PERSONALIZATION_TEXT.sections.major.options.findIndex(
-      (option) => option === background
-    );
-    return index !== -1 ? index : null;
-  };
-
-  if (isLoading) {
-    return <PersonalizationSettingsSkeleton />;
-  }
+  if (isLoading) return <PersonalizationSettingsSkeleton />;
 
   return (
     <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
       <SectionHeader text='개인화 설정' size='lg' />
-      {/* 전공 분야 */}
-      <div className='flex flex-col justify-start items-start w-full gap-3'>
+
+      {/* 전공 */}
+      <div className='flex flex-col gap-3 w-full'>
         <SectionHeader text={PERSONALIZATION_TEXT.sections.major.title} peak={false} size='sm' />
-        <div className='flex flex-wrap justify-start items-start w-full gap-2'>
-          {PERSONALIZATION_TEXT.sections.major.options.map((option, index) => {
-            const selectedMajorIndex = getSelectedMajorIndex();
-            return (
-              <SelectionChip
-                key={option}
-                label={option}
-                size='md'
-                style='surface'
-                selected={selectedMajorIndex === index}
-                isShowChevron={false}
-                onClick={() => handleMajorChange(index)}
-              />
-            );
-          })}
+        <div className='flex flex-wrap gap-2'>
+          {PERSONALIZATION_TEXT.sections.major.options.map((option, index) => (
+            <SelectionChip
+              key={option}
+              label={option}
+              size='md'
+              style='surface'
+              selected={getSelectedMajorIndex() === index}
+              isShowChevron={false}
+              index={index}
+              onClick={handleMajorChange}
+            />
+          ))}
         </div>
       </div>
+
       {/* 관심 분야 */}
-      <div className='flex flex-col justify-start items-start w-full gap-3'>
+      <div className='flex flex-col gap-3 w-full'>
         <SectionHeader
           text={PERSONALIZATION_TEXT.sections.interests.title}
           peak={false}
           size='sm'
         />
-        <div className='flex flex-wrap justify-start items-start w-full gap-2'>
+        <div className='flex flex-wrap gap-2'>
           {PERSONALIZATION_TEXT.sections.interests.options.map((option, index) => (
             <SelectionChip
               key={option}
@@ -166,19 +167,21 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               style='surface'
               selected={isInterestSelected(index)}
               isShowChevron={false}
-              onClick={() => toggleInterest(index)}
+              index={index}
+              onClick={toggleInterest}
             />
           ))}
         </div>
       </div>
-      {/* 기술 역량 */}
-      <div className='flex flex-col justify-start items-start w-full gap-3'>
+
+      {/* 기술 수준 */}
+      <div className='flex flex-col gap-3 w-full'>
         <SectionHeader
           text={PERSONALIZATION_TEXT.sections.skillLevel.title}
           peak={false}
           size='sm'
         />
-        <div className='flex flex-wrap justify-start items-start w-full gap-2'>
+        <div className='flex flex-wrap gap-2'>
           {PERSONALIZATION_TEXT.sections.skillLevel.options.map((option, index) => (
             <SelectionChip
               key={option}
@@ -187,14 +190,15 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               style='surface'
               selected={index === getLevelIndex(selectedLevel)}
               isShowChevron={false}
-              onClick={() => handleLevelChange(index)}
+              onClick={handleLevelChange}
+              index={index}
             />
           ))}
         </div>
       </div>
 
       {/* 관심 키워드 */}
-      <div className='flex flex-col justify-start items-start w-full gap-3'>
+      <div className='flex flex-col gap-3 w-full'>
         <div className='flex justify-between items-center w-full gap-3'>
           <div className='flex items-center gap-1.5'>
             <SectionHeader
@@ -209,22 +213,25 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
           </span>
         </div>
 
-        <div className='flex flex-col lg:flex-row w-full items-center gap-3 min-w-0'>
+        <div className='flex flex-col lg:flex-row gap-3 w-full items-center'>
           <ChipInput
             size='lg'
             variant='surface'
-            data={false}
+            value={chips}
+            onChange={(newChips) => setChips(sanitizeKeywords(newChips))}
+            inputValue={inputValue}
+            onInputChange={setInputValue}
+            onAdd={handleAddKeyword}
+            suggestions={suggestions}
             placeholder='키워드를 입력하세요'
             className='w-full h-11 min-w-0'
-            value={keywords}
-            onChange={handleKeywordsChange}
           />
 
           <Button
             size='lg'
             style='surface'
             peak={true}
-            label={PERSONALIZATION_TEXT.sections.keyword.saveButtonLabel}
+            label={'저장'}
             className='w-full xl:w-auto'
             onClick={handleSave}
             disabled={updatePersonalizationMutation.isPending}

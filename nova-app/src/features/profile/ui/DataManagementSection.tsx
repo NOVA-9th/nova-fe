@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { ItemList, SectionHeader, Modal } from '@/shared/ui';
 import { Trash2 } from 'lucide-react';
 import { showToast } from '@/shared/utils/toast';
-import { useDeleteAllBookmarks, useResetHiddenCardNews } from '../hooks/useProfile';
+import { useDeleteAllBookmarks, useResetHiddenCardNews } from '@/features/profile/hooks/useProfile';
 import { useQueryClient } from '@tanstack/react-query';
 
 export const DataManagementSection = () => {

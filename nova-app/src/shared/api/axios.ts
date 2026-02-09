@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig, AxiosAdapter } from 'axios';
-import { ApiResponse } from '../types/api';
-import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { ApiResponse } from '@/shared/types/api';
+
 // API Base URL - 환경 변수 필수 설정
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
