@@ -1,9 +1,9 @@
 import { axiosInstance } from '@/shared/api';
-import { ApiResponse } from '@/shared/types';
-import { KeywordTopDTO, skilltopDTO } from '@/features/trend/api/types';
+import { ApiSuccessResponse } from '@/shared/types';
+import { KeywordTopDTO, skilltopDTO } from '@/features/trend/types/api';
 import { useSuspenseQuery } from '@tanstack/react-query';
-export const getKeywordTop = async (): Promise<ApiResponse<KeywordTopDTO>> => {
-  const { data } = await axiosInstance.get<ApiResponse<KeywordTopDTO>>(
+export const getKeywordTop = async (): Promise<ApiSuccessResponse<KeywordTopDTO>> => {
+  const { data } = await axiosInstance.get<ApiSuccessResponse<KeywordTopDTO>>(
     `/api/trends/keywords/keywordtop`,
   );
   return data;
@@ -17,8 +17,8 @@ export const useGetKeywordTop = () => {
   });
 };
 
-export const getInterestSkillTop = async (): Promise<ApiResponse<skilltopDTO>> => {
-  const { data } = await axiosInstance.get<ApiResponse<skilltopDTO>>(
+export const getInterestSkillTop = async (): Promise<ApiSuccessResponse<skilltopDTO>> => {
+  const { data } = await axiosInstance.get<ApiSuccessResponse<skilltopDTO>>(
     `/api/trends/interests/skilltop`,
   );
   return data;
