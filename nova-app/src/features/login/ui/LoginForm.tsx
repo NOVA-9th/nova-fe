@@ -22,6 +22,7 @@ export const LoginForm = () => {
       <div className='flex flex-col gap-2.5 w-full px-10 py-7.75 justify-center items-center sm:w-150'>
         <LoginButton type='google' />
         <LoginButton type='kakao' />
+        <LoginButton type='github' />
       </div>
       <span className='typo-footnote-base text-charcoal-optional'>
         로그인 시 서비스 이용약관 및 개인정보 처리방침에 동의하게 됩니다.

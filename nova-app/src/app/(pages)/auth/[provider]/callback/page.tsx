@@ -3,7 +3,14 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter, useParams } from 'next/navigation';
 import { showToast } from '@/shared/utils/toast';
-import { handleGoogleCallback, handleKakaoCallback } from '@/features/login/api/login';
+import {
+  handleGoogleCallback,
+  handleKakaoCallback,
+  handleGithubCallback,
+  handleGoogleConnect,
+  handleKakaoConnect,
+  handleGithubConnect,
+} from '@/features/login/api/login';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { usePersonalization } from '@/shared/hooks/usePersonalization';
 
@@ -23,7 +30,7 @@ const OAuthCallbackContent = () => {
   useEffect(() => {
     const processCallback = async () => {
       const provider = params.provider as string;
-      if (provider !== 'google' && provider !== 'kakao') {
+      if (provider !== 'google' && provider !== 'kakao' && provider !== 'github') {
         const message = '지원하지 않는 OAuth 제공자입니다.';
         setStatus('error');
         setErrorMessage(message);
@@ -33,6 +40,7 @@ const OAuthCallbackContent = () => {
       }
 
       const code = searchParams.get('code');
+      const state = searchParams.get('state') || 'login'; // 기본값은 'login'
       const error = searchParams.get('error');
       const errorDescription = searchParams.get('error_description');
 
@@ -55,25 +63,57 @@ const OAuthCallbackContent = () => {
       }
 
       try {
-        const response =
-          provider === 'kakao'
-            ? await handleKakaoCallback({ code })
-            : await handleGoogleCallback({ code });
+        // state에 따라 다른 API 호출
+        if (state === 'connect') {
+          // 연결(connect) API 호출
+          let response;
+          if (provider === 'kakao') {
+            response = await handleKakaoConnect({ code });
+          } else if (provider === 'github') {
+            response = await handleGithubConnect({ code });
+          } else {
+            response = await handleGoogleConnect({ code });
+          }
 
-        if (response.success && response.data) {
-          const { accessToken, memberId } = response.data;
-
-          login(accessToken, memberId);
-          setMemberId(memberId);
-
-          setStatus('success');
-          showToast.success('로그인에 성공했습니다!');
+          // connect API는 null을 반환하므로 성공 여부만 확인
+          if (response.success) {
+            setStatus('success');
+            showToast.success('계정 연결에 성공했습니다!');
+            // 프로필 페이지로 리다이렉트
+            setTimeout(() => router.push('/profile'), 1500);
+          } else {
+            const message = response.message || '계정 연결에 실패했습니다.';
+            setStatus('error');
+            setErrorMessage(message);
+            showToast.error(message);
+            setTimeout(() => router.push('/profile'), 2000);
+          }
         } else {
-          const message = response.message || '로그인에 실패했습니다.';
-          setStatus('error');
-          setErrorMessage(message);
-          showToast.error(message);
-          setTimeout(() => router.push('/login'), 2000);
+          // 로그인(login) API 호출
+          let response;
+          if (provider === 'kakao') {
+            response = await handleKakaoCallback({ code });
+          } else if (provider === 'github') {
+            response = await handleGithubCallback({ code });
+          } else {
+            response = await handleGoogleCallback({ code });
+          }
+
+          if (response.success && response.data) {
+            const { accessToken, memberId } = response.data;
+
+            login(accessToken, memberId);
+            setMemberId(memberId);
+
+            setStatus('success');
+            showToast.success('로그인에 성공했습니다!');
+          } else {
+            const message = response.message || '로그인에 실패했습니다.';
+            setStatus('error');
+            setErrorMessage(message);
+            showToast.error(message);
+            setTimeout(() => router.push('/login'), 2000);
+          }
         }
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
