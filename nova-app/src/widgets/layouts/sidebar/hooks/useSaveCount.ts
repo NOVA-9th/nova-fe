@@ -20,6 +20,7 @@ export const useSavedCount = () => {
         page: 1,
         size: 1,
         saved: true,
+        hidden: false,
       }),
     select: (res) => res?.data?.totalCount,
     staleTime: 5 * 60 * 1000,
