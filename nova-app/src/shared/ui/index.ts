@@ -19,6 +19,7 @@ import { TextBadge } from '@/shared/ui/content/TextBadge';
 
 // input
 import { ChipInput } from '@/shared/ui/input/ChipInput';
+import { Select } from '@/shared/ui/input/Select';
 import { SwitchInput } from '@/shared/ui/input/SwitchInput';
 import { TextInput } from '@/shared/ui/input/TextInput';
 
@@ -56,6 +57,7 @@ export {
   SectionHeader,
   TextBadge,
   ChipInput,
+  Select,
   SwitchInput,
   TextInput,
   Breadcrumb,

@@ -1,4 +1,4 @@
-import { Globe, Newspaper, User } from 'lucide-react';
+import { Globe, Grid2X2Icon, Newspaper, User } from 'lucide-react';
 
 export const SORT_ITEMS = ['최신순', '관련도 순'] as const;
 
