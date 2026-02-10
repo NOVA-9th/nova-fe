@@ -1,5 +1,5 @@
 'use client';
-import { useGetInterestSkillTop } from '@/features/trend/api/trend';
+import { useGetInterestSkillTop } from '@/features/trend/hooks/useGetInterestSkillTop';
 import { chartColors } from '@/features/trend/lib/chartColor';
 import { useBarKeywordStore } from '@/features/trend/model/useBarKeywordTop';
 import { getCategoryArray } from '@/features/trend/utils/getCategoryArray';
