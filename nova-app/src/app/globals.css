@@ -37,6 +37,11 @@
       @apply text-title font-300 leading-8 tracking-tight;
     }
   }
+  @media (min-width: 768px) {
+    .md\:typo-headline-strong {
+      @apply text-heading font-300 leading-7 tracking-tight;
+    }
+  }
 }
 
 html,
