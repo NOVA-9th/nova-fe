@@ -43,7 +43,7 @@ export const KEYWORD_CATEGORY_MAP: Record<string, string[]> = {
     'MERN Stack',
     'MEAN Stack',
     'Next.js Fullstack',
-    'BFF',
+    'BFF (Backend for Frontend)',
     'Prisma',
     'Supabase',
     'Firebase Auth',
