@@ -3,7 +3,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import { InputChip } from '@/shared/ui';
@@ -65,6 +65,10 @@ export const ChipInput = ({
   const [isComposing, setIsComposing] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
+  // ✅ 드롭다운 스크롤 제어용 ref
+  const listRef = useRef<HTMLUListElement | null>(null);
+  const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
+
   const addChip = (raw?: string) => {
     const finalValue = raw ?? inputValue;
     if (!finalValue.trim()) return;
@@ -105,6 +109,16 @@ export const ChipInput = ({
   useEffect(() => {
     setHighlightedIndex(filteredSuggestions.length > 0 ? 0 : -1);
   }, [filteredSuggestions]);
+
+  // ✅ highlight가 바뀔 때마다 해당 li가 보이도록 스크롤
+  useEffect(() => {
+    if (highlightedIndex < 0) return;
+    const el = itemRefs.current[highlightedIndex];
+    if (!el) return;
+
+    // nearest: 이미 보이면 안 움직이고, 가려지면 필요한 만큼만 스크롤
+    el.scrollIntoView({ block: 'nearest' });
+  }, [highlightedIndex]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isComposing) return;
@@ -172,10 +186,16 @@ export const ChipInput = ({
       </div>
 
       {inputValue && filteredSuggestions.length > 0 && (
-        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'>
+        <ul
+          ref={listRef}
+          className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'
+        >
           {filteredSuggestions.map((item, index) => (
             <li
               key={item}
+              ref={(el) => {
+                itemRefs.current[index] = el;
+              }}
               className={cn(
                 'px-4 py-2.5 typo-body-base h-12 text-optional hover:bg-surface active:bg-surface',
                 highlightedIndex === index && 'bg-surface',
