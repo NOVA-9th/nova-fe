@@ -27,20 +27,42 @@
   }
 
   @media (min-width: 640px) {
+    .sm\:typo-callout-base {
+      @apply text-callout font-100 leading-5 tracking-tight;
+    }
+    .sm\:typo-body-base {
+      @apply text-body font-100 leading-6 tracking-tight;
+    }
     .sm\:typo-body-key {
       @apply text-body font-200 leading-6 tracking-tight;
     }
-  }
-
-  @media (min-width: 640px) {
+    .sm\:typo-title-key {
+      @apply text-title font-200 leading-8 tracking-tight;
+    }
     .sm\:typo-title-strong {
       @apply text-title font-300 leading-8 tracking-tight;
     }
   }
+
   @media (min-width: 768px) {
     .md\:typo-headline-strong {
       @apply text-heading font-300 leading-7 tracking-tight;
     }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out;
   }
 }
 

@@ -64,7 +64,7 @@ export const SideBar = () => {
                 </p>
               </div>
 
-              {item.badge && item.href === '/' && (
+              {item.badge && item.href === '/feed' && (
                 <TextBadge size='sm' variant='surface' peak={false} text={item.badge} />
               )}
 

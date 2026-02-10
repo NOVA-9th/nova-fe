@@ -6,8 +6,10 @@ interface AuthState {
   accessToken: string | null;
   memberId: number | null;
   hasHydrated: boolean;
+  isFirstVisit: boolean;
   login: (token: string, memberId: number) => void;
   logout: () => void;
+  setFirstVisit: (value: boolean) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
@@ -17,12 +19,14 @@ export const useAuthStore = create<AuthState>()(
       accessToken: null,
       memberId: null,
       hasHydrated: false,
+      isFirstVisit: true,
 
       login: (token, memberId) => {
         set({
           isLoggedIn: true,
           accessToken: token,
           memberId,
+          isFirstVisit: false,
         });
       },
 
@@ -32,6 +36,10 @@ export const useAuthStore = create<AuthState>()(
           accessToken: null,
           memberId: null,
         });
+      },
+
+      setFirstVisit: (value) => {
+        set({ isFirstVisit: value });
       },
     }),
     {
