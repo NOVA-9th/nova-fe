@@ -69,7 +69,7 @@ const FeedArticle = () => {
           </div>
         )}
       </section>
-      <div ref={targetRef} className='' />
+      <div ref={targetRef} className='h-4' />
     </>
   );
 };

@@ -54,9 +54,6 @@ const SavedArticleList = () => {
         {articles.map((article) => (
           <ArticleCard key={article.id} articleData={article} />
         ))}
-        
-        <div ref={targetRef} className='' />
-        
         {isFetchingNextPage && (
           <div className='space-y-4'>
             {Array.from({ length: 1 }).map((_, idx) => (
@@ -73,7 +70,7 @@ const SavedArticleList = () => {
           </div>
         )}
       </section>
-      
+      <div ref={targetRef} className='h-4' />
     </>
   );
 };
