@@ -1,105 +1,152 @@
 'use client';
 
+import { ChevronDown, Grid2X2Icon, ListFilter, Search } from 'lucide-react';
 import { useState } from 'react';
-import { Grid2X2Icon, EarthIcon, FileUser, ListFilter, Newspaper, Search } from 'lucide-react';
 import { KeywordFilter } from '@/features/saved/mocks/KeywordFilter';
-import { SectionHeader, SelectionChip, TextButton, TextInput } from '@/shared/ui';
+import { SectionHeader, SelectionChip, Select, TextButton, TextInput } from '@/shared/ui';
+import { useSavedFilterStore } from '@/features/saved/model/useSavedFilterStore';
+import { TYPE_ITEMS } from '@/features/feed/data/FilterData';
 
 export const KeywordCard = () => {
-  const [value, setValue] = useState('');
-
-  const onChange = (value: string) => {
-    setValue(value);
-  };
+  const [isOpen, setIsOpen] = useState(false);
+  const {
+    searchKeyword,
+    selectedSort,
+    selectedTypes,
+    selectedKeywords,
+    setSearchKeyword,
+    setSelectedSort,
+    setSelectedTypes,
+    toggleType,
+    toggleKeyword,
+    resetAll,
+  } = useSavedFilterStore();
+  const shouldShowKeywordToggle = KeywordFilter.length > 6;
 
   return (
-    <div className='bg-base rounded-static-frame p-5 flex flex-col gap-5'>
-      <div className='flex w-full gap-3 flex-col items-start lg:flex-row lg:items-center'>
+    <div className='bg-base rounded-static-frame p-5 flex flex-col gap-4 md:gap-5'>
+      <div className='flex w-full gap-3 items-start lg:flex-row lg:items-center'>
         <TextInput
           size='lg'
           variant='surface'
           data={false}
-          value={value}
+          value={searchKeyword}
           placeholder='제목 혹은 키워드로 검색하기'
-          onChange={onChange}
+          onChange={setSearchKeyword}
           icon={Search}
-          className='w-full md:flex-1'
+          className='w-full overflow-hidden'
         />
         <TextButton
-          onClick={() => {}}
+          onClick={resetAll}
           size='lg'
-          label='필터 초기화'
+          label='초기화'
           leftIcon={ListFilter}
           style='surface'
           className='flex h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-surface'
         />
       </div>
-      <div className='flex flex-col lg:flex-row w-full h-fit justify-between items-start gap-8'>
-        <div className='flex flex-col w-fit h-full justify-start items-start gap-4'>
+      <div className='flex flex-row w-full h-fit justify-between items-start gap-2 md:gap-8'>
+        <div className='flex flex-1 md:flex-1 flex-col w-full md:w-fit h-full justify-start items-start gap-2 md:gap-4'>
           <SectionHeader text='정렬' />
-          <div className='flex gap-2'>
+          {/* 데스크톱: SelectionChip */}
+          <div className='hidden md:flex gap-2'>
             <SelectionChip
               isShowChevron={false}
               size='md'
               style='surface'
-              selected={true}
+              selected={selectedSort === '최신순'}
               label='최신순'
-              onClick={() => {}}
+              onClick={() => setSelectedSort('최신순')}
             />
             <SelectionChip
               isShowChevron={false}
               size='md'
               style='surface'
-              selected={false}
+              selected={selectedSort === '관련도 순'}
               label='관련도 순'
-              onClick={() => {}}
+              onClick={() => setSelectedSort('관련도 순')}
+            />
+          </div>
+          {/* 모바일: Select 드롭다운 */}
+          <div className='md:hidden w-full'>
+            <Select
+              value={selectedSort}
+              onValueChange={(value) => setSelectedSort(value as '최신순' | '관련도 순')}
+              options={[
+                { value: '최신순', label: '최신순' },
+                { value: '관련도 순', label: '관련도 순' },
+              ]}
+              size='md'
+              style='surface'
+              className='w-full'
             />
           </div>
         </div>
-        <div className='flex flex-col w-fit h-full justify-start items-start gap-4'>
+        <div className='flex flex-2 md:flex-1 flex-col w-full md:w-fit h-full justify-start items-start gap-2 md:gap-4'>
           <SectionHeader text='유형' />
-          <div className='flex flex-wrap gap-2 w-full'>
+          {/* 데스크톱: SelectionChip */}
+          <div className='hidden md:flex flex-wrap gap-2 w-full'>
             <SelectionChip
               isShowChevron={false}
               icon={Grid2X2Icon}
               size='md'
               style='surface'
-              selected={true}
+              selected={selectedTypes.length === 0}
               label='전체'
-              onClick={() => {}}
+              onClick={() => setSelectedTypes([])}
             />
-            <SelectionChip
-              isShowChevron={false}
-              icon={Newspaper}
+            {TYPE_ITEMS.map((item) => (
+              <SelectionChip
+                key={item.value}
+                isShowChevron={false}
+                icon={item.icon}
+                size='md'
+                style='surface'
+                selected={selectedTypes.includes(item.value)}
+                label={item.label}
+                onClick={() => toggleType(item.value)}
+              />
+            ))}
+          </div>
+          {/* 모바일: Select 드롭다운 */}
+          <div className='md:hidden w-full'>
+            <Select
+              value={selectedTypes.length === 0 ? '전체' : selectedTypes[0] || '전체'}
+              onValueChange={(value) => {
+                if (value === '전체') {
+                  setSelectedTypes([]);
+                } else {
+                  setSelectedTypes([value as 'NEWS' | 'JOB' | 'COMMUNITY']);
+                }
+              }}
+              options={[
+                { value: '전체', label: '전체', icon: Grid2X2Icon },
+                ...TYPE_ITEMS.map((item) => ({ value: item.value, label: item.label, icon: item.icon })),
+              ]}
               size='md'
               style='surface'
-              selected={true}
-              label='뉴스'
-              onClick={() => {}}
-            />
-            <SelectionChip
-              isShowChevron={false}
-              icon={FileUser}
-              size='md'
-              style='surface'
-              selected={false}
-              label='채용'
-              onClick={() => {}}
-            />
-            <SelectionChip
-              isShowChevron={false}
-              icon={EarthIcon}
-              size='md'
-              style='surface'
-              selected={true}
-              label='커뮤니티'
-              onClick={() => {}}
+              className='w-full'
             />
           </div>
         </div>
       </div>
-      <div className='flex flex-col w-full h-full justify-start items-start gap-4'>
-        <SectionHeader text='키워드 필터' />
+      <div className='flex flex-col w-full h-full justify-start items-start gap-2 md:gap-4'>
+        <div className='flex items-center justify-between w-full'>
+          <SectionHeader text='키워드 필터' className='text-md md:typo-subhead-key' />
+          {shouldShowKeywordToggle && (
+            <button
+              type='button'
+              className='flex md:hidden justify-center items-center gap-1 typo-callout-key text-optional hover:text-optional active:text-optional'
+              onClick={() => setIsOpen((prev) => !prev)}
+            >
+              <p>{isOpen ? '접기' : `+${KeywordFilter.length - 6}개 더보기`}</p>
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+          )}
+        </div>
         <div className='flex flex-wrap gap-2'>
           {KeywordFilter.map((keyword, index) => (
             <SelectionChip
@@ -107,9 +154,10 @@ export const KeywordCard = () => {
               key={index}
               size='md'
               style='surface'
-              selected={false}
+              className={!isOpen && index >= 6 ? 'hidden md:inline-flex' : ''}
+              selected={selectedKeywords.includes(keyword.filter)}
               label={`#${keyword.filter}`}
-              onClick={() => {}}
+              onClick={() => toggleKeyword(keyword.filter)}
             />
           ))}
         </div>
