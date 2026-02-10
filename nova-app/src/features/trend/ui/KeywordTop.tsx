@@ -1,10 +1,10 @@
 'use client';
-import { useGetKeywordTop } from '@/features/trend/api';
+import { useGetKeywordTop } from '@/features/trend/hooks/useGetKeywordTop';
 import { useKeywordStore } from '@/features/trend/model/useKeywordTop';
 import { getCategory } from '@/features/trend/utils/getCategory';
-// import { getCategory } from '@/features/trend/utils/getCategory';
 import { Button, Header, TextBadge } from '@/shared/ui';
 import { cn } from '@/shared/utils/cn';
+import { showToast } from '@/shared/utils/toast';
 
 export const KeywordTop = () => {
   const { data } = useGetKeywordTop();
@@ -14,7 +14,6 @@ export const KeywordTop = () => {
 
   const { keywords, toggleKeyword } = useKeywordStore();
 
-  if (!data || !data.trends) return null;
   return (
     <>
       <Header
@@ -32,7 +31,7 @@ export const KeywordTop = () => {
           )}
         >
           <div className='w-10 lg:w-auto text-center'>순위</div>
-          <div className='flex-1 w-30 ;g:flex-none lg:w-auto text-left '>키워드</div>
+          <div className='flex-1 w-30 lg:flex-none lg:w-auto text-left '>키워드</div>
           <div className='hidden lg:block  text-center lg:w-auto'>카테고리</div>
           <div className='hidden lg:block text-center lg:w-auto'>언급수</div>
           <div className='w-12.5 lg:w-auto text-center  lg:text-left mr-3 lg:mr-0'>변화율</div>
@@ -50,7 +49,7 @@ export const KeywordTop = () => {
                 'border-b border-outline ',
                 isSelected && [
                   'z-10 bg-surface text-base-color border-black',
-                  'before:absolute before:-top-px before:left-0 before:w-full before:h-px before:bg-black ',
+                  'before:absolute before:-top-px before:left-0 before:w-full before:h-px ',
                 ],
               )}
             >
@@ -72,7 +71,12 @@ export const KeywordTop = () => {
                 style='surface'
                 peak={isSelected}
                 size='sm'
-                onClick={() => toggleKeyword(item.keyword)}
+                onClick={() => {
+                  const isMaxLength = toggleKeyword(item.keyword);
+                  if (!isMaxLength) {
+                    showToast.error('최대 3개까지만 선택할 수 있습니다.');
+                  }
+                }}
                 className='w-fit'
               />
             </div>

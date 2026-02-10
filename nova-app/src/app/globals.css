@@ -38,6 +38,12 @@
     }
   }
 
+  @media (min-width: 768px) {
+    .md\:typo-headline-strong {
+      @apply text-heading font-300 leading-7 tracking-tight;
+    }
+  }
+
   .shadow-modal {
     box-shadow: var(--shadow-modal);
   }

@@ -3,7 +3,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import { InputChip } from '@/shared/ui';
@@ -63,6 +63,11 @@ export const ChipInput = ({
   onAdd,
 }: ChipInputProps) => {
   const [isComposing, setIsComposing] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+
+  // ✅ 드롭다운 스크롤 제어용 ref
+  const listRef = useRef<HTMLUListElement | null>(null);
+  const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
 
   const addChip = (raw?: string) => {
     const finalValue = raw ?? inputValue;
@@ -79,6 +84,7 @@ export const ChipInput = ({
     }
 
     onInputChange('');
+    setHighlightedIndex(-1);
   };
 
   const removeChip = (chip: string) => {
@@ -88,19 +94,7 @@ export const ChipInput = ({
   const clearAll = () => {
     onInputChange('');
     onChange([]);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isComposing) return;
-
-    if (e.key === 'Enter' || e.key === ',') {
-      e.preventDefault();
-      addChip();
-    }
-
-    if (e.key === 'Backspace' && !inputValue && value.length) {
-      removeChip(value[value.length - 1]);
-    }
+    setHighlightedIndex(-1);
   };
 
   const filteredSuggestions = useMemo(
@@ -110,6 +104,53 @@ export const ChipInput = ({
       ),
     [inputValue, suggestions, value],
   );
+
+  // suggestions 변경 시 highlight 초기화
+  useEffect(() => {
+    setHighlightedIndex(filteredSuggestions.length > 0 ? 0 : -1);
+  }, [filteredSuggestions]);
+
+  // ✅ highlight가 바뀔 때마다 해당 li가 보이도록 스크롤
+  useEffect(() => {
+    if (highlightedIndex < 0) return;
+    const el = itemRefs.current[highlightedIndex];
+    if (!el) return;
+
+    // nearest: 이미 보이면 안 움직이고, 가려지면 필요한 만큼만 스크롤
+    el.scrollIntoView({ block: 'nearest' });
+  }, [highlightedIndex]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isComposing) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setHighlightedIndex((prev) => Math.min(prev + 1, filteredSuggestions.length - 1));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setHighlightedIndex((prev) => Math.max(prev - 1, 0));
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (highlightedIndex >= 0 && highlightedIndex < filteredSuggestions.length) {
+          addChip(filteredSuggestions[highlightedIndex]);
+        } else {
+          addChip();
+        }
+        break;
+      case ',':
+        e.preventDefault();
+        addChip();
+        break;
+      case 'Backspace':
+        if (!inputValue && value.length) {
+          removeChip(value[value.length - 1]);
+        }
+        break;
+    }
+  };
 
   return (
     <div className={cn(ChipInputVariants({ size, variant, data }), className)}>
@@ -145,11 +186,21 @@ export const ChipInput = ({
       </div>
 
       {inputValue && filteredSuggestions.length > 0 && (
-        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'>
-          {filteredSuggestions.map((item) => (
+        <ul
+          ref={listRef}
+          className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'
+        >
+          {filteredSuggestions.map((item, index) => (
             <li
               key={item}
-              className='px-4 py-2.5 typo-body-base h-12 text-optional hover:bg-surface active:bg-surface'
+              ref={(el) => {
+                itemRefs.current[index] = el;
+              }}
+              className={cn(
+                'px-4 py-2.5 typo-body-base h-12 text-optional hover:bg-surface active:bg-surface',
+                highlightedIndex === index && 'bg-surface',
+              )}
+              onMouseEnter={() => setHighlightedIndex(index)}
               onClick={() => addChip(item)}
             >
               {item}
