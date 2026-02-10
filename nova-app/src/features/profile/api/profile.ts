@@ -1,116 +1,76 @@
 import { axiosInstance } from '@/shared/api';
 import { ApiResponse } from '@/shared/types';
 import {
+  MemberConnectedAccountsResponseDto,
+  MemberPersonalizationDto,
   MemberRequestDto,
   MemberResponseDto,
   MemberUpdateResponseDto,
-  MemberPersonalizationDto,
-  MemberConnectedAccountsResponseDto,
-  MemberLevel,
-} from './types';
+} from '@/features/profile/types/api';
 
-export type {
-  MemberRequestDto,
-  MemberResponseDto,
-  MemberUpdateResponseDto,
-  MemberPersonalizationDto,
-  MemberConnectedAccountsResponseDto,
-} from './types';
-
-export { MemberLevel } from './types';
-
-/**
- * 멤버 정보 조회
- * @param memberId 멤버 ID
- */
-export const getMemberInfo = async (
-  memberId: number
-): Promise<ApiResponse<MemberResponseDto>> => {
+//멤버 정보 조회
+export const getMemberInfo = async (memberId: number): Promise<ApiResponse<MemberResponseDto>> => {
   const response = await axiosInstance.get<ApiResponse<MemberResponseDto>>(
-    `/api/members/${memberId}`
+    `/api/members/${memberId}`,
   );
   return response.data;
 };
 
-/**
- * 멤버 이름 수정
- * @param memberId 멤버 ID
- * @param requestDto 수정할 이름 정보
- */
+// 멤버 이름 수정
 export const updateMemberName = async (
   memberId: number,
-  requestDto: MemberRequestDto
+  requestDto: MemberRequestDto,
 ): Promise<ApiResponse<MemberUpdateResponseDto>> => {
   const response = await axiosInstance.patch<ApiResponse<MemberUpdateResponseDto>>(
     `/api/members/${memberId}`,
-    requestDto
+    requestDto,
   );
   return response.data;
 };
 
-/**
- * 멤버 삭제
- * @param memberId 멤버 ID
- */
-export const deleteMember = async (
-  memberId: number
-): Promise<ApiResponse<void>> => {
-  const response = await axiosInstance.delete<ApiResponse<void>>(
-    `/api/members/${memberId}`
-  );
+// 멤버 삭제
+export const deleteMember = async (memberId: number): Promise<ApiResponse<void>> => {
+  const response = await axiosInstance.delete<ApiResponse<void>>(`/api/members/${memberId}`);
   return response.data;
 };
 
-/**
- * 멤버 개인화 설정 조회
- * @param memberId 멤버 ID
- */
+// 멤버 개인화 설정 조회
 export const getPersonalization = async (
-  memberId: number
+  memberId: number,
 ): Promise<ApiResponse<MemberPersonalizationDto>> => {
   const response = await axiosInstance.get<ApiResponse<MemberPersonalizationDto>>(
-    `/api/members/${memberId}/personalization`
+    `/api/members/${memberId}/personalization`,
   );
   return response.data;
 };
 
-/**
- * 멤버 개인화 설정 수정
- * @param memberId 멤버 ID
- * @param requestDto 개인화 설정 정보
- */
+// 멤버 개인화 설정 수정
 export const updatePersonalization = async (
   memberId: number,
-  requestDto: MemberPersonalizationDto
+  requestDto: MemberPersonalizationDto,
 ): Promise<ApiResponse<void>> => {
   const response = await axiosInstance.put<ApiResponse<void>>(
     `/api/members/${memberId}/personalization`,
-    requestDto
+    requestDto,
   );
   return response.data;
 };
 
-/**
- * 연결된 계정 조회
- * @param memberId 멤버 ID
- */
+// 연결된 계정 조회
 export const getConnectedAccounts = async (
-  memberId: number
+  memberId: number,
 ): Promise<ApiResponse<MemberConnectedAccountsResponseDto>> => {
   const response = await axiosInstance.get<ApiResponse<MemberConnectedAccountsResponseDto>>(
-    `/api/members/${memberId}/connected-accounts`
+    `/api/members/${memberId}/connected-accounts`,
   );
   return response.data;
 };
 
 export type ConnectedAccountProvider = 'google' | 'kakao' | 'github';
 
-/**
- * 연결된 계정 해제 (취소)
- * @param provider google | kakao | github
- */
+// 연결된 계정 해제
 export const disconnectConnectedAccount = async (
-  provider: ConnectedAccountProvider
+  provider: ConnectedAccountProvider,
 ): Promise<ApiResponse<void>> => {
   const path =
     provider === 'google'
@@ -122,14 +82,8 @@ export const disconnectConnectedAccount = async (
   return response.data;
 };
 
-/**
- * 프로필 이미지 조회
- * @param memberId 멤버 ID
- * @returns 이미지 Blob 또는 null
- */
-export const getProfileImage = async (
-  memberId: number
-): Promise<Blob | null> => {
+// 프로필 이미지 조회
+export const getProfileImage = async (memberId: number): Promise<Blob | null> => {
   try {
     const response = await axiosInstance.get(`/api/members/${memberId}/profile-image`, {
       responseType: 'blob',
@@ -144,14 +98,10 @@ export const getProfileImage = async (
   }
 };
 
-/**
- * 프로필 이미지 업로드
- * @param memberId 멤버 ID
- * @param file 이미지 파일
- */
+// 프로필 이미지 업로드
 export const uploadProfileImage = async (
   memberId: number,
-  file: File
+  file: File,
 ): Promise<ApiResponse<void>> => {
   const formData = new FormData();
   formData.append('file', file);
@@ -163,42 +113,27 @@ export const uploadProfileImage = async (
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    }
+    },
   );
   return response.data;
 };
 
-/**
- * 프로필 이미지 삭제
- * @param memberId 멤버 ID
- */
-export const deleteProfileImage = async (
-  memberId: number
-): Promise<ApiResponse<void>> => {
+// 프로필 이미지 삭제
+export const deleteProfileImage = async (memberId: number): Promise<ApiResponse<void>> => {
   const response = await axiosInstance.delete<ApiResponse<void>>(
-    `/api/members/${memberId}/profile-image`
+    `/api/members/${memberId}/profile-image`,
   );
   return response.data;
 };
 
-/**
- * 저장함 목록 삭제 (모든 북마크 삭제)
- * 복구 불가
- */
+// 모든 북마크 삭제
 export const deleteAllBookmarks = async (): Promise<ApiResponse<void>> => {
-  const response = await axiosInstance.delete<ApiResponse<void>>(
-    '/api/bookmarks/delete/all'
-  );
+  const response = await axiosInstance.delete<ApiResponse<void>>('/api/bookmarks/delete/all');
   return response.data;
 };
 
-/**
- * 카드뉴스 숨김 내역 초기화
- * 복구 불가
- */
+// 카드 숨김 내역 조회 초기화
 export const resetHiddenCardNews = async (): Promise<ApiResponse<void>> => {
-  const response = await axiosInstance.delete<ApiResponse<void>>(
-    '/api/cardnews/hidden'
-  );
+  const response = await axiosInstance.delete<ApiResponse<void>>('/api/cardnews/hidden');
   return response.data;
 };

@@ -13,6 +13,8 @@
     --bg-accent-surface: var(--color-primary-surface); /* #287AF5 @ 10% */
     --bg-accent-peak: var(--color-primary-full);
 
+    --bg-login: rgba(212, 216, 216, 0.198);
+
     /* ---------- Background / Interaction ---------- */
     --bg-interaction-surface: var(--color-interaction-surface);
     --bg-interaction-peak: var(--color-interaction-peak);
@@ -41,6 +43,9 @@
 
     --stroke-data-outline: var(--color-dark-outline); /* #00BD75 @ 20% */
     --stroke-data-selected: var(--color-dark-full);
+
+    /* ---------- Shadow ---------- */
+    --shadow-suggestion: rgb(255 255 255 / 0.15);
   }
 
   /* ---------- Background ---------- */
@@ -80,6 +85,9 @@
     background-color: var(--color-primary-full);
   }
 
+  .dark .bg-login {
+    background-color: var(--bg-login);
+  }
   /* ---------- Background / Interaction ---------- */
   .dark .hover\:bg-surface:hover {
     background-color: color-mix(in srgb, var(--color-slate-surface), var(--color-white-full) 6%);
@@ -87,6 +95,10 @@
 
   .dark .hover\:bg-peak:hover {
     background-color: color-mix(in srgb, var(--bg-peak), white 6%);
+  }
+
+  .dark .hover\:bg-login:hover {
+    background-color: color-mix(in srgb, var(--bg-login), white 6%);
   }
 
   .dark .hover\:bg-data-surface:hover {
@@ -196,6 +208,14 @@
 
   .dark .text-accent-peak {
     color: var(--color-white-accent-peak);
+  }
+
+  .dark .text-login {
+    color: var(--color-white-additive);
+  }
+
+  .dark .text-github {
+    color: var(--color-white-additive);
   }
 
   .dark .hover\:text-base-color:hover {

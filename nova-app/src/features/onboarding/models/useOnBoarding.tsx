@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { STEP_ITEMS } from '@/features/onboarding/data/StepItems';
 import { Step } from '@/features/onboarding/types/StepItem';
 
@@ -18,16 +18,23 @@ export const useOnboarding = () => {
   const isStepValid = stepValidMap[currentStep];
   const showSkip = currentStep === 'step2' || currentStep === 'step4';
 
-  const onNext = () =>
+  const onNext = useCallback(() => {
     setCurrentStep((prev) => STEPS[Math.min(STEPS.indexOf(prev) + 1, STEPS.length - 1)]);
-  const onPrev = () => setCurrentStep((prev) => STEPS[Math.max(STEPS.indexOf(prev) - 1, 0)]);
+  }, []);
 
-  const onValidChange = (isValid: boolean) => {
-    setStepValidMap((prev) => {
-      if (prev[currentStep] === isValid) return prev;
-      return { ...prev, [currentStep]: isValid };
-    });
-  };
+  const onPrev = useCallback(() => {
+    setCurrentStep((prev) => STEPS[Math.max(STEPS.indexOf(prev) - 1, 0)]);
+  }, []);
+
+  const onValidChange = useCallback(
+    (isValid: boolean) => {
+      setStepValidMap((prev) => {
+        if (prev[currentStep] === isValid) return prev;
+        return { ...prev, [currentStep]: isValid };
+      });
+    },
+    [currentStep],
+  );
 
   return {
     currentStep,

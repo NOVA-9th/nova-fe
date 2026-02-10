@@ -1,12 +1,13 @@
 import clsx from 'clsx';
 import { Step } from '@/features/onboarding/types/StepItem';
+import { memo } from 'react';
 
 interface StepperProps {
   currentStep: Step;
   labels: string[];
 }
 
-export const Stepper = ({ currentStep, labels }: StepperProps) => {
+export const Stepper = memo(({ currentStep, labels }: StepperProps) => {
   const STEP_ORDER: Step[] = ['step1', 'step2', 'step3', 'step4'];
   const currentIndex = STEP_ORDER.indexOf(currentStep) + 1;
 
@@ -24,18 +25,14 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
               <div
                 className={clsx(
                   'flex-1 h-0.75 mr-2 rounded-r-static-pill',
-                  step === 1
-                    ? 'bg-transparent'
-                    : step <= currentIndex
-                      ? 'bg-charcoal-full'
-                      : 'bg-slate-outline',
+                  step === 1 ? 'bg-transparent' : step <= currentIndex ? 'bg-peak' : 'bg-surface',
                 )}
               />
 
               <div
                 className={clsx(
                   'flex items-center justify-center w-6 h-6 rounded-static-pill typo-body-key',
-                  isActive ? 'bg-peak text-peak' : 'bg-surface text-charcoal-additive',
+                  isActive ? 'bg-peak text-peak' : 'bg-surface text-login',
                 )}
               >
                 {step}
@@ -48,8 +45,8 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
                   step === STEP_ORDER.length
                     ? 'bg-transparent'
                     : step < currentIndex
-                      ? 'bg-charcoal-full'
-                      : 'bg-slate-outline',
+                      ? 'bg-peak'
+                      : 'bg-surface',
                 )}
               />
             </div>
@@ -57,7 +54,7 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
             <span
               className={clsx(
                 'typo-body-key mt-2 whitespace-nowrap',
-                isActive ? 'text-charcoal-full' : 'text-charcoal-additive',
+                isActive ? 'text-base-color' : 'text-additive',
               )}
             >
               {label}
@@ -67,4 +64,4 @@ export const Stepper = ({ currentStep, labels }: StepperProps) => {
       })}
     </div>
   );
-};
+});
