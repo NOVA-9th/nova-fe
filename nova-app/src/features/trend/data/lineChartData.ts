@@ -1,4 +1,4 @@
-import { useGetKeywordTop } from '@/features/trend/api/trend';
+import { useGetKeywordTop } from '@/features/trend/hooks/useGetKeywordTop';
 import { useKeywordStore } from '@/features/trend/model/useKeywordTop';
 import type { ChartData, ScriptableContext } from 'chart.js';
 

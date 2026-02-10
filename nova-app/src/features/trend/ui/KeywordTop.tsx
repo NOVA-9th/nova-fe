@@ -1,5 +1,5 @@
 'use client';
-import { useGetKeywordTop } from '@/features/trend/api/trend';
+import { useGetKeywordTop } from '@/features/trend/hooks/useGetKeywordTop';
 import { useKeywordStore } from '@/features/trend/model/useKeywordTop';
 import { getCategory } from '@/features/trend/utils/getCategory';
 import { Button, Header, TextBadge } from '@/shared/ui';

@@ -6,13 +6,10 @@ import { cn } from '@/shared/utils/cn';
 
 export const CategoriesKeyword = () => {
   const { toggleCategory, category } = useBarKeywordStore();
-  console.log(category);
   const { data: skillData } = useGetInterestSkillTop();
-  console.log(skillData);
 
   const categoryMapData = skillData.rankings.map((item) => {
     const keywordNames = item.keywords.map((k) => k.name);
-    // console.log(keywordNames);
     return {
       ...item,
       keywordNames,
@@ -39,7 +36,8 @@ export const CategoriesKeyword = () => {
           >
             <h6
               className={cn(
-                'md:text-left! text-center text-optional typo-headline-strong',
+                'text-center text-optional typo-body-strong',
+                'md:text-left md:typo-headline-strong',
                 isSelected && 'text-peak',
               )}
             >
@@ -47,7 +45,7 @@ export const CategoriesKeyword = () => {
             </h6>
             <p
               className={cn(
-                'hidden md:block! typo-subhead-base text-inactive  truncate ',
+                'hidden md:block typo-subhead-base text-inactive  truncate ',
                 isSelected && 'text-peak',
               )}
             >
