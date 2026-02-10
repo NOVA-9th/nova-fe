@@ -59,6 +59,11 @@ export const createCategoryRankOptions = (
           color: colors.textOptional,
           padding: 2,
           font: { size: 12 },
+          callback: function (value) {
+            if (typeof value !== 'number') return value;
+            const label = this.getLabelForValue(value);
+            return label.split(' ');
+          },
         },
         border: {
           display: true,
