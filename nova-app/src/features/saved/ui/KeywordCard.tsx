@@ -34,15 +34,15 @@ export const KeywordCard = () => {
           placeholder='제목 혹은 키워드로 검색하기'
           onChange={setSearchKeyword}
           icon={Search}
-          className='w-full md:flex-1'
+          className='w-full overflow-hidden'
         />
         <TextButton
           onClick={resetAll}
           size='lg'
-          label='필터 초기화'
+          label='초기화'
           leftIcon={ListFilter}
           style='surface'
-          className='hidden md:flex h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-surface'
+          className='flex h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-surface'
         />
       </div>
       <div className='flex flex-row w-full h-fit justify-between items-start gap-2 md:gap-8'>
