@@ -62,5 +62,5 @@ export const SkillCard = ({ onValidChange }: SkillCardProps) => {
     });
   }, [selected]);
 
-  return <div className='sm:w-150 sm:h-24.5 flex flex-wrap gap-2.5 h-22.5'>{buttons}</div>;
+  return <div className='sm:h-24.5 grid grid-cols-2 gap-3 h-22.5'>{buttons}</div>;
 };
