@@ -1,12 +1,14 @@
 'use client';
 
-import { Grid2X2Icon, EarthIcon, FileUser, ListFilter, Newspaper, Search } from 'lucide-react';
+import { ChevronDown, Grid2X2Icon, ListFilter, Search } from 'lucide-react';
+import { useState } from 'react';
 import { KeywordFilter } from '@/features/saved/mocks/KeywordFilter';
 import { SectionHeader, SelectionChip, Select, TextButton, TextInput } from '@/shared/ui';
 import { useSavedFilterStore } from '@/features/saved/model/useSavedFilterStore';
 import { TYPE_ITEMS } from '@/features/feed/data/FilterData';
 
 export const KeywordCard = () => {
+  const [isOpen, setIsOpen] = useState(false);
   const {
     searchKeyword,
     selectedSort,
@@ -19,6 +21,7 @@ export const KeywordCard = () => {
     toggleKeyword,
     resetAll,
   } = useSavedFilterStore();
+  const shouldShowKeywordToggle = KeywordFilter.length > 6;
 
   return (
     <div className='bg-base rounded-static-frame p-5 flex flex-col gap-4 md:gap-5'>
@@ -128,7 +131,22 @@ export const KeywordCard = () => {
         </div>
       </div>
       <div className='flex flex-col w-full h-full justify-start items-start gap-2 md:gap-4'>
-        <SectionHeader text='키워드 필터' className='text-md md:typo-subhead-key' />
+        <div className='flex items-center justify-between w-full'>
+          <SectionHeader text='키워드 필터' className='text-md md:typo-subhead-key' />
+          {shouldShowKeywordToggle && (
+            <button
+              type='button'
+              className='flex md:hidden justify-center items-center gap-1 typo-callout-key text-optional hover:text-optional active:text-optional'
+              onClick={() => setIsOpen((prev) => !prev)}
+            >
+              <p>{isOpen ? '접기' : `+${KeywordFilter.length - 6}개 더보기`}</p>
+              <ChevronDown
+                size={14}
+                className={`transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+          )}
+        </div>
         <div className='flex flex-wrap gap-2'>
           {KeywordFilter.map((keyword, index) => (
             <SelectionChip
@@ -136,6 +154,7 @@ export const KeywordCard = () => {
               key={index}
               size='md'
               style='surface'
+              className={!isOpen && index >= 6 ? 'hidden md:inline-flex' : ''}
               selected={selectedKeywords.includes(keyword.filter)}
               label={`#${keyword.filter}`}
               onClick={() => toggleKeyword(keyword.filter)}
