@@ -6,18 +6,19 @@ import { useBookmarkCountsBySourceType } from '../hooks/useBookmarkStatistics';
 import { mapCardTypeNameToDisplay, getCardTypeIcon } from '../utils/cardTypeMapping';
 import { SavedStatics } from './SavedStatics';
 import { useMemo, useState } from 'react';
-import { showToast } from '@/shared/utils/toast';
+import { useSavedExport } from '../hooks/useSavedExport';
 
 const ExportDropdownButton = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { exportSavedAsJson, exportSavedAsPdf, isExportingPdf } = useSavedExport();
 
-  const handleExportJSON = () => {
-    showToast.success('JSON 내보내기는 준비 중입니다.');
+  const handleExportJSON = async () => {
+    await exportSavedAsJson();
     setIsOpen(false);
   };
 
-  const handleExportPDF = () => {
-    showToast.success('PDF 내보내기는 준비 중입니다.');
+  const handleExportPDF = async () => {
+    await exportSavedAsPdf();
     setIsOpen(false);
   };
 
@@ -37,6 +38,7 @@ const ExportDropdownButton = () => {
           <button
             type='button'
             onClick={handleExportJSON}
+            disabled={isExportingPdf}
             className='flex w-full items-center justify-center gap-1.5 rounded-interactive-default bg-white-charcoal px-padding-bold py-padding-regular text-additive hover:bg-surface active:bg-surface'
           >
             <CodeXml size={16} className='text-additive' />
@@ -45,6 +47,7 @@ const ExportDropdownButton = () => {
           <button
             type='button'
             onClick={handleExportPDF}
+            disabled={isExportingPdf}
             className='mt-1 flex w-full items-center justify-center gap-1.5 rounded-interactive-default bg-white-charcoal px-padding-bold py-padding-regular text-additive hover:bg-surface active:bg-surface'
           >
             <FileText size={16} className='text-additive' />

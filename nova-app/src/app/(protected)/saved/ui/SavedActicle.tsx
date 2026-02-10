@@ -33,7 +33,7 @@ const SavedArticleList = () => {
     );
 
   return (
-    <section className='space-y-4'>
+    <section id='saved-articles-export-root' className='space-y-4'>
       {sortedArticles.map((article) => (
         <ArticleCard key={article.id} articleData={article} />
       ))}

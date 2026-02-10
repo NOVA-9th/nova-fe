@@ -7,25 +7,28 @@ import { useBookmarkCountsByInterest, useBookmarkCountsBySourceType } from '@/fe
 import { getInterestIcon, mapInterestNameToDisplay } from '@/features/saved/utils/interestMapping';
 import { getCardTypeIcon, mapCardTypeNameToDisplay } from '@/features/saved/utils/cardTypeMapping';
 import { TextIconButton } from '@/shared/ui/action/TextIconButton';
-import { showToast } from '@/shared/utils/toast';
+import { useSavedExport } from '../hooks/useSavedExport';
 
 export const SavedPageHeader = () => {
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
   const [isExportOptionsOpen, setIsExportOptionsOpen] = useState(false);
   const { data: interestData } = useBookmarkCountsByInterest();
   const { data: sourceTypeData } = useBookmarkCountsBySourceType();
+  const { exportSavedAsJson, exportSavedAsPdf, isExportingPdf } = useSavedExport();
 
   const handleCloseModal = () => {
     setIsCollectionModalOpen(false);
     setIsExportOptionsOpen(false);
   };
 
-  const handleExportJSON = () => {
-    showToast.success('JSON 내보내기는 준비 중입니다.');
+  const handleExportJSON = async () => {
+    await exportSavedAsJson();
+    setIsExportOptionsOpen(false);
   };
 
-  const handleExportPDF = () => {
-    showToast.success('PDF 내보내기는 준비 중입니다.');
+  const handleExportPDF = async () => {
+    await exportSavedAsPdf();
+    setIsExportOptionsOpen(false);
   };
 
   const collectionItems = useMemo(() => {
@@ -153,6 +156,7 @@ export const SavedPageHeader = () => {
                     <button
                       type='button'
                       onClick={handleExportJSON}
+                      disabled={isExportingPdf}
                       className='flex flex-1 flex-col items-center gap-2 rounded-xl border border-outline bg-base px-3 py-4 text-base-color transition-colors hover:bg-surface'
                     >
                       <div className='flex h-10 w-10 items-center justify-center rounded-full bg-surface'>
@@ -166,6 +170,7 @@ export const SavedPageHeader = () => {
                     <button
                       type='button'
                       onClick={handleExportPDF}
+                      disabled={isExportingPdf}
                       className='flex flex-1 flex-col items-center gap-2 rounded-xl border border-outline bg-base px-3 py-4 text-base-color transition-colors hover:bg-surface'
                     >
                       <div className='flex h-10 w-10 items-center justify-center rounded-full bg-surface'>
