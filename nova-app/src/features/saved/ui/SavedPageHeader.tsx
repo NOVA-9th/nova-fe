@@ -1,17 +1,32 @@
 'use client';
 
 import { PageHeader, TextButton } from '@/shared/ui';
-import { Bookmark, Download, Folder, Grid2X2Icon, X } from 'lucide-react';
+import { Bookmark, Download, FileJson, FileText, Folder, Grid2X2Icon, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useBookmarkCountsByInterest, useBookmarkCountsBySourceType } from '@/features/saved/hooks/useBookmarkStatistics';
 import { getInterestIcon, mapInterestNameToDisplay } from '@/features/saved/utils/interestMapping';
 import { getCardTypeIcon, mapCardTypeNameToDisplay } from '@/features/saved/utils/cardTypeMapping';
 import { TextIconButton } from '@/shared/ui/action/TextIconButton';
+import { showToast } from '@/shared/utils/toast';
 
 export const SavedPageHeader = () => {
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
+  const [isExportOptionsOpen, setIsExportOptionsOpen] = useState(false);
   const { data: interestData } = useBookmarkCountsByInterest();
   const { data: sourceTypeData } = useBookmarkCountsBySourceType();
+
+  const handleCloseModal = () => {
+    setIsCollectionModalOpen(false);
+    setIsExportOptionsOpen(false);
+  };
+
+  const handleExportJSON = () => {
+    showToast.success('JSON 내보내기는 준비 중입니다.');
+  };
+
+  const handleExportPDF = () => {
+    showToast.success('PDF 내보내기는 준비 중입니다.');
+  };
 
   const collectionItems = useMemo(() => {
     const counts = interestData?.data?.bookmarkCounts ?? [];
@@ -52,19 +67,22 @@ export const SavedPageHeader = () => {
       <div className='flex w-full items-center justify-between pr-4'>
         <PageHeader text='저장함' icon={Bookmark} />
         <TextButton
-          onClick={() => setIsCollectionModalOpen(true)}
+          onClick={() => {
+            setIsCollectionModalOpen(true);
+            setIsExportOptionsOpen(false);
+          }}
           size='lg'
           label='컬렉션'
           leftIcon={Folder}
           style='surface'
-          className='flex md:hidden h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-surface'
+          className='flex xl:hidden h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-white-charcoal'
         />
       </div>
 
       {isCollectionModalOpen && (
         <div
-          className='fixed bottom-20 inset-0 z-99999999 bg-black/40 md:hidden'
-          onClick={() => setIsCollectionModalOpen(false)}
+          className='fixed bottom-20 md:bottom-0  inset-0 z-99 bg-black/40 xl:hidden'
+          onClick={handleCloseModal}
         >
           <div
             className='absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl bg-base p-5 pb-6'
@@ -75,7 +93,7 @@ export const SavedPageHeader = () => {
               <button
                 type='button'
                 className='rounded-step4 p-1 text-optional'
-                onClick={() => setIsCollectionModalOpen(false)}
+                onClick={handleCloseModal}
                 aria-label='컬렉션 모달 닫기'
               >
                 <X size={18} />
@@ -127,7 +145,40 @@ export const SavedPageHeader = () => {
                 leftIcon={Download}
                 label='저장함 내보내기'
                 className='w-full gap-1.5'
+                onClick={() => setIsExportOptionsOpen((prev) => !prev)}
               />
+              {isExportOptionsOpen && (
+                <div className='overflow-hidden'>
+                  <div className='flex gap-2 pt-3'>
+                    <button
+                      type='button'
+                      onClick={handleExportJSON}
+                      className='flex flex-1 flex-col items-center gap-2 rounded-xl border border-outline bg-base px-3 py-4 text-base-color transition-colors hover:bg-surface'
+                    >
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-surface'>
+                        <FileJson size={20} className='text-base-color' />
+                      </div>
+                      <div className='flex flex-col items-center'>
+                        <span className='typo-callout-key'>JSON</span>
+                        <span className='typo-footnote-base text-additive'>데이터 파일</span>
+                      </div>
+                    </button>
+                    <button
+                      type='button'
+                      onClick={handleExportPDF}
+                      className='flex flex-1 flex-col items-center gap-2 rounded-xl border border-outline bg-base px-3 py-4 text-base-color transition-colors hover:bg-surface'
+                    >
+                      <div className='flex h-10 w-10 items-center justify-center rounded-full bg-surface'>
+                        <FileText size={20} className='text-base-color' />
+                      </div>
+                      <div className='flex flex-col items-center'>
+                        <span className='typo-callout-key'>PDF</span>
+                        <span className='typo-footnote-base text-additive'>문서 저장</span>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>

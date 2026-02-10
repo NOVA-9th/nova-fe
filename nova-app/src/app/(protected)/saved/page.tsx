@@ -11,7 +11,7 @@ const SavedPage = () => {
           <SavedArticle />
         </section>
 
-        <aside className='hidden md:flex flex-col w-full xl:w-80 lg:shrink-0 h-full bg-alternative gap-4'>
+        <aside className='hidden xl:flex flex-col w-full xl:w-80 lg:shrink-0 h-full bg-alternative gap-4'>
           <CollectionSection />
           <SavedStatisticsSection />
         </aside>
