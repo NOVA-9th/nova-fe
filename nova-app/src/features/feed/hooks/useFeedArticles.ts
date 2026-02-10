@@ -58,7 +58,7 @@ export const useFeedArticles = (saved: boolean = false) => {
       return [...articles].sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
     }
 
-    // 최신순: publishedAt 최신이 먼저(내림차순)
+    // 최신순: publishedAt 최신이 나중에(오름차순)
     return [...articles].sort(
       (a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime(),
     );

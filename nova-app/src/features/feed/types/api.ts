@@ -37,14 +37,3 @@ export type KeywordsResponse = {
   interestId: number;
   name: string;
 };
-
-export interface Pageable {
-  page: number;
-  size: number;
-  sort: string[];
-}
-
-export interface SearchFeedParams {
-  searchKeyword?: string;
-  pageable: Pageable;
-}
