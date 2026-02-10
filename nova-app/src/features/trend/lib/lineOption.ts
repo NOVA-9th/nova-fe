@@ -13,7 +13,6 @@ export const createTrendOptions = (isDark: boolean): ChartOptions<'line'> => {
       tooltip: {
         mode: 'index',
         intersect: false,
-        bodyColor: colors.textOptional,
         callbacks: {
           label: (context) => {
             const dataset: any = context.dataset;

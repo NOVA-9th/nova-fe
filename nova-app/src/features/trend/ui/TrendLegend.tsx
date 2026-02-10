@@ -28,7 +28,7 @@ export const TrendLegend = ({ datasets }: TrendLegendProps) => {
               />
             </span>
 
-            <span className='text-sm text-gray-600'>{ds.label}</span>
+            <span className='text-sm text-additive'>{ds.label}</span>
           </div>
         ))}
       </div>
