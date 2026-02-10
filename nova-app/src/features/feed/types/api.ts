@@ -23,6 +23,8 @@ export type FeedSearchRequest = {
   page: number;
   size: number;
   saved: boolean;
+  searchKeyword?: string;
+  hidden: boolean;
 };
 
 export type FeedSearchResponse = {

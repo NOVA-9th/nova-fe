@@ -12,7 +12,7 @@ export const HeaderBar = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const isInputVisible = pathname === '/' || pathname === '/saved';
+  const isInputVisible = pathname === '/';
 
   const { isDark, toggleTheme } = useThemeToggle();
 
