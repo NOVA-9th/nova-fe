@@ -14,10 +14,10 @@ export const BarChart = () => {
     <>
       <div className='h-90 text-optional relative'>
         <Bar data={categoryRankData} options={createCategoryRankOptions(isDark, hasData)} />
-        {category ?? (
-          <div className='absolute left-1/2 -translate-x-1/2 top-1/2 text-additive body-base '>
+        {!category && (
+          <p className='absolute left-1/2 -translate-x-1/4 -translate-y-1/2 top-1/2 md:left-1/2 md:-translate-x-1/2 md:top-1/2 text-additive body-base break-keep whitespace-normal'>
             카테고리를 선택해주세요!
-          </div>
+          </p>
         )}
       </div>
     </>

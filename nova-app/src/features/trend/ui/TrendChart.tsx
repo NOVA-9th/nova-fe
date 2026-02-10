@@ -14,7 +14,7 @@ export const TrendChart = () => {
   return (
     <div className='bg-static rounded-2xl min-h-83 relative'>
       {/* 차트 */}
-      <div className='overflow-x-auto'>
+      <div className='overflow-x-auto '>
         <div className='min-w-160 h-77'>
           <Line data={trendChartData} options={createTrendOptions(isDark)} />
         </div>
@@ -24,9 +24,9 @@ export const TrendChart = () => {
       <TrendLegend datasets={trendChartData.datasets as LegendDataset[]} />
 
       {isEmpty && (
-        <div className='absolute left-1/2 -translate-x-1/2 top-1/3 text-additive body-base '>
+        <p className='absolute left-1/2 -translate-x-1/6 -translate-y-10 top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-10 md:top-1/2 text-additive body-base break-keep whitespace-normal'>
           인기 키워드를 선택해주세요!
-        </div>
+        </p>
       )}
     </div>
   );
