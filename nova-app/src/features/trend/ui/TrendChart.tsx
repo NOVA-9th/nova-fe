@@ -10,9 +10,9 @@ import { useThemeToggle } from '@/shared/hooks';
 export const TrendChart = () => {
   const trendChartData = useKeywordChart();
   const { isDark } = useThemeToggle();
-
+  const isEmpty = trendChartData.datasets.length === 0;
   return (
-    <div className='bg-static rounded-2xl min-h-83'>
+    <div className='bg-static rounded-2xl min-h-83 relative'>
       {/* 차트 */}
       <div className='overflow-x-auto'>
         <div className='min-w-160 h-77'>
@@ -22,6 +22,12 @@ export const TrendChart = () => {
 
       {/* legend */}
       <TrendLegend datasets={trendChartData.datasets as LegendDataset[]} />
+
+      {isEmpty && (
+        <div className='absolute left-1/2 -translate-x-1/2 top-1/3 text-additive body-base '>
+          인기 키워드를 선택해주세요!
+        </div>
+      )}
     </div>
   );
 };

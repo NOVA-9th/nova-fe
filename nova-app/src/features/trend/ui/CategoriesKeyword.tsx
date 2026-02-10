@@ -39,7 +39,7 @@ export const CategoriesKeyword = () => {
           >
             <h6
               className={cn(
-                'md:text-left! text-center text-optional typo-body-strong',
+                'md:text-left! text-center text-optional typo-headline-strong',
                 isSelected && 'text-peak',
               )}
             >
