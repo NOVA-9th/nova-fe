@@ -5,7 +5,7 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { showToast } from '@/shared/utils/toast';
 import type { CardNews } from '@/features/feed/types/api';
-import { useSavedArticles } from './useSavedArticles';
+import { useInfiniteSavedArticles } from './useInfiniteSavedArticles';
 
 const SAVED_ARTICLES_EXPORT_ROOT_ID = 'saved-articles-export-root';
 
@@ -45,10 +45,10 @@ const toExportData = (articles: CardNews[]) =>
   }));
 
 export const useSavedExport = () => {
-  const { sortedArticles, isLoading } = useSavedArticles();
+  const { articles, isLoading } = useInfiniteSavedArticles();
   const [isExportingPdf, setIsExportingPdf] = useState(false);
 
-  const hasExportableArticles = sortedArticles.length > 0;
+  const hasExportableArticles = articles.length > 0;
 
   const exportSavedAsJson = async () => {
     if (isLoading || !hasExportableArticles) {
@@ -59,8 +59,8 @@ export const useSavedExport = () => {
     try {
       const exportData = {
         exportedAt: new Date().toISOString(),
-        count: sortedArticles.length,
-        articles: toExportData(sortedArticles),
+        count: articles.length,
+        articles: toExportData(articles),
       };
       const blob = new Blob([JSON.stringify(exportData, null, 2)], {
         type: 'application/json;charset=utf-8',
