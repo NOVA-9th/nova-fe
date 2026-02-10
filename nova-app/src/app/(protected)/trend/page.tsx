@@ -15,7 +15,7 @@ const TrendPage = () => {
     <div className='md:px-5 p-4 '>
       <PageHeader text='트렌드' icon={ChartBar} className='p-0 mb-4 md:-mx-1' />
       {/* 트렌드차트 */}
-      <section className='rounded-static-frame bg-base border border-outline p-5 flex flex-col gap-4 mb-4 md:gap-5'>
+      <section className='rounded-static-frame bg-base border border-outline px-5 pt-5 pb-15 flex flex-col gap-4 mb-4 md:gap-5 lg:pb-5'>
         <SelectionChip
           isShowChevron={false}
           label='최근 7일'

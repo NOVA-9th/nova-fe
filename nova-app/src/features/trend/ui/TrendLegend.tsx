@@ -13,7 +13,7 @@ export const TrendLegend = ({ datasets }: TrendLegendProps) => {
   return (
     <div className='relative'>
       <div
-        className='flex justify-center gap-6 mb-3 pt-6 absolute -bottom-8 left-1/2 
+        className='flex justify-center gap-6 mb-3 pt-6 absolute lg:-bottom-8 -bottom-15 left-1/2 
   -translate-x-1/2'
       >
         {datasets.map((ds) => (
