@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getFeedList } from '@/features/feed/api/feed';
-import { useSavedFilterStore } from '@/features/saved/model/useSavedFilterStore';
+import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 import type { FeedSearchRequest } from '@/features/feed/types/api';
 
 const ALL_TYPES: FeedSearchRequest['type'] = [];
@@ -11,13 +11,20 @@ const ALL_TYPES: FeedSearchRequest['type'] = [];
 const sortToApi = (ui: string): FeedSearchRequest['sort'] =>
   ui === '최신순' ? 'LATEST' : 'RELEVANCE';
 
-export const useInfiniteSavedArticles = () => {
-  const { selectedSort, selectedTypes, selectedKeywords } = useSavedFilterStore();
+const periodToDays = (ui: string) => {
+  if (ui === '1일') return 1;
+  if (ui === '7일') return 7;
+  return 30;
+};
+
+export const useInfiniteFeedArticles = () => {
+  const { selectedSort, selectedPeriod, selectedTypes, selectedKeywords } = useFeedFilterStore();
 
   const baseParams = useMemo(() => {
     const endDate = new Date();
-    // 저장함에서는 기간 필터를 사용하지 않으므로 넓은 범위로 설정
-    const startDate = new Date('2000-01-01');
+    const days = periodToDays(selectedPeriod);
+    const startDate = new Date(endDate);
+    startDate.setDate(endDate.getDate() - days);
 
     return {
       sort: sortToApi(selectedSort),
@@ -26,12 +33,12 @@ export const useInfiniteSavedArticles = () => {
       type: selectedTypes.length === 0 ? ALL_TYPES : selectedTypes,
       keywords: selectedKeywords,
       size: 10,
-      saved: true, // 저장함이므로 항상 true
+      saved: false, // 피드이므로 false
     };
-  }, [selectedSort, selectedTypes, selectedKeywords]);
+  }, [selectedSort, selectedPeriod, selectedTypes, selectedKeywords]);
 
   const query = useInfiniteQuery({
-    queryKey: ['savedList', baseParams],
+    queryKey: ['feedList', baseParams],
     queryFn: ({ pageParam = 1 }) => getFeedList({ ...baseParams, page: pageParam }),
     getNextPageParam: (lastPage, allPages) => {
       const total = lastPage.data?.totalCount ?? 0;
@@ -43,7 +50,7 @@ export const useInfiniteSavedArticles = () => {
     },
     initialPageParam: 1,
     gcTime: 10 * 60 * 1000,
-    staleTime: 5 * 60 * 1000,
+    staleTime: 3 * 60 * 1000, // 피드는 저장함보다 짧게 (3분)
     retry: 3,
   });
 
@@ -61,3 +68,4 @@ export const useInfiniteSavedArticles = () => {
     articles,
   };
 };
+
