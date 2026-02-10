@@ -26,6 +26,11 @@ export default function LandingPage() {
     }
   }, [isLoggedIn, isFirstVisit, hasHydrated, router]);
 
+  // Hydration 전이거나 리다이렉트 조건이면 아무것도 렌더링하지 않음
+  if (!hasHydrated || isLoggedIn || !isFirstVisit) {
+    return null;
+  }
+
   return (
     <main className='flex min-h-screen flex-col items-center gap-8 bg-base px-4 pb-12 pt-12 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-16 md:gap-16 md:pt-20'>
       {/* Hero Section */}

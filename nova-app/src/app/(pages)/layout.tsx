@@ -13,7 +13,7 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
     if (!accessToken) return;
 
     if (pathname === '/login') {
-      router.replace('/');
+      router.replace('/feed');
     }
   }, [pathname, accessToken, router]);
 
