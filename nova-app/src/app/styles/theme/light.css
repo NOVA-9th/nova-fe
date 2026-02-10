@@ -90,6 +90,8 @@
 
   .bg-white-charcoal {
     background-color: #ffffff;
+  }
+
   .bg-login {
     background-color: var(--bg-login);
   }
