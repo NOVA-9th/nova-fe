@@ -15,7 +15,7 @@ export const HeaderBar = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const isInputVisible = pathname === '/';
+  const isInputVisible = pathname === '/feed';
   const { isDark, toggleTheme } = useThemeToggle();
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const HeaderBar = () => {
         type='button'
         aria-label='Go to home'
         className='flex items-center gap-3.5 text-base-color px-2'
-        onClick={() => router.push('/')}
+        onClick={() => router.push('/feed')}
       >
         <Logo width={36} height={36} />
         <NovaLabel className='text-base-color' width={60} height={15.83} />
