@@ -1,6 +1,7 @@
 'use client';
 
 import { useAuthRedirect } from '@/features/login/model/useAuthRedirect';
+import UpScrollButton from '@/shared/ui/action/UoScrollButton';
 import { HeaderBar, SideBar, FloatingBar } from '@/widgets/layouts';
 
 const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
@@ -23,6 +24,7 @@ const ProtectedLayout = ({ children }: { children: React.ReactNode }) => {
       </div>
 
       <FloatingBar />
+      <UpScrollButton />
     </div>
   );
 };
