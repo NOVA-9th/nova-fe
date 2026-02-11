@@ -12,7 +12,7 @@ export default function LandingPage() {
   const { isLoggedIn, isFirstVisit, hasHydrated, setFirstVisit } = useAuthStore();
   
   // Intersection Observer를 위한 refs
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
     // Zustand hydration 완료 후에만 체크
@@ -38,7 +38,11 @@ export default function LandingPage() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // 뷰포트에 들어오면 보이기
             entry.target.classList.add('animate-slide-up-visible');
+          } else {
+            // 뷰포트를 벗어나면 다시 숨기기
+            entry.target.classList.remove('animate-slide-up-visible');
           }
         });
       },
@@ -78,7 +82,7 @@ export default function LandingPage() {
         </div>
 
         {/* Logos - Responsive sizing */}
-        <div className='flex items-center gap-2 sm:gap-3'>
+        <div className='flex items-center gap-1 sm:gap-2 bg-white px-5 pr-2 rounded-3xl'>
           <div className='relative h-[45px] w-[180px] sm:h-[55px] sm:w-[220px] md:h-[65px] md:w-[258px]'>
             <Image src='/nova.svg' alt='nova' fill className='object-contain' priority />
           </div>
@@ -100,9 +104,9 @@ export default function LandingPage() {
           className='flex-1 text-sm sm:text-base'
         />
 
-        <div className='mt-8 flex flex-col items-center gap-3'>
+        <div className='mt-8 flex flex-col items-center gap-5'>
           <h1 className='typo-headline-base text-additive'>서비스 살펴보기</h1>
-          <ArrowDown className='size-4 text-base-color animate-bounce' />
+          <ArrowDown className='size-6 text-base-color animate-bounce' />
         </div>
       </section>
 
@@ -112,9 +116,9 @@ export default function LandingPage() {
           ref={(el) => {
             sectionRefs.current[0] = el;
           }}
-          className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
+          className='flex flex-col items-center gap-5 animate-slide-up b'
         >
-          <h1 className='typo-callout-key sm:typo-title-strong text-black'>AI가 요약한 IT 뉴스와 근거 자료를 한눈에 확인하세요!</h1>
+          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>AI가 요약한 IT 뉴스와 근거 자료를 한눈에 확인하세요!</h1>
           <picture>
             <source media='(max-width: 640px)' srcSet='/LandingFeedMb.png' />
             <img
@@ -131,7 +135,7 @@ export default function LandingPage() {
           }}
           className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
         >
-          <h1 className='typo-callout-key sm:typo-title-strong text-black'>관심 있는 키워드의 추세를 차트로 파악하세요!</h1>
+          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>관심 있는 키워드의 추세를 차트로 파악하세요!</h1>
           <picture>
             <source media='(max-width: 640px)' srcSet='/LandingTrendMb.png' />
             <img
@@ -148,7 +152,7 @@ export default function LandingPage() {
           }}
           className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
         >
-          <h1 className='typo-callout-key sm:typo-title-strong text-black'>관심 콘텐츠를 저장하고, 나만의 기술 아카이브를 만드세요</h1>
+          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>관심 콘텐츠를 저장하고, 나만의 기술 아카이브를 만드세요</h1>
           <picture>
             <source media='(max-width: 640px)' srcSet='/LandingSavedMb.png' />
             <img
@@ -160,8 +164,13 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className='flex flex-col items-center gap-5'>
-        <h1 className='typo-callout-base sm:typo-headline-base text-black'>Google, 카카오, GitHub 계정으로 3초 만에 바로 시작하세요!</h1>
+      <section
+        ref={(el) => {
+          sectionRefs.current[3] = el;
+        }}
+        className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
+      >
+        <h1 className='typo-callout-base sm:typo-headline-base text-black-white'>Google, 카카오, GitHub 계정으로 3초 만에 바로 시작하세요!</h1>
         <Button
             label='지금 시작하기'
             size='lg'

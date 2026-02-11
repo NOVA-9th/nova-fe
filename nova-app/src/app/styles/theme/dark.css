@@ -276,6 +276,15 @@
   .dark .disabled\:text-accent-base[aria-disabled='true'] {
     color: var(--color-white-inactive);
   }
+  
+  .dark .text-black-white {
+    color: #ffffff;
+  }
+
+  .dark .text-white-black {
+    color: #000000;
+  }
+
 
   /* ---------- Stroke ---------- */
   .dark .border-outline {

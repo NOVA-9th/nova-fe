@@ -284,6 +284,14 @@
     color: var(--color-charcoal-inactive);
   }
 
+  .text-black-white {
+    color: #000000;
+  }
+
+  .text-white-black {
+    color: #ffffff;
+  }
+
   /* ---------- Stroke ---------- */
   .border-outline {
     border-color: var(--color-slate-outline);
