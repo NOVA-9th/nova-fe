@@ -21,7 +21,12 @@ export const useOnboardingGate = ({
   const isLoggedIn = Boolean(accessToken);
 
   const safeMemberId = useMemo(() => (memberId ? memberId : null), [memberId]);
-  const { data: personalization, isLoading, isSuccess } = usePersonalization(safeMemberId ?? 0);
+  const {
+    data: personalization,
+    isLoading,
+    isFetching,
+    isSuccess,
+  } = usePersonalization(safeMemberId ?? 0);
 
   const shouldIgnore = useMemo(
     () => ignorePaths.some((p) => pathname.startsWith(p)),
@@ -40,7 +45,7 @@ export const useOnboardingGate = ({
     if (!isEnabledPath) return;
 
     if (!safeMemberId) return;
-    if (isLoading) return;
+    if (isLoading || isFetching) return;
 
     // personalization 못 가져오면 일단 패스(정책)
     if (!isSuccess || !personalization) return;
