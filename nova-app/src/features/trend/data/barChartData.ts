@@ -15,7 +15,9 @@ export const useCategoryRank = (isDark: boolean) => {
     return getCategoryArray(keywordName) === category;
   });
   console.log(selectedCategory);
-  const labels = selectedCategory?.keywords.map((item) => item.name).slice(0, 6);
+  const labels = selectedCategory?.keywords
+    .map((item) => item.name.replace(/\s*\(.*?\)/g, ''))
+    .slice(0, 6);
   console.log(labels);
   const values = selectedCategory?.keywords.map((item) => item.mentionCount).slice(0, 6) ?? [];
 
@@ -26,7 +28,7 @@ export const useCategoryRank = (isDark: boolean) => {
     datasets: [
       {
         data: values,
-        backgroundColor: colors.bgPeak,
+        backgroundColor: colors.bar,
         borderRadius: 16,
         categoryPercentage: 1,
         barPercentage: 0.8,

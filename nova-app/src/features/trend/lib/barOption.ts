@@ -56,6 +56,7 @@ export const createCategoryRankOptions = (
         },
 
         ticks: {
+          autoSkip: false,
           color: colors.textOptional,
           padding: 2,
           font: { size: 12 },
