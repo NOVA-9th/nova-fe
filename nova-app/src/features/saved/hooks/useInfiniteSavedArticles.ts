@@ -12,7 +12,7 @@ const sortToApi = (ui: string): FeedSearchRequest['sort'] =>
   ui === '최신순' ? 'LATEST' : 'RELEVANCE';
 
 export const useInfiniteSavedArticles = () => {
-  const { selectedSort, selectedTypes, selectedKeywords } = useSavedFilterStore();
+  const { selectedSort, selectedTypes, selectedKeywords, searchKeyword } = useSavedFilterStore();
 
   const baseParams = useMemo(() => {
     const endDate = new Date();
@@ -26,10 +26,11 @@ export const useInfiniteSavedArticles = () => {
       type: selectedTypes.length === 0 ? ALL_TYPES : selectedTypes,
       keywords: selectedKeywords,
       size: 10,
+      searchKeyword,
       saved: true, // 저장함이므로 항상 true
       hidden: false,
     };
-  }, [selectedSort, selectedTypes, selectedKeywords]);
+  }, [selectedSort, selectedTypes, selectedKeywords, searchKeyword]);
 
   const query = useInfiniteQuery({
     queryKey: ['savedList', baseParams],

@@ -2,24 +2,48 @@
 
 import { PageHeader, TextButton } from '@/shared/ui';
 import { Bookmark, Download, FileJson, FileText, Folder, Grid2X2Icon, X } from 'lucide-react';
-import { useMemo, useState } from 'react';
-import { useBookmarkCountsByInterest, useBookmarkCountsBySourceType } from '@/features/saved/hooks/useBookmarkStatistics';
+import { useEffect, useMemo, useState } from 'react';
+import {
+  useBookmarkCountsByInterest,
+  useBookmarkCountsBySourceType,
+} from '@/features/saved/hooks/useBookmarkStatistics';
 import { getInterestIcon, mapInterestNameToDisplay } from '@/features/saved/utils/interestMapping';
 import { getCardTypeIcon, mapCardTypeNameToDisplay } from '@/features/saved/utils/cardTypeMapping';
 import { TextIconButton } from '@/shared/ui/action/TextIconButton';
 import { useSavedExport } from '../hooks/useSavedExport';
+import clsx from 'clsx';
 
 export const SavedPageHeader = () => {
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [isExportOptionsOpen, setIsExportOptionsOpen] = useState(false);
   const { data: interestData } = useBookmarkCountsByInterest();
   const { data: sourceTypeData } = useBookmarkCountsBySourceType();
   const { exportSavedAsJson, exportSavedAsPdf, isExportingPdf } = useSavedExport();
 
   const handleCloseModal = () => {
-    setIsCollectionModalOpen(false);
-    setIsExportOptionsOpen(false);
+    setIsClosing(true);
+
+    setTimeout(() => {
+      setIsCollectionModalOpen(false);
+      setIsExportOptionsOpen(false);
+      setIsClosing(false);
+    }, 200);
   };
+
+  useEffect(() => {
+    if (!isCollectionModalOpen) return;
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        handleCloseModal();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isCollectionModalOpen]);
 
   const handleExportJSON = async () => {
     await exportSavedAsJson();
@@ -77,18 +101,23 @@ export const SavedPageHeader = () => {
           size='lg'
           label='컬렉션'
           leftIcon={Folder}
-          style='surface'
-          className='flex xl:hidden h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-white-charcoal'
+          className='flex xl:hidden h-11 justify-center items-center whitespace-nowrap px-padding-bold py-padding-regular rounded-interactive-default bg-white-charcoal mr-1 outline-none'
         />
       </div>
 
       {isCollectionModalOpen && (
         <div
-          className='fixed bottom-20 md:bottom-0  inset-0 z-99 bg-black/40 xl:hidden'
+          className={clsx(
+            'fixed bottom-20 md:bottom-0 inset-0 z-99 bg-black/40 xl:hidden',
+            isClosing ? 'animate-fade-out' : 'animate-fade-in',
+          )}
           onClick={handleCloseModal}
         >
           <div
-            className='absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl bg-base p-5 pb-6'
+            className={clsx(
+              'fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-t-2xl bg-base p-5 pb-6 thin-scrollbar',
+              isClosing ? 'animate-slide-down' : 'animate-slide-up',
+            )}
             onClick={(e) => e.stopPropagation()}
           >
             <div className='mb-4 flex items-center justify-between'>
@@ -191,5 +220,3 @@ export const SavedPageHeader = () => {
     </>
   );
 };
-
-

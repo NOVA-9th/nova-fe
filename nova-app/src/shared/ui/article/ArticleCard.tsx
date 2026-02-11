@@ -44,6 +44,9 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
   const evidences = (articleData.evidence ?? []).map((e) => e.trim()).filter(Boolean);
   const evidenceCount = evidences.length;
 
+  const evidenceTitle = typeKey === 'JOB' ? '채용 정보' : 'Evidence';
+  const evidenceItemTitle = typeKey === 'JOB' ? '채용 정보' : '근거';
+
   if (articleData.hidden) return null;
 
   return (
@@ -56,7 +59,9 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           icon={typeConfig.icon}
           text={typeConfig.title}
         />
-        <TextBadge size='lg' variant='data' peak={false} text={`관련도 ${articleData.score}%`} />
+        {articleData.score != null && (
+          <TextBadge size='lg' variant='data' peak={false} text={`관련도 ${articleData.score}%`} />
+        )}
       </div>
 
       <Header
@@ -75,7 +80,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
 
       <div className='flex w-full h-fit justify-between items-center gap-2.5'>
         <div className='flex gap-1.5 items-center'>
-          <SectionHeader size='sm' peak={false} leftIcon={BookOpenText} text='Evidence' />
+          <SectionHeader size='sm' peak={false} leftIcon={BookOpenText} text={evidenceTitle} />
           <TextBadge
             size='md'
             variant='surface'
@@ -105,7 +110,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           {evidences.map((content, idx) => (
             <EvidenceCard
               key={`${articleData.id}-evidence-${idx}`}
-              evidenceSource={`근거 ${idx + 1}`}
+              evidenceSource={`${evidenceItemTitle} ${idx + 1}`}
               content={content}
             />
           ))}

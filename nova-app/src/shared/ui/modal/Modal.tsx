@@ -26,7 +26,7 @@ export const Modal = ({
     >
       <div
         className={cn(
-          'bg-base rounded-[20px] flex flex-col overflow-hidden p-5 w-80 text-base-color  z-50',
+          'bg-base rounded-[20px] flex flex-col overflow-hidden p-5 w-80 text-base-color z-50 shadow-modal',
           className,
         )}
         onClick={(e) => e.stopPropagation()}

@@ -264,7 +264,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
 
   const { name, email, profileImage } = memberInfo.data;
   return (
-    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
+    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5 border border-outline'>
       <SectionHeader text='사용자 정보' size='lg' />
       <div className='flex flex-col w-full items-center justify-start gap-2'>
         <div className='flex w-full items-center justify-start p-2 gap-1'>

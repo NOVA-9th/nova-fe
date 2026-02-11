@@ -14,6 +14,9 @@ export const useBookmarkToggle = (cardnewsId: number, initialSaved: boolean) => 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['feedList'] });
       queryClient.invalidateQueries({ queryKey: ['savedCount'] });
+      queryClient.invalidateQueries({ queryKey: ['bookmarkCountsByInterest'] });
+      queryClient.invalidateQueries({ queryKey: ['bookmarkCountsBySourceType'] });
+
       showToast.success('북마크가 저장되었습니다');
     },
     onError: () => {
@@ -27,6 +30,9 @@ export const useBookmarkToggle = (cardnewsId: number, initialSaved: boolean) => 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['feedList'] });
       queryClient.invalidateQueries({ queryKey: ['savedCount'] });
+      queryClient.invalidateQueries({ queryKey: ['bookmarkCountsByInterest'] });
+      queryClient.invalidateQueries({ queryKey: ['bookmarkCountsBySourceType'] });
+
       showToast.success('북마크가 삭제되었습니다');
     },
     onError: () => {

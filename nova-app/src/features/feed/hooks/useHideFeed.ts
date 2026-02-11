@@ -13,6 +13,8 @@ export const useHideFeed = (cardNewsId: number, options?: { shouldUnbookmark?: (
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['savedCount'] });
       queryClient.invalidateQueries({ queryKey: ['savedList'] });
+      queryClient.invalidateQueries({ queryKey: ['bookmarkCountsByInterest'] });
+      queryClient.invalidateQueries({ queryKey: ['bookmarkCountsBySourceType'] });
     },
   });
 
