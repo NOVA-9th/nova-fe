@@ -21,7 +21,7 @@ const ProfilePage = () => {
             <UserInfoSection memberId={memberId} />
             <LinkedAccountsSection memberId={memberId} />
           </div>
-          <div className='flex flex-col flex-2 justify-start items-start w-full h-full gap-4'>
+          <div className='flex flex-col flex-2 justify-start items-start w-full h-full gap-4 min-w-0'>
             <PersonalizationSettings memberId={memberId} />
             <DataManagementSection />
           </div>

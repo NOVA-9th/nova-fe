@@ -3,7 +3,7 @@ import { FeedSearchRequest, FeedSearchResponse } from '@/features/feed/types/api
 import { ApiResponse } from '@/shared/types';
 import qs from 'qs';
 
-// 피드 목록 조회 api
+// 피드 목록 조회
 export const getFeedList = async (
   params: FeedSearchRequest,
 ): Promise<ApiResponse<FeedSearchResponse>> => {

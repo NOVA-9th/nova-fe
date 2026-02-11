@@ -2,6 +2,7 @@ export type CardNews = {
   id: number;
   title: string;
   cardType: string;
+  score: number;
   author: string;
   publishedAt: string;
   summary: string;
@@ -22,15 +23,11 @@ export type FeedSearchRequest = {
   page: number;
   size: number;
   saved: boolean;
+  searchKeyword?: string;
+  hidden: boolean;
 };
 
 export type FeedSearchResponse = {
   totalCount: number;
   cardnews: CardNews[];
-};
-
-export type KeywordsResponse = {
-  id: number;
-  interestId: number;
-  name: string;
 };

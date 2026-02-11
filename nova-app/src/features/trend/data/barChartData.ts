@@ -1,33 +1,32 @@
 'use client';
-import { useGetInterestSkillTop, useGetKeywordTop } from '@/features/trend/api';
+import { useGetInterestSkillTop } from '@/features/trend/hooks/useGetInterestSkillTop';
+import { chartColors } from '@/features/trend/lib/chartColor';
 import { useBarKeywordStore } from '@/features/trend/model/useBarKeywordTop';
 import { getCategoryArray } from '@/features/trend/utils/getCategoryArray';
 import type { ChartData } from 'chart.js';
 
-export const useCategoryRank = () => {
+export const useCategoryRank = (isDark: boolean) => {
   const { data } = useGetInterestSkillTop();
-  const { data: keyword } = useGetKeywordTop();
-  console.log(keyword);
-  console.log(data);
   const { category } = useBarKeywordStore();
-  if (!data) return null;
+  const colors = isDark ? chartColors.dark : chartColors.light;
 
-  const filteredRankings = data.rankings.filter(
-    (item) => getCategoryArray(item.keywords) === category,
-  );
+  const selectedCategory = data.rankings.find((item) => {
+    const keywordName = item.keywords.map((keyword) => keyword.name);
+    return getCategoryArray(keywordName) === category;
+  }) ?? { interest: 0, keywords: [], rank: 0, totalMentionCount: 0 };
+  const labels = selectedCategory?.keywords
+    .map((item) => item.name.replace(/\s*\(.*?\)/g, ''))
+    .slice(0, 6);
+  const values = selectedCategory?.keywords.map((item) => item.mentionCount).slice(0, 6) ?? [];
 
-  const labels = filteredRankings.flatMap((item) => item.keywords);
-
-  const values = filteredRankings.flatMap((item) =>
-    item.keywords.map(() => item.totalMentionCount),
-  );
+  const hasData = values.length > 0;
 
   const categoryRankData: ChartData<'bar', number[], string> = {
     labels,
     datasets: [
       {
         data: values,
-        backgroundColor: '#151618',
+        backgroundColor: colors.bar,
         borderRadius: 16,
         categoryPercentage: 1,
         barPercentage: 0.8,
@@ -35,5 +34,5 @@ export const useCategoryRank = () => {
       },
     ],
   };
-  return categoryRankData;
+  return { categoryRankData, hasData };
 };

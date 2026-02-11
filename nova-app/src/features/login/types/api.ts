@@ -1,7 +1,7 @@
 export type AuthResponse = {
   accessToken: string;
   memberId: number;
-  email: string;
+  email: string | null;
   name: string;
 };
 

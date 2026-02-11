@@ -64,7 +64,7 @@ export const SideBar = () => {
                 </p>
               </div>
 
-              {item.badge && item.href === '/' && (
+              {item.badge && item.href === '/feed' && (
                 <TextBadge size='sm' variant='surface' peak={false} text={item.badge} />
               )}
 
@@ -86,10 +86,10 @@ export const SideBar = () => {
               alt='User Profile'
               width={200}
               height={200}
-              className='rounded-full size-10 object-cover bg-black'
+              className='rounded-full size-10 object-cover'
             />
           )}
-          <div className='flex flex-col gap-1 px-1 min-w-0 flex-1'>
+          <div className='flex flex-col px-1 min-w-0 flex-1'>
             {isLoading ? (
               <>
                 <div className='h-4 w-20 bg-alternative rounded animate-pulse' />

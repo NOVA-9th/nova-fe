@@ -3,7 +3,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { X } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import React from 'react';
 import { LucideIcon } from 'lucide-react';
 import { InputChip } from '@/shared/ui';
@@ -63,6 +63,15 @@ export const ChipInput = ({
   onAdd,
 }: ChipInputProps) => {
   const [isComposing, setIsComposing] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+
+  // 드롭다운 스크롤 제어용 ref
+  const listRef = useRef<HTMLUListElement | null>(null);
+  const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
+
+  // 칩 컨테이너/인풋 ref (칩 추가 시 커서 쪽으로 스크롤 + 포커스 유지)
+  const chipsContainerRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const addChip = (raw?: string) => {
     const finalValue = raw ?? inputValue;
@@ -79,6 +88,7 @@ export const ChipInput = ({
     }
 
     onInputChange('');
+    setHighlightedIndex(-1);
   };
 
   const removeChip = (chip: string) => {
@@ -88,19 +98,7 @@ export const ChipInput = ({
   const clearAll = () => {
     onInputChange('');
     onChange([]);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (isComposing) return;
-
-    if (e.key === 'Enter' || e.key === ',') {
-      e.preventDefault();
-      addChip();
-    }
-
-    if (e.key === 'Backspace' && !inputValue && value.length) {
-      removeChip(value[value.length - 1]);
-    }
+    setHighlightedIndex(-1);
   };
 
   const filteredSuggestions = useMemo(
@@ -111,11 +109,68 @@ export const ChipInput = ({
     [inputValue, suggestions, value],
   );
 
+  // suggestions 변경 시 highlight 초기화
+  useEffect(() => {
+    setHighlightedIndex(filteredSuggestions.length > 0 ? 0 : -1);
+  }, [filteredSuggestions]);
+
+  // highlight가 바뀔 때마다 해당 li가 보이도록 스크롤
+  useEffect(() => {
+    if (highlightedIndex < 0) return;
+    const el = itemRefs.current[highlightedIndex];
+    if (!el) return;
+
+    // nearest: 이미 보이면 안 움직이고, 가려지면 필요한 만큼만 스크롤
+    el.scrollIntoView({ block: 'nearest' });
+  }, [highlightedIndex]);
+
+  // value가 바뀔 때(칩 추가/삭제 등) 커서 쪽(맨 오른쪽)으로 이동 + 포커스 유지
+  useEffect(() => {
+    const el = chipsContainerRef.current;
+    if (!el) return;
+
+    el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' });
+    inputRef.current?.focus();
+  }, [value]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (isComposing) return;
+
+    switch (e.key) {
+      case 'ArrowDown':
+        e.preventDefault();
+        setHighlightedIndex((prev) => Math.min(prev + 1, filteredSuggestions.length - 1));
+        break;
+      case 'ArrowUp':
+        e.preventDefault();
+        setHighlightedIndex((prev) => Math.max(prev - 1, 0));
+        break;
+      case 'Enter':
+        e.preventDefault();
+        if (highlightedIndex >= 0 && highlightedIndex < filteredSuggestions.length) {
+          addChip(filteredSuggestions[highlightedIndex]);
+        } else {
+          addChip();
+        }
+        break;
+      case ',':
+        e.preventDefault();
+        addChip();
+        break;
+      case 'Backspace':
+        if (!inputValue && value.length) {
+          removeChip(value[value.length - 1]);
+        }
+        break;
+    }
+  };
+
   return (
     <div className={cn(ChipInputVariants({ size, variant, data }), className)}>
       {icon && React.createElement(icon, { size: size === 'md' ? 14 : 16 })}
 
       <div
+        ref={chipsContainerRef}
         className={cn(
           'no-scrollbar flex flex-1 items-center overflow-x-auto whitespace-nowrap',
           size === 'md' ? 'gap-1' : 'gap-1.5',
@@ -133,6 +188,7 @@ export const ChipInput = ({
         ))}
 
         <input
+          ref={inputRef}
           type='text'
           value={inputValue}
           onChange={(e) => onInputChange(e.target.value)}
@@ -140,16 +196,26 @@ export const ChipInput = ({
           onCompositionStart={() => setIsComposing(true)}
           onCompositionEnd={() => setIsComposing(false)}
           placeholder={value.length === 0 ? placeholder : undefined}
-          className='caret-color placeholder:text-charcoal-optional min-w-20 flex-1 bg-transparent outline-none'
+          className='caret-color placeholder:text-optional min-w-20 flex-1 bg-transparent outline-none'
         />
       </div>
 
       {inputValue && filteredSuggestions.length > 0 && (
-        <ul className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_0_rgba(0,0,0,0.25)] border-slate-ring rounded-b-static-frame thin-scrollbar'>
-          {filteredSuggestions.map((item) => (
+        <ul
+          ref={listRef}
+          className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'
+        >
+          {filteredSuggestions.map((item, index) => (
             <li
               key={item}
-              className='px-4 py-2.5 typo-body-base h-12 text-charcoal-optional hover:bg-surface active:bg-surface'
+              ref={(el) => {
+                itemRefs.current[index] = el;
+              }}
+              className={cn(
+                'px-4 py-2.5 typo-body-base h-12 text-optional hover:bg-surface active:bg-surface',
+                highlightedIndex === index && 'bg-surface',
+              )}
+              onMouseEnter={() => setHighlightedIndex(index)}
               onClick={() => addChip(item)}
             >
               {item}
@@ -159,7 +225,7 @@ export const ChipInput = ({
       )}
 
       {(inputValue || value.length > 0) && (
-        <button type='button' onClick={clearAll} className='text-charcoal-optional'>
+        <button type='button' onClick={clearAll} className='text-optional'>
           <X size={size === 'md' ? 14 : 16} />
         </button>
       )}

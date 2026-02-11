@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority';
 import { KakaoIcon } from '@/shared/assets';
 import { GoogleIcon } from '@/shared/assets';
 import { GithubIcon } from '@/shared/assets';
-import { redirectToGoogle, redirectToKakao } from '@/features/login/api/login';
+import { redirectToGoogle, redirectToKakao, redirectToGithub } from '@/features/login/api/login';
 
 const LoginButtonVariants = cva(
   'h-11 rounded-interactive-default py-padding-regular px-padding-bold typo-body-key flex flex-row items-center justify-center',
@@ -13,8 +13,8 @@ const LoginButtonVariants = cva(
     variants: {
       type: {
         kakao: 'bg-[#FEE404] hover:bg-[#F6DC00] active:bg-[#EFD400] text-[#1A1A1C]',
-        google: 'bg-surface hover:bg-surface active:bg-surface text-charcoal-additive',
-        github: 'bg-surface hover:bg-surface active:bg-surface text-charcoal-additive',
+        google: 'bg-login hover:bg-surface active:bg-surface text-login',
+        github: 'bg-login hover:bg-surface active:bg-surface text-github',
       },
     },
   },
@@ -57,8 +57,7 @@ export const LoginButton = ({ type, onClick, className }: LoginButtonProps) => {
         redirectToKakao();
         break;
       case 'github':
-        // TODO: GitHub OAuth 구현 시 추가
-        console.warn('GitHub 로그인은 아직 구현되지 않았습니다.');
+        redirectToGithub();
         break;
     }
   };
@@ -69,7 +68,9 @@ export const LoginButton = ({ type, onClick, className }: LoginButtonProps) => {
       className={cn(LoginButtonVariants({ type }), className)}
       onClick={handleClick}
     >
-      <span className='py-1'>{Icon && <Icon className='w-4 h-4' />}</span>
+      <span className='py-1'>
+        {Icon && <Icon className='w-4 h-4 text-inherit' fill='currentColor' />}
+      </span>
       <div className='w-62.5 h-6 px-0.5'>{text} 계정으로 시작하기</div>
     </button>
   );

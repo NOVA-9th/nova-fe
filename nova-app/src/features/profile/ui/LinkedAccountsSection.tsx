@@ -12,6 +12,7 @@ import {
   useDisconnectConnectedAccount,
 } from '@/features/profile/hooks/useProfile';
 import type { ConnectedAccountProvider } from '@/features/profile/api/profile';
+import { redirectToGoogle, redirectToKakao, redirectToGithub } from '@/features/login/api/login';
 
 interface LinkedAccountsSectionProps {
   memberId: number | null;
@@ -45,6 +46,21 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
     }
   };
 
+  const handleConnectClick = (provider: ConnectedAccountProvider) => {
+    // state='connect'로 리다이렉트
+    switch (provider) {
+      case 'google':
+        redirectToGoogle('connect');
+        break;
+      case 'kakao':
+        redirectToKakao('connect');
+        break;
+      case 'github':
+        redirectToGithub('connect');
+        break;
+    }
+  };
+
   if (isLoading) {
     return <LinkedAccountsSectionSkeleton />;
   }
@@ -70,13 +86,18 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
       size: 'md' as const,
       style: 'surface' as const,
       peak: connected,
-      onClick: isCancel && canDisconnect ? () => handleDisconnectClick(provider) : undefined,
+      onClick:
+        isCancel && canDisconnect
+          ? () => handleDisconnectClick(provider)
+          : !connected
+            ? () => handleConnectClick(provider)
+            : undefined,
       disabled: isCancel && isDisconnectDisabled,
     };
   };
 
   return (
-    <section className='flex flex-col justify-start items-start bg-base rounded-static-frame w-full gap-5 p-5'>
+    <section className='flex flex-col justify-start items-start bg-base rounded-static-frame w-full gap-5 p-5 border border-outline'>
       <SectionHeader text='연결된 계정' size='lg' />
       <div className='flex flex-col gap-1 w-full items-center justify-start'>
         <ItemList
@@ -85,7 +106,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           description={googleConnected ? '연결됨' : '연결안됨'}
           leftIcon={GoogleLogoIcon}
           rightButton={getDisconnectButtonProps(googleConnected, 'google')}
-          className='w-full p-2'
+          className='w-full p-2 '
         />
         <ItemList
           size='lg'
@@ -94,6 +115,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           leftIcon={KakaoLogoIcon}
           rightButton={getDisconnectButtonProps(kakaoConnected, 'kakao')}
           className='w-full p-2'
+          leftIconClassName='text-github'
         />
         <ItemList
           size='lg'
@@ -102,6 +124,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           leftIcon={GithubLogoIcon}
           rightButton={getDisconnectButtonProps(githubConnected, 'github')}
           className='w-full p-2'
+          leftIconClassName='text-github'
         />
       </div>
 

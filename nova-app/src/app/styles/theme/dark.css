@@ -4,7 +4,7 @@
     --bg-base: var(--color-charcoal-full);
     --bg-alternative: var(--color-black-full);
     --bg-surface: var(--color-slate-surface);
-    --bg-peak: rgb(121, 126, 126);
+    --bg-peak: rgba(121, 126, 126, 0.6);
     --bg-static: rgb(255 255 255 / 0.04); /* #FFFFFF @ 4% */
 
     --bg-data-surface: var(--color-dark-surface); /* #00AD65 @ 10% */
@@ -12,6 +12,9 @@
 
     --bg-accent-surface: var(--color-primary-surface); /* #287AF5 @ 10% */
     --bg-accent-peak: var(--color-primary-full);
+
+    --bg-white-charcoal: var(--color-charcoal-full);
+    --bg-login: rgba(212, 216, 216, 0.198);
 
     /* ---------- Background / Interaction ---------- */
     --bg-interaction-surface: var(--color-interaction-surface);
@@ -41,6 +44,10 @@
 
     --stroke-data-outline: var(--color-dark-outline); /* #00BD75 @ 20% */
     --stroke-data-selected: var(--color-dark-full);
+
+    /* ---------- Shadow ---------- */
+    --shadow-modal: 0 0 12px rgba(255, 255, 255, 0.2), 0 6px 16px rgba(0, 0, 0, 0.35);
+    --shadow-suggestion: rgb(255 255 255 / 0.15);
   }
 
   /* ---------- Background ---------- */
@@ -79,7 +86,17 @@
   .dark .bg-accent-peak {
     background-color: var(--color-primary-full);
   }
+  .dark .bg-accent-peak2 {
+    background-color: var(--color-primary-full2);
+  }
 
+  .dark .bg-white-charcoal {
+    background-color: var(--color-charcoal-full);
+  }
+
+  .dark .bg-login {
+    background-color: var(--bg-login);
+  }
   /* ---------- Background / Interaction ---------- */
   .dark .hover\:bg-surface:hover {
     background-color: color-mix(in srgb, var(--color-slate-surface), var(--color-white-full) 6%);
@@ -87,6 +104,10 @@
 
   .dark .hover\:bg-peak:hover {
     background-color: color-mix(in srgb, var(--bg-peak), white 6%);
+  }
+
+  .dark .hover\:bg-login:hover {
+    background-color: color-mix(in srgb, var(--bg-login), white 6%);
   }
 
   .dark .hover\:bg-data-surface:hover {
@@ -198,6 +219,14 @@
     color: var(--color-white-accent-peak);
   }
 
+  .dark .text-login {
+    color: var(--color-white-additive);
+  }
+
+  .dark .text-github {
+    color: var(--color-white-additive);
+  }
+
   .dark .hover\:text-base-color:hover {
     color: var(--color-white-full);
   }
@@ -251,6 +280,15 @@
   .dark .disabled\:text-accent-base[aria-disabled='true'] {
     color: var(--color-white-inactive);
   }
+  
+  .dark .text-black-white {
+    color: #ffffff;
+  }
+
+  .dark .text-white-black {
+    color: #000000;
+  }
+
 
   /* ---------- Stroke ---------- */
   .dark .border-outline {

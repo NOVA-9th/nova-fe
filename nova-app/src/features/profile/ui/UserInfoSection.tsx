@@ -264,12 +264,12 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
 
   const { name, email, profileImage } = memberInfo.data;
   return (
-    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
+    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5 border border-outline'>
       <SectionHeader text='사용자 정보' size='lg' />
       <div className='flex flex-col w-full items-center justify-start gap-2'>
-        <div className='flex w-full items-center justify-start p-2 gap-2'>
+        <div className='flex w-full items-center justify-start p-2 gap-1'>
           <div
-            className={`relative ${
+            className={`relative shrink-0 ${
               isSaving || updateNameMutation.isPending || uploadImageMutation.isPending
                 ? 'cursor-not-allowed opacity-50'
                 : 'cursor-pointer'
@@ -288,7 +288,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               alt='User Profile'
               width={200}
               height={200}
-              className='rounded-full size-12 object-cover bg-black'
+              className='rounded-full size-12 object-cover'
             />
             <input
               ref={fileInputRef}
@@ -299,7 +299,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               className='hidden'
             />
           </div>
-          <ItemList size='lg' label={name} description={email} />
+          <ItemList size='lg' label={name} description={email!} />
         </div>
         <div className='flex w-full gap-2'>
           <TextIconButton
@@ -349,9 +349,9 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             size='lg'
             variant='surface'
             data={false}
-            value={email}
+            value={email ?? ''}
             onChange={() => {}}
-            placeholder={email}
+            placeholder={email!}
             disabled
             className='w-full opacity-50 cursor-not-allowed disabled:'
           />

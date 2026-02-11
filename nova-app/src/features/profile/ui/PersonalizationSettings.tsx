@@ -33,32 +33,46 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   const [selectedLevel, setSelectedLevel] = useState<MemberLevel | null>(null);
   const [background, setBackground] = useState<string>('');
 
-  // 키워드 상태
+  // 키워드 상태 (chips = 화면 표시/저장 모두)
   const [chips, setChips] = useState<string[]>([]);
   const [inputValue, setInputValue] = useState('');
-  const [keywords, setKeywords] = useState<string[]>([]); // 저장용
+
   const debouncedChips = useDebounce(chips, 2000);
   const prevRef = useRef<string[]>([]);
+
+  const isHydratingRef = useRef(true);
 
   const { data } = useGetKeywords();
   const suggestions = useMemo(() => data?.map((item) => item.name) ?? [], [data]);
 
+  // 초기 데이터 초기화
   useEffect(() => {
-    if (personalizationData?.data) {
-      const data = personalizationData.data;
-      setSelectedInterests(data.interests || []);
-      setSelectedLevel(data.level);
-      setChips(data.keywords || []);
-      setKeywords(data.keywords || []);
-      setBackground(data.background || '');
-      prevRef.current = data.keywords || [];
-    }
+    if (!personalizationData?.data) return;
+
+    const d = personalizationData.data;
+
+    const initialKeywords = sanitizeKeywords(d.keywords || []);
+
+    setSelectedInterests(d.interests || []);
+    setSelectedLevel(d.level);
+    setBackground(d.background || '');
+
+    isHydratingRef.current = true;
+    setChips(initialKeywords);
+    prevRef.current = initialKeywords;
   }, [personalizationData]);
 
   useEffect(() => {
-    const prev = prevRef.current;
-    const addedKeyword = debouncedChips.find((chip) => !prev.includes(chip));
+    if (isHydratingRef.current) {
+      if (debouncedChips.join(',') === prevRef.current.join(',')) {
+        isHydratingRef.current = false;
+      }
+      return;
+    }
 
+    const prev = prevRef.current;
+
+    const addedKeyword = debouncedChips.find((chip) => !prev.includes(chip));
     if (addedKeyword && !suggestions.includes(addedKeyword)) {
       setChips(prev);
       return;
@@ -69,15 +83,12 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     if (sanitized.join(',') !== prev.join(',')) {
       setChips(sanitized);
       prevRef.current = sanitized;
-      setKeywords(sanitized);
     }
   }, [debouncedChips, suggestions]);
 
   const handleAddKeyword = (keyword: string) => {
     const { newKeywords, error } = addKeyword(chips, keyword, suggestions);
-    if (error) {
-      showToast.error(error);
-    }
+    if (error) showToast.error(error);
     setChips(newKeywords);
     setInputValue('');
   };
@@ -92,7 +103,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
           level: selectedLevel,
           background,
           interests: selectedInterests,
-          keywords,
+          keywords: chips,
         },
       },
       {
@@ -103,12 +114,22 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     );
   };
 
-  const toggleInterest = useCallback((index: number) => {
-    const id = getInterestIdByIndex(index);
-    setSelectedInterests((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
-    );
-  }, []);
+  const toggleInterest = useCallback(
+    (index: number) => {
+      const id = getInterestIdByIndex(index);
+      const isAlreadySelected = selectedInterests.includes(id);
+
+      if (!isAlreadySelected && selectedInterests.length >= 2) {
+        showToast.error('관심 분야는 최대 2개까지 선택할 수 있습니다.');
+        return;
+      }
+
+      setSelectedInterests((prev) =>
+        prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+      );
+    },
+    [selectedInterests],
+  );
 
   const isInterestSelected = useCallback(
     (index: number) => selectedInterests.includes(getInterestIdByIndex(index)),
@@ -129,7 +150,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   if (isLoading) return <PersonalizationSettingsSkeleton />;
 
   return (
-    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
+    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5 border border-outline'>
       <SectionHeader text='개인화 설정' size='lg' />
 
       {/* 전공 */}
@@ -206,7 +227,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               peak={false}
               size='sm'
             />
-            <TextBadge text={`${keywords.length}개`} size='sm' variant='surface' peak={false} />
+            <TextBadge text={`${chips.length}개`} size='sm' variant='surface' peak={false} />
           </div>
           <span className='typo-callout-base text-optional text-right'>
             {PERSONALIZATION_TEXT.sections.keyword.helperText}
@@ -218,6 +239,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
             size='lg'
             variant='surface'
             value={chips}
+            data={false}
             onChange={(newChips) => setChips(sanitizeKeywords(newChips))}
             inputValue={inputValue}
             onInputChange={setInputValue}
@@ -231,8 +253,8 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
             size='lg'
             style='surface'
             peak={true}
-            label={'저장'}
-            className='w-full xl:w-auto'
+            label='저장'
+            className='w-full lg:w-auto'
             onClick={handleSave}
             disabled={updatePersonalizationMutation.isPending}
           />

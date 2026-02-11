@@ -9,11 +9,10 @@ interface TrendLegendProps {
 }
 
 export const TrendLegend = ({ datasets }: TrendLegendProps) => {
-  // console.log(datasets);
   return (
     <div className='relative'>
       <div
-        className='flex justify-center gap-6 mb-3 pt-6 absolute -bottom-8 left-1/2 
+        className='flex justify-center gap-6 mb-3 pt-6 absolute lg:-bottom-8 -bottom-15 left-1/2 
   -translate-x-1/2'
       >
         {datasets.map((ds) => (
@@ -28,7 +27,7 @@ export const TrendLegend = ({ datasets }: TrendLegendProps) => {
               />
             </span>
 
-            <span className='text-sm text-gray-600'>{ds.label}</span>
+            <span className='text-sm text-additive'>{ds.label}</span>
           </div>
         ))}
       </div>
