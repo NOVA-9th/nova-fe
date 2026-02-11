@@ -71,9 +71,9 @@ export const createCategoryRankOptions = (
           color: colors.outline,
           width: 1,
         },
-        // afterFit: (axis) => {
-        //   axis.width = 70; //키워드 차지 넓이
-        // },
+        afterFit: (axis) => {
+          axis.width = 70;
+        },
       },
     },
   };
