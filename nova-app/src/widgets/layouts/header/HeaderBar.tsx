@@ -2,17 +2,17 @@
 
 import { IconButton, TextInput } from '@/shared/ui';
 import { Moon, Search, Sun } from 'lucide-react';
-import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Logo, NovaLabel } from '@/shared/assets';
 import { useThemeToggle } from '@/shared/hooks';
+import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 
 export const HeaderBar = () => {
-  const [keyword, setKeyword] = useState('');
+  const { searchKeyword, setSearchKeyword } = useFeedFilterStore();
   const pathname = usePathname();
   const router = useRouter();
 
-  const isInputVisible = pathname === '/' || pathname === '/saved';
+  const isInputVisible = pathname === '/';
 
   const { isDark, toggleTheme } = useThemeToggle();
 
@@ -33,8 +33,8 @@ export const HeaderBar = () => {
           <>
             <TextInput
               size='lg'
-              value={keyword}
-              onChange={setKeyword}
+              value={searchKeyword}
+              onChange={setSearchKeyword}
               icon={Search}
               placeholder='아티클 및 트렌드를 검색해보세요'
               className='w-100 max-sm:hidden'

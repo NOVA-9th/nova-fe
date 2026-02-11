@@ -47,6 +47,7 @@
   --stroke-data-selected: var(--color-light-full);
 
   /* ---------- Shadow ---------- */
+  --shadow-modal: 1px -1px 10px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
   --shadow-suggestion: rgb(0 0 0 / 0.25);
 }
 

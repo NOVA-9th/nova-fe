@@ -7,7 +7,7 @@ export function getProfileImageUrl(
   path: string | null | undefined,
   version?: number | string,
 ): string {
-  if (!path) return '/test.png';
+  if (!path) return '/basicImage.jpg';
   if (path.startsWith('http://') || path.startsWith('https://')) {
     return version != null ? `${path}?v=${version}` : path;
   }

@@ -27,6 +27,7 @@ export const useInfiniteSavedArticles = () => {
       keywords: selectedKeywords,
       size: 10,
       saved: true, // 저장함이므로 항상 true
+      hidden: false,
     };
   }, [selectedSort, selectedTypes, selectedKeywords]);
 
@@ -47,7 +48,9 @@ export const useInfiniteSavedArticles = () => {
     retry: 3,
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const pages = query.data?.pages ?? [];
+
   const articles = useMemo(() => {
     const allArticles = pages.flatMap((page) => page.data?.cardnews ?? []);
     // ID 기준 중복 제거 (백엔드 페이지네이션 이슈 방어)

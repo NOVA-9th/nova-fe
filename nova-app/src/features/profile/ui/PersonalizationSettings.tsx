@@ -46,6 +46,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   useEffect(() => {
     if (personalizationData?.data) {
       const data = personalizationData.data;
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setSelectedInterests(data.interests || []);
       setSelectedLevel(data.level);
       setChips(data.keywords || []);
@@ -218,6 +219,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
             size='lg'
             variant='surface'
             value={chips}
+            data={false}
             onChange={(newChips) => setChips(sanitizeKeywords(newChips))}
             inputValue={inputValue}
             onInputChange={setInputValue}
@@ -232,7 +234,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
             style='surface'
             peak={true}
             label={'저장'}
-            className='w-full xl:w-auto'
+            className='w-full lg:w-auto'
             onClick={handleSave}
             disabled={updatePersonalizationMutation.isPending}
           />

@@ -14,6 +14,9 @@ interface FeedFilterState {
   selectedTypes: CardType[];
   selectedKeywords: string[];
 
+  // ✅ search keyword (HeaderBar)
+  searchKeyword: string;
+
   // actions
   setSelectedSort: (sort: SortUI) => void;
   setSelectedPeriod: (period: PeriodUI) => void;
@@ -21,6 +24,10 @@ interface FeedFilterState {
 
   toggleType: (type: CardType) => void;
   toggleKeyword: (keyword: string) => void;
+
+  // ✅ actions for search keyword
+  setSearchKeyword: (keyword: string) => void;
+  resetSearchKeyword: () => void;
 
   resetSort: () => void;
   resetPeriod: () => void;
@@ -38,13 +45,14 @@ export const useFeedFilterStore = create<FeedFilterState>((set) => ({
   selectedPeriod: DEFAULT_PERIOD,
   selectedTypes: [],
   selectedKeywords: [],
+  searchKeyword: '',
 
   setSelectedSort: (selectedSort) => set({ selectedSort }),
   setSelectedPeriod: (selectedPeriod) => set({ selectedPeriod }),
   setSelectedTypes: (selectedTypes) => set({ selectedTypes }),
+  setSearchKeyword: (searchKeyword) => set({ searchKeyword }),
 
   toggleType: (type) => set((state) => ({ selectedTypes: toggleArray(state.selectedTypes, type) })),
-
   toggleKeyword: (keyword) =>
     set((state) => ({ selectedKeywords: toggleArray(state.selectedKeywords, keyword) })),
 
@@ -52,6 +60,7 @@ export const useFeedFilterStore = create<FeedFilterState>((set) => ({
   resetPeriod: () => set({ selectedPeriod: DEFAULT_PERIOD }),
   resetTypes: () => set({ selectedTypes: [] }),
   resetKeywords: () => set({ selectedKeywords: [] }),
+  resetSearchKeyword: () => set({ searchKeyword: '' }),
 
   resetAll: () =>
     set({
@@ -59,5 +68,6 @@ export const useFeedFilterStore = create<FeedFilterState>((set) => ({
       selectedPeriod: DEFAULT_PERIOD,
       selectedTypes: [],
       selectedKeywords: [],
+      searchKeyword: '',
     }),
 }));
