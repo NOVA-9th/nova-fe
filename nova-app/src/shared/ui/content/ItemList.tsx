@@ -34,6 +34,7 @@ interface ItemListProps extends VariantProps<typeof ItemListVariants> {
     disabled?: boolean;
   };
   className?: string;
+  leftIconClassName?: string;
 }
 
 export const ItemList = ({
@@ -43,6 +44,7 @@ export const ItemList = ({
   leftIcon,
   rightButton,
   className,
+  leftIconClassName,
 }: ItemListProps) => {
   return (
     <div className={cn(ItemListVariants({ size }), className)}>
@@ -53,7 +55,10 @@ export const ItemList = ({
             typeof leftIcon === 'object' &&
             ('render' in leftIcon || '$$typeof' in leftIcon)) ? (
             React.createElement(leftIcon as LucideIcon, {
-              size: 20,
+              width: 20,
+              height: 20,
+              className: cn('shrink-0 text-inherit', leftIconClassName),
+              fill: 'currentColor',
             })
           ) : typeof leftIcon === 'string' ||
             (leftIcon && typeof leftIcon === 'object' && 'src' in leftIcon) ? (
