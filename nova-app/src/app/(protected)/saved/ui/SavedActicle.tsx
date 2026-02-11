@@ -8,15 +8,8 @@ import { useInfiniteSavedArticles } from '@/features/saved/hooks/useInfiniteSave
 import { useInfiniteScroll } from '@/shared/hooks';
 
 const SavedArticleList = () => {
-  const {
-    articles,
-    isLoading,
-    isError,
-    refetch,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteSavedArticles();
+  const { articles, isLoading, isError, refetch, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useInfiniteSavedArticles();
 
   const { targetRef } = useInfiniteScroll({
     hasNextPage: hasNextPage ?? false,
@@ -64,9 +57,7 @@ const SavedArticleList = () => {
 
         {!hasNextPage && !isFetchingNextPage && articles.length > 0 && (
           <div className='flex justify-center items-center py-2'>
-            <p className='typo-body-base text-additive'>
-              더 이상 저장한 콘텐츠가 없습니다.
-            </p>
+            <p className='typo-body-base text-additive'>더 이상 저장한 콘텐츠가 없습니다.</p>
           </div>
         )}
       </section>

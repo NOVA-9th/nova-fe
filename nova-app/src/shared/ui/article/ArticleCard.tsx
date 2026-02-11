@@ -56,7 +56,9 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           icon={typeConfig.icon}
           text={typeConfig.title}
         />
-        <TextBadge size='lg' variant='data' peak={false} text={`관련도 ${articleData.score}%`} />
+        {articleData.score && (
+          <TextBadge size='lg' variant='data' peak={false} text={`관련도 ${articleData.score}%`} />
+        )}
       </div>
 
       <Header
