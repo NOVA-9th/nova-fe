@@ -6,7 +6,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { Logo, NovaLabel } from '@/shared/assets';
 import { useThemeToggle } from '@/shared/hooks';
 import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 export const HeaderBar = () => {
@@ -16,8 +16,21 @@ export const HeaderBar = () => {
   const router = useRouter();
 
   const isInputVisible = pathname === '/';
-
   const { isDark, toggleTheme } = useThemeToggle();
+
+  useEffect(() => {
+    // 첫 렌더링 때도 무조건 닫힘 보장
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMobileSearchOpen(false);
+
+    const handleResize = () => {
+      // 화면 사이즈 바뀌면 무조건 닫기
+      setIsMobileSearchOpen(false);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <header
@@ -39,24 +52,39 @@ export const HeaderBar = () => {
       <div className='flex items-center gap-3'>
         {isInputVisible && (
           <>
-            <TextInput
-              size='lg'
-              value={searchKeyword}
-              onChange={setSearchKeyword}
-              icon={Search}
-              placeholder='아티클 및 트렌드를 검색해보세요'
-              className='w-100 max-md:hidden'
-            />
-            <IconButton
-              size='lg'
-              peak={false}
-              icon={isMobileSearchOpen ? X : Search}
-              className='md:hidden'
-              aria-label='검색'
-              onClick={() => {
-                setIsMobileSearchOpen((prev) => !prev);
-              }}
-            />
+            {isMobileSearchOpen ? (
+              <IconButton
+                size='lg'
+                peak={false}
+                icon={X}
+                className='md:hidden'
+                aria-label='검색 닫기'
+                onClick={() => setIsMobileSearchOpen(false)}
+              />
+            ) : (
+              <>
+                <div className='hidden md:block'>
+                  <TextInput
+                    size='lg'
+                    value={searchKeyword}
+                    onChange={setSearchKeyword}
+                    icon={Search}
+                    placeholder='아티클 및 트렌드를 검색해보세요'
+                    className='w-100'
+                  />
+                </div>
+
+                <div className='md:hidden'>
+                  <IconButton
+                    size='lg'
+                    peak={false}
+                    icon={Search}
+                    aria-label='검색'
+                    onClick={() => setIsMobileSearchOpen(true)}
+                  />
+                </div>
+              </>
+            )}
           </>
         )}
 
