@@ -16,7 +16,6 @@ export const CategoriesKeyword = () => {
       category: getCategoryArray(keywordNames),
     };
   });
-  console.log(categoryMapData);
 
   return (
     <section className='grid grid-cols-2 md:gap-4 gap-2.5 '>

@@ -72,7 +72,7 @@ export const createCategoryRankOptions = (
           width: 1,
         },
         afterFit: (axis) => {
-          axis.width = 70;
+          hasData ? (axis.width = 70) : (axis.width = 0);
         },
       },
     },
