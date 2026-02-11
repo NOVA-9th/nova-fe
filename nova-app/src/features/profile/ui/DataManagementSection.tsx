@@ -41,7 +41,7 @@ export const DataManagementSection = () => {
   };
 
   return (
-    <section className='flex flex-col justify-start items-start w-full gap-3 bg-base rounded-static-frame p-5'>
+    <section className='flex flex-col justify-start items-start w-full gap-3 bg-base rounded-static-frame p-5 border border-outline'>
       <SectionHeader text='데이터 관리' size='lg' />
       <ItemList
         label='저장함 목록 삭제'

@@ -97,7 +97,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
   };
 
   return (
-    <section className='flex flex-col justify-start items-start bg-base rounded-static-frame w-full gap-5 p-5'>
+    <section className='flex flex-col justify-start items-start bg-base rounded-static-frame w-full gap-5 p-5 border border-outline'>
       <SectionHeader text='연결된 계정' size='lg' />
       <div className='flex flex-col gap-1 w-full items-center justify-start'>
         <ItemList

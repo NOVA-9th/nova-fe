@@ -3,7 +3,7 @@
 import { Grid2X2Icon, ListFilter, Search } from 'lucide-react';
 import { SectionHeader, SelectionChip, Select, TextButton, TextInput } from '@/shared/ui';
 import { useSavedFilterStore } from '@/features/saved/model/useSavedFilterStore';
-import { TYPE_ITEMS } from '@/features/feed/data/FilterData';
+import { SORT_ITEMS, TYPE_ITEMS } from '@/features/feed/data/FilterData';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { useMemberKeywordsQuery } from '@/shared/hooks/useMemberKeywords';
 
@@ -25,7 +25,7 @@ export const KeywordCard = () => {
   const { data } = useMemberKeywordsQuery(memberId);
 
   return (
-    <div className='bg-base rounded-static-frame p-5 flex flex-col gap-4 md:gap-5'>
+    <div className='bg-base rounded-static-frame p-5 flex flex-col gap-4 md:gap-5 border border-outline'>
       <div className='flex w-full gap-3 items-start lg:flex-row lg:items-center'>
         <TextInput
           size='lg'
@@ -51,22 +51,16 @@ export const KeywordCard = () => {
           <SectionHeader text='정렬' />
           {/* 데스크톱: SelectionChip */}
           <div className='hidden md:flex gap-2'>
-            <SelectionChip
-              isShowChevron={false}
-              size='md'
-              style='surface'
-              selected={selectedSort === '최신순'}
-              label='최신순'
-              onClick={() => setSelectedSort('최신순')}
-            />
-            <SelectionChip
-              isShowChevron={false}
-              size='md'
-              style='surface'
-              selected={selectedSort === '관련도 순'}
-              label='관련도 순'
-              onClick={() => setSelectedSort('관련도 순')}
-            />
+            {SORT_ITEMS.map((option) => (
+              <SelectionChip
+                key={option}
+                size='md'
+                label={option}
+                selected={selectedSort === option}
+                isShowChevron={false}
+                onClick={() => setSelectedSort(option)}
+              />
+            ))}
           </div>
           {/* 모바일: Select 드롭다운 */}
           <div className='md:hidden w-full'>

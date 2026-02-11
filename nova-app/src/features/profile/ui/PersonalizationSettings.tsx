@@ -130,7 +130,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   if (isLoading) return <PersonalizationSettingsSkeleton />;
 
   return (
-    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
+    <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5 border border-outline'>
       <SectionHeader text='개인화 설정' size='lg' />
 
       {/* 전공 */}
