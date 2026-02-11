@@ -104,12 +104,22 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     );
   };
 
-  const toggleInterest = useCallback((index: number) => {
-    const id = getInterestIdByIndex(index);
-    setSelectedInterests((prev) =>
-      prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
-    );
-  }, []);
+  const toggleInterest = useCallback(
+    (index: number) => {
+      const id = getInterestIdByIndex(index);
+      const isAlreadySelected = selectedInterests.includes(id);
+
+      if (!isAlreadySelected && selectedInterests.length >= 2) {
+        showToast.error('관심 분야는 최대 2개까지 선택할 수 있습니다.');
+        return;
+      }
+
+      setSelectedInterests((prev) =>
+        prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
+      );
+    },
+    [selectedInterests],
+  );
 
   const isInterestSelected = useCallback(
     (index: number) => selectedInterests.includes(getInterestIdByIndex(index)),
