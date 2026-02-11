@@ -1,13 +1,16 @@
 'use client';
 
 import { IconButton, TextInput } from '@/shared/ui';
-import { Moon, Search, Sun } from 'lucide-react';
+import { Moon, Search, Sun, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { Logo, NovaLabel } from '@/shared/assets';
 import { useThemeToggle } from '@/shared/hooks';
 import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
+import { useState } from 'react';
+import clsx from 'clsx';
 
 export const HeaderBar = () => {
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const { searchKeyword, setSearchKeyword } = useFeedFilterStore();
   const pathname = usePathname();
   const router = useRouter();
@@ -17,7 +20,12 @@ export const HeaderBar = () => {
   const { isDark, toggleTheme } = useThemeToggle();
 
   return (
-    <header className='p-4 px-5 flex justify-between items-center h-19'>
+    <header
+      className={clsx(
+        'p-4 px-5 flex flex-wrap justify-between items-center gap-4',
+        isMobileSearchOpen ? 'h-auto' : 'h-19',
+      )}
+    >
       <button
         type='button'
         aria-label='Go to home'
@@ -42,10 +50,12 @@ export const HeaderBar = () => {
             <IconButton
               size='lg'
               peak={false}
-              icon={Search}
+              icon={isMobileSearchOpen ? X : Search}
               className='md:hidden'
               aria-label='검색'
-              onClick={() => {}}
+              onClick={() => {
+                setIsMobileSearchOpen((prev) => !prev);
+              }}
             />
           </>
         )}
@@ -59,6 +69,19 @@ export const HeaderBar = () => {
           {isDark ? <Moon size={24} /> : <Sun size={24} />}
         </button>
       </div>
+
+      {isInputVisible && isMobileSearchOpen && (
+        <div className='md:hidden w-full'>
+          <TextInput
+            size='lg'
+            value={searchKeyword}
+            onChange={setSearchKeyword}
+            icon={Search}
+            placeholder='아티클 및 트렌드를 검색해보세요'
+            className='w-full'
+          />
+        </div>
+      )}
     </header>
   );
 };

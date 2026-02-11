@@ -9,7 +9,6 @@ interface TrendLegendProps {
 }
 
 export const TrendLegend = ({ datasets }: TrendLegendProps) => {
-  // console.log(datasets);
   return (
     <div className='relative'>
       <div

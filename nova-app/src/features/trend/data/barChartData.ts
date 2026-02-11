@@ -14,9 +14,8 @@ export const useCategoryRank = (isDark: boolean) => {
     const keywordName = item.keywords.map((keyword) => keyword.name);
     return getCategoryArray(keywordName) === category;
   });
-  console.log(selectedCategory);
+
   const labels = selectedCategory?.keywords.map((item) => item.name).slice(0, 6);
-  console.log(labels);
   const values = selectedCategory?.keywords.map((item) => item.mentionCount).slice(0, 6) ?? [];
 
   const hasData = values.length > 0;
