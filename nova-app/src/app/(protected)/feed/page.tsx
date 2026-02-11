@@ -1,8 +1,6 @@
 import { PageHeader } from '@/shared/ui';
 import { MessagesSquare } from 'lucide-react';
-import FeedFilterSidebar from '@/app/(protected)/(feed)/ui/FeedFilterSidebar';
-import FeedArticle from '@/app/(protected)/(feed)/ui/FeedArticle';
-import { FeedMobileFilter } from '@/app/(protected)/(feed)/ui/FeedMobileFilter';
+import { FeedFilterSidebar, FeedArticle, FeedMobileFilter } from './ui';
 
 const FeedPage = () => {
   return (

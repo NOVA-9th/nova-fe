@@ -88,6 +88,9 @@
   .bg-accent-peak {
     background-color: var(--color-primary-full);
   }
+  .bg-accent-peak2 {
+    background-color: var(--color-primary-full);
+  }
 
   .bg-white-charcoal {
     background-color: #ffffff;
@@ -211,6 +214,10 @@
     color: #000000;
   }
 
+  .text-kakao {
+    color: #1c1c1a;
+  }
+
   .text-data-base {
     color: var(--color-light-full);
   }
@@ -283,6 +290,14 @@
   .disabled\:text-accent-base:disabled,
   .disabled\:text-accent-base[aria-disabled='true'] {
     color: var(--color-charcoal-inactive);
+  }
+
+  .text-black-white {
+    color: #000000;
+  }
+
+  .text-white-black {
+    color: #ffffff;
   }
 
   /* ---------- Stroke ---------- */

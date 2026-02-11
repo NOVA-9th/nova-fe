@@ -3,7 +3,7 @@ import { SideItem } from '@/widgets/layouts/sidebar/types/SideItem';
 
 export const SIDE_ITEMS: SideItem[] = [
   {
-    href: '/',
+    href: '/feed',
     title: '피드',
     description: 'AI가 요약한 IT 뉴스',
     icon: MessagesSquare,

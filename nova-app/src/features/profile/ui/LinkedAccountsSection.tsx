@@ -106,7 +106,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           description={googleConnected ? '연결됨' : '연결안됨'}
           leftIcon={GoogleLogoIcon}
           rightButton={getDisconnectButtonProps(googleConnected, 'google')}
-          className='w-full p-2'
+          className='w-full p-2 '
         />
         <ItemList
           size='lg'
@@ -115,6 +115,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           leftIcon={KakaoLogoIcon}
           rightButton={getDisconnectButtonProps(kakaoConnected, 'kakao')}
           className='w-full p-2'
+          leftIconClassName='text-github'
         />
         <ItemList
           size='lg'
@@ -123,6 +124,7 @@ export const LinkedAccountsSection = ({ memberId }: LinkedAccountsSectionProps) 
           leftIcon={GithubLogoIcon}
           rightButton={getDisconnectButtonProps(githubConnected, 'github')}
           className='w-full p-2'
+          leftIconClassName='text-github'
         />
       </div>
 

@@ -65,9 +65,13 @@ export const ChipInput = ({
   const [isComposing, setIsComposing] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
-  // ✅ 드롭다운 스크롤 제어용 ref
+  // 드롭다운 스크롤 제어용 ref
   const listRef = useRef<HTMLUListElement | null>(null);
   const itemRefs = useRef<Array<HTMLLIElement | null>>([]);
+
+  // 칩 컨테이너/인풋 ref (칩 추가 시 커서 쪽으로 스크롤 + 포커스 유지)
+  const chipsContainerRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const addChip = (raw?: string) => {
     const finalValue = raw ?? inputValue;
@@ -110,7 +114,7 @@ export const ChipInput = ({
     setHighlightedIndex(filteredSuggestions.length > 0 ? 0 : -1);
   }, [filteredSuggestions]);
 
-  // ✅ highlight가 바뀔 때마다 해당 li가 보이도록 스크롤
+  // highlight가 바뀔 때마다 해당 li가 보이도록 스크롤
   useEffect(() => {
     if (highlightedIndex < 0) return;
     const el = itemRefs.current[highlightedIndex];
@@ -119,6 +123,15 @@ export const ChipInput = ({
     // nearest: 이미 보이면 안 움직이고, 가려지면 필요한 만큼만 스크롤
     el.scrollIntoView({ block: 'nearest' });
   }, [highlightedIndex]);
+
+  // value가 바뀔 때(칩 추가/삭제 등) 커서 쪽(맨 오른쪽)으로 이동 + 포커스 유지
+  useEffect(() => {
+    const el = chipsContainerRef.current;
+    if (!el) return;
+
+    el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' });
+    inputRef.current?.focus();
+  }, [value]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (isComposing) return;
@@ -157,6 +170,7 @@ export const ChipInput = ({
       {icon && React.createElement(icon, { size: size === 'md' ? 14 : 16 })}
 
       <div
+        ref={chipsContainerRef}
         className={cn(
           'no-scrollbar flex flex-1 items-center overflow-x-auto whitespace-nowrap',
           size === 'md' ? 'gap-1' : 'gap-1.5',
@@ -174,6 +188,7 @@ export const ChipInput = ({
         ))}
 
         <input
+          ref={inputRef}
           type='text'
           value={inputValue}
           onChange={(e) => onInputChange(e.target.value)}

@@ -7,7 +7,7 @@ import { useAuthStore } from '@/features/login/model/useAuthStore';
 import { useMemberKeywordsQuery } from '@/shared/hooks/useMemberKeywords';
 import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
 
-export const FeedMobileFilter = () => {
+const FeedMobileFilter = () => {
   const {
     selectedSort,
     selectedPeriod,
@@ -110,3 +110,5 @@ export const FeedMobileFilter = () => {
     </section>
   );
 };
+
+export default FeedMobileFilter;

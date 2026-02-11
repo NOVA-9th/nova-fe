@@ -22,20 +22,18 @@ export const useAuthRedirect = ({ when, redirectTo, ignorePaths = [] }: UseAuthR
     [ignorePaths, pathname],
   );
 
+  const shouldRedirect = useMemo(() => {
+    if (!hasHydrated) return false;
+    if (shouldIgnore) return false;
+    if (when === 'loggedIn' && isLoggedIn) return true;
+    if (when === 'loggedOut' && !isLoggedIn) return true;
+    return false;
+  }, [hasHydrated, shouldIgnore, when, isLoggedIn]);
+
   useEffect(() => {
-    if (!hasHydrated) return;
-    if (shouldIgnore) return;
+    if (!shouldRedirect) return;
+    router.replace(redirectTo);
+  }, [shouldRedirect, redirectTo, router]);
 
-    if (when === 'loggedIn' && isLoggedIn) {
-      router.replace(redirectTo);
-    }
-
-    if (when === 'loggedOut' && !isLoggedIn) {
-      router.replace(redirectTo);
-    }
-  }, [hasHydrated, shouldIgnore, when, isLoggedIn, redirectTo, router]);
-
-  return {
-    isBlocked: !hasHydrated,
-  };
+  return { isBlocking: !hasHydrated || shouldRedirect };
 };

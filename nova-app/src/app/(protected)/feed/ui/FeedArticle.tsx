@@ -1,17 +1,22 @@
 'use client';
 
 import { ArticleCard } from '@/shared/ui';
-import {
-  FeedArticleSkeleton as ArticleCardSkeleton,
-  FeedArticleError,
-  EmptyFeed,
-} from '@/app/(protected)/feed/ui';
-import { useInfiniteSavedArticles } from '@/features/saved/hooks/useInfiniteSavedArticles';
+import ArticleCardSkeleton from './FeedArticleSkeleton';
+import FeedArticleError from './FeedArticleError';
+import EmptyFeed from './EmptyFeed';
+import { useInfiniteFeedArticles } from '@/features/feed/hooks/useInfiniteFeedArticles';
 import { useInfiniteScroll } from '@/shared/hooks';
 
-const SavedArticleList = () => {
-  const { articles, isLoading, isError, refetch, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useInfiniteSavedArticles();
+const FeedArticle = () => {
+  const {
+    articles,
+    isLoading,
+    isError,
+    refetch,
+    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useInfiniteFeedArticles();
 
   const { targetRef } = useInfiniteScroll({
     hasNextPage: hasNextPage ?? false,
@@ -45,7 +50,7 @@ const SavedArticleList = () => {
 
   return (
     <>
-      <section id='saved-articles-export-root' className='space-y-4'>
+      <section className='space-y-4'>
         {articles.map((article) => (
           <ArticleCard key={article.id} articleData={article} />
         ))}
@@ -56,10 +61,9 @@ const SavedArticleList = () => {
             ))}
           </div>
         )}
-
         {!hasNextPage && !isFetchingNextPage && articles.length > 0 && (
-          <div className='flex justify-center items-center py-2'>
-            <p className='typo-body-base text-additive'>더 이상 저장한 콘텐츠가 없습니다.</p>
+          <div className='flex justify-center items-center py-8'>
+            <p className='typo-body-base text-additive'>더 이상 피드 콘텐츠가 없습니다.</p>
           </div>
         )}
       </section>
@@ -68,4 +72,4 @@ const SavedArticleList = () => {
   );
 };
 
-export default SavedArticleList;
+export default FeedArticle;

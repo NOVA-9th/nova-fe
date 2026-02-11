@@ -13,9 +13,10 @@ export const useCategoryRank = (isDark: boolean) => {
   const selectedCategory = data.rankings.find((item) => {
     const keywordName = item.keywords.map((keyword) => keyword.name);
     return getCategoryArray(keywordName) === category;
-  });
-
-  const labels = selectedCategory?.keywords.map((item) => item.name).slice(0, 6);
+  }) ?? { interest: 0, keywords: [], rank: 0, totalMentionCount: 0 };
+  const labels = selectedCategory?.keywords
+    .map((item) => item.name.replace(/\s*\(.*?\)/g, ''))
+    .slice(0, 6);
   const values = selectedCategory?.keywords.map((item) => item.mentionCount).slice(0, 6) ?? [];
 
   const hasData = values.length > 0;
@@ -25,7 +26,7 @@ export const useCategoryRank = (isDark: boolean) => {
     datasets: [
       {
         data: values,
-        backgroundColor: colors.bgPeak,
+        backgroundColor: colors.bar,
         borderRadius: 16,
         categoryPercentage: 1,
         barPercentage: 0.8,
