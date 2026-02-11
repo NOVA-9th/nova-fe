@@ -15,7 +15,9 @@ export const KeywordFilter = () => {
     <FilterSection
       title='키워드 필터'
       onReset={resetKeywords}
-      badge={<TextBadge variant='surface' peak={false} size='lg' text={`${data?.totalCount}개`} />}
+      badge={
+        <TextBadge variant='surface' peak={false} size='lg' text={`${data?.totalCount ?? 0}개`} />
+      }
     >
       <div className='flex items-center gap-2 flex-wrap'>
         {data?.keywords.map((keyword) => (

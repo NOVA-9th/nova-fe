@@ -59,7 +59,7 @@ export const ArticleCard = ({ articleData }: { articleData: CardNews }) => {
           icon={typeConfig.icon}
           text={typeConfig.title}
         />
-        {articleData.score && (
+        {articleData.score != null && (
           <TextBadge size='lg' variant='data' peak={false} text={`관련도 ${articleData.score}%`} />
         )}
       </div>
