@@ -1,21 +1,43 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useMemo, useLayoutEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { usePersonalization } from '@/shared/hooks';
 
 const PublicLayout = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const { accessToken } = useAuthStore();
+  const { accessToken, memberId, hasHydrated } = useAuthStore();
 
-  useEffect(() => {
-    if (!accessToken) return;
+  const isLoggedIn = Boolean(accessToken);
+  const safeMemberId = useMemo(() => (memberId ? memberId : null), [memberId]);
 
-    if (pathname === '/login') {
-      router.replace('/feed');
+  const { data: personalization, isLoading, isSuccess } = usePersonalization(safeMemberId ?? 0);
+
+  const shouldBlockLogin = hasHydrated && isLoggedIn && pathname === '/login';
+
+  useLayoutEffect(() => {
+    if (!shouldBlockLogin) return;
+
+    if (!safeMemberId) return;
+    if (isLoading) return;
+
+    if (!isSuccess || !personalization) {
+      router.replace('/');
+      return;
     }
-  }, [pathname, accessToken, router]);
+
+    router.replace(personalization.data?.background === null ? '/onboarding' : '/');
+  }, [shouldBlockLogin, safeMemberId, isLoading, isSuccess, personalization, router]);
+
+  if (shouldBlockLogin) {
+    return (
+      <div className='flex items-center justify-center min-h-screen mx-auto bg-alternative px-4'>
+        <div className='animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent' />
+      </div>
+    );
+  }
 
   return (
     <div className='flex items-center justify-center min-h-screen mx-auto bg-alternative px-4'>

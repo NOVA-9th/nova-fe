@@ -57,5 +57,3 @@ export const useSavedFilterStore = create<SavedFilterState>((set) => ({
       searchKeyword: '',
     }),
 }));
-
-

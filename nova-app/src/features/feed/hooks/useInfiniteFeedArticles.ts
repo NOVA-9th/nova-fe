@@ -18,7 +18,8 @@ const periodToDays = (ui: string) => {
 };
 
 export const useInfiniteFeedArticles = () => {
-  const { selectedSort, selectedPeriod, selectedTypes, selectedKeywords } = useFeedFilterStore();
+  const { selectedSort, selectedPeriod, selectedTypes, selectedKeywords, searchKeyword } =
+    useFeedFilterStore();
 
   const baseParams = useMemo(() => {
     const endDate = new Date();
@@ -33,9 +34,11 @@ export const useInfiniteFeedArticles = () => {
       type: selectedTypes.length === 0 ? ALL_TYPES : selectedTypes,
       keywords: selectedKeywords,
       size: 10,
+      searchKeyword,
       saved: false, // 피드이므로 false
+      hidden: false,
     };
-  }, [selectedSort, selectedPeriod, selectedTypes, selectedKeywords]);
+  }, [selectedPeriod, selectedSort, selectedTypes, selectedKeywords, searchKeyword]);
 
   const query = useInfiniteQuery({
     queryKey: ['feedList', baseParams],
@@ -54,13 +57,26 @@ export const useInfiniteFeedArticles = () => {
     retry: 3,
   });
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const pages = query.data?.pages ?? [];
+
   const articles = useMemo(() => {
     const allArticles = pages.flatMap((page) => page.data?.cardnews ?? []);
+
     // ID 기준 중복 제거 (백엔드 페이지네이션 이슈 방어)
     const uniqueMap = new Map(allArticles.map((article) => [article.id, article]));
-    return Array.from(uniqueMap.values());
-  }, [pages]);
+    const uniqueArticles = Array.from(uniqueMap.values());
+
+    // 관련도 순 정렬 (내림차순)
+    if (selectedSort === '관련도 순') {
+      return uniqueArticles.sort((a, b) => (b.score ?? 0) - (a.score ?? 0));
+    }
+
+    // 기본은 최신순 정렬 (오름차순)
+    return uniqueArticles.sort(
+      (a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime(),
+    );
+  }, [pages, selectedSort]);
 
   return {
     ...query,
@@ -68,4 +84,3 @@ export const useInfiniteFeedArticles = () => {
     articles,
   };
 };
-

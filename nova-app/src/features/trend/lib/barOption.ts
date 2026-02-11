@@ -56,6 +56,7 @@ export const createCategoryRankOptions = (
         },
 
         ticks: {
+          autoSkip: false,
           color: colors.textOptional,
           padding: 2,
           font: { size: 12 },
@@ -70,9 +71,9 @@ export const createCategoryRankOptions = (
           color: colors.outline,
           width: 1,
         },
-        // afterFit: (axis) => {
-        //   axis.width = 70; //키워드 차지 넓이
-        // },
+        afterFit: (axis) => {
+          hasData ? (axis.width = 70) : (axis.width = 0);
+        },
       },
     },
   };

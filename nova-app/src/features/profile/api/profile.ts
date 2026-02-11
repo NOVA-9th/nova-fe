@@ -89,6 +89,7 @@ export const getProfileImage = async (memberId: number): Promise<Blob | null> =>
       responseType: 'blob',
     });
     return response.data;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // 404 Not Found인 경우 null 반환
     if (error.response?.status === 404) {

@@ -9,7 +9,7 @@ export type MemberRequestDto = {
 export type MemberResponseDto = {
   id: number;
   name: string;
-  email: string;
+  email: string | null;
   profileImage: string | null;
 };
 

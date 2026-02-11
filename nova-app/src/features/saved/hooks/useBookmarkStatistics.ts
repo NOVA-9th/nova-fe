@@ -4,11 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import {
   getBookmarkCountsByInterest,
   getBookmarkCountsBySourceType,
-} from '../api/bookmark';
+} from '@/features/saved/api/bookmark';
 
-/**
- * 관심사별 북마크 개수 조회 Hook
- */
+// 관심사별 북마크 개수 조회 Hook
 export const useBookmarkCountsByInterest = () => {
   return useQuery({
     queryKey: ['bookmarkCountsByInterest'],
@@ -18,9 +16,7 @@ export const useBookmarkCountsByInterest = () => {
   });
 };
 
-/**
- * 출처별 북마크 개수 조회 Hook
- */
+// 출처별 북마크 개수 조회 Hook
 export const useBookmarkCountsBySourceType = () => {
   return useQuery({
     queryKey: ['bookmarkCountsBySourceType'],
@@ -29,4 +25,3 @@ export const useBookmarkCountsBySourceType = () => {
     gcTime: 1000 * 60 * 30, // 30분 동안 캐시 유지
   });
 };
-
