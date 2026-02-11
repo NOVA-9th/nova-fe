@@ -267,7 +267,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
     <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5'>
       <SectionHeader text='사용자 정보' size='lg' />
       <div className='flex flex-col w-full items-center justify-start gap-2'>
-        <div className='flex w-full items-center justify-start p-2 gap-2'>
+        <div className='flex w-full items-center justify-start p-2 gap-1'>
           <div
             className={`relative ${
               isSaving || updateNameMutation.isPending || uploadImageMutation.isPending
@@ -288,7 +288,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               alt='User Profile'
               width={200}
               height={200}
-              className='rounded-full size-12 object-cover bg-black'
+              className='rounded-full size-12 object-cover'
             />
             <input
               ref={fileInputRef}
