@@ -269,7 +269,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
       <div className='flex flex-col w-full items-center justify-start gap-2'>
         <div className='flex w-full items-center justify-start p-2 gap-1'>
           <div
-            className={`relative ${
+            className={`relative shrink-0 ${
               isSaving || updateNameMutation.isPending || uploadImageMutation.isPending
                 ? 'cursor-not-allowed opacity-50'
                 : 'cursor-pointer'

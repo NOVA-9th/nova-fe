@@ -75,7 +75,7 @@ export const ItemList = ({
         </div>
       )}
       <div className='flex flex-col items-start justify-center gap-0.5 px-1 flex-1 min-w-0'>
-        <span className='typo-body-base text-base'>{label}</span>
+        <span className='typo-body-base text-base break-keep line-clamp-2'>{label}</span>
         {description && <span className='typo-callout-base text-additive'>{description}</span>}
       </div>
       {rightButton && (
