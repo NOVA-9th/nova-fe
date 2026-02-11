@@ -13,15 +13,19 @@ const PublicLayout = ({ children }: { children: React.ReactNode }) => {
   const isLoggedIn = Boolean(accessToken);
   const safeMemberId = useMemo(() => (memberId ? memberId : null), [memberId]);
 
-  const { data: personalization, isLoading, isSuccess } = usePersonalization(safeMemberId ?? 0);
+  const {
+    data: personalization,
+    isLoading,
+    isFetching,
+    isSuccess,
+  } = usePersonalization(safeMemberId);
 
   const shouldBlockLogin = hasHydrated && isLoggedIn && pathname === '/login';
 
   useLayoutEffect(() => {
     if (!shouldBlockLogin) return;
-
     if (!safeMemberId) return;
-    if (isLoading) return;
+    if (isLoading || isFetching) return;
 
     if (!isSuccess || !personalization) {
       router.replace('/');
