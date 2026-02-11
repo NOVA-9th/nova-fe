@@ -13,6 +13,7 @@
   --bg-accent-surface: var(--color-primary-surface); /* #287AF5 @ 10% */
   --bg-accent-peak: var(--color-primary-full);
 
+  --bg-white-charcoal: var(--color-white-full);
   --bg-login: var(--color-slate-surface);
 
   /* ---------- Background / Interaction ---------- */
@@ -86,6 +87,10 @@
 
   .bg-accent-peak {
     background-color: var(--color-primary-full);
+  }
+
+  .bg-white-charcoal {
+    background-color: #ffffff;
   }
 
   .bg-login {
