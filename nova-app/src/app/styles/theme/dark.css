@@ -86,6 +86,9 @@
   .dark .bg-accent-peak {
     background-color: var(--color-primary-full);
   }
+  .dark .bg-accent-peak2 {
+    background-color: var(--color-primary-full2);
+  }
 
   .dark .bg-white-charcoal {
     background-color: var(--color-charcoal-full);

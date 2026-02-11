@@ -27,7 +27,7 @@ export const CategoriesKeyword = () => {
             className={cn(
               'rounded-static-frame bg-base md:p-5 px-5 py-2.5 cursor-pointer border border-outline flex flex-col items-center justify-center',
               'md:block ',
-              isSelected && 'bg-accent-peak shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]',
+              isSelected && 'bg-accent-peak2 shadow-[0_4px_4px_0_rgba(0,0,0,0.25)]',
             )}
             key={item.rank}
             onClick={() => {
