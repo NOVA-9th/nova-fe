@@ -299,7 +299,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               className='hidden'
             />
           </div>
-          <ItemList size='lg' label={name} description={email} />
+          <ItemList size='lg' label={name} description={email!} />
         </div>
         <div className='flex w-full gap-2'>
           <TextIconButton
@@ -349,9 +349,9 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
             size='lg'
             variant='surface'
             data={false}
-            value={email}
+            value={email ?? ''}
             onChange={() => {}}
-            placeholder={email}
+            placeholder={email!}
             disabled
             className='w-full opacity-50 cursor-not-allowed disabled:'
           />
