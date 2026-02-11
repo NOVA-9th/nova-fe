@@ -58,7 +58,6 @@ export const ItemList = ({
               width: 20,
               height: 20,
               className: cn('shrink-0 text-inherit', leftIconClassName),
-              fill: 'currentColor',
             })
           ) : typeof leftIcon === 'string' ||
             (leftIcon && typeof leftIcon === 'object' && 'src' in leftIcon) ? (
