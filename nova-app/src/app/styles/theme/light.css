@@ -88,6 +88,9 @@
   .bg-accent-peak {
     background-color: var(--color-primary-full);
   }
+  .bg-accent-peak2 {
+    background-color: var(--color-primary-full);
+  }
 
   .bg-white-charcoal {
     background-color: #ffffff;
