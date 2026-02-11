@@ -26,16 +26,9 @@ export const useAuthRedirect = ({ when, redirectTo, ignorePaths = [] }: UseAuthR
     if (!hasHydrated) return;
     if (shouldIgnore) return;
 
-    if (when === 'loggedIn' && isLoggedIn) {
-      router.replace(redirectTo);
-    }
-
-    if (when === 'loggedOut' && !isLoggedIn) {
-      router.replace(redirectTo);
-    }
+    if (when === 'loggedIn' && isLoggedIn) router.replace(redirectTo);
+    if (when === 'loggedOut' && !isLoggedIn) router.replace(redirectTo);
   }, [hasHydrated, shouldIgnore, when, isLoggedIn, redirectTo, router]);
 
-  return {
-    isBlocked: !hasHydrated,
-  };
+  return { isBlocking: !hasHydrated };
 };
