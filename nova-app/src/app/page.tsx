@@ -1,14 +1,18 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/shared/ui';
 import { useAuthStore } from '@/features/login/model/useAuthStore';
+import { ArrowDown } from 'lucide-react';
 
 export default function LandingPage() {
   const router = useRouter();
   const { isLoggedIn, isFirstVisit, hasHydrated, setFirstVisit } = useAuthStore();
+  
+  // Intersection Observer를 위한 refs
+  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     // Zustand hydration 완료 후에만 체크
@@ -26,24 +30,49 @@ export default function LandingPage() {
     }
   }, [isLoggedIn, isFirstVisit, hasHydrated, router]);
 
+  // Intersection Observer 설정
+  useEffect(() => {
+    if (typeof IntersectionObserver === 'undefined') return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-slide-up-visible');
+          }
+        });
+      },
+      {
+        threshold: 0.1, // 10%만 보여도 트리거
+        rootMargin: '0px 0px -50px 0px', // 하단에서 50px 전에 트리거
+      }
+    );
+
+    sectionRefs.current.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, [hasHydrated, isLoggedIn, isFirstVisit]);
+
   // Hydration 전이거나 리다이렉트 조건이면 아무것도 렌더링하지 않음
   if (!hasHydrated || isLoggedIn || !isFirstVisit) {
     return null;
   }
 
   return (
-    <main className='flex min-h-screen flex-col items-center gap-8 bg-base px-4 pb-12 pt-12 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-16 md:gap-16 md:pt-20'>
+    <main className='flex min-h-screen flex-col items-center gap-16 bg-base px-4 pb-12 pt-12 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-16 md:gap-16 md:pt-20'>
       {/* Hero Section */}
-      <section className='flex w-full max-w-2xl flex-col items-center gap-4 text-center sm:gap-6'>
+      <section className='flex w-full max-w-2xl flex-col items-center gap-9 text-center sm:gap-6'>
         {/* Text Content */}
-        <div className='space-y-1 px-2 sm:space-y-1.5'>
-          <p className='text-xs text-optional sm:typo-callout-base'>
+        <div className='space-y-1 px-0 sm:space-y-0.5 sm:px-2'>
+          <p className='typo-callout-base text-optional sm:typo-callout-base'>
             Next opportunity, Vision & Analysis
           </p>
-          <h1 className='text-lg font-semibold leading-tight tracking-tight text-base-color sm:typo-title-key'>
+          <h1 className='typo-body-strong sm:typo-title-key text-[#4A5565]'>
             빠르게 변화하는 IT 트렌드를 AI가 분석하고 요약해
           </h1>
-          <p className='text-sm text-additive sm:typo-body-base'>
+          <p className='typo-footnote-strong text-additive sm:typo-body-base '>
             취업준비생과 학습자에게 맞춤형 인사이트를 제공합니다.
           </p>
         </div>
@@ -59,9 +88,82 @@ export default function LandingPage() {
         </div>
 
         {/* CTA Buttons - Responsive width */}
-        <div className='flex w-full max-w-[280px] gap-2 sm:max-w-xs'>
-          <Button
-            label='시작하기'
+        <Button
+          label='지금 시작하기'
+          size='lg'
+          peak
+          style='surface'
+          onClick={() => {
+            setFirstVisit(false);
+            router.push('/login');
+          }}
+          className='flex-1 text-sm sm:text-base'
+        />
+
+        <div className='mt-8 flex flex-col items-center gap-3'>
+          <h1 className='typo-headline-base text-additive'>서비스 살펴보기</h1>
+          <ArrowDown className='size-4 text-base-color animate-bounce' />
+        </div>
+      </section>
+
+      {/* App Preview - Responsive sizing */}
+      <section id='preview' className='flex flex-col gap-20 w-full max-w-3xl px-2 sm:px-4'>
+        <div
+          ref={(el) => {
+            sectionRefs.current[0] = el;
+          }}
+          className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
+        >
+          <h1 className='typo-callout-key sm:typo-title-strong text-black'>AI가 요약한 IT 뉴스와 근거 자료를 한눈에 확인하세요!</h1>
+          <picture>
+            <source media='(max-width: 640px)' srcSet='/LandingFeedMb.png' />
+            <img
+              src='/LandingFeed.png'
+              alt='NOVA 피드 페이지 미리보기'
+              className='h-auto max-w-60 rounded-lg object-contain sm:max-w-full sm:rounded-xl md:rounded-2xl'
+            />
+          </picture>
+        </div>
+
+        <div
+          ref={(el) => {
+            sectionRefs.current[1] = el;
+          }}
+          className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
+        >
+          <h1 className='typo-callout-key sm:typo-title-strong text-black'>관심 있는 키워드의 추세를 차트로 파악하세요!</h1>
+          <picture>
+            <source media='(max-width: 640px)' srcSet='/LandingTrendMb.png' />
+            <img
+              src='/LandingTrend.png'
+              alt='NOVA 트렌드 페이지 미리보기'
+              className='h-auto max-w-60 rounded-lg object-contain sm:max-w-full sm:rounded-xl md:rounded-2xl'
+            />
+          </picture>
+        </div>
+
+        <div
+          ref={(el) => {
+            sectionRefs.current[2] = el;
+          }}
+          className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
+        >
+          <h1 className='typo-callout-key sm:typo-title-strong text-black'>관심 콘텐츠를 저장하고, 나만의 기술 아카이브를 만드세요</h1>
+          <picture>
+            <source media='(max-width: 640px)' srcSet='/LandingSavedMb.png' />
+            <img
+              src='/LandingSaved.png'
+              alt='NOVA 저장함 페이지 미리보기'
+              className='h-auto max-w-60 rounded-lg object-contain sm:max-w-full sm:rounded-xl md:rounded-2xl'
+            />
+          </picture>
+        </div>
+      </section>
+
+      <section className='flex flex-col items-center gap-5'>
+        <h1 className='typo-callout-base sm:typo-headline-base text-black'>Google, 카카오, GitHub 계정으로 3초 만에 바로 시작하세요!</h1>
+        <Button
+            label='지금 시작하기'
             size='lg'
             peak
             style='surface'
@@ -71,26 +173,6 @@ export default function LandingPage() {
             }}
             className='flex-1 text-sm sm:text-base'
           />
-          <Button
-            label='더 알아보기'
-            size='lg'
-            style='surface'
-            peak={false}
-            onClick={() =>
-              document.getElementById('preview')?.scrollIntoView({ behavior: 'smooth' })
-            }
-            className='flex-1 text-sm sm:text-base'
-          />
-        </div>
-      </section>
-
-      {/* App Preview - Responsive sizing */}
-      <section id='preview' className='w-full max-w-4xl px-2 sm:px-4'>
-        <img
-          src='/LandingImage.png'
-          alt='NOVA 앱 미리보기'
-          className='h-auto w-full animate-slide-up rounded-lg object-contain sm:rounded-xl md:rounded-2xl'
-        />
       </section>
     </main>
   );

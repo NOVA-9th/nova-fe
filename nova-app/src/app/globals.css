@@ -64,6 +64,19 @@
   .animate-slide-up {
     animation: slide-up 0.8s ease-out;
   }
+
+  /* 스크롤 시 애니메이션 - 초기 상태 */
+  .animate-slide-up-on-scroll {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  /* 스크롤 시 애니메이션 - 보이는 상태 */
+  .animate-slide-up-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 html,
