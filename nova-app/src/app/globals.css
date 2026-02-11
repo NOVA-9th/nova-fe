@@ -27,12 +27,18 @@
   }
 
   @media (min-width: 640px) {
+    .sm\:typo-callout-base {
+      @apply text-callout font-100 leading-5 tracking-tight;
+    }
+    .sm\:typo-body-base {
+      @apply text-body font-100 leading-6 tracking-tight;
+    }
     .sm\:typo-body-key {
       @apply text-body font-200 leading-6 tracking-tight;
     }
-  }
-
-  @media (min-width: 640px) {
+    .sm\:typo-title-key {
+      @apply text-title font-200 leading-8 tracking-tight;
+    }
     .sm\:typo-title-strong {
       @apply text-title font-300 leading-8 tracking-tight;
     }
@@ -42,6 +48,34 @@
     .md\:typo-headline-strong {
       @apply text-heading font-300 leading-7 tracking-tight;
     }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out;
+  }
+
+  /* 스크롤 시 애니메이션 - 초기 상태 */
+  .animate-slide-up-on-scroll {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  /* 스크롤 시 애니메이션 - 보이는 상태 */
+  .animate-slide-up-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 
   .shadow-modal {
