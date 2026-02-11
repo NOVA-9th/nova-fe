@@ -4,7 +4,7 @@
     --bg-base: var(--color-charcoal-full);
     --bg-alternative: var(--color-black-full);
     --bg-surface: var(--color-slate-surface);
-    --bg-peak: rgb(121, 126, 126);
+    --bg-peak: rgba(121, 126, 126, 0.6);
     --bg-static: rgb(255 255 255 / 0.04); /* #FFFFFF @ 4% */
 
     --bg-data-surface: var(--color-dark-surface); /* #00AD65 @ 10% */

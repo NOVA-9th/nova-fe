@@ -214,6 +214,10 @@
     color: #000000;
   }
 
+  .text-kakao {
+    color: #1c1c1a;
+  }
+
   .text-data-base {
     color: var(--color-light-full);
   }
