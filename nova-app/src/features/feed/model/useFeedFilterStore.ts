@@ -14,7 +14,6 @@ interface FeedFilterState {
   selectedTypes: CardType[];
   selectedKeywords: string[];
 
-  // ✅ search keyword (HeaderBar)
   searchKeyword: string;
 
   // actions
@@ -25,7 +24,6 @@ interface FeedFilterState {
   toggleType: (type: CardType) => void;
   toggleKeyword: (keyword: string) => void;
 
-  // ✅ actions for search keyword
   setSearchKeyword: (keyword: string) => void;
   resetSearchKeyword: () => void;
 
