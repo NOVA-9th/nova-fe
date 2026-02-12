@@ -74,7 +74,7 @@ export const useInfiniteFeedArticles = () => {
 
     // 기본은 최신순 정렬 (오름차순)
     return uniqueArticles.sort(
-      (a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime(),
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
     );
   }, [pages, selectedSort]);
 
