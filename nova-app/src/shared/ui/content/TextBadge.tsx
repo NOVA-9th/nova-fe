@@ -1,7 +1,7 @@
 import { cn } from '@/shared/utils/cn';
 import { cva, VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
-import React from 'react';
+import React, { memo } from 'react';
 
 const TextBadgeVariants = cva('flex items-center justify-center rounded-static-pill shrink-0', {
   variants: {
@@ -78,7 +78,7 @@ interface TextBadgeProps extends VariantProps<typeof TextBadgeVariants> {
   className?: string;
 }
 
-export const TextBadge = ({ size, variant, peak, text, icon, className }: TextBadgeProps) => {
+export const TextBadge = memo(({ size, variant, peak, text, icon, className }: TextBadgeProps) => {
   return (
     <div className={cn(TextBadgeVariants({ size, variant, peak }), className)}>
       {icon && (
@@ -91,4 +91,4 @@ export const TextBadge = ({ size, variant, peak, text, icon, className }: TextBa
       <p className='px-0.5'>{text}</p>
     </div>
   );
-};
+});
