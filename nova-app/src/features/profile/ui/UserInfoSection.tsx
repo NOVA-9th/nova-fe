@@ -360,8 +360,8 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
           <TextIconButton
             label='회원 탈퇴'
             size='lg'
-            style='data'
-            peak={true}
+            style='surface'
+            peak={false}
             leftIcon={UserX}
             className={`w-full gap-1.5 ${
               deleteMemberMutation.isPending ? 'opacity-50 cursor-not-allowed' : ''
@@ -371,7 +371,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
           <TextIconButton
             label='로그아웃'
             size='lg'
-            style='data'
+            style='surface'
             peak={false}
             leftIcon={LogOut}
             className='w-full gap-1.5'

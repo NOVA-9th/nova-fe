@@ -210,7 +210,7 @@ export const ChipInput = ({
       {inputValue && filteredSuggestions.length > 0 && (
         <ul
           ref={listRef}
-          className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'
+          className='absolute z-10 top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'
         >
           {filteredSuggestions.map((item, index) => (
             <li
