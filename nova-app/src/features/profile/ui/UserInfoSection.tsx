@@ -1,7 +1,7 @@
 'use client';
 
 import { ItemList, Modal, SectionHeader, TextIconButton, TextInput } from '@/shared/ui';
-import { LogOut, RefreshCw, UserX, X } from 'lucide-react';
+import { Loader2, LogOut, RefreshCw, UserX, X } from 'lucide-react';
 import Image from 'next/image';
 import {
   useMemberInfo,
@@ -263,39 +263,39 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   }
 
   const { name, email, profileImage } = memberInfo.data;
+  const isImageBusy =
+    isSaving || updateNameMutation.isPending || uploadImageMutation.isPending;
   return (
     <section className='flex flex-col justify-start items-start w-full gap-5 bg-base rounded-static-frame p-5 border border-outline'>
       <SectionHeader text='사용자 정보' size='lg' />
       <div className='flex flex-col w-full items-center justify-start gap-2'>
         <div className='flex w-full items-center justify-start p-2 gap-1'>
-          <div
-            className={`relative shrink-0 ${
-              isSaving || updateNameMutation.isPending || uploadImageMutation.isPending
-                ? 'cursor-not-allowed opacity-50'
-                : 'cursor-pointer'
-            }`}
-            onClick={handleImageClick}
-            role='button'
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                handleImageClick();
-              }
-            }}
-          >
+          <div className={`relative shrink-0`}>
             <Image
               src={previewImage || getProfileImageUrl(profileImage, dataUpdatedAt) || '/test.png'}
               alt='User Profile'
               width={200}
               height={200}
-              className='rounded-full size-12 object-cover'
+              className='rounded-full size-16 object-cover border border-outline'
             />
+            <button
+              type='button'
+              onClick={handleImageClick}
+              disabled={isImageBusy}
+              className='absolute -bottom-1 -right-2 size-6 bg-white border border-gray-300 rounded-full flex items-center justify-center text-additive hover:bg-gray-100 active:bg-gray-200'
+            >
+              {isImageBusy ? (
+                <Loader2 className='w-3 h-3 animate-spin' />
+              ) : (
+                <span className='pb-0.5 text-lg text-black'>+</span>
+              )}
+            </button>
             <input
               ref={fileInputRef}
               type='file'
               accept='image/*'
               onChange={handleFileChange}
-              disabled={isSaving || updateNameMutation.isPending || uploadImageMutation.isPending}
+              disabled={isImageBusy}
               className='hidden'
             />
           </div>

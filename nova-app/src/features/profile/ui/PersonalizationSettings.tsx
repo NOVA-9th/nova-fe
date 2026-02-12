@@ -114,6 +114,36 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     );
   };
 
+  // 초기 개인화 값과 현재 값 비교해서 변경 여부 계산
+  const hasChanges = useMemo(() => {
+    if (!personalizationData?.data) return false;
+
+    const initial = personalizationData.data;
+    const initialInterests = initial.interests || [];
+    const initialLevel = initial.level;
+    const initialBackground = initial.background || '';
+    const initialKeywords = sanitizeKeywords(initial.keywords || []);
+
+    // 관심사 비교 (순서 포함)
+    const interestsChanged =
+      selectedInterests.length !== initialInterests.length ||
+      selectedInterests.some((id, idx) => id !== initialInterests[idx]);
+
+    // 레벨 비교
+    const levelChanged = selectedLevel !== initialLevel;
+
+    // 전공/배경 비교
+    const backgroundChanged = (background || '') !== initialBackground;
+
+    // 키워드 비교 (sanitize 후 순서 포함)
+    const currentKeywords = sanitizeKeywords(chips);
+    const keywordsChanged =
+      currentKeywords.length !== initialKeywords.length ||
+      currentKeywords.some((kw, idx) => kw !== initialKeywords[idx]);
+
+    return interestsChanged || levelChanged || backgroundChanged || keywordsChanged;
+  }, [personalizationData, selectedInterests, selectedLevel, background, chips]);
+
   const toggleInterest = useCallback(
     (index: number) => {
       const id = getInterestIdByIndex(index);
@@ -252,11 +282,11 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
           <Button
             size='lg'
             style='surface'
-            peak={true}
+            peak={hasChanges}
             label='저장'
             className='w-full lg:w-auto'
             onClick={handleSave}
-            disabled={updatePersonalizationMutation.isPending}
+            disabled={!hasChanges || updatePersonalizationMutation.isPending}
           />
         </div>
       </div>

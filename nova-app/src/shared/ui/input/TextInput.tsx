@@ -122,7 +122,7 @@ export const TextInput = ({
             setLocalValue('');
           }}
           disabled={disabled}
-          className='text-optional hover:text-optional active:text-optional disabled:cursor-not-allowed'
+          className='text-optional hover:text-optional active:text-optional disabled:hidden disabled:cursor-not-allowed'
         >
           <X size={size === 'md' ? 14 : 16} />
         </button>

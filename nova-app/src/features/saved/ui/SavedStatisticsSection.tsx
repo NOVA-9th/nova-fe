@@ -2,15 +2,24 @@
 
 import { CodeXml, Download, FileText, Grid2X2Icon } from 'lucide-react';
 import { SectionHeader, TextIconButton } from '@/shared/ui';
-import { useBookmarkCountsBySourceType } from '../hooks/useBookmarkStatistics';
 import { mapCardTypeNameToDisplay, getCardTypeIcon } from '../utils/cardTypeMapping';
 import { SavedStatics } from './SavedStatics';
 import { useMemo, useState } from 'react';
-import { useSavedExport } from '../hooks/useSavedExport';
+import type { ApiResponse } from '@/shared/types';
+import type { BookmarkCountsBySourceTypeResponse } from '../types/api';
 
-const ExportDropdownButton = () => {
+interface ExportDropdownButtonProps {
+  exportSavedAsJson: () => Promise<boolean>;
+  exportSavedAsPdf: () => Promise<boolean>;
+  isExportingPdf: boolean;
+}
+
+const ExportDropdownButton = ({
+  exportSavedAsJson,
+  exportSavedAsPdf,
+  isExportingPdf,
+}: ExportDropdownButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { exportSavedAsJson, exportSavedAsPdf, isExportingPdf } = useSavedExport();
 
   const handleExportJSON = async () => {
     await exportSavedAsJson();
@@ -59,13 +68,25 @@ const ExportDropdownButton = () => {
   );
 };
 
-export const SavedStatisticsSection = () => {
-  const { data, isLoading } = useBookmarkCountsBySourceType();
+interface SavedStatisticsSectionProps {
+  sourceTypeData?: ApiResponse<BookmarkCountsBySourceTypeResponse>;
+  exportSavedAsJson: () => Promise<boolean>;
+  exportSavedAsPdf: () => Promise<boolean>;
+  isExportingPdf: boolean;
+}
+
+export const SavedStatisticsSection = ({
+  sourceTypeData,
+  exportSavedAsJson,
+  exportSavedAsPdf,
+  isExportingPdf,
+}: SavedStatisticsSectionProps) => {
+  const isLoading = !sourceTypeData;
 
   const statisticsData = useMemo(() => {
-    if (!data?.data?.bookmarkCounts) return [];
+    if (!sourceTypeData?.data?.bookmarkCounts) return [];
 
-    const counts = data.data.bookmarkCounts;
+    const counts = sourceTypeData.data.bookmarkCounts;
     const totalCount = counts.reduce((sum, item) => sum + item.count, 0);
 
     // 전체 항목 추가
@@ -90,7 +111,7 @@ export const SavedStatisticsSection = () => {
     });
 
     return [allItem, ...sourceItems];
-  }, [data]);
+  }, [sourceTypeData]);
 
   if (isLoading) {
     return (
@@ -101,7 +122,11 @@ export const SavedStatisticsSection = () => {
           <div className='w-full h-10 bg-surface animate-pulse rounded' />
           <div className='w-full h-10 bg-surface animate-pulse rounded' />
         </section>
-        <ExportDropdownButton />
+        <ExportDropdownButton
+          exportSavedAsJson={exportSavedAsJson}
+          exportSavedAsPdf={exportSavedAsPdf}
+          isExportingPdf={isExportingPdf}
+        />
       </section>
     );
   }
@@ -113,7 +138,11 @@ export const SavedStatisticsSection = () => {
         <section className='flex flex-col w-full h-fit justify-center items-start gap-1'>
           <div className='text-additive typo-body-key'>저장된 북마크가 없습니다.</div>
         </section>
-        <ExportDropdownButton />
+        <ExportDropdownButton
+          exportSavedAsJson={exportSavedAsJson}
+          exportSavedAsPdf={exportSavedAsPdf}
+          isExportingPdf={isExportingPdf}
+        />
       </section>
     );
   }
@@ -131,7 +160,11 @@ export const SavedStatisticsSection = () => {
           />
         ))}
       </section>
-      <ExportDropdownButton />
+      <ExportDropdownButton
+        exportSavedAsJson={exportSavedAsJson}
+        exportSavedAsPdf={exportSavedAsPdf}
+        isExportingPdf={isExportingPdf}
+      />
     </section>
   );
 };
