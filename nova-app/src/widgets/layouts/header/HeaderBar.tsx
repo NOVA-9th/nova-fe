@@ -19,17 +19,17 @@ export const HeaderBar = () => {
   const { isDark, toggleTheme } = useThemeToggle();
 
   useEffect(() => {
-    // 첫 렌더링 때도 무조건 닫힘 보장
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileSearchOpen(false);
 
-    const handleResize = () => {
-      // 화면 사이즈 바뀌면 무조건 닫기
-      setIsMobileSearchOpen(false);
+    const mq = window.matchMedia('(min-width: 768px)');
+
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setIsMobileSearchOpen(false); // md 이상으로 전환되면 닫기
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
   }, []);
 
   return (
