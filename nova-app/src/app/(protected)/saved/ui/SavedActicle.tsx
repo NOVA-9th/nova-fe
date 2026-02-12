@@ -6,12 +6,28 @@ import {
   FeedArticleError,
   EmptyFeed,
 } from '@/app/(protected)/feed/ui';
-import { useInfiniteSavedArticles } from '@/features/saved/hooks/useInfiniteSavedArticles';
 import { useInfiniteScroll } from '@/shared/hooks';
+import type { CardNews } from '@/features/feed/types/api';
 
-const SavedArticleList = () => {
-  const { articles, isLoading, isError, refetch, hasNextPage, fetchNextPage, isFetchingNextPage } =
-    useInfiniteSavedArticles();
+interface SavedArticleListProps {
+  articles: CardNews[];
+  isLoading: boolean;
+  isError: boolean;
+  refetch: () => void;
+  hasNextPage?: boolean;
+  fetchNextPage: () => void;
+  isFetchingNextPage: boolean;
+}
+
+const SavedArticleList = ({
+  articles,
+  isLoading,
+  isError,
+  refetch,
+  hasNextPage,
+  fetchNextPage,
+  isFetchingNextPage,
+}: SavedArticleListProps) => {
 
   const { targetRef } = useInfiniteScroll({
     hasNextPage: hasNextPage ?? false,

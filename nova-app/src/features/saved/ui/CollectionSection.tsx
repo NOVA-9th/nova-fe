@@ -2,17 +2,22 @@
 
 import { Grid2X2Icon, LucideIcon } from 'lucide-react';
 import { SectionHeader, SideTabItemCustom } from '@/shared/ui';
-import { useBookmarkCountsByInterest } from '../hooks/useBookmarkStatistics';
 import { mapInterestNameToDisplay, getInterestIcon } from '../utils/interestMapping';
 import { useMemo } from 'react';
+import type { ApiResponse } from '@/shared/types';
+import type { BookmarkCountsByInterestResponse } from '../types/api';
 
-export const CollectionSection = () => {
-  const { data, isLoading } = useBookmarkCountsByInterest();
+interface CollectionSectionProps {
+  interestData?: ApiResponse<BookmarkCountsByInterestResponse>;
+}
+
+export const CollectionSection = ({ interestData }: CollectionSectionProps) => {
+  const isLoading = !interestData;
 
   const collectionData = useMemo(() => {
-    if (!data?.data?.bookmarkCounts) return [];
+    if (!interestData?.data?.bookmarkCounts) return [];
 
-    const counts = data.data.bookmarkCounts;
+    const counts = interestData.data.bookmarkCounts;
     const totalCount = counts.reduce((sum, item) => sum + item.count, 0);
 
     // 전체 항목 추가
@@ -39,7 +44,7 @@ export const CollectionSection = () => {
     });
 
     return [allItem, ...interestItems];
-  }, [data]);
+  }, [interestData]);
 
   if (isLoading) {
     return (

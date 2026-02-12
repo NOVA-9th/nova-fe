@@ -72,6 +72,7 @@ export const ChipInput = ({
   // 칩 컨테이너/인풋 ref (칩 추가 시 커서 쪽으로 스크롤 + 포커스 유지)
   const chipsContainerRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const isInitialMount = useRef(true);
 
   const addChip = (raw?: string) => {
     const finalValue = raw ?? inputValue;
@@ -126,6 +127,12 @@ export const ChipInput = ({
 
   // value가 바뀔 때(칩 추가/삭제 등) 커서 쪽(맨 오른쪽)으로 이동 + 포커스 유지
   useEffect(() => {
+    // 첫 로딩 시에는 실행하지 않음 (자동 포커스로 인한 스크롤 방지)
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+
     const el = chipsContainerRef.current;
     if (!el) return;
 
@@ -203,7 +210,7 @@ export const ChipInput = ({
       {inputValue && filteredSuggestions.length > 0 && (
         <ul
           ref={listRef}
-          className='absolute top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'
+          className='absolute z-10 top-full left-0 w-full max-h-60 overflow-auto bg-base shadow-[2px_6px_6px_var(--shadow-suggestion)] border-ring rounded-b-static-frame thin-scrollbar'
         >
           {filteredSuggestions.map((item, index) => (
             <li
