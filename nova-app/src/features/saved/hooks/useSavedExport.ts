@@ -5,7 +5,6 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import { showToast } from '@/shared/utils/toast';
 import type { CardNews } from '@/features/feed/types/api';
-import { useInfiniteSavedArticles } from './useInfiniteSavedArticles';
 
 const SAVED_ARTICLES_EXPORT_ROOT_ID = 'saved-articles-export-root';
 
@@ -44,8 +43,7 @@ const toExportData = (articles: CardNews[]) =>
     keywords: article.keywords,
   }));
 
-export const useSavedExport = () => {
-  const { articles, isLoading } = useInfiniteSavedArticles();
+export const useSavedExport = (articles: CardNews[], isLoading: boolean) => {
   const [isExportingPdf, setIsExportingPdf] = useState(false);
 
   const hasExportableArticles = articles.length > 0;
@@ -147,4 +145,3 @@ export const useSavedExport = () => {
     isExportingPdf,
   };
 };
-

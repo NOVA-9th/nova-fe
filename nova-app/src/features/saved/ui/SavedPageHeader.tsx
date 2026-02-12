@@ -3,23 +3,34 @@
 import { PageHeader, TextButton } from '@/shared/ui';
 import { Bookmark, Download, FileJson, FileText, Folder, Grid2X2Icon, X } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
-import {
-  useBookmarkCountsByInterest,
-  useBookmarkCountsBySourceType,
-} from '@/features/saved/hooks/useBookmarkStatistics';
 import { getInterestIcon, mapInterestNameToDisplay } from '@/features/saved/utils/interestMapping';
 import { getCardTypeIcon, mapCardTypeNameToDisplay } from '@/features/saved/utils/cardTypeMapping';
 import { TextIconButton } from '@/shared/ui/action/TextIconButton';
-import { useSavedExport } from '../hooks/useSavedExport';
 import clsx from 'clsx';
+import type { ApiResponse } from '@/shared/types';
+import type {
+  BookmarkCountsByInterestResponse,
+  BookmarkCountsBySourceTypeResponse,
+} from '../types/api';
 
-export const SavedPageHeader = () => {
+interface SavedPageHeaderProps {
+  interestData?: ApiResponse<BookmarkCountsByInterestResponse>;
+  sourceTypeData?: ApiResponse<BookmarkCountsBySourceTypeResponse>;
+  exportSavedAsJson: () => Promise<boolean>;
+  exportSavedAsPdf: () => Promise<boolean>;
+  isExportingPdf: boolean;
+}
+
+export const SavedPageHeader = ({
+  interestData,
+  sourceTypeData,
+  exportSavedAsJson,
+  exportSavedAsPdf,
+  isExportingPdf,
+}: SavedPageHeaderProps) => {
   const [isCollectionModalOpen, setIsCollectionModalOpen] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [isExportOptionsOpen, setIsExportOptionsOpen] = useState(false);
-  const { data: interestData } = useBookmarkCountsByInterest();
-  const { data: sourceTypeData } = useBookmarkCountsBySourceType();
-  const { exportSavedAsJson, exportSavedAsPdf, isExportingPdf } = useSavedExport();
 
   const handleCloseModal = () => {
     setIsClosing(true);
