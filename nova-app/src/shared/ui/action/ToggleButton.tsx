@@ -43,6 +43,7 @@ interface ToggleButtonProps extends VariantProps<typeof ToggleButtonVariants> {
   className?: string;
 }
 
+// eslint-disable-next-line react/display-name
 export const ToggleButton = memo(
   ({ size, variant, selected, text, icon, onClick, className, value }: ToggleButtonProps) => {
     const handleClick = useCallback(() => {

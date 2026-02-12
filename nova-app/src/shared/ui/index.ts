@@ -1,6 +1,5 @@
 // action
 import { Button } from '@/shared/ui/action/Button';
-import { GuidanceChip } from '@/shared/ui/action/GuidanceChip';
 import { IconButton } from '@/shared/ui/action/IconButton';
 import { InputChip } from '@/shared/ui/action/InputChip';
 import { SelectionChip } from '@/shared/ui/action/SelectionChip';
@@ -9,18 +8,14 @@ import { TextIconButton } from '@/shared/ui/action/TextIconButton';
 import { ToggleButton } from '@/shared/ui/action/ToggleButton';
 
 // content
-import { DotBadge } from '@/shared/ui/content/DotBadge';
 import { Header } from '@/shared/ui/content/Header';
-import { IconBadge } from '@/shared/ui/content/IconBadge';
 import { ItemList } from '@/shared/ui/content/ItemList';
-import { NumberBadge } from '@/shared/ui/content/NumberBadge';
 import { SectionHeader } from '@/shared/ui/content/SectionHeader';
 import { TextBadge } from '@/shared/ui/content/TextBadge';
 
 // input
 import { ChipInput } from '@/shared/ui/input/ChipInput';
 import { Select } from '@/shared/ui/input/Select';
-import { SwitchInput } from '@/shared/ui/input/SwitchInput';
 import { TextInput } from '@/shared/ui/input/TextInput';
 
 // navigation
@@ -42,23 +37,18 @@ import { Toast } from '@/shared/ui/toast/Toast';
 
 export {
   Button,
-  GuidanceChip,
   IconButton,
   InputChip,
   SelectionChip,
   TextButton,
   TextIconButton,
   ToggleButton,
-  DotBadge,
   Header,
-  IconBadge,
   ItemList,
-  NumberBadge,
   SectionHeader,
   TextBadge,
   ChipInput,
   Select,
-  SwitchInput,
   TextInput,
   Breadcrumb,
   SideTabItem,

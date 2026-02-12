@@ -19,6 +19,7 @@ interface HeaderProps extends VariantProps<typeof HeaderVariants> {
   className?: string;
 }
 
+// eslint-disable-next-line react/display-name
 export const Header = memo(({ size, subLabel, label, description, className }: HeaderProps) => {
   const containerClass = useMemo(() => cn(HeaderVariants({ size }), className), [size, className]);
   const labelClass = useMemo(

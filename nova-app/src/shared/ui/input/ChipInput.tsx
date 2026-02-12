@@ -232,7 +232,12 @@ export const ChipInput = ({
       )}
 
       {(inputValue || value.length > 0) && (
-        <button type='button' onClick={clearAll} className='text-optional'>
+        <button
+          type='button'
+          onClick={clearAll}
+          className='text-optional'
+          aria-label='입력 및 선택된 칩 모두 지우기'
+        >
           <X size={size === 'md' ? 14 : 16} />
         </button>
       )}
