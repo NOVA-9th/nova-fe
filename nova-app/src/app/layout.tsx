@@ -42,6 +42,13 @@ export const metadata: Metadata = {
   },
 
   applicationName: 'Nova',
+
+  verification: {
+    google: '4R5sf6u9A6asZmNrpNS37QFh1CvZn_q9NjB2mXI7IOg',
+  },
+  other: {
+    'naver-site-verification': 'db7ab61ed37ce80655c9baa4eb28219b4dc12f62',
+  },
 };
 
 const pretendardJP = localFont({
