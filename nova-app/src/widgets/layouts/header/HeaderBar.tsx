@@ -1,36 +1,30 @@
 'use client';
 
-import { IconButton, TextInput } from '@/shared/ui';
+import { IconButton } from '@/shared/ui';
 import { Moon, Search, Sun, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
-import { Logo, NovaLabel } from '@/shared/assets';
 import { useThemeToggle } from '@/shared/hooks';
-import { useFeedFilterStore } from '@/features/feed/model/useFeedFilterStore';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
+import { LogoLabel } from '@/widgets/layouts/header/ui/LogoLabel';
+import { HeaderSearch } from '@/widgets/layouts/header/ui/HeaderSearch';
 
 export const HeaderBar = () => {
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
-  const { searchKeyword, setSearchKeyword } = useFeedFilterStore();
+
   const pathname = usePathname();
   const router = useRouter();
-
-  const isInputVisible = pathname === '/feed';
   const { isDark, toggleTheme } = useThemeToggle();
 
+  const isInputVisible = useMemo(() => pathname === '/feed', [pathname]);
+
+  const goFeed = useCallback(() => router.push('/feed'), [router]);
+  const openMobileSearch = useCallback(() => setIsMobileSearchOpen(true), []);
+  const closeMobileSearch = useCallback(() => setIsMobileSearchOpen(false), []);
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMobileSearchOpen(false);
-
-    const mq = window.matchMedia('(min-width: 768px)');
-
-    const onChange = (e: MediaQueryListEvent) => {
-      if (e.matches) setIsMobileSearchOpen(false); // md 이상으로 전환되면 닫기
-    };
-
-    mq.addEventListener('change', onChange);
-    return () => mq.removeEventListener('change', onChange);
-  }, []);
+  }, [pathname]);
 
   return (
     <header
@@ -39,15 +33,7 @@ export const HeaderBar = () => {
         isMobileSearchOpen ? 'h-auto' : 'h-19',
       )}
     >
-      <button
-        type='button'
-        aria-label='Go to home'
-        className='flex items-center gap-3.5 text-base-color px-2'
-        onClick={() => router.push('/feed')}
-      >
-        <Logo width={36} height={36} />
-        <NovaLabel className='text-base-color' width={60} height={15.83} />
-      </button>
+      <LogoLabel onClick={goFeed} />
 
       <div className='flex items-center gap-3'>
         {isInputVisible && (
@@ -59,19 +45,12 @@ export const HeaderBar = () => {
                 icon={X}
                 className='md:hidden'
                 aria-label='검색 닫기'
-                onClick={() => setIsMobileSearchOpen(false)}
+                onClick={closeMobileSearch}
               />
             ) : (
               <>
                 <div className='hidden md:block'>
-                  <TextInput
-                    size='lg'
-                    value={searchKeyword}
-                    onChange={setSearchKeyword}
-                    icon={Search}
-                    placeholder='아티클 및 트렌드를 검색해보세요'
-                    className='w-100'
-                  />
+                  <HeaderSearch className='w-100' />
                 </div>
 
                 <div className='md:hidden'>
@@ -80,7 +59,7 @@ export const HeaderBar = () => {
                     peak={false}
                     icon={Search}
                     aria-label='검색'
-                    onClick={() => setIsMobileSearchOpen(true)}
+                    onClick={openMobileSearch}
                   />
                 </div>
               </>
@@ -100,14 +79,7 @@ export const HeaderBar = () => {
 
       {isInputVisible && isMobileSearchOpen && (
         <div className='md:hidden w-full'>
-          <TextInput
-            size='lg'
-            value={searchKeyword}
-            onChange={setSearchKeyword}
-            icon={Search}
-            placeholder='아티클 및 트렌드를 검색해보세요'
-            className='w-full'
-          />
+          <HeaderSearch className='w-full' />
         </div>
       )}
     </header>

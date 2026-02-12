@@ -2,6 +2,7 @@ import { cn } from '@/shared/utils/cn';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ChevronRight, LucideIcon } from 'lucide-react';
 import { TextButton } from '@/shared/ui';
+import { memo } from 'react';
 
 const BreadcrumbVariants = cva('typo-body-key px-2 py-0.5', {
   variants: {
@@ -22,7 +23,7 @@ interface BreadcrumbProps extends VariantProps<typeof BreadcrumbVariants> {
   icon?: LucideIcon;
 }
 
-export const Breadcrumb = ({ items, depth, className, icon }: BreadcrumbProps) => {
+export const Breadcrumb = memo(({ items, depth, className, icon }: BreadcrumbProps) => {
   const visible = depth ? items.slice(0, depth) : items;
   const lastIndex = visible.length - 1;
 
@@ -48,4 +49,4 @@ export const Breadcrumb = ({ items, depth, className, icon }: BreadcrumbProps) =
       })}
     </nav>
   );
-};
+});

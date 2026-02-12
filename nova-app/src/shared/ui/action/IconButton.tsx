@@ -2,7 +2,7 @@ import { IconButtonVariants } from '@/shared/ui/styles/iconButton.styles';
 import { cn } from '@/shared/utils/cn';
 import { VariantProps } from 'class-variance-authority';
 import { LucideIcon } from 'lucide-react';
-import React from 'react';
+import React, { memo } from 'react';
 
 interface IconButtonProps extends VariantProps<typeof IconButtonVariants> {
   onClick?: () => void;
@@ -10,14 +10,19 @@ interface IconButtonProps extends VariantProps<typeof IconButtonVariants> {
   icon: LucideIcon;
 }
 
-export const IconButton = ({ onClick, size, style, className, peak, icon }: IconButtonProps) => {
-  return (
-    <button onClick={onClick} className={cn(IconButtonVariants({ size, style, peak }), className)}>
-      <span>
-        {React.createElement(icon, {
-          size: size === 'sm' ? 12 : size === 'lg' ? 16 : 14,
-        })}
-      </span>
-    </button>
-  );
-};
+export const IconButton = memo(
+  ({ onClick, size, style, className, peak, icon }: IconButtonProps) => {
+    return (
+      <button
+        onClick={onClick}
+        className={cn(IconButtonVariants({ size, style, peak }), className)}
+      >
+        <span>
+          {React.createElement(icon, {
+            size: size === 'sm' ? 12 : size === 'lg' ? 16 : 14,
+          })}
+        </span>
+      </button>
+    );
+  },
+);
