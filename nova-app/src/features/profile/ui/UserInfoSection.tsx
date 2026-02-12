@@ -44,7 +44,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
   useEffect(() => {
     if (memberInfo?.data) {
       setNameValue(memberInfo.data.name);
-      setPreviewImage(); // 새 데이터 로드 시 미리보기 초기화
+      setPreviewImage(null); // 새 데이터 로드 시 미리보기 초기화
       setSelectedFile(null);
     }
   }, [memberInfo?.data]);
