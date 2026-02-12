@@ -28,6 +28,14 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   const { data: personalizationData, isLoading } = usePersonalization(memberId);
   const updatePersonalizationMutation = useUpdatePersonalization();
 
+  console.log({
+    Button: typeof Button,
+    ChipInput: typeof ChipInput,
+    SectionHeader: typeof SectionHeader,
+    SelectionChip: typeof SelectionChip,
+    TextBadge: typeof TextBadge,
+  });
+
   // 선택 상태
   const [selectedInterests, setSelectedInterests] = useState<number[]>([]);
   const [selectedLevel, setSelectedLevel] = useState<MemberLevel | null>(null);
@@ -114,27 +122,26 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     );
   };
 
-  const toggleInterest = useCallback(
-    (index: number) => {
-      const id = getInterestIdByIndex(index);
-      const isAlreadySelected = selectedInterests.includes(id);
+  const toggleInterest = useCallback((index: number) => {
+    const id = getInterestIdByIndex(index);
 
-      if (!isAlreadySelected && selectedInterests.length >= 2) {
-        showToast.error('관심 분야는 최대 2개까지 선택할 수 있습니다.');
-        return;
+    let blocked = false;
+
+    setSelectedInterests((prev) => {
+      const isAlreadySelected = prev.includes(id);
+
+      if (!isAlreadySelected && prev.length >= 2) {
+        blocked = true;
+        return prev;
       }
 
-      setSelectedInterests((prev) =>
-        prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id],
-      );
-    },
-    [selectedInterests],
-  );
+      return isAlreadySelected ? prev.filter((x) => x !== id) : [...prev, id];
+    });
 
-  const isInterestSelected = useCallback(
-    (index: number) => selectedInterests.includes(getInterestIdByIndex(index)),
-    [selectedInterests],
-  );
+    if (blocked) {
+      showToast.error('관심 분야는 최대 2개까지 선택할 수 있습니다.');
+    }
+  }, []);
 
   const handleLevelChange = useCallback((index: number) => {
     setSelectedLevel(LEVELS[index]);
@@ -144,8 +151,11 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
     setBackground(PERSONALIZATION_TEXT.sections.major.options[index]);
   }, []);
 
-  const getSelectedMajorIndex = () =>
-    PERSONALIZATION_TEXT.sections.major.options.findIndex((o) => o === background);
+  const selectedInterestSet = useMemo(() => new Set(selectedInterests), [selectedInterests]);
+
+  const selectedMajorIndex = useMemo(() => {
+    return PERSONALIZATION_TEXT.sections.major.options.findIndex((o) => o === background);
+  }, [background]);
 
   if (isLoading) return <PersonalizationSettingsSkeleton />;
 
@@ -163,7 +173,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               label={option}
               size='md'
               style='surface'
-              selected={getSelectedMajorIndex() === index}
+              selected={selectedMajorIndex === index}
               isShowChevron={false}
               index={index}
               onClick={handleMajorChange}
@@ -186,7 +196,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
               label={option}
               size='md'
               style='surface'
-              selected={isInterestSelected(index)}
+              selected={selectedInterestSet.has(getInterestIdByIndex(index))}
               isShowChevron={false}
               index={index}
               onClick={toggleInterest}

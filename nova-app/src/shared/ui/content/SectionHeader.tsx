@@ -1,7 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority';
 import { cn } from '@/shared/utils/cn';
-import React from 'react';
-import { LucideIcon } from 'lucide-react';
+import { memo, useMemo } from 'react';
+import type { LucideIcon } from 'lucide-react';
 
 const SectionHeaderVariants = cva('flex items-center py-0.5', {
   variants: {
@@ -10,11 +10,14 @@ const SectionHeaderVariants = cva('flex items-center py-0.5', {
       md: 'gap-1.5 typo-subhead-key',
       lg: 'gap-2 typo-headline-key',
     },
-
     peak: {
       true: 'text-base',
       false: 'text-additive',
     },
+  },
+  defaultVariants: {
+    size: 'md',
+    peak: false,
   },
 });
 
@@ -25,31 +28,38 @@ interface SectionHeaderProps extends VariantProps<typeof SectionHeaderVariants> 
   className?: string;
 }
 
-export const SectionHeader = ({
-  size,
-  peak,
+const getLeftIconSize = (size: SectionHeaderProps['size']) =>
+  size === 'sm' ? 16 : size === 'md' ? 18 : 20;
+
+const getRightIconSize = (size: SectionHeaderProps['size']) =>
+  size === 'sm' ? 14 : size === 'md' ? 16 : 18;
+
+export const SectionHeader = memo(function SectionHeader({
+  size = 'md',
+  peak = false,
   text,
-  leftIcon,
-  rightIcon,
+  leftIcon: LeftIcon,
+  rightIcon: RightIcon,
   className,
-}: SectionHeaderProps) => {
+}: SectionHeaderProps) {
+  const leftSize = useMemo(() => getLeftIconSize(size), [size]);
+  const rightSize = useMemo(() => getRightIconSize(size), [size]);
+
   return (
     <div className={cn(SectionHeaderVariants({ size, peak }), className)}>
-      {leftIcon && (
-        <span>
-          {React.createElement(leftIcon, {
-            size: size === 'sm' ? 16 : size === 'md' ? 18 : 20,
-          })}
+      {LeftIcon ? (
+        <span aria-hidden='true'>
+          <LeftIcon size={leftSize} />
         </span>
-      )}
+      ) : null}
+
       {text}
-      {rightIcon && (
-        <span>
-          {React.createElement(rightIcon, {
-            size: size === 'sm' ? 14 : size === 'md' ? 16 : 18,
-          })}
+
+      {RightIcon ? (
+        <span aria-hidden='true'>
+          <RightIcon size={rightSize} />
         </span>
-      )}
+      ) : null}
     </div>
   );
-};
+});
