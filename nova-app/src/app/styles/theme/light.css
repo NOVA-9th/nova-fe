@@ -211,7 +211,7 @@
   }
 
   .text-github {
-    color: #000000;
+    color: var(--color-charcoal-additive);
   }
 
   .text-kakao {

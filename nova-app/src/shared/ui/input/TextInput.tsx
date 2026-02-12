@@ -111,7 +111,7 @@ export const TextInput = ({
         }}
         placeholder={placeholder}
         disabled={disabled}
-        className='caret-color placeholder:text-optional flex-1 bg-transparent outline-none disabled:cursor-not-allowed'
+        className='min-w-0 caret-color placeholder:text-optional flex-1 bg-transparent outline-none disabled:cursor-not-allowed'
       />
 
       {localValue && (
