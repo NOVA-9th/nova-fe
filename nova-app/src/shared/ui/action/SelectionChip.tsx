@@ -18,6 +18,7 @@ const ICON_SIZE_BY_CHIP_SIZE = {
   md: 14,
 } as const;
 
+// eslint-disable-next-line react/display-name
 export const SelectionChip = memo(
   ({
     size,

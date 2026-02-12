@@ -13,6 +13,7 @@ interface TextIconButtonProps extends VariantProps<typeof ButtonVariants> {
   disabled?: boolean;
 }
 
+// eslint-disable-next-line react/display-name
 export const TextIconButton = memo(
   ({
     onClick,

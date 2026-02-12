@@ -10,7 +10,7 @@ import { ArrowDown } from 'lucide-react';
 export default function LandingPage() {
   const router = useRouter();
   const { isLoggedIn, isFirstVisit, hasHydrated, setFirstVisit } = useAuthStore();
-  
+
   // Intersection Observer를 위한 refs
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
 
@@ -49,7 +49,7 @@ export default function LandingPage() {
       {
         threshold: 0.1, // 10%만 보여도 트리거
         rootMargin: '0px 0px -50px 0px', // 하단에서 50px 전에 트리거
-      }
+      },
     );
 
     sectionRefs.current.forEach((ref) => {
@@ -118,7 +118,9 @@ export default function LandingPage() {
           }}
           className='flex flex-col items-center gap-5 animate-slide-up b'
         >
-          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>AI가 요약한 IT 뉴스와 근거 자료를 한눈에 확인하세요!</h1>
+          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>
+            AI가 요약한 IT 뉴스와 근거 자료를 한눈에 확인하세요!
+          </h1>
           <picture>
             <source media='(max-width: 640px)' srcSet='/LandingFeedMb.png' />
             <img
@@ -135,7 +137,9 @@ export default function LandingPage() {
           }}
           className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
         >
-          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>관심 있는 키워드의 추세를 차트로 파악하세요!</h1>
+          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>
+            관심 있는 키워드의 추세를 차트로 파악하세요!
+          </h1>
           <picture>
             <source media='(max-width: 640px)' srcSet='/LandingTrendMb.png' />
             <img
@@ -152,7 +156,9 @@ export default function LandingPage() {
           }}
           className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
         >
-          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>관심 콘텐츠를 저장하고, 나만의 기술 아카이브를 만드세요</h1>
+          <h1 className='typo-callout-key sm:typo-title-strong text-black-white'>
+            관심 콘텐츠를 저장하고, 나만의 기술 아카이브를 만드세요
+          </h1>
           <picture>
             <source media='(max-width: 640px)' srcSet='/LandingSavedMb.png' />
             <img
@@ -170,18 +176,20 @@ export default function LandingPage() {
         }}
         className='flex flex-col items-center gap-5 animate-slide-up-on-scroll'
       >
-        <h1 className='typo-callout-base sm:typo-headline-base text-black-white'>Google, 카카오, GitHub 계정으로 3초 만에 바로 시작하세요!</h1>
+        <h1 className='typo-callout-base sm:typo-headline-base text-black-white'>
+          Google, 카카오, GitHub 계정으로 3초 만에 바로 시작하세요!
+        </h1>
         <Button
-            label='지금 시작하기'
-            size='lg'
-            peak
-            style='surface'
-            onClick={() => {
-              setFirstVisit(false);
-              router.push('/login');
-            }}
-            className='flex-1 text-sm sm:text-base'
-          />
+          label='지금 시작하기'
+          size='lg'
+          peak
+          style='surface'
+          onClick={() => {
+            setFirstVisit(false);
+            router.push('/login');
+          }}
+          className='flex-1 text-sm sm:text-base'
+        />
       </section>
     </main>
   );
