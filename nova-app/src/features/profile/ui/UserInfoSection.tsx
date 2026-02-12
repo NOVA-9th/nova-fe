@@ -282,7 +282,7 @@ export const UserInfoSection = ({ memberId }: UserInfoSectionProps) => {
               type='button'
               onClick={handleImageClick}
               disabled={isImageBusy}
-              className='absolute -bottom-1 -right-2 size-6 bg-white border border-gray-300 rounded-full flex items-center justify-center text-additive'
+              className='absolute -bottom-1 -right-2 size-6 bg-white border border-gray-300 rounded-full flex items-center justify-center text-additive hover:bg-gray-100 active:bg-gray-200'
             >
               {isImageBusy ? (
                 <Loader2 className='w-3 h-3 animate-spin' />
