@@ -6,6 +6,7 @@ import { Toast } from '@/shared/ui';
 import { AuthHydration } from '@/shared/utils/authHydration';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://nova.snowfrost.kr'),
   title: {
     template: '%s | Nova',
     default: 'Nova | AI 기반 맞춤형 개발자 뉴스 피드 서비스',
@@ -32,17 +33,13 @@ export const metadata: Metadata = {
       url: '/og-image.png',
     },
   },
-
   icons: {
     icon: '/Logo.svg',
   },
-
   alternates: {
     canonical: '/',
   },
-
   applicationName: 'Nova',
-
   verification: {
     google: '4R5sf6u9A6asZmNrpNS37QFh1CvZn_q9NjB2mXI7IOg',
   },

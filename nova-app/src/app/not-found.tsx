@@ -1,7 +1,12 @@
+'use client';
+
 import { ArrowLeft, Frown, Home } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
-const NotFound = () => {
+const NotFoundPage = () => {
+  const router = useRouter();
+
   return (
     <div className='min-h-screen flex items-center justify-center'>
       <div className='max-w-md w-full text-center'>
@@ -24,7 +29,10 @@ const NotFound = () => {
             <Home size={20} className='text-white' />
             <p className='text-white'>메인으로 돌아가기</p>
           </Link>
-          <button className='inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-medium border-2 border-slate-300 hover:border-slate-400 transition-colors'>
+          <button
+            onClick={() => router.back()}
+            className='inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-slate-900 font-medium border-2 border-slate-300 hover:border-slate-400 transition-colors'
+          >
             <ArrowLeft size={20} />
             이전 페이지
           </button>
@@ -34,4 +42,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;

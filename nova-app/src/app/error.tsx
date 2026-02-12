@@ -7,7 +7,7 @@ type ErrorProps = {
   reset: () => void;
 };
 
-export default function Error({ error, reset }: ErrorProps) {
+const ErrorPage = ({ error, reset }: ErrorProps) => {
   return (
     <main className='min-h-dvh flex items-center justify-center px-4'>
       <div className='max-w-md w-full text-center'>
@@ -24,11 +24,16 @@ export default function Error({ error, reset }: ErrorProps) {
             다시 시도
           </button>
 
-          <Link href='/' className='rounded-interactive-default border border-outline px-4 py-2'>
-            홈으로
+          <Link
+            href='/feed'
+            className='rounded-interactive-default border border-outline px-4 py-2'
+          >
+            메인으로
           </Link>
         </div>
       </div>
     </main>
   );
-}
+};
+
+export default ErrorPage;
