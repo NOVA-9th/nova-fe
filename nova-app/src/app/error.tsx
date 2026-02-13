@@ -11,22 +11,26 @@ const ErrorPage = ({ error, reset }: ErrorProps) => {
   return (
     <main className='min-h-dvh flex items-center justify-center px-4'>
       <div className='max-w-md w-full text-center'>
-        <h1 className='text-3xl font-bold mb-2'>문제가 발생했습니다</h1>
-        <p className='text-sm text-secondary mb-4'>예상치 못한 오류가 발생했습니다.</p>
+        <h1 className='text-2xl sm:text-3xl font-bold mb-2 break-keep'>문제가 발생했습니다</h1>
+        <p className='text-sm sm:text-base text-secondary mb-4 break-keep'>
+          예상치 못한 오류가 발생했습니다.
+        </p>
 
-        <p className='text-xs text-muted mb-6'>{error?.message || '알 수 없는 오류'}</p>
+        <p className='text-xs sm:text-sm text-muted mb-6 break-all'>
+          {error?.message || '알 수 없는 오류'}
+        </p>
 
-        <div className='flex gap-3 justify-center'>
+        <div className='flex flex-col sm:flex-row gap-3 justify-center'>
           <button
             onClick={() => reset()}
-            className='rounded-interactive-default bg-accent-peak px-4 py-2 text-white'
+            className='w-full sm:w-auto rounded-interactive-default bg-accent-peak px-4 py-2 text-white'
           >
             다시 시도
           </button>
 
           <Link
             href='/feed'
-            className='rounded-interactive-default border border-outline px-4 py-2'
+            className='w-full sm:w-auto rounded-interactive-default border border-outline px-4 py-2'
           >
             메인으로
           </Link>

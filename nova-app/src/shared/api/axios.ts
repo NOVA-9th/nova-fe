@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig, AxiosAdapter } from 'axios';
 import { ApiResponse } from '@/shared/types/api';
+import { showToast } from '../utils/toast';
 
 // API Base URL - 환경 변수 필수 설정
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -206,6 +207,7 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 403) {
       // 권한 없음 처리
       console.error('접근 권한이 없습니다.');
+      showToast.error('접근 권한이 없습니다');
     }
 
     // 500 Internal Server Error

@@ -34,7 +34,28 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: '/Logo.svg',
+    icon: [
+      {
+        url: '/favicon.ico',
+      },
+      {
+        url: '/favicon.png',
+        sizes: '32x32',
+        type: 'image/png',
+      },
+    ],
+    shortcut: [
+      {
+        url: '/favicon.ico',
+      },
+    ],
+    apple: [
+      {
+        url: '/apple-touch-icon.png',
+        sizes: '180x180',
+        type: 'image/png',
+      },
+    ],
   },
   alternates: {
     canonical: '/',

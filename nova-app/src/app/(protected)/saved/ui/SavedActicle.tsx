@@ -28,7 +28,6 @@ const SavedArticleList = ({
   fetchNextPage,
   isFetchingNextPage,
 }: SavedArticleListProps) => {
-
   const { targetRef } = useInfiniteScroll({
     hasNextPage: hasNextPage ?? false,
     isFetchingNextPage,
@@ -55,7 +54,7 @@ const SavedArticleList = ({
   if (!articles || articles.length === 0)
     return (
       <section className='space-y-4'>
-        <EmptyFeed />
+        <EmptyFeed desc='저장' />
       </section>
     );
 
