@@ -86,6 +86,10 @@ export const ChipInput = ({
     if (newChips.length) {
       onChange([...value, ...newChips]);
       newChips.forEach((chip) => onAdd?.(chip));
+
+      setTimeout(() => {
+        inputRef.current?.focus();
+      }, 0);
     }
 
     onInputChange('');
@@ -137,7 +141,6 @@ export const ChipInput = ({
     if (!el) return;
 
     el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' });
-    inputRef.current?.focus();
   }, [value]);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

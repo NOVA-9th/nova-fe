@@ -13,30 +13,27 @@ interface FeedFilterState {
   selectedPeriod: PeriodUI;
   selectedTypes: CardType[];
   selectedKeywords: string[];
-
   searchKeyword: string;
 
   // actions
   setSelectedSort: (sort: SortUI) => void;
   setSelectedPeriod: (period: PeriodUI) => void;
   setSelectedTypes: (types: CardType[]) => void;
+  setSearchKeyword: (keyword: string) => void;
 
   toggleType: (type: CardType) => void;
   toggleKeyword: (keyword: string) => void;
-
-  setSearchKeyword: (keyword: string) => void;
-  resetSearchKeyword: () => void;
 
   resetSort: () => void;
   resetPeriod: () => void;
   resetTypes: () => void;
   resetKeywords: () => void;
-
+  resetSearchKeyword: () => void;
   resetAll: () => void;
 }
 
 const DEFAULT_SORT: SortUI = '최신순';
-const DEFAULT_PERIOD: PeriodUI = '1일';
+const DEFAULT_PERIOD: PeriodUI = '7일';
 
 export const useFeedFilterStore = create<FeedFilterState>((set) => ({
   selectedSort: DEFAULT_SORT,

@@ -28,14 +28,6 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
   const { data: personalizationData, isLoading } = usePersonalization(memberId);
   const updatePersonalizationMutation = useUpdatePersonalization();
 
-  console.log({
-    Button: typeof Button,
-    ChipInput: typeof ChipInput,
-    SectionHeader: typeof SectionHeader,
-    SelectionChip: typeof SelectionChip,
-    TextBadge: typeof TextBadge,
-  });
-
   // 선택 상태
   const [selectedInterests, setSelectedInterests] = useState<number[]>([]);
   const [selectedLevel, setSelectedLevel] = useState<MemberLevel | null>(null);
@@ -61,6 +53,7 @@ export const PersonalizationSettings = ({ memberId }: PersonalizationSettingsPro
 
     const initialKeywords = sanitizeKeywords(d.keywords || []);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedInterests(d.interests || []);
     setSelectedLevel(d.level);
     setBackground(d.background || '');

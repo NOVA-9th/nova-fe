@@ -8,15 +8,8 @@ import { useInfiniteFeedArticles } from '@/features/feed/hooks/useInfiniteFeedAr
 import { useInfiniteScroll } from '@/shared/hooks';
 
 const FeedArticle = () => {
-  const {
-    articles,
-    isLoading,
-    isError,
-    refetch,
-    hasNextPage,
-    fetchNextPage,
-    isFetchingNextPage,
-  } = useInfiniteFeedArticles();
+  const { articles, isLoading, isError, refetch, hasNextPage, fetchNextPage, isFetchingNextPage } =
+    useInfiniteFeedArticles();
 
   const { targetRef } = useInfiniteScroll({
     hasNextPage: hasNextPage ?? false,
@@ -44,7 +37,7 @@ const FeedArticle = () => {
   if (!articles || articles.length === 0)
     return (
       <section className='space-y-4'>
-        <EmptyFeed />
+        <EmptyFeed desc='작성' />
       </section>
     );
 
