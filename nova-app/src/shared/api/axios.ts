@@ -1,6 +1,8 @@
 import axios, { AxiosError, AxiosInstance, InternalAxiosRequestConfig, AxiosAdapter } from 'axios';
 import { ApiResponse } from '@/shared/types/api';
 import { showToast } from '../utils/toast';
+import { invalidateToken } from '@/features/login/api/login';
+import { useAuthStore } from '@/features/login/model/useAuthStore';
 
 // API Base URL - 환경 변수 필수 설정
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
@@ -197,7 +199,7 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 401) {
       // 토큰 제거 및 로그인 페이지로 리다이렉트
       if (typeof window !== 'undefined') {
-        localStorage.removeItem('accessToken');
+        localStorage.removeItem('auth-storage');
         // 필요시 로그인 페이지로 리다이렉트
         // window.location.href = '/login';
       }
@@ -207,7 +209,19 @@ axiosInstance.interceptors.response.use(
     if (error.response?.status === 403) {
       // 권한 없음 처리
       console.error('접근 권한이 없습니다.');
-      showToast.error('접근 권한이 없습니다');
+      showToast.error('다시 로그인 해주세요');
+
+      try {
+        await invalidateToken();
+      } catch (e) {
+        console.error('토큰 무효화 실패:', e);
+      }
+
+      useAuthStore.getState().logout();
+
+      if (typeof window !== 'undefined') {
+        window.location.href = '/login';
+      }
     }
 
     // 500 Internal Server Error
