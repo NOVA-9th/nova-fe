@@ -16,7 +16,7 @@ const EventPage = () => {
       <PageHeader text='이벤트' icon={Ticket} />
 
       <div className='flex-1 flex items-center justify-center md:px-5 px-4 pb-5'>
-        <div className='w-full max-w-170'>
+        <div className='w-full h-full flex justify-center items-center bg-base rounded-static-frame border border-outline'>
           {phase === 'ROLE' && <RoleSelectContainer />}
           {phase === 'QUIZ' && <EventContainer />}
           {phase === 'RESULT' && <ResultContainer />}
