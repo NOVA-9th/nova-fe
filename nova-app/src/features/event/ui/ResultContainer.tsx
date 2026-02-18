@@ -5,13 +5,14 @@ import { useEventStore } from '@/features/event/model/useEventStore';
 import { showToast } from '@/shared/utils/toast';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { weightedPickIndex, type WeightedItem } from '@/features/event/utils/weightedPick';
+import { useRouter } from 'next/navigation';
 
 type Prize = { label: string };
 
 const PRIZES_WITH_WEIGHT: WeightedItem<Prize>[] = [
-  { item: { label: '밈 스티커' }, weight: 30 },
-  { item: { label: '키캡 키링' }, weight: 10 },
-  { item: { label: '간식' }, weight: 25 },
+  { item: { label: '밈 스티커' }, weight: 35 },
+  { item: { label: '키캡 키링' }, weight: 5 },
+  { item: { label: '간식' }, weight: 35 },
   { item: { label: '한 번 더!' }, weight: 25 },
 ];
 
@@ -25,6 +26,7 @@ export const ResultContainer = () => {
   const role = useEventStore((s) => s.role);
   const score = useEventStore((s) => s.score);
   const spins = useEventStore((s) => s.spins);
+  const router = useRouter();
 
   const consumeSpin = useEventStore((s) => s.consumeSpin);
   const resetAll = useEventStore((s) => s.resetAll);
@@ -35,7 +37,6 @@ export const ResultContainer = () => {
 
   const [isSpinning, setIsSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   const pendingPrizeRef = useRef<number | null>(null);
   const shouldConsumeRef = useRef(false);
@@ -85,7 +86,6 @@ export const ResultContainer = () => {
 
       pendingPrizeRef.current = idx;
       setRotation(nextRotation);
-      setSelectedIndex(idx);
     },
     [rotation, slice],
   );
@@ -130,8 +130,8 @@ export const ResultContainer = () => {
 
       <div className='flex flex-col items-center gap-4 py-2'>
         <div className='relative'>
-          <div className='absolute left-1/2 -top-3 z-10 -translate-x-1/2'>
-            <div className='w-0 h-0 border-l-10 border-l-transparent border-r-10 border-r-transparent border-b-16 border-b-outline' />
+          <div className='absolute left-1/2 top-0 z-10 -translate-x-1/2'>
+            <div className='w-0 h-0 border-l-10 border-l-transparent border-r-10 border-r-transparent border-t-16 border-b-outline' />
           </div>
 
           <div
@@ -165,7 +165,13 @@ export const ResultContainer = () => {
       <div className='flex justify-between gap-2'>
         <Button size='lg' label={'처음으로 돌아가기'} style='surface' onClick={resetAll} />
 
-        <Button size='lg' label='홈으로 돌아가기' style='accent' onClick={resetAll} peak />
+        <Button
+          size='lg'
+          label='홈으로 돌아가기'
+          style='accent'
+          onClick={() => router.push('/')}
+          peak
+        />
       </div>
     </main>
   );
