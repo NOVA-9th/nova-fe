@@ -1,4 +1,4 @@
-import { Bookmark, ChartGantt, MessagesSquare, User } from 'lucide-react';
+import { Bookmark, ChartGantt, MessagesSquare, Ticket, User } from 'lucide-react';
 import { SideItem } from '@/widgets/layouts/sidebar/types/SideItem';
 
 export const SIDE_ITEMS: SideItem[] = [
@@ -26,5 +26,11 @@ export const SIDE_ITEMS: SideItem[] = [
     title: '프로필',
     description: '개인화 설정 및 계정 관리',
     icon: User,
+  },
+  {
+    href: '/event',
+    title: '이벤트',
+    description: '데모데이를 위한 이벤트 페이지',
+    icon: Ticket,
   },
 ];
