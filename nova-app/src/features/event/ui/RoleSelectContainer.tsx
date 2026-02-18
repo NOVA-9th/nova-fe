@@ -17,7 +17,7 @@ export const RoleSelectContainer = () => {
   const handlePick = useCallback((role: Role) => setRole(role), [setRole]);
 
   return (
-    <main className='flex flex-col w-full gap-5 px-7 py-5 bg-base rounded-static-frame sm:px-10 sm:py-7.5'>
+    <main className='flex flex-col w-full gap-5 px-7 py-5 bg-base rounded-static-frame sm:px-10 sm:py-7.5 max-w-170'>
       <Header
         size='lg'
         label='관심있는 직무를 선택해주세요 !'
