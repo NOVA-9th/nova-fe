@@ -1,7 +1,8 @@
 'use client';
 
-import { Stepper } from '@/features/onboarding/ui';
+import { Stepper, type StepStatus } from '@/features/onboarding/ui';
 import { Button, Header, ToggleButton } from '@/shared/ui';
+import { showToast } from '@/shared/utils/toast';
 import { cn } from '@/shared/utils/cn';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
@@ -12,7 +13,8 @@ import type { EventQuestion } from '@/features/event/type/EventQuestion';
 
 const roundKeys: RoundKey[] = ['round1', 'round2', 'round3', 'round4'];
 
-const calcSpins = (score: number) => (score === 4 ? 2 : score >= 1 ? 1 : 0);
+/** 맞춘 문제 수 = 룰렛 기회 */
+const calcSpins = (score: number) => score;
 
 export const EventContainer = () => {
   const role = useEventStore((s) => s.role);
@@ -27,6 +29,13 @@ export const EventContainer = () => {
   const resetAll = useEventStore((s) => s.resetAll);
 
   const [index, setIndex] = useState(0);
+  /** 각 라운드 정답 여부 (null = 미제출, true = 정답, false = 오답) */
+  const [roundResults, setRoundResults] = useState<(boolean | null)[]>([
+    null,
+    null,
+    null,
+    null,
+  ]);
 
   useEffect(() => {
     if (!role) return;
@@ -61,8 +70,32 @@ export const EventContainer = () => {
     setIndex((i) => Math.max(0, i - 1));
   }, []);
 
+  const revealed = roundResults[index] !== null;
+  const stepStatuses: StepStatus[] = roundResults.map((r) =>
+    r === null ? 'default' : r ? 'success' : 'error',
+  );
+
   const handleNext = useCallback(() => {
     if (!isValid) return;
+
+    const isRevealed = roundResults[index] !== null;
+
+    if (!isRevealed) {
+      const correct = selected === current.answer;
+      setRoundResults((prev) => {
+        const next = [...prev];
+        next[index] = correct;
+        return next;
+      });
+      const message =
+        current.rationale ?? (correct ? '정답이에요!' : `정답: ${current.answer ?? ''}`);
+      if (correct) {
+        showToast.success(message);
+      } else {
+        showToast.error(message);
+      }
+      return;
+    }
 
     if (isLast) {
       const score = questions.reduce((acc, q, i) => {
@@ -77,7 +110,18 @@ export const EventContainer = () => {
     }
 
     setIndex((i) => Math.min(3, i + 1));
-  }, [isValid, isLast, answers, questions, setResult, setPhase]);
+  }, [
+    isValid,
+    isLast,
+    index,
+    roundResults,
+    selected,
+    current,
+    answers,
+    questions,
+    setResult,
+    setPhase,
+  ]);
 
   if (!role) {
     return (
@@ -104,38 +148,53 @@ export const EventContainer = () => {
       <Stepper
         currentStep={`step${index + 1}` as any}
         labels={['Round 1', 'Round 2', 'Round 3', 'Round 4']}
+        stepStatus={stepStatuses}
+        currentStepRevealed={revealed}
       />
 
-      <div>
-        <Header
-          size='lg'
-          subLabel={current.role}
-          label={current.question}
-          description='하나만 선택해주세요.'
-          className='hidden sm:flex'
-        />
-        <Header
-          size='md'
-          subLabel={current.role}
-          label={current.question}
-          description='하나만 선택해주세요.'
-          className='flex sm:hidden'
-        />
-      </div>
-
-      <div className='grid grid-cols-1 gap-3'>
-        {current.options!.map((opt) => (
-          <ToggleButton
-            key={opt}
+      <div key={index} className='animate-slide-in-from-right'>
+        <div>
+          <Header
             size='lg'
-            variant='outline'
-            value={opt}
-            text={opt}
-            selected={selected === opt}
-            onClick={() => handleSelect(opt)}
-            className={cn('w-full')}
+            subLabel={current.role}
+            label={current.question}
+            description='하나만 선택해주세요.'
+            className='hidden sm:flex'
           />
-        ))}
+          <Header
+            size='md'
+            subLabel={current.role}
+            label={current.question}
+            description='하나만 선택해주세요.'
+            className='flex sm:hidden'
+          />
+        </div>
+
+        <div className='grid grid-cols-1 gap-3'>
+          {current.options!.map((opt) => {
+            const isCorrect = opt === current.answer;
+            const isSelected = selected === opt;
+            const feedback =
+              revealed && isCorrect
+                ? 'correct'
+                : revealed && isSelected && !isCorrect
+                  ? 'wrong'
+                  : 'none';
+            return (
+              <ToggleButton
+                key={opt}
+                size='lg'
+                variant='outline'
+                value={opt}
+                text={opt}
+                selected={selected === opt}
+                feedback={feedback}
+                onClick={revealed ? undefined : () => handleSelect(opt)}
+                className={cn('w-full')}
+              />
+            );
+          })}
+        </div>
       </div>
 
       <div className='mt-auto flex w-full sm:max-w-150 justify-between'>

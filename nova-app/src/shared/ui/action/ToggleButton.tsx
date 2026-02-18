@@ -19,19 +19,30 @@ const ToggleButtonVariants = cva(
         true: 'bg-surface text-base-color',
         false: 'text-optional',
       },
+      /** 정답/오답 피드백 (이벤트 퀴즈 등에서 사용) */
+      feedback: {
+        none: '',
+        correct: 'border-green-500 bg-green-50 text-green-800',
+        wrong: 'border-red-500 bg-red-50 text-red-800',
+      },
     },
     compoundVariants: [
       {
         variant: 'outline',
         selected: true,
+        feedback: 'none',
         class: 'border-selected',
       },
       {
         variant: 'outline',
         selected: false,
+        feedback: 'none',
         class: 'border-slate-outline',
       },
     ],
+    defaultVariants: {
+      feedback: 'none',
+    },
   },
 );
 
@@ -45,7 +56,17 @@ interface ToggleButtonProps extends VariantProps<typeof ToggleButtonVariants> {
 
 // eslint-disable-next-line react/display-name
 export const ToggleButton = memo(
-  ({ size, variant, selected, text, icon, onClick, className, value }: ToggleButtonProps) => {
+  ({
+    size,
+    variant,
+    selected,
+    feedback = 'none',
+    text,
+    icon,
+    onClick,
+    className,
+    value,
+  }: ToggleButtonProps) => {
     const handleClick = useCallback(() => {
       onClick?.(value);
     }, [onClick, value]);
@@ -53,7 +74,7 @@ export const ToggleButton = memo(
     return (
       <button
         type='button'
-        className={cn(ToggleButtonVariants({ size, variant, selected }), className)}
+        className={cn(ToggleButtonVariants({ size, variant, selected, feedback }), className)}
         onClick={handleClick}
       >
         {icon && (
