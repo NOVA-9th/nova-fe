@@ -1,6 +1,6 @@
 'use client';
 
-import { Stepper, type StepStatus } from '@/features/onboarding/ui';
+import { EventStepper, type StepStatus } from '@/features/event/ui/EventStepper';
 import { Button, Header, ToggleButton } from '@/shared/ui';
 import { showToast } from '@/shared/utils/toast';
 import { cn } from '@/shared/utils/cn';
@@ -186,7 +186,7 @@ export const EventContainer = () => {
 
   return (
     <main className='flex flex-col w-full gap-5 px-7 py-5 bg-base rounded-static-frame sm:max-w-170 sm:px-10 sm:py-7.5'>
-      <Stepper
+      <EventStepper
         currentStep={`step${index + 1}` as any}
         labels={['Round 1', 'Round 2', 'Round 3', 'Round 4']}
         stepStatus={stepStatuses}
