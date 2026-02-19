@@ -71,6 +71,8 @@ export const ResultContainer = () => {
   const pendingTargetRef = useRef<number | null>(null);
   const rotationRef = useRef(0);
   rotationRef.current = rotation;
+  /** 룰렛 결과 사운드 */
+  const soundRef = useRef<HTMLAudioElement | null>(null);
 
   /** 당첨 인덱스 세그먼트 내 랜덤 각도 + 360×랜덤 바퀴 수 (0도 기준). CSS rotate는 시계방향이라 포인터(상단)에는 (360-R)%360이 보이므로 보정 */
   const computeTargetFromZero = useCallback(
@@ -98,6 +100,15 @@ export const ResultContainer = () => {
     if (shouldConsumeRef.current) {
       consumeSpin();
       shouldConsumeRef.current = false;
+    }
+
+    // 사운드 재생
+    if (soundRef.current) {
+      soundRef.current.currentTime = 0; // 처음부터 재생
+      soundRef.current.play().catch((err) => {
+        // 브라우저 정책으로 인한 재생 실패는 무시
+        console.debug('Sound play failed:', err);
+      });
     }
 
     // 꽝이 아닐 때만 팡파레 이펙트 발사
@@ -144,6 +155,21 @@ export const ResultContainer = () => {
 
     showToast.event(`${prize} 당첨!`);
   }, [prizes, consumeSpin]);
+
+  /** 사운드 초기화 */
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    soundRef.current = new Audio('/TaDa.mp3');
+    soundRef.current.preload = 'auto';
+    soundRef.current.volume = 0.4; // 볼륨 조절 (0.0 ~ 1.0)
+
+    return () => {
+      if (soundRef.current) {
+        soundRef.current.pause();
+        soundRef.current = null;
+      }
+    };
+  }, []);
 
   /** 0도 리셋 후 pendingTarget을 다음 프레임에 적용 (transition으로 애니메이션) */
   useEffect(() => {
