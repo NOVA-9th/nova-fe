@@ -18,9 +18,12 @@ export const RoleSelectContainer = () => {
 
   return (
     <main className='flex flex-col w-full gap-5 px-7 py-5 bg-base rounded-static-frame sm:px-10 sm:py-7.5 max-w-170'>
+      <h1 className='w-full text-center text-2xl font-100 leading-tight tracking-tight text-optional -mb-6'>
+        이벤트
+      </h1>
       <Header
         size='lg'
-        label='관심있는 직무를 선택해주세요'
+        label='문제를 맞추고 상품에 도전해보세요!'
         description='맞춘 문제에 따라 룰렛 돌리기 기회가 주어집니다!'
         className='items-center'
       />
