@@ -6,28 +6,27 @@ import { showToast } from '@/shared/utils/toast';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { weightedPickIndex, type WeightedItem } from '@/features/event/utils/weightedPick';
 import { useRouter } from 'next/navigation';
-import {
-  Sticker,
-  KeyRound,
-  Cookie,
-  RotateCcw,
-  Gift,
-  type LucideIcon,
-} from 'lucide-react';
+import confetti from 'canvas-confetti';
 
 type Prize = { label: string };
 
 const PRIZES_WITH_WEIGHT: WeightedItem<Prize>[] = [
-  { item: { label: '밈 스티커' }, weight: 50 },
-  { item: { label: '키캡' }, weight: 10 },
-  { item: { label: '간식' }, weight: 40 },
+  { item: { label: '간식' }, weight: 20 },
+  { item: { label: '개발자 스티커' }, weight: 20 },
+  { item: { label: '간식' }, weight: 20 },
+  { item: { label: '꽝!' }, weight: 5 },
+  { item: { label: '개발자 스티커' }, weight: 30 },
+  { item: { label: '키캡' }, weight: 5 },
 ];
 
-const PRIZE_DISPLAY: Record<string, { icon: LucideIcon; color: string }> = {
-  '밈 스티커': { icon: Sticker, color: '#FF2600' },
-  '키캡': { icon: KeyRound, color: '#287AF5' },
-  '간식': { icon: Cookie, color: '#00BD75' },
-};
+const PRIZE_COLORS = [
+  '#e03939', // 코랄 핑크
+  '#3a91e2', // 소프트 블루
+  '#f89524', // 오렌지
+  '#83d342', // 라임 그린
+  '#ffa805', // 옐로우
+  '#2ea0bd', // 라임 그린
+];
 
 const getCssVar = (name: string, fallback: string) => {
   if (typeof window === 'undefined') return fallback;
@@ -94,13 +93,56 @@ export const ResultContainer = () => {
 
     const idx = wonIndexRef.current;
     const prize = prizes[idx]?.label ?? '결과 없음';
+    const prizeColor = PRIZE_COLORS[idx % PRIZE_COLORS.length];
 
     if (shouldConsumeRef.current) {
       consumeSpin();
       shouldConsumeRef.current = false;
     }
 
-    showToast.success(`당첨: ${prize}`);
+    // 꽝이 아닐 때만 팡파레 이펙트 발사
+    if (prize !== '꽝!') {
+      // 당첨 색상에 맞춘 팡파레
+      const count = 200;
+      const defaults = {
+        origin: { y: 0.7 },
+        colors: [prizeColor],
+      };
+
+      const fire = (particleRatio: number, opts: confetti.Options) => {
+        confetti({
+          ...defaults,
+          ...opts,
+          particleCount: Math.floor(count * particleRatio),
+        });
+      };
+
+      // 여러 방향에서 발사
+      fire(0.25, {
+        spread: 26,
+        startVelocity: 55,
+      });
+      fire(0.2, {
+        spread: 60,
+      });
+      fire(0.35, {
+        spread: 100,
+        decay: 0.91,
+        scalar: 0.8,
+      });
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 25,
+        decay: 0.92,
+        scalar: 1.2,
+      });
+      fire(0.1, {
+        spread: 120,
+        startVelocity: 45,
+      });
+    }
+
+    showToast.event(`${prize} 당첨!`);
   }, [prizes, consumeSpin]);
 
   /** 0도 리셋 후 pendingTarget을 다음 프레임에 적용 (transition으로 애니메이션) */
@@ -244,35 +286,18 @@ export const ResultContainer = () => {
                 ].join(' ');
 
                 const textAngleDeg = midDeg;
-                const display = PRIZE_DISPLAY[prize.label] ?? {
-                  icon: Gift,
-                  color: '#E8F1FF',
-                };
-                const PrizeIcon = display.icon;
+                const color = PRIZE_COLORS[index % PRIZE_COLORS.length];
 
                 return (
                   <g key={index}>
                     <path
                       d={pathD}
-                      fill={display.color}
+                      fill={color}
                       stroke={centerBg}
-                      strokeWidth={2}
+                      strokeWidth={1}
                       opacity={0.92}
                     />
-                    <g
-                      transform={`translate(${iconX}, ${iconY}) rotate(${textAngleDeg})`}
-                    >
-                      <circle r={14} fill='rgba(255,255,255,0.25)' />
-                      <foreignObject x={-9} y={-9} width={18} height={18}>
-                        <div className='flex items-center justify-center w-full h-full'>
-                          <PrizeIcon
-                            size={14}
-                            color='white'
-                            strokeWidth={2.5}
-                          />
-                        </div>
-                      </foreignObject>
-                    </g>
+                    
                     <text
                       x={textX}
                       y={textY}

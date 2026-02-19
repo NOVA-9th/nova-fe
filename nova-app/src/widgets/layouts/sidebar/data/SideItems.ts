@@ -30,7 +30,7 @@ export const SIDE_ITEMS: SideItem[] = [
   {
     href: '/event',
     title: '이벤트',
-    description: '데모데이를 위한 이벤트 페이지',
+    description: '개발자 상식을 테스트해보세요!',
     icon: Ticket,
   },
 ];
