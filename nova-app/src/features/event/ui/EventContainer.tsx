@@ -4,7 +4,7 @@ import { Stepper, type StepStatus } from '@/features/onboarding/ui';
 import { Button, Header, ToggleButton } from '@/shared/ui';
 import { showToast } from '@/shared/utils/toast';
 import { cn } from '@/shared/utils/cn';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useEventStore, type RoundKey } from '@/features/event/model/useEventStore';
 import { pickRandomQuestionsByRole } from '@/features/event/utils/pickQuestion';
@@ -36,6 +36,33 @@ export const EventContainer = () => {
     null,
     null,
   ]);
+
+  /** 정답/오답 사운드 */
+  const correctSoundRef = useRef<HTMLAudioElement | null>(null);
+  const wrongSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  /** 사운드 초기화 */
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    correctSoundRef.current = new Audio('/AnswerSound.mp3');
+    correctSoundRef.current.preload = 'auto';
+    correctSoundRef.current.volume = 0.4;
+
+    wrongSoundRef.current = new Audio('/WrongSound.mp3');
+    wrongSoundRef.current.preload = 'auto';
+    wrongSoundRef.current.volume = 0.4;
+
+    return () => {
+      if (correctSoundRef.current) {
+        correctSoundRef.current.pause();
+        correctSoundRef.current = null;
+      }
+      if (wrongSoundRef.current) {
+        wrongSoundRef.current.pause();
+        wrongSoundRef.current = null;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!role) return;
@@ -87,6 +114,20 @@ export const EventContainer = () => {
         next[index] = correct;
         return next;
       });
+
+      // 정답/오답 사운드 재생
+      if (correct && correctSoundRef.current) {
+        correctSoundRef.current.currentTime = 0;
+        correctSoundRef.current.play().catch((err) => {
+          console.debug('Correct sound play failed:', err);
+        });
+      } else if (!correct && wrongSoundRef.current) {
+        wrongSoundRef.current.currentTime = 0;
+        wrongSoundRef.current.play().catch((err) => {
+          console.debug('Wrong sound play failed:', err);
+        });
+      }
+
       const message =
         current.rationale ?? (correct ? '정답이에요!' : `정답: ${current.answer ?? ''}`);
       if (correct) {

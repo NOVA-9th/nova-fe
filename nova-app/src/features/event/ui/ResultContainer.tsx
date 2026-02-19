@@ -73,6 +73,8 @@ export const ResultContainer = () => {
   rotationRef.current = rotation;
   /** 룰렛 결과 사운드 */
   const soundRef = useRef<HTMLAudioElement | null>(null);
+  /** 룰렛 돌 때 드럼 롤 사운드 */
+  const drumRollSoundRef = useRef<HTMLAudioElement | null>(null);
 
   /** 당첨 인덱스 세그먼트 내 랜덤 각도 + 360×랜덤 바퀴 수 (0도 기준). CSS rotate는 시계방향이라 포인터(상단)에는 (360-R)%360이 보이므로 보정 */
   const computeTargetFromZero = useCallback(
@@ -102,7 +104,13 @@ export const ResultContainer = () => {
       shouldConsumeRef.current = false;
     }
 
-    // 사운드 재생
+    // 드럼 롤 사운드 중지
+    if (drumRollSoundRef.current) {
+      drumRollSoundRef.current.pause();
+      drumRollSoundRef.current.currentTime = 0;
+    }
+
+    // 결과 사운드 재생
     if (soundRef.current) {
       soundRef.current.currentTime = 0; // 처음부터 재생
       soundRef.current.play().catch((err) => {
@@ -163,10 +171,19 @@ export const ResultContainer = () => {
     soundRef.current.preload = 'auto';
     soundRef.current.volume = 0.4; // 볼륨 조절 (0.0 ~ 1.0)
 
+    drumRollSoundRef.current = new Audio('/DrumRoll.mp3');
+    drumRollSoundRef.current.preload = 'auto';
+    drumRollSoundRef.current.volume = 0.4;
+    drumRollSoundRef.current.loop = true; // 반복 재생
+
     return () => {
       if (soundRef.current) {
         soundRef.current.pause();
         soundRef.current = null;
+      }
+      if (drumRollSoundRef.current) {
+        drumRollSoundRef.current.pause();
+        drumRollSoundRef.current = null;
       }
     };
   }, []);
@@ -189,6 +206,14 @@ export const ResultContainer = () => {
     didHandleTransitionRef.current = false;
     setIsSpinning(true);
     shouldConsumeRef.current = true;
+
+    // 드럼 롤 사운드 재생
+    if (drumRollSoundRef.current) {
+      drumRollSoundRef.current.currentTime = 0.3;
+      drumRollSoundRef.current.play().catch((err) => {
+        console.debug('Drum roll sound play failed:', err);
+      });
+    }
 
     const idx = weightedPickIndex(PRIZES_WITH_WEIGHT);
     wonIndexRef.current = idx;
