@@ -19,7 +19,7 @@ export const FloatingBar = () => {
       aria-label='Floating navigation'
     >
       <div className='flex items-center justify-between gap-1.5 rounded-static-pill border border-outline bg-base p-1.5 shadow-lg'>
-        {SIDE_ITEMS.map((item) => {
+        {SIDE_ITEMS.filter((item) => item.href !== '/event').map((item) => {
           const active = isActive(item.href);
           const Icon = item.icon;
 
