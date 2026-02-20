@@ -13,8 +13,8 @@ type Prize = { label: string };
 const PRIZES_WITH_WEIGHT: WeightedItem<Prize>[] = [
   { item: { label: '간식' }, weight: 20 },
   { item: { label: '개발자 스티커' }, weight: 20 },
-  { item: { label: '간식' }, weight: 20 },
-  { item: { label: '키캡' }, weight: 5 },
+  { item: { label: '간식' }, weight: 15 },
+  { item: { label: '키캡' }, weight: 10 },
   { item: { label: '개발자 스티커' }, weight: 30 },
   { item: { label: '키캡' }, weight: 5 },
 ];
@@ -70,6 +70,7 @@ export const ResultContainer = () => {
   /** 0도 리셋 후 적용할 목표 회전값 (리셋 직후 한 프레임 뒤 적용) */
   const pendingTargetRef = useRef<number | null>(null);
   const rotationRef = useRef(0);
+  // eslint-disable-next-line react-hooks/refs
   rotationRef.current = rotation;
   /** 룰렛 결과 사운드 */
   const soundRef = useRef<HTMLAudioElement | null>(null);
@@ -254,9 +255,7 @@ export const ResultContainer = () => {
       <div className='flex flex-col items-center gap-4 py-2'>
         <div className='relative flex items-center justify-center'>
           {/* Pointer (top): 라이트=검정, 다크=흰색 */}
-          <div
-            className='absolute top-0 left-1/2 z-10 -translate-x-1/2 -translate-y-0.5 w-0 h-0 border-l-[14px] border-r-[14px] border-t-[24px] border-l-transparent border-r-transparent border-t-peak'
-          />
+          <div className='absolute top-0 left-1/2 z-10 -translate-x-1/2 -translate-y-0.5 w-0 h-0 border-l-[14px] border-r-[14px] border-t-[24px] border-l-transparent border-r-transparent border-t-peak' />
 
           {/* Glow when spinning */}
           {isSpinning && (
@@ -341,14 +340,8 @@ export const ResultContainer = () => {
 
                 return (
                   <g key={index}>
-                    <path
-                      d={pathD}
-                      fill={color}
-                      stroke={centerBg}
-                      strokeWidth={1}
-                      opacity={0.92}
-                    />
-                    
+                    <path d={pathD} fill={color} stroke={centerBg} strokeWidth={1} opacity={0.92} />
+
                     <text
                       x={textX}
                       y={textY}
@@ -391,9 +384,7 @@ export const ResultContainer = () => {
 
         <Button
           size='lg'
-          label={
-            spins <= 0 ? '기회 없음' : isSpinning ? '도는 중...' : '룰렛 돌리기'
-          }
+          label={spins <= 0 ? '기회 없음' : isSpinning ? '도는 중...' : '룰렛 돌리기'}
           style='data'
           onClick={handleSpin}
           disabled={!canSpin}
