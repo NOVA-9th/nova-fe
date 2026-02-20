@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import { Step } from '@/features/onboarding/types/StepItem';
 import { memo } from 'react';
 
+export type StepStatus = 'default' | 'success' | 'error';
+
 interface StepperProps {
   currentStep: Step;
   labels: string[];

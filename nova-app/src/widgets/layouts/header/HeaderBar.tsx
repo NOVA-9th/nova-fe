@@ -1,7 +1,7 @@
 'use client';
 
 import { IconButton } from '@/shared/ui';
-import { Moon, Search, Sun, X } from 'lucide-react';
+import { Moon, Search, Sun, Ticket, X } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useThemeToggle } from '@/shared/hooks';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -36,6 +36,15 @@ export const HeaderBar = () => {
       <LogoLabel onClick={goFeed} />
 
       <div className='flex items-center gap-3'>
+        <div className='md:hidden'>
+          <IconButton
+            size='lg'
+            peak={false}
+            icon={Ticket}
+            aria-label='이벤트'
+            onClick={() => router.push('/event')}
+          />
+        </div>
         {isInputVisible && (
           <>
             {isMobileSearchOpen ? (
