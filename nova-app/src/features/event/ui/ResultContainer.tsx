@@ -14,7 +14,7 @@ const PRIZES_WITH_WEIGHT: WeightedItem<Prize>[] = [
   { item: { label: '간식' }, weight: 20 },
   { item: { label: '개발자 스티커' }, weight: 20 },
   { item: { label: '간식' }, weight: 20 },
-  { item: { label: '꽝!' }, weight: 5 },
+  { item: { label: '키캡' }, weight: 5 },
   { item: { label: '개발자 스티커' }, weight: 30 },
   { item: { label: '키캡' }, weight: 5 },
 ];
